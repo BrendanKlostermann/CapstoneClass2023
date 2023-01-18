@@ -4,6 +4,8 @@ Developers:
 Toney Hale
 Alex Korte :ThumbsUP:
 Nick Vroom
-Rith Sivaprakash
 Brendan Klostermann
 Gideon Trevor
+Elijah Morgan
+Rith Sivaprakash
+Garion Opiola
