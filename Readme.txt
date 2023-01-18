@@ -4,4 +4,5 @@ Developers:
 Toney Hale
 Alex Korte :ThumbsUP:
 Nick Vroom
+Rith Sivaprakash
 Brendan Klostermann
