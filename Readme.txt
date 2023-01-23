@@ -11,3 +11,4 @@ Elijah Morgan
 Rith Sivaprakash
 Garion Opiola
 Heritier Otiom
+Michael Haring
