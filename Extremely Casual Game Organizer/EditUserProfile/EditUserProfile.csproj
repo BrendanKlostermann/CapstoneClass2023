@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD5A6E29-FC69-4CD7-8DB3-6BE34845C72A}</ProjectGuid>
+    <ProjectGuid>{0E29EE8D-C9DB-4382-8D00-D9B84EE90FE7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Extremely_Casual_Game_Organizer</RootNamespace>
-    <AssemblyName>Extremely Casual Game Organizer</AssemblyName>
+    <RootNamespace>EditUserProfile</RootNamespace>
+    <AssemblyName>EditUserProfile</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,10 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="EditUserProfile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,9 +62,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="EditUserProfile.xaml.cs">
-      <DependentUpon>EditUserProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
