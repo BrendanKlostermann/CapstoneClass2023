@@ -20,7 +20,7 @@
         <Label Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.IsSharedSizeScope="True" Grid.ColumnSpan="2" FontSize="20" BorderThickness="1" BorderBrush="Black" Width="250" Height="65">Edit Profile</Label>
         <Image x:Name="imgMember" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Width="150" Height="150" Margin="10,10,0,0"></Image>
         <Label x:Name="lblFirstName" Grid.Row="1" Grid.Column="0" Height="25" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="170,10,0,0"></Label>
-        <Label x:Name="lblLastName" Grid.Row="1" Grid.Column="0" Height="25" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="270,10,0,0"></Label>
+        <Label x:Name="lblFamilyName" Grid.Row="1" Grid.Column="0" Height="25" Width="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="270,10,0,0"></Label>
         <Label x:Name="lblLocation" Grid.Row="1" Grid.Column="0" Height="25" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="170,40,0,0"></Label>
         <Button x:Name="btnUpload" Grid.Row="1" Grid.Column="0" Width="100" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="35 170">Upload</Button>
         <Label x:Name="lblMemberBio" Grid.Row="1" Grid.Column="0" Height="175" Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10,0,0,20"></Label>

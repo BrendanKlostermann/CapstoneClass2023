@@ -18,22 +18,32 @@ using LogicLayer;
 namespace Extremely_Casual_Game_Organizer
 {
     /// <summary>
-    /// Interaction logic for EditUserProfile.xaml
+    /// Interaction logic for ConfirmDeactivate.xaml
     /// </summary>
-    public partial class EditUserProfile : Page
+    public partial class ConfirmDeactivate : Page
     {
         Member member = null;
-        public EditUserProfile(Member mem)
+
+
+        public ConfirmDeactivate(Member mem)
         {
             member = mem;
             InitializeComponent();
         }
 
-        private void btnDeactivate_Click(object sender, RoutedEventArgs e)
+        private void confirm_Click(object sender, RoutedEventArgs e)
         {
-            var confirmDeactivation = new ConfirmDeactivate(member);
-            // Open page for confirm delete passing in member object and returning int.
-            NavigationService.Navigate(new ConfirmDeactivate(member));
-        }
+            MemberManager memberManager = new MemberManager();
+            int count = memberManager.EditUserToInactive(member.member_id);
+            if(count == 1)
+            {
+                //Logout User here???
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("Account was not deactivated");
+            }
+        }  
     }
 }

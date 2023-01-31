@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicLayer
+namespace LogicLayerInterfaces
 {
-    public class Class1
+    public interface IMemberManager
     {
+        int EditUserToInactive(int member_id);
     }
 }
