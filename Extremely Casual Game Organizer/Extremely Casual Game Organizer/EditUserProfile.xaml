@@ -1,4 +1,17 @@
-﻿<Page x:Class="Extremely_Casual_Game_Organizer.EditUserProfile"
+﻿<!-- 
+/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/01/31
+/// 
+/// User Interface for Edit Member Profile.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>    
+    -->
+    <Page x:Class="Extremely_Casual_Game_Organizer.EditUserProfile"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

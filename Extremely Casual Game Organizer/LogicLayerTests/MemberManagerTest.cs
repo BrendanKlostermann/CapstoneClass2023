@@ -1,4 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/01/31
+/// 
+/// Test class to ensure functionality of the logic layer for Member Manager.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using DataObjects;
 using LogicLayer;

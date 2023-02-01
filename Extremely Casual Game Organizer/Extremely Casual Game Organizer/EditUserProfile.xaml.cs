@@ -22,18 +22,18 @@ namespace Extremely_Casual_Game_Organizer
     /// </summary>
     public partial class EditUserProfile : Page
     {
-        Member member = null;
+        Member _member = null;
         public EditUserProfile(Member mem)
         {
-            member = mem;
+            _member = mem;
             InitializeComponent();
         }
 
         private void btnDeactivate_Click(object sender, RoutedEventArgs e)
         {
-            var confirmDeactivation = new ConfirmDeactivate(member);
+            var confirmDeactivation = new ConfirmDeactivate(_member);
             // Open page for confirm delete passing in member object and returning int.
-            NavigationService.Navigate(new ConfirmDeactivate(member));
+            NavigationService.Navigate(new ConfirmDeactivate(_member));
         }
     }
 }
