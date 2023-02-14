@@ -1,5 +1,12 @@
-print'' print'*** Creating deactivate user'
+-- Created By Brendan Klostermann
+
+print'' print'*** Creating  sp_deactivate_member -Brendan K'
 GO
+
+USE [ecgo_db]
+GO
+
+
 
 CREATE PROCEDURE [dbo].[sp_deactivate_member]
 (
@@ -14,4 +21,3 @@ AS
         RETURN @@ROWCOUNT
     END
 GO
-

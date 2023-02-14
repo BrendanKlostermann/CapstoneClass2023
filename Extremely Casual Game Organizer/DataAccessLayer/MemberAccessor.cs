@@ -1,4 +1,16 @@
-﻿using System;
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/01/31
+/// 
+/// Accessor class for Member. Contains methods to interact with database.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +36,8 @@ namespace DataAccessLayer
             var cmdText = "sp_deactivate_member";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = member_id;
 
             try
             {
@@ -34,7 +48,11 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Could not find any members with provided ID.");
+                throw new ApplicationException("Could not find any active members with provided ID.", ex);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
     }

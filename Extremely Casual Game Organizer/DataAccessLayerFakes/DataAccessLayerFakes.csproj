@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LeagueAccessorFake.cs" />
     <Compile Include="MemberAccessorFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

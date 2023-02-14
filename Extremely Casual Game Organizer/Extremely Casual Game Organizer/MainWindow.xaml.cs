@@ -24,5 +24,15 @@ namespace Extremely_Casual_Game_Organizer
         {
             InitializeComponent();
         }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            frameMain.Navigate(new pgUserDetails(int.Parse(txtTest.Text)));
+        }
+
+        private void btnTest2_Click(object sender, RoutedEventArgs e)
+        {
+            frameMain.Navigate(new pgViewLeagueList());
+        }
     }
 }

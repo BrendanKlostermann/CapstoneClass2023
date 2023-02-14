@@ -14,6 +14,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using DataObjects;
 using LogicLayer;
+using DataAccessLayerFakes;
 
 namespace LogicLayerTests
 {
@@ -25,10 +26,8 @@ namespace LogicLayerTests
         [TestInitialize]
         public void TestSetup()
         {
-            _memberManager = new MemberManager();
+            _memberManager = new MemberManager(new MemberAccessorFake());
         }
-
-
         [TestMethod]
         public void TestEditUserToInactive()
         {
@@ -43,8 +42,5 @@ namespace LogicLayerTests
             int actualyResult = _memberManager.EditUserToInactive(1);
             Assert.AreEqual(expectedResult, actualyResult);
         }
-
-
-
     }
 }

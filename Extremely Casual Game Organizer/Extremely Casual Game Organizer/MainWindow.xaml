@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="MainWindow" Height="900" Width="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
@@ -23,9 +23,13 @@
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtTest"></TextBox>
+            <Button Grid.Column="1" x:Name="btnTest" Click="btnTest_Click"></Button>
+            
             <Image Source=""></Image>
             <Label Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Logo PlaceHolder</Label>
-
+            <Button Grid.Column="3" Margin="0 0 0 0" x:Name="btnTest2" Click="btnTest2_Click">Open League List</Button>
         </Grid>
+        <Frame x:Name="frameMain" Grid.Row="2" Grid.Column="3"></Frame>
     </Grid>
 </Window>

@@ -1,4 +1,17 @@
-﻿using System;
+﻿    /// <summary>
+    /// Brendan Klostermann
+    /// Created: 2023/01/31
+    /// 
+    /// Member class used to hold Member data.
+    /// </summary>
+    ///
+    /// <remarks>
+    /// Updater Name
+    /// Updated: yyyy/mm/dd
+    /// </remarks>    
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +27,7 @@ namespace DataObjects
         public string family_name { get; set; }
         public DateTime birthday { get; set; }
         public string phone_number { get; set; }
-        public bool gender { get; set; }
+        public bool? gender { get; set; }
         public bool active { get; set; }
         public string bio { get; set; }
 

@@ -19,15 +19,36 @@ using DataObjects;
 using DataAccessLayerFakes;
 using DataAccessLayer;
 using LogicLayerInterfaces;
+using DataAccessLayerInterfaces;
 
 namespace LogicLayer
 {
     public class MemberManager : IMemberManager
     {
+
+        private IMemberAccessor _memberAccessor = null;
+        private MemberAccessorFake _fakeMemberAccessor = null;
+
+        public MemberManager()
+        {
+            _memberAccessor = new MemberAccessor();
+        }
+        public MemberManager(IMemberAccessor ma)
+        {
+            _memberAccessor = ma;
+        }
+
         public int EditUserToInactive(int member_id)
         {
-            MemberAccessor memberAccessor = new MemberAccessor();
-            return memberAccessor.SetUserToInactive(member_id);
+            try
+            {
+                
+                return _memberAccessor.SetUserToInactive(member_id);
+            }
+            catch(Exception ex)
+            {
+                throw new ApplicationException("Member not found.",ex);
+            }
         }
     }
 }

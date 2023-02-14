@@ -55,11 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="ConfirmDeactivate.xaml">
+    <Compile Include="pgViewLeagueList.xaml.cs">
+      <DependentUpon>pgViewLeagueList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pgUserDetails.xaml.cs">
+      <DependentUpon>pgUserDetails.xaml</DependentUpon>
+    </Compile>
+    <Page Include="pgConfirmDeactivate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditUserProfile.xaml">
+    <Page Include="pgEditUserProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -71,16 +77,24 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConfirmDeactivate.xaml.cs">
-      <DependentUpon>ConfirmDeactivate.xaml</DependentUpon>
+    <Compile Include="pgConfirmDeactivate.xaml.cs">
+      <DependentUpon>pgConfirmDeactivate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditUserProfile.xaml.cs">
-      <DependentUpon>EditUserProfile.xaml</DependentUpon>
+    <Compile Include="pgEditUserProfile.xaml.cs">
+      <DependentUpon>pgEditUserProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="pgViewLeagueList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pgUserDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
