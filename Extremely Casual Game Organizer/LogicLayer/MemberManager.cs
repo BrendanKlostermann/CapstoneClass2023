@@ -42,7 +42,6 @@ namespace LogicLayer
         {
             try
             {
-                
                 return _memberAccessor.SetUserToInactive(member_id);
             }
             catch(Exception ex)

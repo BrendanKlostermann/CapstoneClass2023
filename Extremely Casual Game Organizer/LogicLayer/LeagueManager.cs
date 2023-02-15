@@ -28,8 +28,18 @@ namespace LogicLayer
        
         public List<League> RetrieveListOfLeagues()
         {
-            return _leagueAccessor.SelectListOfLeagues();
+            List<League> leagueList = null;
+            try
+            {
+                leagueList = _leagueAccessor.SelectListOfLeagues();
+            }
+            catch (ApplicationException ex)
+            {
 
+                throw new ApplicationException("Failed loading League list", ex);
+            }
+
+            return leagueList;
         }
     }
 }

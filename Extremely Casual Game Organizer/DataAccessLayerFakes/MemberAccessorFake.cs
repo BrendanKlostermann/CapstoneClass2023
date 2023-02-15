@@ -39,7 +39,7 @@ namespace DataAccessLayerFakes
         {
             foreach(Member mem in _members)
             {
-                if(mem.member_id == member_id)
+                if(mem.MemberID == member_id)
                 {
                     return mem;
                 }
@@ -53,9 +53,9 @@ namespace DataAccessLayerFakes
             int count = 0;
             foreach(Member mem in _members)
             {
-                if (mem.member_id == member_id)
+                if (mem.MemberID == member_id)
                 {
-                    mem.active = false;
+                    mem.Active = false;
                     count++;
                 }
             }

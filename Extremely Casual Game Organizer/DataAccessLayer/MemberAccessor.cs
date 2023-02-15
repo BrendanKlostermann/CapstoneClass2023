@@ -48,7 +48,7 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Could not find any active members with provided ID.", ex);
+                throw ex;
             }
             finally
             {

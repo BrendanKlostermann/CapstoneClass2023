@@ -42,11 +42,11 @@ namespace DataAccessLayer
 
                         league = new League();
 
-                        league.League_ID = reader.GetInt32(0);
-                        league.Sport_ID = reader.GetInt32(1);
-                        league.League_Dues = reader.GetDecimal(2);
+                        league.LeagueID = reader.GetInt32(0);
+                        league.SportID = reader.GetInt32(1);
+                        league.LeagueDues = reader.GetDecimal(2);
                         league.Active = reader.GetBoolean(3);
-                        league.Member_id = reader.GetInt32(4);
+                        league.MemberID = reader.GetInt32(4);
                         league.Gender = reader.GetBoolean(5);
                         league.Description = reader.GetString(6);
                         league.Name = reader.GetString(7);
@@ -60,7 +60,7 @@ namespace DataAccessLayer
             catch (Exception ex)
             {
 
-                throw new ApplicationException("Leagues not found", ex);
+                throw ex;
             }
             finally
             {

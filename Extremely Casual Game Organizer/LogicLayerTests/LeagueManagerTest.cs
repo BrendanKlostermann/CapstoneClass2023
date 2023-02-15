@@ -20,7 +20,7 @@ namespace LogicLayerTests
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestRetreivingListOfLeagues()
         {
             int expectedResult = 3;
             List<League> _leagues = _leagueManager.RetrieveListOfLeagues();

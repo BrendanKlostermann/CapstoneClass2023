@@ -21,28 +21,31 @@ namespace DataObjects
 {
     public class Member
     {
-        public int member_id { get; set; }
-        public string email { get; set; }
-        public string first_name { get; set; }
-        public string family_name { get; set; }
-        public DateTime birthday { get; set; }
-        public string phone_number { get; set; }
-        public bool? gender { get; set; }
-        public bool active { get; set; }
-        public string bio { get; set; }
+        public int MemberID { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string FamilyName { get; set; }
+        public DateTime Birthday { get; set; }
+        public string PhoneNumber { get; set; }
+        public bool? Gender { get; set; }
+        public bool Active { get; set; }
+        public string Bio { get; set; }
 
         public Member(int mem_id,string email, string fName, string flName, DateTime bDay, string pNumber, bool gender, bool active, string bio)
         {
-            this.member_id = mem_id;
-            this.email = email;
-            this.first_name = fName;
-            this.family_name = flName;
-            this.birthday = bDay;
-            this.phone_number = pNumber;
-            this.gender = gender;
-            this.active = active;
-            this.bio = bio;
+            this.MemberID = mem_id;
+            this.Email = email;
+            this.FirstName = fName;
+            this.FamilyName = flName;
+            this.Birthday = bDay;
+            this.PhoneNumber = pNumber;
+            this.Gender = gender;
+            this.Active = active;
+            this.Bio = bio;
         }
+        public Member()
+        {
 
+        }
     }
 }
