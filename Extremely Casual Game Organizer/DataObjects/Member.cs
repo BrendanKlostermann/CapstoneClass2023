@@ -30,6 +30,7 @@ namespace DataObjects
         public bool? Gender { get; set; }
         public bool Active { get; set; }
         public string Bio { get; set; }
+		public string PasswordHash { get; set; }
 
         public Member(int mem_id,string email, string fName, string flName, DateTime bDay, string pNumber, bool gender, bool active, string bio)
         {

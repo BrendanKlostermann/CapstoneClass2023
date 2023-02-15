@@ -10,5 +10,5 @@ namespace LogicLayerInterfaces
     public interface ILeagueManager
     {
         List<League> RetrieveListOfLeagues();
-    }
+	}
 }

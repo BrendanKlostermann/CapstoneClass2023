@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DataObjects;
+
+namespace DataAccessLayerInterfaces
+{
+<<<<<<<< HEAD:Extremely Casual Game Organizer/DataAccessLayerInterfaces/ILeagueAccessor.cs
+    public interface ILeagueAccessor
+    {
+        List<League> SelectListOfLeagues();
+========
+    public interface ITeamAccessor
+    {
+        Team SelectTeamByTeamID(int team_id);
+>>>>>>>> origin/main:Extremely Casual Game Organizer/DataAccessLayerInterfaces/ITeamAccessor.cs
+    }
+}

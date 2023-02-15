@@ -1,30 +1,25 @@
-﻿/// <summary>
-    /// Brendan Klostermann
-    /// Created: 2023/01/31
-    /// 
-    /// Database Connection class used to get the connection to the Sql Server.
-    /// </summary>
-    ///
-    /// <remarks>
-    /// Updater Name
-    /// Updated: yyyy/mm/dd
-    /// </remarks>
-using System;
+
+
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayerInterfaces;
 
 namespace DataAccessLayer
 {
-    public class DBConnection
+    public class DBConnection : IDBConnection
     {
         public SqlConnection GetDBConnection()
         {
             SqlConnection conn = null;
-            string connectionString = @"Data Source=localhost;Initial Catalog=ecgo_db;Integrated Security=True";
+
+            string connectionString = @"Data Source=Localhost;Initial Catalog=ecgo_db;Integrated Security=True";
+
             conn = new SqlConnection(connectionString);
+
             return conn;
         }
     }

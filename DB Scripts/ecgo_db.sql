@@ -123,7 +123,8 @@ CREATE TABLE [dbo].[Team] (
 	[gender]				[bit]							NULL,
 	[sport_id]				[int]							NOT NULL,
 	CONSTRAINT [pk_team_id] PRIMARY KEY([team_id]),
-    CONSTRAINT [fk_teamSport_id] FOREIGN KEY([sport_id]) REFERENCES [dbo].[Sport]([sport_id])
+    CONSTRAINT [fk_teamSport_id] FOREIGN KEY([sport_id]) REFERENCES [dbo].[Sport]([sport_id]),
+	CONSTRAINT [ak_team_name] Unique ([team_name])
 )
 GO
 

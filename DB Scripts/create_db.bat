@@ -17,7 +17,9 @@ sqlcmd -S localhost -E -i sp_select_league_by_league_id.sql
 sqlcmd -S localhost -E -i sp_select_league_by_league_id_and_member_id.sql
 sqlcmd -S localhost -E -i sp_select_messages_by_user_id.sql
 sqlcmd -S localhost -E -i sp_select_sports.sql
-
+sqlcmd -S localhost -E -i sp_select_game_list.sql
+sqlcmd -S localhost -E -i sp_select_game_details_by_game_id.sql
+sqlcmd -S localhost -E -i FakeDataInsert.sql
 
 
 

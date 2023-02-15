@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DataObjects;
+
+namespace LogicLayerInterfaces
+{
+<<<<<<<< HEAD:Extremely Casual Game Organizer/LogicLayerInterfaces/ILeagueManager.cs
+    public interface ILeagueManager
+    {
+        List<League> RetrieveListOfLeagues();
+========
+    public interface ITeamManager
+    {
+        Team RetrieveTeamByTeamID(int team_id);
+>>>>>>>> origin/main:Extremely Casual Game Organizer/LogicLayerInterfaces/ITeamManager.cs
+    }
+}
