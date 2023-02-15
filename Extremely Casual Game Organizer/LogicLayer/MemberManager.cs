@@ -1,0 +1,163 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using LogicLayerInterfaces;
+using DataAccessLayerFakes;
+using DataAccessLayerInterfaces;
+using System.Security.Cryptography;
+using DataObjects;
+using DataAccessLayer;
+
+namespace LogicLayer
+{
+    public class MemberManager : IMemberManager
+    {
+        private IMemberAccessor _memberAccessor = null;
+        private MemberAccessorFake _fakeMemberAccessor = null;
+
+        public MemberManager()
+        {
+            _memberAccessor = new MemberAccessor();
+        }
+        public MemberManager(IMemberAccessor ma)
+        {
+            _memberAccessor = ma;
+        }
+        public bool EditMemberPassword(int member_id, string oldPassword, string newPassword)
+        {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 01/24/2023
+            /// 
+            /// Method takes old and new password text and converts it to SHA256 Hash format and passes that to accessor
+            /// </summary>
+            bool result = false;
+            string currentPassword = HashSha256(oldPassword);
+            string updatePassword = HashSha256(newPassword);
+
+            try
+            {
+                if (currentPassword.Equals(updatePassword))
+                {
+                    throw new ArgumentException("New password cannot be the same as the old password.");
+                }
+                else
+                {
+                    result = _memberAccessor.UpdateMemberPassword(member_id, updatePassword, currentPassword);
+
+                    if (!result)
+                    {
+                        throw new ApplicationException("Failed to update password!");
+                    }
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException("Password Mismatch", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Update Failed", ex);
+            }
+            return result;
+        }
+        public string HashSha256(string source)
+        {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created 01/24/2023
+            /// 
+            /// Method take input string and returns 256 Hash value.
+            /// </summary>
+            string result = "";
+
+            if (source.Equals("") || source.Equals(null))
+            {
+                throw new ArgumentException("Source cannot be empty");
+            }
+
+            byte[] data;
+
+            // Creating hash provider
+            using (SHA256 sha256hasher = SHA256.Create())
+            {
+                // Hash input
+                data = sha256hasher.ComputeHash(Encoding.UTF8.GetBytes(source));
+            }
+
+            var stringBuilder = new StringBuilder();
+
+            // Convert array to string to match return type
+            for (int i = 0; i < data.Length; i++)
+            {
+                stringBuilder.Append(data[i].ToString("x2"));
+            }
+
+            result = stringBuilder.ToString();
+
+            return result.ToLower();
+        }
+        public Member RetrieveMemberByEmail(string email)
+        {
+            Member returnMember = null;
+
+            try
+            {
+                returnMember = _memberAccessor.SelectMemberByEmail(email);
+
+                if (returnMember == null)
+                {
+                    throw new ArgumentException("Invalid Email");
+                }
+            }
+            catch (ArgumentException ae)
+            {
+                throw new ArgumentException("Error Finding Member", ae);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Finding Member", ex);
+            }
+
+            return returnMember;
+        }
+
+        public List<Member> SearchMemberByFirstAndLastName(string firstName, string lastName)
+        {
+            List<Member> results = null;
+
+            try
+            {
+                results = _memberAccessor.SelectMemberByMemberFullName(firstName, lastName);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Search Has Failed", ex);
+            }
+
+            return results;
+             
+        }
+
+        public List<Member> SearchMemberByFirstName(string firstName)
+        {
+            List<Member> results = null;
+
+            try
+            {
+                results = _memberAccessor.SelectMemberByMemberFirstName(firstName);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Search Has Failed", ex);
+            }
+
+            return results;
+        }
+    }
+}

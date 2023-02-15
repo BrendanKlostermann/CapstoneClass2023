@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayerInterfaces
 {
-    public class Class1
+    public interface ITeamMemberAccessor
     {
+        int InsertTeamMember(int team_id, int member_id, string description);
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicLayerInterfaces
 {
-    public class Class1
+    public interface ITeamMemberManager
     {
+        int AddTeamMember(int team_id, int member_id, string description);
     }
 }
