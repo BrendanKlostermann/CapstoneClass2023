@@ -81,6 +81,7 @@ namespace Extremely_Casual_Game_Organizer
         private void datLeagues_Unloaded(object sender, RoutedEventArgs e)
         {
             _leagues = null;
+            datLeagues.ItemsSource = null;
         }
     }
 }

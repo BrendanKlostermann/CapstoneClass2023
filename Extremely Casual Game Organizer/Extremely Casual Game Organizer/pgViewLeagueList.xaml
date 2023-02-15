@@ -9,6 +9,6 @@
       Title="pgViewLeagueList">
 
     <Grid Background="White">
-        <DataGrid x:Name="datLeagues" Loaded="datLeagues_Loaded" Unloaded="datLeagues_Unloaded"></DataGrid>
+        <DataGrid x:Name="datLeagues" Loaded="datLeagues_Loaded" Unloaded="datLeagues_Unloaded" IsReadOnly="True" Focusable="False"></DataGrid>
     </Grid>
 </Page>
