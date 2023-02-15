@@ -123,6 +123,5 @@
             <Frame x:Name="frameLoad" NavigationUIVisibility="Hidden" />
         </Grid>
         <!-- Frame / Page Load Grid-->
-
     </Grid>
 </Window>

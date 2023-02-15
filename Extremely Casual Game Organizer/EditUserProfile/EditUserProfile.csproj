@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CD5A6E29-FC69-4CD7-8DB3-6BE34845C72A}</ProjectGuid>
+    <ProjectGuid>{0E29EE8D-C9DB-4382-8D00-D9B84EE90FE7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Extremely_Casual_Game_Organizer</RootNamespace>
-    <AssemblyName>Extremely Casual Game Organizer</AssemblyName>
+    <RootNamespace>EditUserProfile</RootNamespace>
+    <AssemblyName>EditUserProfile</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,10 +55,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="EditUserProfile.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,58 +63,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EditUserProfile.xaml.cs">
-      <DependentUpon>EditUserProfile.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PageFiles\pgAddTeamMember.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgGameList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgResetPassword.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgViewGameDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgViewTeamDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgViewTeamList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageFiles\PageControl.cs" />
-    <Compile Include="PageFiles\pgAddTeamMember.xaml.cs">
-      <DependentUpon>pgAddTeamMember.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageFiles\pgGameList.xaml.cs">
-      <DependentUpon>pgGameList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageFiles\pgResetPassword.xaml.cs">
-      <DependentUpon>pgResetPassword.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageFiles\pgViewGameDetails.xaml.cs">
-      <DependentUpon>pgViewGameDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageFiles\pgViewTeamDetails.xaml.cs">
-      <DependentUpon>pgViewTeamDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageFiles\pgViewTeamList.xaml.cs">
-      <DependentUpon>pgViewTeamList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -143,26 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataObjects\DataObjects.csproj">
-      <Project>{2cc3afac-da8c-4ce0-9d1d-cff5d4f14c88}</Project>
-      <Name>DataObjects</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogicLayerInterfaces\LogicLayerInterfaces.csproj">
-      <Project>{68acf833-c77a-43e3-bcad-90980c0bd422}</Project>
-      <Name>LogicLayerInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogicLayer\LogicLayer.csproj">
-      <Project>{53ad4840-45b1-461d-b7b1-f065308e0790}</Project>
-      <Name>LogicLayer</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Data\helpButton.png" />
-    <Resource Include="Data\homeButton.png" />
-    <Resource Include="Data\mailButton.png" />
-    <Resource Include="Data\profileButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
