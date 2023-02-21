@@ -1,4 +1,14 @@
-﻿using System;
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/01/31
+/// 
+/// .cs file attached to pgEditUserProfile.
+/// 
+/// This page will allow members to edit their profile information.
+/// 
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

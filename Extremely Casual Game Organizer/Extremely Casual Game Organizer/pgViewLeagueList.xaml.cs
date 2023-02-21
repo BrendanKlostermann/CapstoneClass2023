@@ -1,4 +1,15 @@
-﻿using System;
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/01/31
+/// 
+/// This page will be used to display the list of leagues from the database
+/// and allow further actions upon the list.
+/// 
+/// .cs file attached to pgViewLeagueList.
+/// </summary>
+///
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -32,6 +43,15 @@ namespace Extremely_Casual_Game_Organizer
             _leagueManager = new LeagueManager();
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// this method will load the list of leagues and display them in a datagrid.
+        /// It will call the LeagueManager method RetrieveListOfLeagues.
+        /// 
+        /// </summary>
+        /// 
         private void datLeagues_Loaded(object sender, RoutedEventArgs e)
         {
             if(_leagues == null)
@@ -78,6 +98,14 @@ namespace Extremely_Casual_Game_Organizer
             }
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// When the page is unloaded it will clear out the league list and clear the item
+        /// source of the datagrid to ensure they are empty and ready for next time it is loaded.
+        /// </summary>
+        /// 
         private void datLeagues_Unloaded(object sender, RoutedEventArgs e)
         {
             _leagues = null;

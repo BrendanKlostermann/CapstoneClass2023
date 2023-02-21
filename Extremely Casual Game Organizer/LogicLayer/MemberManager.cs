@@ -1,18 +1,14 @@
-
-﻿/// <summary>
+/// <summary>
 /// Brendan Klostermann
-/// Created: 2023/01/31
+/// Created: 2023/02/20
 /// 
-/// Manager class for Member class. Contains methods for interacting with member objects.
+/// This class is the manager for the Member data object.
+/// It bridges the presentation to the database and does computations if needed.
+/// 
 /// </summary>
-///
-/// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
-/// </remarks>
 
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +35,15 @@ namespace LogicLayer
         {
             _memberAccessor = ma;
         }
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method calls the MemberAccessor method SetUserToInactive
+        /// </summary>
+        /// 
+        /// <returns> int count of rows effected </returns>
         public int EditUserToInactive(int member_id)
         {
             try

@@ -21,6 +21,14 @@ namespace LogicLayerInterfaces
 {
     public interface IMemberManager
     {
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method calls the MemberAccessor method SetUserToInactive
+        /// </summary>
+        /// 
+        /// <returns> int count of rows effected </returns>
         int EditUserToInactive(int member_id);
         bool EditMemberPassword(int member_id, string oldPassword, string newPassword);
         string HashSha256(string source);

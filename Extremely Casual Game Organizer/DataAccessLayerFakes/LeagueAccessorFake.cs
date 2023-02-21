@@ -1,4 +1,12 @@
-﻿using System;
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/02/20
+/// 
+/// This class is fake data for the League accessor
+/// 
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +19,13 @@ namespace DataAccessLayerFakes
     public class LeagueAccessorFake : ILeagueAccessor
     {
         List<League> _leagues = null;
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This constructor creates a list of fake data for the class to use.
+        /// </summary>
         public LeagueAccessorFake()
         {
             _leagues = new List<League>();
@@ -22,6 +37,12 @@ namespace DataAccessLayerFakes
             _leagues.Add(league3);
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method returns the list of fake data created by the constructor.
+        /// </summary>
         public List<League> SelectListOfLeagues()
         {
             return _leagues;

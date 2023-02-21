@@ -46,5 +46,10 @@ namespace Extremely_Casual_Game_Organizer
 
         }
 
+        private void navLeagues_Click(object sender, RoutedEventArgs e)
+        {
+            LeagueManager leagueManager = new LeagueManager();
+            _pageControl.LoadPage(new pgViewLeagueList());
+        }
     }
 }

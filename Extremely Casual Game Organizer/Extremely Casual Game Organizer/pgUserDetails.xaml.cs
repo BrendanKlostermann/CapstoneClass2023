@@ -39,6 +39,15 @@ namespace Extremely_Casual_Game_Organizer
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// when the Delete button is selected it will bring up the page to confirm the 
+        /// deactivation of the members account.
+        /// 
+        /// </summary>
+        /// 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             var confirmDeactivation = new pgConfirmDeactivate(_member_id);

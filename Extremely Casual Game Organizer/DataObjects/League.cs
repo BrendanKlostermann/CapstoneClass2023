@@ -1,4 +1,12 @@
-﻿using System;
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/02/20
+/// 
+/// This class will contain the properties and View Models for the
+/// League data Object.
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +24,7 @@ namespace DataObjects
         public bool? Gender { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }
-        public int Max_Num_Of_Teams { get; set; }
+        public int MaxNumOfTeams { get; set; }
 
 
         public League(int league_id, int sport_id, decimal league_dues, bool active, int member_id, bool gender, string description, string name, int max)
@@ -28,7 +36,7 @@ namespace DataObjects
             MemberID = member_id;
             Gender = gender;
             Description = description;
-            Max_Num_Of_Teams = max;
+            MaxNumOfTeams = max;
         }
         public League()
         {

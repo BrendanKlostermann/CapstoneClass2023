@@ -24,13 +24,15 @@ namespace DataAccessLayerFakes
 {
     public class MemberAccessorFake : IMemberAccessor
     {
-        /// <summary>
-        /// Create list of Members for data fakes
-        /// </summary>
-        /// 
 
         List<Member> _members = null;
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This constructor creates a list of fake members.
+        /// </summary>
         public MemberAccessorFake()
         {
             _members = new List<Member>()
@@ -91,6 +93,15 @@ namespace DataAccessLayerFakes
 
         }
 
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method loops through the member list for a matching MemberID and if it finds one it
+        /// sets the member's active state to false.
+        /// </summary>
+        /// <returns> int count of rows effected </returns>
         public int SetUserToInactive(int member_id)
         {
             int count = 0;
