@@ -2,13 +2,10 @@
 /// Brendan Klostermann
 /// Created: 2023/01/31
 /// 
+/// This page is to confirm the deletion of a Members account.
+/// 
 /// .cs file attached to ConfirmDeactivate.
 /// </summary>
-///
-/// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
-/// </remarks>
 /// 
 using System;
 using System.Collections.Generic;
@@ -43,6 +40,14 @@ namespace Extremely_Casual_Game_Organizer
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method will run the EditUserToInactive method from the MemberManager class
+        /// in turn deactivating the members account.
+        /// </summary>
+        /// 
         private void confirm_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -65,6 +70,14 @@ namespace Extremely_Casual_Game_Organizer
             }
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// If the user decided to select cancel on the confirmation screen it will close
+        /// the page and not deactivate the members account.
+        /// </summary>
+        /// 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.GoBack();

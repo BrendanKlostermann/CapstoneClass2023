@@ -1,4 +1,12 @@
-﻿using System;
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/02/20
+/// 
+/// This class contains the data access methods for the League object.
+/// 
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +21,16 @@ namespace DataAccessLayer
     public class LeagueAccessor : ILeagueAccessor
     {
         List<League> _leagues;
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method creates a database connection and selects a list of all leagues in the database.
+        /// </summary>
+        ///
+        /// <exception cref="Exception">Select fails or database could not be found</exception>
+        /// <returns>List of League objects</returns>
         public List<League> SelectListOfLeagues()
         {
             _leagues = new List<League>();
@@ -47,10 +65,13 @@ namespace DataAccessLayer
                         league.LeagueDues = reader.GetDecimal(2);
                         league.Active = reader.GetBoolean(3);
                         league.MemberID = reader.GetInt32(4);
-                        league.Gender = reader.GetBoolean(5);
+                        if (!reader.IsDBNull(5))
+                        {
+                            league.Gender = reader.GetBoolean(5);
+                        }
                         league.Description = reader.GetString(6);
                         league.Name = reader.GetString(7);
-                        league.Max_Num_Of_Teams = reader.GetInt32(8);
+                        league.MaxNumOfTeams = reader.GetInt32(8);
 
                         _leagues.Add(league);
                     }

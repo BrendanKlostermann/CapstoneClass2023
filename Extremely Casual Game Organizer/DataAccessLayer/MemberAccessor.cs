@@ -31,6 +31,13 @@ namespace DataAccessLayer
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method creates a database connection and runs the procedure
+        /// sp_deactivate_member and sets the supplied member to inactive.
+        /// </summary>
         public int SetUserToInactive(int member_id)
         {
             DBConnection connectionFactory = new DBConnection();
