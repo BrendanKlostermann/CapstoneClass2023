@@ -1,5 +1,4 @@
-
-﻿/// <summary>
+/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/01/31
 /// 
@@ -7,11 +6,13 @@
 /// </summary>
 ///
 /// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
+/// Updater Name: Jacob Lindauer
+/// Updated: 2023/02/10
+/// 
+/// Added method for UpdateMemberPassword
 /// </remarks>
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
@@ -24,15 +25,16 @@ namespace DataAccessLayerFakes
 {
     public class MemberAccessorFake : IMemberAccessor
     {
-        /// <summary>
-        /// Create list of Members for data fakes
-        /// </summary>
-        /// 
-
         List<Member> _members = null;
 
         public MemberAccessorFake()
         {
+            /// <summary> 
+            /// Jacob LIndauer
+            /// Created 2023/02/10
+            /// 
+            /// Constructor creates mock members for MemberManager Unit Testing. 
+            /// </summary>
             _members = new List<Member>()
             {
                 new Member{
@@ -173,7 +175,6 @@ namespace DataAccessLayerFakes
             /// <param name="member_id"></param>
             /// <param name="password"></param>
             /// <returns></returns>
-            /// 
             bool result = false;
 
             try

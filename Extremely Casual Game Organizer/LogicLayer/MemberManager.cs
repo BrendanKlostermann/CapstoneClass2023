@@ -1,5 +1,4 @@
-
-﻿/// <summary>
+/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/01/31
 /// 
@@ -7,11 +6,11 @@
 /// </summary>
 ///
 /// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
+/// Updater Name: Jacob Lindauer
+/// Updated: 2023/02/10
+/// 
+/// Added HashSha265 Method and EditMemberPassword
 /// </remarks>
-
-
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,4 +1,16 @@
-﻿using System;
+﻿///<summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Data Fakes for GameRosterAccessor and GameRosterManger Class Testing
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +24,14 @@ namespace DataAccessLayerFakes
     {
         List<GameRoster> _gameRoster = null;
         public GameRosterAccessorFake()
-        {
+        {   
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Constructor creates mock GameRoster List
+            /// 
+            /// </summary>
             _gameRoster = new List<GameRoster>()
             {
                 new GameRoster
@@ -31,6 +50,14 @@ namespace DataAccessLayerFakes
         }
         public List<GameRoster> SelectGameRoster(int game_id)
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Query the list and retrieves results based on provided game_id.
+            /// Sets results to a list and returns said list.
+            /// 
+            /// </summary>
             List<GameRoster> gameRoster = null;
 
             try

@@ -9,8 +9,6 @@
     /// Updater Name
     /// Updated: yyyy/mm/dd
     /// </remarks>    
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;

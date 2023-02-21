@@ -31,7 +31,7 @@ AS
 			JOIN [Venue] ON [Venue].[venue_id] = [Game].[venue_id]
 			JOIN [GameRoster] ON [GameRoster].[game_id] = [Game].[game_id]
 			JOIN [Team] ON [Team].[team_id] = [GameRoster].[team_id]
-			JOIN [Sport] ON [Team].[sport_id] = [Sport].[sport_id]
+			JOIN [Sport] ON [Game].[sport_id] = [Sport].[sport_id]
 			WHERE @game_id = [Game].[game_id]
 	END
 GO

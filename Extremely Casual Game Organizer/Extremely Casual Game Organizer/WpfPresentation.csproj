@@ -92,10 +92,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pgUserDetails.xaml">
-	  <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgAddTeamMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -122,9 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageFiles\PageControl.cs" />
-    <Compile Include="PageFiles\pgAddTeamMember.xaml.cs">
-      <DependentUpon>pgAddTeamMember.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PageFiles\pgGameList.xaml.cs">
       <DependentUpon>pgGameList.xaml</DependentUpon>
     </Compile>

@@ -6,8 +6,10 @@
 /// </summary>
 ///
 /// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
+/// Updater Name: Jacob Lindauer
+/// Updated: 2023/02/15
+/// 
+/// Added Edit MemberPassword and HashSha256 Interface Methods.
 /// </remarks>
 
 ﻿using System;

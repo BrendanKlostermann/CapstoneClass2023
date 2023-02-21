@@ -1,4 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/// /// <summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Unit Testing for for GameRosterManager classes.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using DataObjects;
 using LogicLayerInterfaces;
@@ -22,6 +34,10 @@ namespace LogicLayerTests
         [TestMethod]
         public void TestRetreivingGameRosterList()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             const int source = 1000;
             const int expectedResult = 2;
             int actualResult = 0;
@@ -36,6 +52,10 @@ namespace LogicLayerTests
         [ExpectedException(typeof(ArgumentException))]
         public void TestInvaidGameIDForRetrievingGameRosterList()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             const int source = 0;
             const int expectedResult = 2;
             int actualResult = 0;

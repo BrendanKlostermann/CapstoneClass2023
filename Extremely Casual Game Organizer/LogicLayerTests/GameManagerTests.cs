@@ -1,4 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/// /// <summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Unit Testing for for GameManager classes.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data;
 using LogicLayerInterfaces;
@@ -20,6 +32,10 @@ namespace LogicLayerTests
         [TestMethod]
         public void TestRetrievingGameList()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             const int expectedResult = 4;
             int actualResult = 0;
 
@@ -33,6 +49,10 @@ namespace LogicLayerTests
         [TestMethod]
         public void TestRetrievingGameDetailsByGameID()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             const int source = 1000;
             const int expectedResult = 1000;
             int actualResult = 0;
@@ -47,6 +67,10 @@ namespace LogicLayerTests
         [ExpectedException(typeof(ArgumentException))]
         public void TestRetrievingGameDetailsWithInvlaidGameID()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             const int source = 1;
             const int expectedResult = 1000;
             int actualResult = 0;

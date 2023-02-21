@@ -1,4 +1,16 @@
-﻿using System;
+﻿///<summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Interface for GameManager Class
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;

@@ -1,4 +1,16 @@
-﻿using System;
+﻿///<summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Page for resetting user passwords
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,12 +29,6 @@ using DataObjects;
 
 namespace Extremely_Casual_Game_Organizer.PageFiles
 {
-    /// <summary>
-    /// Jacob Lindauer
-    /// Created 01/28/2023
-    /// 
-    /// Page for resetting user passwords
-    /// </summary>
     public partial class pgResetPassword : Page
     {
         MemberManager _memberManager = null;
@@ -32,7 +38,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         public pgResetPassword(MemberManager memberManager, Member member, string currentPW)
         {
-            // Called when user signs in for the first time.
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Called when user signs in for the first time. First time login should have provided login be true.
+            /// </summary>
             _memberManager = memberManager;
             _member = member;
             _currentPassword = currentPW;
@@ -43,7 +54,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         
         public pgResetPassword(MemberManager memberManager)
         {
-            // Called when user just clicks on reset password without providing login info first.
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Called when user just clicks on reset password without providing login info first. Provided Login should be false
+            /// </summary>
             _memberManager = memberManager;
             _providedLogin = false;
 
@@ -53,6 +69,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void pgResetPassword_Loaded(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Page Loaded Event
+            /// </summary>
             if (_providedLogin)
             {
                 try
@@ -70,7 +92,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // Validate entries
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Save click event and entry validation before password reset is processed.
+            /// </summary>
             if (txtNewPW.Password == txtCurrentPW.Password)
             {
                 MessageBox.Show("Current password and new password cannot be the same. \n\nPlease try again");
@@ -152,6 +179,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Cancel click event
+            /// </summary>
             var result = MessageBox.Show("Are you sure you want to cancel?", "Cancel", MessageBoxButton.YesNo);
 
             switch (result)

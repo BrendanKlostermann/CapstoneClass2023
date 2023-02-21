@@ -1,4 +1,16 @@
-﻿using System;
+﻿///<summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Data Fakes for GameAccessor and GameManger Class Testing
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +27,12 @@ namespace DataAccessLayerFakes
         DataTable _gameDetails = null;
         public GameAccessorFake()
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Constructor creates mock data tables columns and rows for unit testing.
+            /// </summary>
             _gameList = new DataTable();
             _gameList.Columns.Add("game_id", typeof(int));
             _gameList.Columns.Add("Teams", typeof(string));
@@ -38,11 +56,23 @@ namespace DataAccessLayerFakes
 
         public DataTable SelectAllGames()
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Returns game list
+            /// </summary>
             return _gameList;
         }
 
         public DataRow SelectGameDetails(int game_id)
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Query's the data table for provided game_id and returns the row data for selected value.
+            /// </summary>
             DataRow returnRow = null;
 
             try
