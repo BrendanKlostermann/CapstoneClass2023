@@ -48,6 +48,7 @@
     <Compile Include="IGameAccessor.cs" />
     <Compile Include="ITeamAccessor.cs" />
     <Compile Include="ITeamMemberAccessor.cs" />
+    <Compile Include="ITeamRoleAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

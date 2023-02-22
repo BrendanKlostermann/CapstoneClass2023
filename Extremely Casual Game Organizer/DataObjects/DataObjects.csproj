@@ -54,6 +54,7 @@
     <Compile Include="TeamGame.cs" />
     <Compile Include="TeamMember.cs" />
     <Compile Include="TeamRole.cs" />
+    <Compile Include="TeamRoles.cs" />
     <Compile Include="TeamRoleType.cs" />
     <Compile Include="Venue.cs" />
     <Compile Include="VenueEquipmentList.cs" />
