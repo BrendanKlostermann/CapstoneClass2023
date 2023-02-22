@@ -37,6 +37,23 @@ namespace DataAccessLayerFakes
             _leagues.Add(league3);
         }
 
+        public int RemoveATeamFromALeague(int teamId, int leagueId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<League> SelectAllLeagues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Team> SelectATeamByLeagueID(int leagueId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/02/20

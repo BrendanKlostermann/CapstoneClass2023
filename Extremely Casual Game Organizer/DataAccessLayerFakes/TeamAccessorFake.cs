@@ -46,6 +46,22 @@ namespace DataAccessLayerFakes
 
             };
         }
+
+        public int DeleteAMemberFromATeamByMemberIdAndTeamID(int memberId, int teamId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Member> SelectAllmembersByTeamID(int teamId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TeamMember SelectAMembersInATeamWithTeamDetails(int memberID, int teamID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Team SelectTeamByTeamID(int team_id)
         {
             Team selectedTeam = null;

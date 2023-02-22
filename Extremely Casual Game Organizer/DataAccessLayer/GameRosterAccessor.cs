@@ -1,4 +1,16 @@
-﻿using System;
+﻿///<summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// GameRosterAccessor for processing GameRosterManager methods to the database. 
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +26,13 @@ namespace DataAccessLayer
     {
         public List<GameRoster> SelectGameRoster(int game_id)
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Retrieves game roster based on provided game_id
+            /// </summary>
+            
             List<GameRoster> _rosterList = null;
 
             DBConnection connectionFactory = new DBConnection();

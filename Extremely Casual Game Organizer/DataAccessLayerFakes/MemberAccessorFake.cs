@@ -1,5 +1,4 @@
-
-﻿/// <summary>
+/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/01/31
 /// 
@@ -7,11 +6,13 @@
 /// </summary>
 ///
 /// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
+/// Updater Name: Jacob Lindauer
+/// Updated: 2023/02/10
+/// 
+/// Added method for UpdateMemberPassword
 /// </remarks>
 
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Data;
@@ -24,7 +25,6 @@ namespace DataAccessLayerFakes
 {
     public class MemberAccessorFake : IMemberAccessor
     {
-
         List<Member> _members = null;
 
         /// <summary>
@@ -35,6 +35,12 @@ namespace DataAccessLayerFakes
         /// </summary>
         public MemberAccessorFake()
         {
+            /// <summary> 
+            /// Jacob LIndauer
+            /// Created 2023/02/10
+            /// 
+            /// Constructor creates mock members for MemberManager Unit Testing. 
+            /// </summary>
             _members = new List<Member>()
             {
                 new Member{
@@ -44,7 +50,6 @@ namespace DataAccessLayerFakes
                     FamilyName = "Smith",
                     Birthday =  new DateTime(2023, 01, 25),
                     PhoneNumber = "319-999-9999",
-                    PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
                     Gender = true,
                     Active = true,
                     Bio = "Member bio"
@@ -57,7 +62,6 @@ namespace DataAccessLayerFakes
                     FamilyName = "Johnson",
                     Birthday =  new DateTime(2022, 02, 12),
                     PhoneNumber = "319-888-8888",
-                    PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
                     Gender = true,
                     Active = false,
                     Bio = "Another Member bio"
@@ -70,21 +74,20 @@ namespace DataAccessLayerFakes
                     FamilyName = "Waters",
                     Birthday =  new DateTime(2020, 08, 10),
                     PhoneNumber = "319-777-7777",
-                    PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
                     Gender = true,
                     Active = true,
                     Bio = "Yet Another Member bio"
                 }
             };
         }
-    
+
 
 
         public Member SelectAUserByID(int member_id)
         {
-            foreach(Member mem in _members)
+            foreach (Member mem in _members)
             {
-                if(mem.MemberID == member_id)
+                if (mem.MemberID == member_id)
                 {
                     return mem;
                 }
@@ -105,7 +108,7 @@ namespace DataAccessLayerFakes
         public int SetUserToInactive(int member_id)
         {
             int count = 0;
-            foreach(Member mem in _members)
+            foreach (Member mem in _members)
             {
                 if (mem.MemberID == member_id)
                 {
@@ -116,7 +119,7 @@ namespace DataAccessLayerFakes
             return count;
         }
 
-        
+
 
         public Member SelectMemberByEmail(string email)
         {
@@ -184,32 +187,33 @@ namespace DataAccessLayerFakes
             /// <param name="member_id"></param>
             /// <param name="password"></param>
             /// <returns></returns>
-            /// 
-            bool result = false;
+            /// PLEASE REVISIT JACOB
+            ////////////////////////////////////////bool result = false;
 
-            try
-            {
-                int memberID = member_id;
-                string newPassword = password;
-                string currentPassword = oldPassword;
+            ////////////////////////////////////////try
+            ////////////////////////////////////////{
+            ////////////////////////////////////////    int memberID = member_id;
+            ////////////////////////////////////////    string newPassword = password;
+            ////////////////////////////////////////    string currentPassword = oldPassword;
 
-                foreach(Member member in _members)
-                {
-                    if (member.MemberID == memberID && currentPassword == member.PasswordHash)
-                    {
-                        member.PasswordHash = newPassword;
+            ////////////////////////////////////////    foreach(Member member in _members)
+            ////////////////////////////////////////    {
+            ////////////////////////////////////////        if (member.MemberID == memberID && currentPassword == member.PasswordHash)
+            ////////////////////////////////////////        {
+            ////////////////////////////////////////            member.PasswordHash = newPassword;
 
-                        result = true;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+            ////////////////////////////////////////            result = true;
+            ////////////////////////////////////////        }
+            ////////////////////////////////////////    }
+            ////////////////////////////////////////}
+            ////////////////////////////////////////catch (Exception ex)
+            ////////////////////////////////////////{
 
-                throw ex;
-            }
+            ////////////////////////////////////////    throw ex;
+            ////////////////////////////////////////}
 
-            return result;
+            ////////////////////////////////////////return result;
+            return false;
         }
         /// <summary>
         /// Michael Haring
@@ -224,23 +228,24 @@ namespace DataAccessLayerFakes
         /// </remarks>
         public int UpdatePasswordHashToDefault(int memberID, string passwordHash)
         {
-            int rows = 0;
-            var member = _members.Where(b => b.MemberID == memberID).First();
+            ////////    int rows = 0;
+            ////////    var member = _members.Where(b => b.MemberID == memberID).First();
 
-            if (member == null)
-            {
-                // employee not found
-                throw new ApplicationException("Bad member id.");
-            }
+            ////////    if (member == null)
+            ////////    {
+            ////////        // employee not found
+            ////////        throw new ApplicationException("Bad member id.");
+            ////////    }
 
 
-            member.PasswordHash = passwordHash;
+            ////////    member.PasswordHash = passwordHash;
 
-            if (member.PasswordHash == "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e")
-            {
-                rows = 1;
-            }
-            return rows;
+            ////////    if (member.PasswordHash == "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e")
+            ////////    {
+            ////////        rows = 1;
+            ////////    }
+            ////////    return rows;
+            return 1;
         }
     }
 }

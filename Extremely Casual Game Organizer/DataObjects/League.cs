@@ -1,3 +1,15 @@
+
+﻿/// <LeagueObject>
+/// Alex Korte
+/// Created: 2023/02/04
+/// 
+/// </summary>
+/// This class is used to create the League Object
+/// 
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+
 ﻿/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/02/20
@@ -5,6 +17,7 @@
 /// This class will contain the properties and View Models for the
 /// League data Object.
 /// </summary>
+
 
 using System;
 using System.Collections.Generic;
@@ -18,12 +31,12 @@ namespace DataObjects
     {
         public int LeagueID { get; set; }
         public int SportID { get; set; }
-        public decimal LeagueDues { get; set;}
-        public bool Active { get; set; }
-        public int MemberID { get; set; }
-        public bool? Gender { get; set; }
-        public string Description { get; set; }
-        public string Name { get; set; }
+        public decimal LeagueDues { get; set; }
+        public bool Active { get; set; }//open regestration or closed
+        public int MemberID { get; set; }//person who made the league
+        public bool? Gender { get; set; }//nullable and if there is a gender requirement
+        public string Description { get; set; }//description of the league
+        public string Name { get; set; }//name of the league
         public int MaxNumOfTeams { get; set; }
 
 
@@ -42,5 +55,17 @@ namespace DataObjects
         {
 
         }
-    } 
+        public League(int leagueID, int sportID, decimal leagueDues, bool active, int memberID, bool? gender
+            , string description, string name)
+        {
+            this.LeagueID = leagueID;
+            this.SportID = sportID;
+            this.LeagueDues = leagueDues;
+            this.Active = active;
+            this.MemberID = memberID;
+            this.Gender = gender;
+            this.Description = description;
+            this.Name = name;
+        }
+    }
 }

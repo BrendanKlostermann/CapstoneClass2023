@@ -4,9 +4,15 @@
 /// 
 /// Accessor class for Member. Contains methods to interact with database.
 /// </summary>
+///
+/// <remarks>
+/// Updater Name: Jacob Lindauer
+/// Updated: 2023/02/01
+/// 
+/// Added method for UpdateMemberPassword
+/// </remarks>
 
-
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,24 +47,23 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@member_id", SqlDbType.Int);
             cmd.Parameters["@member_id"].Value = member_id;
-			
-			try
+            try
             {
                 conn.Open();
-				
+
                 int count = cmd.ExecuteNonQuery();
                 return count;
 
             }
             catch (Exception ex)
             {
-				throw ex;
+                throw ex;
             }
             finally
             {
                 conn.Close();
             }
-		}
+        }
 
         public Member SelectMemberByEmail(string email)
         {
@@ -137,6 +142,12 @@ namespace DataAccessLayer
 
         public bool UpdateMemberPassword(int member_id, string password, string oldPassword)
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Takes input parameters and executes stored procedure to update provided member password.
+            /// </summary>
             bool result;
 
             DBConnection connectionFactory = new DBConnection();
@@ -146,7 +157,7 @@ namespace DataAccessLayer
 
             var cmd = new SqlCommand(cmdText, conn);
 
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@member_id", member_id);
             cmd.Parameters.AddWithValue("@new_password", password);

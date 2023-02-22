@@ -63,7 +63,6 @@ namespace DataAccessLayerFakes
                     FamilyName = "Smith",
                     Birthday =  new DateTime(2023, 01, 25),
                     PhoneNumber = "319-999-9999",
-                    PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
                     Gender = true,
                     Active = true,
                     Bio = "Member bio"
@@ -76,7 +75,6 @@ namespace DataAccessLayerFakes
                     FamilyName = "Johnson",
                     Birthday =  new DateTime(2022, 02, 12),
                     PhoneNumber = "319-888-8888",
-                    PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
                     Gender = true,
                     Active = false,
                     Bio = "Another Member bio"
@@ -89,7 +87,6 @@ namespace DataAccessLayerFakes
                     FamilyName = "Waters",
                     Birthday =  new DateTime(2020, 08, 10),
                     PhoneNumber = "319-777-7777",
-                    PasswordHash = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
                     Gender = true,
                     Active = true,
                     Bio = "Yet Another Member bio"

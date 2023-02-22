@@ -1,6 +1,18 @@
-﻿using System;
+﻿using System.Linq;
+///<summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Class file and Methods for processing the GameManager methods with the database.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataObjects;
@@ -14,6 +26,12 @@ namespace DataAccessLayer
     {
         public DataTable SelectAllGames()
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Retrieves game list from stored procedure and stores results into a data table
+            /// </summary>
             DataTable returnTable = null;
 
             DBConnection connectionFactory = new DBConnection();
@@ -47,6 +65,12 @@ namespace DataAccessLayer
 
         public DataRow SelectGameDetails(int game_id)
         {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Retrieves game details from stored procedure and stores results into a data row. SP should return only 1 row.
+            /// </summary>
             DataRow returnRow;
 
             DBConnection connectionFactory = new DBConnection();

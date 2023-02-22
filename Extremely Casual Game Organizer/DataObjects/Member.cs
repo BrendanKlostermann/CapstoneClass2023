@@ -1,3 +1,15 @@
+
+﻿/// <MemberObject>
+/// Alex Korte
+/// Created: 2023/01/24
+/// 
+/// </summary>
+/// This class is used to create the Member Object
+/// 
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+
 ﻿    /// <summary>
     /// Brendan Klostermann
     /// Created: 2023/01/31
@@ -9,8 +21,6 @@
     /// Updater Name
     /// Updated: yyyy/mm/dd
     /// </remarks>    
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +36,31 @@ namespace DataObjects
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
         public DateTime Birthday { get; set; }
+        public string PasswordHash { get; set; }
         public string PhoneNumber { get; set; }
         public bool? Gender { get; set; }
         public bool Active { get; set; }
         public string Bio { get; set; }
-		public string PasswordHash { get; set; }
+        public byte[] ProfilePicture { get; set; }
+        public string PhotoMimeType { get; set; }
+
+        public Member(string name)
+        {
+            this.FirstName = name;
+        }
+
+        public Member(int memberId, string email, string firstName, string familyName
+            , DateTime birthDay, string phoneNumber
+            , bool? gender, bool active, string bio)
+        {
+            this.MemberID = memberId;
+            this.Email = email;
+            this.FamilyName = firstName;
+            this.FamilyName = familyName;
+            this.Birthday = birthDay;
+            this.PhoneNumber = phoneNumber;
+		}
+
 
         public Member(int mem_id,string email, string fName, string flName, DateTime bDay, string pNumber, bool gender, bool active, string bio)
         {
@@ -44,9 +74,11 @@ namespace DataObjects
             this.Active = active;
             this.Bio = bio;
         }
+
         public Member()
         {
 
         }
-    }
+	}
 }
+

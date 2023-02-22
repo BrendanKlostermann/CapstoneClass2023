@@ -6,6 +6,14 @@
 /// It bridges the presentation to the database and does computations if needed.
 /// 
 /// </summary>
+///
+/// <remarks>
+/// Updater Name: Jacob Lindauer
+/// Updated: 2023/02/10
+/// 
+/// Added HashSha265 Method and EditMemberPassword
+/// </remarks>
+
 
 
 using System;

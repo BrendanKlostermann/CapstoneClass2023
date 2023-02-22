@@ -1,3 +1,15 @@
+
+﻿/// <ILeagueAccessor>
+/// Alex Korte
+/// Created: 2023/01/24
+/// 
+/// </summary>
+/// This is the interface for league accessor, getting the links and manipulating them
+/// 
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
 ﻿/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/02/20
@@ -17,15 +29,10 @@ namespace DataAccessLayerInterfaces
 {
     public interface ILeagueAccessor
     {
-        /// <summary>
-        /// Brendan Klostermann
-        /// Created: 2023/02/20
-        /// 
-        /// This method creates a database connection and selects a list of all leagues in the database.
-        /// </summary>
-        ///
-        /// <exception cref="SQLException">Select fails </exception>
-        /// <returns>List of League objects</returns>
-        List<League> SelectListOfLeagues();
+        List<League> SelectAllLeagues();
+
+        List<Team> SelectATeamByLeagueID(int leagueId);
+
+        int RemoveATeamFromALeague(int teamId, int leagueId);
     }
 }

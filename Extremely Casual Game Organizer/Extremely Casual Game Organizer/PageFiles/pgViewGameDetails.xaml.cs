@@ -1,4 +1,16 @@
-﻿using System;
+﻿///<summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Class file and Methods for populating data for the Game Details Page
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +30,6 @@ using System.Data;
 
 namespace Extremely_Casual_Game_Organizer.PageFiles
 {
-    /// <summary>
-    /// Interaction logic for pgViewGameDetails.xaml
-    /// </summary>
     public partial class pgViewGameDetails : Page
     {
         TeamManager _teamManager = null;
@@ -42,6 +51,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         }
         private void pageViewGameDetails_Loaded(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Loaded event. Need to set the back button and click event for the button. 
+            /// </summary>
             _backButton = _pageControl.ShowGoBack();
             _backButton.Click += BackButton_Click;
 
@@ -51,6 +66,13 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void LoadGameDetails()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Method for loading game details from based on values provided in constructor when class file was called. 
+            /// </summary>
+            
             DataRow details = _gameManager.ViewGameDetails(_game_id);
 
             txtLocation.Text = details[1].ToString() + " " + details[2].ToString() + " " + details[3].ToString();
@@ -61,6 +83,13 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void LoadRosterData()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Method for loading roster details from based teams participating in the selected game
+            /// </summary>
+            
             try
             {
                 Team team1 = new Team();
@@ -180,6 +209,14 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Click event for back button. Instead of doing GoBack on the frame loader 
+            /// we want to load the last page instead so that its buttons are generated correctly.
+            /// </summary>
+            /// 
             _pageControl.LoadPage(new pgGameList(new GameManager()));
         }
     }

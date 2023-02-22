@@ -1,4 +1,16 @@
-﻿using System;
+﻿/// /// <summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Page file and methods for the Game List view page.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +30,6 @@ using System.Data;
 
 namespace Extremely_Casual_Game_Organizer.PageFiles
 {
-    /// <summary>
-    /// Interaction logic for pgGameList.xaml
-    /// </summary>
     public partial class pgGameList : Page
     {
         GameManager _gameManager = null;
@@ -38,6 +47,13 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Page loaded event. Need to create click event for the view button.
+            /// </summary>
+            
             // Load buttons
             _viewButton = _pageControl.ShowReadOnly();
 
@@ -47,6 +63,13 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void LoadGameList()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Method for generating the game list.
+            /// </summary>
+            
             DataTable gameList = _gameManager.ViewAllGames();
 
             // Data Grid Properties
@@ -55,9 +78,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             datGameList.IsReadOnly = true;
 
 
-            // In order to hide the first column (which the game_id is needed but does not need to be visible) each column needs to be set manually.
-
+            //// In order to hide the first column (which the game_id is needed but does not need to be visible) each column needs to be set manually.
             DataGridTextColumn column1 = new DataGridTextColumn();
+            // Binding is determined from column names returned from stored procedure
             column1.Binding = new Binding("game_id");
             column1.Header = "game_id";
             column1.Visibility = Visibility.Hidden;
@@ -66,27 +89,32 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             DataGridTextColumn column2 = new DataGridTextColumn();
             column2.Binding = new Binding("Teams");
             column2.Header = "Teams";
-            column2.Width = new DataGridLength(300);
+            column2.Width = new DataGridLength(200);
             datGameList.Columns.Add(column2);
 
             DataGridTextColumn column3 = new DataGridTextColumn();
             column3.Binding = new Binding("Location");
-            column3.Width = new DataGridLength(300);
+            column3.Width = new DataGridLength(400);
             column3.Header = "Location";
             datGameList.Columns.Add(column3);
 
             DataGridTextColumn column4 = new DataGridTextColumn();
             column4.Binding = new Binding("Date and Time");
-            column4.Width = new DataGridLength(183);
+            column4.Width = new DataGridLength(160);
             column4.Header = "Date and Time";
             datGameList.Columns.Add(column4);
-
 
             datGameList.ItemsSource = gameList.DefaultView;
         }
 
         private void datGameList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Grid double click event
+            /// </summary>
             try
             {
                 _selectedItem = (DataRowView)datGameList.SelectedItem;
@@ -114,6 +142,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// View button click event
+            /// </summary>
             try
             {
 
@@ -154,7 +188,15 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-             // Remove previous click events just in case. 
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// Page unload evnet to remove click events from occurring should we navigate back to this page.
+            /// If this is not done the click event will loop on themselves if you navigate back to this page. 
+            /// </summary>
+             
+            // Remove previous click events just in case. 
             _viewButton.Click -= ViewButton_Click;
 
             // Set selected item to null

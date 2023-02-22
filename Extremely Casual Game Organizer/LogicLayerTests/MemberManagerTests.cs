@@ -1,4 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿/// /// <summary>
+/// Jacob Lindauer
+/// Created: 2023/01/31
+/// 
+/// Unit Testing for for MemberManager classes.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name:
+/// Updated: 
+/// 
+/// </remarks>
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using DataObjects;
 using LogicLayerInterfaces;
@@ -21,6 +33,10 @@ namespace LogicLayerTests
         [TestMethod]
         public void TestResettingMemberPassword()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
 
             const int source = 10000;
             const string newPassword = "password1";
@@ -37,6 +53,10 @@ namespace LogicLayerTests
         [ExpectedException(typeof(ArgumentException))]
         public void TestPasswordMethodWithBadPasswordInput()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
 
             const int source = 10000;
             const string newPassword = "password";
@@ -51,6 +71,10 @@ namespace LogicLayerTests
         [ExpectedException(typeof(ArgumentException))]
         public void TestPasswordResetWithBadEmailInput()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             Member testMember = new Member();
             const string source = "bademail@email.com";
             const string expectedResult = "John";
@@ -63,6 +87,10 @@ namespace LogicLayerTests
         [TestMethod]
         public void TestRetreiveMemberByEmail()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             Member testMember = new Member();
             const string source = "johns@company.com";
             const string expectedResult = "John";
@@ -78,6 +106,10 @@ namespace LogicLayerTests
         [ExpectedException(typeof(ArgumentException))]
         public void TestRetreiveMemberWithInvalidEmail()
         {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/10/2023
+            /// </summary>
             Member testMember = new Member();
             const string source = "asdf";
             const string expectedResult = "John";

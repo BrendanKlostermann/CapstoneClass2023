@@ -7,8 +7,10 @@
 /// </summary>
 ///
 /// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
+/// Updater Name: Jacob Lindauer
+/// Updated: 2023/02/10
+/// 
+/// Added Method for UpdateMemberPassword
 /// </remarks>
 
 

@@ -1,3 +1,15 @@
+
+﻿/// <TeamMemberObject>
+/// Alex Korte
+/// Created: 2023/01/24
+/// 
+/// </summary>
+/// This class is used to create the TeamMember Object
+/// 
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +24,17 @@ namespace DataObjects
         public string Description { get; set; }
         public bool Starter { get; set; }
         public int MemberID { get; set; }
+
+        public TeamMember(int teamID, string description, int memberID)
+        {
+            this.TeamID = teamID;
+            this.Description = description;
+            this.MemberID = memberID;
+        }
+
+        public TeamMember()
+        {
+
+        }
     }
 }

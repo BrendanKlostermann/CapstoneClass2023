@@ -58,6 +58,13 @@
     <Compile Include="PageFiles\pgAdminResetPassword.xaml.cs">
       <DependentUpon>pgAdminResetPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\PageControler.cs" />
+    <Compile Include="PageFiles\PopUpOptions.xaml.cs">
+      <DependentUpon>PopUpOptions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\TeamMemberScreen.xaml.cs">
+      <DependentUpon>TeamMemberScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pgViewLeagueList.xaml.cs">
       <DependentUpon>pgViewLeagueList.xaml</DependentUpon>
     </Compile>
@@ -68,6 +75,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="TeamList.xaml.cs">
+      <DependentUpon>TeamList.xaml</DependentUpon>
+    </Compile>
     <Page Include="pgConfirmDeactivate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,15 +104,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PageFiles\PopUpOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\TeamMemberScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pgViewLeagueList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pgUserDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgAddTeamMember.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,12 +140,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TeamList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageFiles\PageControl.cs" />
-    <Compile Include="PageFiles\pgAddTeamMember.xaml.cs">
-      <DependentUpon>pgAddTeamMember.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PageFiles\pgGameList.xaml.cs">
       <DependentUpon>pgGameList.xaml</DependentUpon>
     </Compile>

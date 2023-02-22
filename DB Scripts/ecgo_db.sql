@@ -197,9 +197,12 @@ CREATE TABLE [dbo].[Game] (
 	[score]					[nvarchar](1000)		NULL,
 	[venue_id]				[int]					NOT NULL,
 	[date_and_time]			[dateTime]				NOT NULL,
+	[sport_id]				[int]					NOT NULL
 	CONSTRAINT [pk_game_id] PRIMARY KEY([game_id]),
 	CONSTRAINT [fk_venue_id] FOREIGN KEY([venue_id])
-		REFERENCES [Venue]([venue_id])
+		REFERENCES [Venue]([venue_id]),
+	CONSTRAINT [fk_sport_id_game_table] FOREIGN KEY([sport_id])
+		REFERENCES [Sport]([sport_id])
 )
 GO
 

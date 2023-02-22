@@ -1,3 +1,16 @@
+
+﻿/// <ITeamAccessor>
+/// Alex Korte
+/// Created: 2023/01/24
+/// 
+/// </summary>
+/// This is the interface for team accessor, getting the methods for manipulating teams
+/// 
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +22,12 @@ namespace DataAccessLayerInterfaces
 {
     public interface ITeamAccessor
     {
+        List<Member> SelectAllmembersByTeamID(int teamId); //returns a list of members on team
+
+        int DeleteAMemberFromATeamByMemberIdAndTeamID(int memberId, int teamId); //returns number of rows affected
+
+        TeamMember SelectAMembersInATeamWithTeamDetails(int memberID, int teamID);//getting a list of team details
+		
         Team SelectTeamByTeamID(int team_id);
     }
 }
