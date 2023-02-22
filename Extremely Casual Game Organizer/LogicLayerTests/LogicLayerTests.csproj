@@ -47,11 +47,17 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamMemberAccessorTest.cs" />
     <Compile Include="LeagueAccessorTest.cs" />
+    <Compile Include="LeagueManagerTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MemberManagerTests.cs" />
+    <Compile Include="GameRosterManagerTests.cs" />
+    <Compile Include="TeamManagerTests.cs" />
+    <Compile Include="GameManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -72,6 +78,10 @@
     <ProjectReference Include="..\DataObjects\DataObjects.csproj">
       <Project>{2cc3afac-da8c-4ce0-9d1d-cff5d4f14c88}</Project>
       <Name>DataObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicLayerInterfaces\LogicLayerInterfaces.csproj">
+      <Project>{68acf833-c77a-43e3-bcad-90980c0bd422}</Project>
+      <Name>LogicLayerInterfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\LogicLayer\LogicLayer.csproj">
       <Project>{53ad4840-45b1-461d-b7b1-f065308e0790}</Project>

@@ -1,3 +1,4 @@
+
 ﻿/// <ILeagueManager>
 /// Alex Korte
 /// Created: 2023/01/24
@@ -8,6 +9,15 @@
 /// Updater Name
 /// Updated: yyyy/mm/dd
 /// </remarks>
+
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/02/20
+/// 
+/// This is the interface class for the LeagueManager
+/// 
+/// </summary>
+
 
 using System;
 using System.Collections.Generic;
@@ -21,6 +31,7 @@ namespace LogicLayerInterfaces
     public interface ILeagueManager
     {
         /// <summary>
+
         /// Alex Korte
         /// Created: 2023/01/24
         /// 
@@ -39,5 +50,16 @@ namespace LogicLayerInterfaces
         List<Team> GetAListOfTeamsByLeagueID(int leagueID);
 
         int RemoveATeamFromALeagueByTeamIDAndLeagueID(int teamId, int leagueID);
-    }
+
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method calls the LeagueAccessor method SelectListOfLeagues and returns it to the 
+        /// presentation layer. 
+        /// </summary>
+        /// 
+        /// <returns>List of League objects</returns>
+        List<League> RetrieveListOfLeagues();
+	}
+
 }

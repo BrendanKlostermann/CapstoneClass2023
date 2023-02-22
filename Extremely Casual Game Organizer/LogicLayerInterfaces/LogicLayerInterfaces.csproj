@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ILeagueManager.cs" />
+    <Compile Include="IGameManager.cs" />
+    <Compile Include="IGameRosterManager.cs" />
+    <Compile Include="IMemberManager.cs" />
+    <Compile Include="ITeamManager.cs" />
     <Compile Include="ITeamMemberManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

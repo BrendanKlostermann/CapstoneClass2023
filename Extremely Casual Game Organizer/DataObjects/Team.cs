@@ -1,3 +1,4 @@
+
 ﻿/// <TeamObject>
 /// Alex Korte
 /// Created: 2023/01/24
@@ -9,7 +10,7 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace DataObjects
         public string TeamName { get; set; }
         public bool? Gender { get; set; }
         public int SportID { get; set; }
-
+		
         public Team()
         {
             

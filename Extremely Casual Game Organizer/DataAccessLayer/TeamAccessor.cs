@@ -1,4 +1,4 @@
-﻿/// <TeamAccessor>
+/// <TeamAccessor>
 /// Alex Korte
 /// Created: 2023/01/24
 /// 
@@ -9,21 +9,20 @@
 /// Updated: 2023/02/21
 /// </remarks>
 
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayerInterfaces;
 using DataObjects;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace DataAccessLayer
 {
     public class TeamAccessor : ITeamAccessor
     {
-
         /// <summary>
         /// Alex Korte
         /// Created: 2023/01/24
@@ -78,6 +77,72 @@ namespace DataAccessLayer
         /// 
         /// Actual summary of the class if needed.
         /// </summary>
+        /// A method to delete a member form a team based on memberID and TeamID
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed
+        public Team SelectTeamByTeamID(int team_id)
+        {
+            Team team = null;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_team_by_team_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+
+            cmd.Parameters["@team_id"].Value = team_id;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                team = new Team();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    team.TeamID = reader.GetInt32(0);
+                    team.TeamName = reader.GetString(1);
+                    if (reader.IsDBNull(2))
+                    {
+                        team.Gender = null;
+                    }
+                    else
+                    {
+                        team.Gender = reader.GetBoolean(2);
+                    }
+                    team.SportID = reader.GetInt32(3);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return team;
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
         /// A method to select all members based on what team they are in
         /// 
         /// <remarks>
@@ -106,7 +171,6 @@ namespace DataAccessLayer
 
             cmd.Parameters.Add("@team_id", SqlDbType.Int);
             cmd.Parameters["@team_id"].Value = teamId;
-
             try
             {
                 conn.Open();
@@ -128,7 +192,7 @@ namespace DataAccessLayer
                         tempMember.Gender = reader.GetBoolean(6);
                         tempMember.Active = reader.GetBoolean(7);
                         tempMember.Bio = reader.GetString(8);
-                        
+
 
                         int columnIndex = 9;
                         try
@@ -162,8 +226,8 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-            return allMembersOnATeam;
-        }
+			return allMembersOnATeam;
+		}
 
         /// <summary>
         /// Alex Korte

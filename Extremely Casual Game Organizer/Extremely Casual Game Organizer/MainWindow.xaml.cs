@@ -12,8 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LogicLayer;
+
 using DataObjects;
+using LogicLayerInterfaces;
+using LogicLayer;
+using Extremely_Casual_Game_Organizer.PageFiles;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -22,27 +25,32 @@ namespace Extremely_Casual_Game_Organizer
     /// </summary>
     public partial class MainWindow : Window
     {
+        MemberManager _memberManager = null;
+        Member _member = null;
+        PageControl _pageControl = null;
         public MainWindow()
         {
+            _memberManager = new MemberManager();
+            _pageControl = new PageControl();
             InitializeComponent();
+
+            // Hide all function buttons
+            grdFrameFunctions.Visibility = Visibility.Hidden;
+
         }
 
-        private void btn_test_Click(object sender, RoutedEventArgs e)
+        private void navEvents_Click(object sender, RoutedEventArgs e)
         {
-            TeamMemberManager tmm = new TeamMemberManager();
-            List<Member> tempList = tmm.GetAListOfAllMembersByTeamID(1000);
-            foreach(Member mem in tempList)
-            {
+            GameManager gameManager = new GameManager();
 
-            }
+            _pageControl.LoadPage(new pgGameList(gameManager));
+
         }
 
-
-        private void testButton_Click_1(object sender, RoutedEventArgs e)
+        private void navLeagues_Click(object sender, RoutedEventArgs e)
         {
-            frameLoad.Navigate(new TeamMemberScreen(1000));
-            Window test = new Window();
-
+            LeagueManager leagueManager = new LeagueManager();
+            _pageControl.LoadPage(new pgViewLeagueList());
         }
     }
 }

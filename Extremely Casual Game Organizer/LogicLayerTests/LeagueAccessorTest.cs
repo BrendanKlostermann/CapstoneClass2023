@@ -27,7 +27,7 @@ namespace LogicLayerTests
         [TestInitialize]
         public void TestSetup()
         {
-            _lm = new LeagueManager(new LeagueAccessorFakes());
+            _lm = new LeagueManager(new LeagueAccessorFake());
         }
 
         [TestMethod]

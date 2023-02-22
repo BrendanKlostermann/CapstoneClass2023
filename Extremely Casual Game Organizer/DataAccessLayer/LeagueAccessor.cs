@@ -1,4 +1,4 @@
-﻿/// <LeagueAccessor>
+/// <LeagueAccessor>
 /// Alex Korte
 /// Created: 2023/01/24
 /// 
@@ -104,12 +104,15 @@ namespace DataAccessLayer
             var cmd = new SqlCommand(cmdText, conn);
 
             //command type
+
             cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
+
+                //process the results
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -122,8 +125,7 @@ namespace DataAccessLayer
                         temp.MemberID = reader.GetInt32(4);
                         temp.Description = reader.GetString(6);
                         temp.Name = reader.GetString(7);
-
-
+						
                         if (reader.IsDBNull(5) == false)
                         {
                             temp.Gender = reader.GetBoolean(5);
@@ -136,13 +138,11 @@ namespace DataAccessLayer
             }catch (Exception up)
             {
                 throw up;
-            }
+			}
             finally
             {
                 conn.Close();
             }
-
-
             return league;
         }
 

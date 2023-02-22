@@ -21,24 +21,15 @@ using DataObjects;
 namespace LogicLayerInterfaces
 {
 
-	public interface ITeamMemberManager
+    public interface ITeamMemberManager
     {
-        /// <summary>
-        /// Alex Korte
-        /// Created: 2023/01/24
-        /// 
-        /// Actual summary of the class if needed.
-        /// --GetAListOfAllmembersByTeamID returns a list of members based on team ID
-        /// --RemoveAPlayerFromATeamByTeamIDAndMemberID removes someone based on their teamID and memberID
-        ///
-        /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
-        /// example: Fixed a problem when user inputs bad data
-        /// </remarks>
-        List<Member> GetAListOfAllMembersByTeamID(int teamID);
+        int AddTeamMember(int team_id, int member_id, string description);
+
+        List<Member> SortIntoStarters(List<Member> members, int teamID, bool active);
 
         int RemoveAPlayerFromATeamByTeamIDAndMemberID(int teamID, int memberID);
+
+        List<Member> GetAListOfAllMembersByTeamID(int teamID);
 
     }
 }

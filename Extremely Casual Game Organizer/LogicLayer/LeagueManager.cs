@@ -1,3 +1,4 @@
+
 ﻿/// <LeagueManager>
 /// Alex Korte
 /// Created: 2023/02/05
@@ -10,14 +11,25 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/02/20
+/// 
+/// This class is the manager for the League data objects.
+/// It bridges the presentation to the database and does computations if needed.
+/// 
+/// </summary>
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataAccessLayerInterfaces;
 using DataObjects;
 using LogicLayerInterfaces;
+using DataAccessLayerFakes;
+using DataAccessLayerInterfaces;
 using DataAccessLayer;
 
 namespace LogicLayer
@@ -35,6 +47,7 @@ namespace LogicLayer
         {
             _leagueAccessor = la;
         }
+
 
 
 
@@ -56,7 +69,7 @@ namespace LogicLayer
             try
             {
                 List<Team> _returnedList = _leagueAccessor.SelectATeamByLeagueID(leagueID);
-                if(_returnedList == null || _returnedList.Count == 0)
+                if (_returnedList == null || _returnedList.Count == 0)
                 {
                     throw new ArgumentException("There was no data to load");
                 }
@@ -91,7 +104,7 @@ namespace LogicLayer
             try
             {
                 return _leagueAccessor.SelectAllLeagues();
-            }catch(ApplicationException up)
+            } catch (ApplicationException up)
             {
                 throw new ApplicationException("List failed to populate", up);
             }
@@ -118,7 +131,7 @@ namespace LogicLayer
             try
             {
                 results = _leagueAccessor.RemoveATeamFromALeague(teamID, leagueID);
-                if(results == 0)
+                if (results == 0)
                 {
                     throw new ArgumentException("Invalid input error");
                 }
@@ -132,6 +145,30 @@ namespace LogicLayer
                 throw up;
             }
             return results;
+        }
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method calls the LeagueAccessor method SelectListOfLeagues and returns it to the 
+        /// presentation layer. 
+        /// </summary>
+        /// 
+        /// <returns>List of League objects</returns>
+        public List<League> RetrieveListOfLeagues()
+        {
+            List<League> leagueList = null;
+            try
+            {
+                leagueList = _leagueAccessor.SelectAllLeagues();
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed loading League list", ex);
+            }
+
+            return leagueList;
         }
     }
 }

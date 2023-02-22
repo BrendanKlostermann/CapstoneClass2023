@@ -1,3 +1,4 @@
+
 ﻿/// <ILeagueAccessor>
 /// Alex Korte
 /// Created: 2023/01/24
@@ -9,6 +10,14 @@
 /// Updater Name
 /// Updated: yyyy/mm/dd
 /// </remarks>
+﻿/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/02/20
+/// 
+/// This class is the interface for the league accessor class.
+/// 
+/// </summary>
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

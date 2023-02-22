@@ -28,10 +28,9 @@ sqlcmd -S localhost -E -i sp_select_members_by_name.sql
 sqlcmd -S localhost -E -i sp_select_people_I_texted_by_user_id.sql
 sqlcmd -S localhost -E -i sp_select_team_by_team_name.sql
 sqlcmd -S localhost -E -i sp_user_create_team.sql
+sqlcmd -S localhost -E -i sp_authenticate_member.sql
+sqlcmd -S localhost -E -i sp_select_game_details_by_game_id.sql
 
-
-
-sqlcmd -S localhost -E -i DataFakes.sql
 
 
 

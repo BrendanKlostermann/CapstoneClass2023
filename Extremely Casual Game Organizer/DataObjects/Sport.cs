@@ -1,3 +1,4 @@
+
 ﻿/// <Sport>
 /// Alex Korte
 /// Created: 2023/01/24
@@ -21,12 +22,12 @@ namespace DataObjects
     {
         public int SportId { get; set; }
         public string Description { get; set; }
+		public string SportDescription { get; set; }//will need to come back to this
 
         public Sport()
         {
 
         }
-
         public Sport(int sportID, string description)
         {
             this.SportId = sportID;

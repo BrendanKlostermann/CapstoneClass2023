@@ -41,11 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="LeagueAccessor.cs" />
+    <Compile Include="GameAccessor.cs" />
+    <Compile Include="GameRosterAccessor.cs" />
+    <Compile Include="MemberAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamAccessor.cs" />
+    <Compile Include="TeamMemberAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayerInterfaces\DataAccessLayerInterfaces.csproj">

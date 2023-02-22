@@ -1,3 +1,4 @@
+
 ﻿/// <ITeamAccessor>
 /// Alex Korte
 /// Created: 2023/01/24
@@ -10,12 +11,12 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-using DataObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataObjects;
 
 namespace DataAccessLayerInterfaces
 {
@@ -26,5 +27,7 @@ namespace DataAccessLayerInterfaces
         int DeleteAMemberFromATeamByMemberIdAndTeamID(int memberId, int teamId); //returns number of rows affected
 
         TeamMember SelectAMembersInATeamWithTeamDetails(int memberID, int teamID);//getting a list of team details
+		
+        Team SelectTeamByTeamID(int team_id);
     }
 }
