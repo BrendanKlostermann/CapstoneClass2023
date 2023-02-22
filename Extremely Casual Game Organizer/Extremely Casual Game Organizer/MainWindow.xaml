@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="800">
+   
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="450"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="800"/>
+        </Grid.ColumnDefinitions>
+        <Frame x:Name="frameLoad" Grid.Row="1" NavigationUIVisibility="Hidden" />
+        <Button x:Name="testButton" Content="Button" HorizontalAlignment="Left" Margin="504,10,0,0" VerticalAlignment="Top" Width="75" Click="testButton_Click_1"/>
     </Grid>
 </Window>

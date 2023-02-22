@@ -1,0 +1,208 @@
+﻿/// <LeagueAccessor>
+/// Alex Korte
+/// Created: 2023/01/24
+/// 
+/// </summary>
+/// This class is used to access the League Database tables
+/// methods include getting a list of all leagues
+/// getting a list of all teams in a specific league
+/// revmoing a team from a league
+/// 
+/// Updater Jacob
+/// Updated: 2023/02/21
+/// </remarks>
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DataAccessLayerInterfaces;
+using DataObjects;
+
+namespace DataAccessLayer 
+{
+    public class LeagueAccessor : ILeagueAccessor
+    {
+        public List<League> league = new List<League>();
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A Method to remove a team from a league (database side)
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public int RemoveATeamFromALeague(int teamId, int leagueId)
+        {
+            //connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_remove_a_player_from_team_by_member_id";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+            cmd.Parameters["@team_id"].Value = teamId;
+            cmd.Parameters.Add("@league_id", SqlDbType.Int);
+            cmd.Parameters["@league_id"].Value = leagueId;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteNonQuery();
+                return reader;
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method to get a list of leagues(as objects)
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public List<League> SelectAllLeagues()
+        {
+            List<League> league = new List<League>();
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_all_leagues";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        League temp = new League();
+                        temp.LeagueID = reader.GetInt32(0);
+                        temp.SportID = reader.GetInt32(1);
+                        temp.LeagueDues = reader.GetDecimal(2);
+                        temp.Active = reader.GetBoolean(3);
+                        temp.MemberID = reader.GetInt32(4);
+                        temp.Description = reader.GetString(6);
+                        temp.Name = reader.GetString(7);
+
+
+                        if (reader.IsDBNull(5) == false)
+                        {
+                            temp.Gender = reader.GetBoolean(5);
+                        }
+                        else { temp.Gender = null; }
+
+                        league.Add(temp);
+                    }
+                }
+            }catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+            return league;
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method to get a list of teams (as an object) 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public List<Team> SelectATeamByLeagueID(int leagueID)
+        {
+            List<Team> team = new List<Team>();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_teams_by_league_id";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@league_id", SqlDbType.Int);
+            cmd.Parameters["@league_id"].Value = leagueID;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Team temp = new Team();
+                        temp.TeamID = reader.GetInt32(0);
+                        temp.TeamName = reader.GetString(1);
+                        temp.Gender = reader.GetBoolean(2);
+                        temp.SportID = reader.GetInt32(3);
+                        team.Add(temp);
+                    }
+                }
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return team;
+        }
+    }
+}

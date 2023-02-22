@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LogicLayer;
+using DataObjects;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -23,6 +25,24 @@ namespace Extremely_Casual_Game_Organizer
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btn_test_Click(object sender, RoutedEventArgs e)
+        {
+            TeamMemberManager tmm = new TeamMemberManager();
+            List<Member> tempList = tmm.GetAListOfAllMembersByTeamID(1000);
+            foreach(Member mem in tempList)
+            {
+
+            }
+        }
+
+
+        private void testButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            frameLoad.Navigate(new TeamMemberScreen(1000));
+            Window test = new Window();
+
         }
     }
 }
