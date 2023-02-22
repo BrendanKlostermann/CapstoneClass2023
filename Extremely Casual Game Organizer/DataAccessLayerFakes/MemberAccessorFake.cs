@@ -211,5 +211,36 @@ namespace DataAccessLayerFakes
 
             return result;
         }
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/02/14
+        /// 
+        /// </summary>
+        /// Fake data to test updating member password hash to default
+        ///
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public int UpdatePasswordHashToDefault(int memberID, string passwordHash)
+        {
+            int rows = 0;
+            var member = _members.Where(b => b.MemberID == memberID).First();
+
+            if (member == null)
+            {
+                // employee not found
+                throw new ApplicationException("Bad member id.");
+            }
+
+
+            member.PasswordHash = passwordHash;
+
+            if (member.PasswordHash == "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e")
+            {
+                rows = 1;
+            }
+            return rows;
+        }
     }
 }

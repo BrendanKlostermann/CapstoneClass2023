@@ -178,5 +178,40 @@ namespace DataAccessLayer
 
             return result;
         }
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/02/14
+        /// 
+        /// </summary>
+        /// DB Connection to run stored procedure for resetting password to default
+        ///
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public int UpdatePasswordHashToDefault(int memberID, string passwordHashes)
+        {
+            int rows = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+            var cmdText = "sp_reset_password_to_default";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@member_id", memberID);
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return rows;
+        }
     }
 }

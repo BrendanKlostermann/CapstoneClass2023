@@ -35,5 +35,6 @@ namespace LogicLayerInterfaces
         Member RetrieveMemberByEmail(string email);
         List<Member> SearchMemberByFirstName(string firstName);
         List<Member> SearchMemberByFirstAndLastName(string fistName, string lastName);
+        bool ResetPasswordToDefault(int memberID);
     }
 }

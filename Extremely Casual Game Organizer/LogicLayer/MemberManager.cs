@@ -189,5 +189,38 @@ namespace LogicLayer
 
             return results;
         }
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/02/14
+        /// 
+        /// </summary>
+        /// Logic to reset user password to default hash
+        ///
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public bool ResetPasswordToDefault(int memberID)
+        {
+            string defaultHash = HashSha256("newuser");
+
+            try
+            {
+                int results = _memberAccessor.UpdatePasswordHashToDefault(memberID, defaultHash);
+
+                if (results == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error resetting member password", ex);
+            }
+        }
     }
 }

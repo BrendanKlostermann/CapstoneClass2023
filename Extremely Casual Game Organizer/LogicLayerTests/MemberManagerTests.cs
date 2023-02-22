@@ -85,7 +85,48 @@ namespace LogicLayerTests
 
             testMember = _memberManager.RetrieveMemberByEmail(source);
 
+        }
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/02/14
+        /// 
+        /// </summary>
+        /// Test cases for Admin_010 - Reset Member Password
+        ///
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        [TestMethod]
+        public void TestResetToDefaultPassword()
+        {
+            // Arrange
+            const int memberID = 10001;
+            const bool expectedResult = true;
+            bool actualResult;
 
+            // Act
+            var rowsAffected = _memberManager.ResetPasswordToDefault(memberID);
+            actualResult = Convert.ToInt32(rowsAffected) > 0;
+
+            // Assert
+            // Needs to be changed to currently logged in member and grab their password
+            Assert.AreEqual(expectedResult, actualResult);
+            //var member = memberManager.GetMemberByID(memberID);
+            //Assert.AreEqual(defaultPassword, member.Password);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestResetToDefaultPasswordFailsWithBadID()
+        {
+            // Arrange
+            const int memberID = 900001;  // bad id
+
+            // Act
+            var rowsAffected = _memberManager.ResetPasswordToDefault(memberID);
+
+            // Assert - nothing to do, exception checking
         }
     }
 }
