@@ -61,6 +61,9 @@
     <Compile Include="pgUserDetails.xaml.cs">
       <DependentUpon>pgUserDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TeamList.xaml.cs">
+      <DependentUpon>TeamList.xaml</DependentUpon>
+    </Compile>
     <Page Include="pgConfirmDeactivate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\pgViewTeamList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeamList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
