@@ -43,6 +43,7 @@ namespace DataObjects
         public string Bio { get; set; }
         public byte[] ProfilePicture { get; set; }
         public string PhotoMimeType { get; set; }
+        public List<string> Roles { get; set; }
 
         public Member(string name)
         {
