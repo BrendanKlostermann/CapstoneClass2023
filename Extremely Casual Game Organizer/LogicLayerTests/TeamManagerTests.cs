@@ -39,5 +39,29 @@ namespace LogicLayerTests
             actualResult = _teamManager.RetrieveTeamByTeamID(source).TeamID;
 
         }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// Test that the number of teams is equal to expected.
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        [TestMethod]
+        public void TestRetreivingAllTeams()
+        {
+
+            const int actual = 15;
+            int expectedResults = _teamManager.RetrieveAllTeams().Count;
+
+            Assert.AreEqual(expectedResults, actual);
+        }
     }
 }

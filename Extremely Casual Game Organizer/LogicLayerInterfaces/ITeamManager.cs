@@ -10,5 +10,7 @@ namespace LogicLayerInterfaces
     public interface ITeamManager
     {
         Team RetrieveTeamByTeamID(int team_id);
+
+        List<Team> RetrieveAllTeams();
     }
 }

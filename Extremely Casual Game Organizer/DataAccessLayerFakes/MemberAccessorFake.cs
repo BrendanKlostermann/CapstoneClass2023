@@ -83,16 +83,16 @@ namespace DataAccessLayerFakes
 
 
 
-        public Member SelectAUserByID(int member_id)
+        public Member SelectAUserByID(int memberID)
         {
             foreach (Member mem in _members)
             {
-                if (mem.MemberID == member_id)
+                if (mem.MemberID == memberID)
                 {
                     return mem;
                 }
             }
-            throw new ApplicationException("No member was found with ID: " + member_id);
+            throw new ApplicationException("No member was found with ID: " + memberID);
 
         }
 
@@ -246,6 +246,38 @@ namespace DataAccessLayerFakes
             ////////    }
             ////////    return rows;
             return 1;
+        }
+
+
+        /// <MemberAccessor>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// </summary>
+        /// This is a method to test selecting all members by  member id
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public List<Member> SelectAllMembersByMemberID(List<int> memberID)
+        {
+            List<Member> _tempList = new List<Member>();
+            for(int i = 0; i < memberID.Count; ++i)//list of ints
+            {
+                for(int j = 0; j < _members.Count; j++)//list of teams (or database)
+                {
+                    if(_members[j].MemberID == memberID[i])//add member to temp list
+                    {
+                        _tempList.Add(_members[j]);
+                    }
+                }
+            }
+            return _tempList;//return temp list
+        }
+
+        public List<Member> SelectAllMembersByTeamID(int memberID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -23,6 +23,31 @@ namespace LogicLayer
         {
             _teamAccessor = ta;
         }
+
+        /// <TeamManager Getting list of all teams>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// </summary>
+        /// This method will get us all teams to display
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public List<Team> RetrieveAllTeams()
+        {
+            List<Team> _teams = null;
+            try
+            {
+                _teamAccessor = new TeamAccessor();
+                _teams = _teamAccessor.SelectAllTeams();
+                return _teams;
+            }catch(ApplicationException up)
+            {
+                throw new ApplicationException("No teams in the System", up);
+            }
+        }
+
         public Team RetrieveTeamByTeamID(int team_id)
         {
             Team selectedTeam = null;

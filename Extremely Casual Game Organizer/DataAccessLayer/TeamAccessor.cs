@@ -137,97 +137,7 @@ namespace DataAccessLayer
             return team;
         }
 
-        /// <summary>
-        /// Alex Korte
-        /// Created: 2023/01/24
-        /// 
-        /// Actual summary of the class if needed.
-        /// </summary>
-        /// A method to select all members based on what team they are in
-        /// 
-        /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
-        /// example: Fixed a problem when user inputs bad data
-        /// </remarks>
-        public List<Member> SelectAllmembersByTeamID(int teamId)
-        {
-            List<Member> allMembersOnATeam = new List<Member>();
-
-            //connection
-            DBConnection connectionFactory = new DBConnection();
-            var conn = connectionFactory.GetDBConnection();
-
-            //command text
-            var cmdText = "sp_selecting_all_players_on_a_team_by_team_id";
-
-            //create command
-            var cmd = new SqlCommand(cmdText, conn);
-
-            //command type
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            //Add paramaters //values
-
-            cmd.Parameters.Add("@team_id", SqlDbType.Int);
-            cmd.Parameters["@team_id"].Value = teamId;
-            try
-            {
-                conn.Open();
-
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        byte[] profile_picture = null;
-                        long? fieldWidth = null;
-                        Member tempMember = new Member();
-                        tempMember.MemberID = reader.GetInt32(0);
-                        tempMember.Email = reader.GetString(1);
-                        tempMember.FirstName = reader.GetString(2);
-                        tempMember.FamilyName = reader.GetString(3);
-                        tempMember.Birthday = reader.GetDateTime(4);
-                        tempMember.PhoneNumber = reader.GetString(5);
-                        tempMember.Gender = reader.GetBoolean(6);
-                        tempMember.Active = reader.GetBoolean(7);
-                        tempMember.Bio = reader.GetString(8);
-
-
-                        int columnIndex = 9;
-                        try
-                        {
-                            fieldWidth = reader.GetBytes(columnIndex, 0, null, 0, Int32.MaxValue);
-                        }
-                        catch (Exception)
-                        {
-                            profile_picture = null;
-                        }
-
-                        if (profile_picture != null)
-                        {
-                            int width = (int)fieldWidth;
-                            profile_picture = new byte[width];
-                            reader.GetBytes(columnIndex, 0, profile_picture, 0, profile_picture.Length);
-                        }
-
-                        tempMember.PhotoMimeType = reader.IsDBNull(10) ? null : reader.GetString(10);
-
-                        allMembersOnATeam.Add(tempMember);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                conn.Close();
-            }
-			return allMembersOnATeam;
-		}
+        
 
         /// <summary>
         /// Alex Korte
@@ -295,5 +205,84 @@ namespace DataAccessLayer
             }
             return _teamMember;
         }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method to select all teams
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public List<Team> SelectAllTeams()
+        {
+
+            List<Team> teams = new List<Team>();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_all_teams";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        
+                        Team team = new Team();
+                        team.TeamID = reader.GetInt32(0);
+                        team.TeamName = reader.GetString(1);
+                        if (reader.IsDBNull(2))
+                        {
+                            team.Gender = null;
+                        }
+                        else
+                        {
+                            team.Gender = reader.GetBoolean(2);
+                        }
+                        team.SportID = reader.GetInt32(3);
+                        team.MemberID = reader.GetInt32(4);
+                        if (reader.IsDBNull(5))
+                        {
+                            team.Description = null;
+                        }
+                        else
+                        {
+                            team.Description = reader.GetString(5);
+                        }
+                        teams.Add(team);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return teams;
+        }
+
     }
 }

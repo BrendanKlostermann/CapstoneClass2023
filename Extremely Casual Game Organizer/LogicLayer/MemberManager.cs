@@ -230,5 +230,69 @@ namespace LogicLayer
                 throw new ApplicationException("Error resetting member password", ex);
             }
         }
+
+
+        /// <MemberManager>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// </summary>
+        /// This is a method to get all members by id, (for getting coach names)
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public List<Member> RetrieveMembersByMemberID(List<int> memberID)
+        {
+            List<Member> _tempMemberList = new List<Member>();
+            try
+            {
+                foreach (var memID in memberID)
+                {
+                    Member tempMember = _memberAccessor.SelectAUserByID(memID);
+                    _tempMemberList.Add(tempMember);
+                }
+                return _tempMemberList;
+            }catch(ApplicationException up)
+            {
+                throw new ApplicationException("Unable to find any members");
+            }
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// This method will run through the stack to get a list of members on a team
+        ///
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public List<Member> GetAListOfMembersByTeamID(int teamID)
+        {
+            try
+            {
+                List<Member> _members = new List<Member>();
+                _members = _memberAccessor.SelectAllMembersByTeamID(teamID);
+                if(_members == null)
+                {
+                    throw new ArgumentException("No Team Members");
+                }
+                return _members;
+
+            }
+            catch (ArgumentException up)
+            {
+                throw new ArgumentException("team is incorrect", up);
+            }
+            catch (ApplicationException down)
+            {
+                throw new ApplicationException("Error getting data", down);
+            }
+        }
     }
 }

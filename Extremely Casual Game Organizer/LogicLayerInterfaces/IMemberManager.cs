@@ -38,5 +38,19 @@ namespace LogicLayerInterfaces
         List<Member> SearchMemberByFirstName(string firstName);
         List<Member> SearchMemberByFirstAndLastName(string fistName, string lastName);
         bool ResetPasswordToDefault(int memberID);
+
+
+        /// <TeamObject>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// </summary>
+        /// Method to get a list of members by member ID (used to get coaches)
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        List<Member> RetrieveMembersByMemberID(List<int> memberID);
+        List<Member> GetAListOfMembersByTeamID(int teamID);
     }
 }

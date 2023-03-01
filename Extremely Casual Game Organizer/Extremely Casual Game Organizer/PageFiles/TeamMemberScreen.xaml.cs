@@ -28,6 +28,7 @@ namespace Extremely_Casual_Game_Organizer
         List<Member> _members = new List<Member>();
         List<Member> _starterOrBenchers = new List<Member>();
         TeamMemberManager _teamMemberManager = null;
+        MemberManager _membersM = null;
         bool toggleBench = true; //true = starter false = benched
         private int _teamID = 0;
         int _optionStatus = 0; //used to figure out which options to display when clicking on a team member
@@ -36,6 +37,7 @@ namespace Extremely_Casual_Game_Organizer
         {
             InitializeComponent();
             _teamMemberManager = new TeamMemberManager();
+            _membersM = new MemberManager();
         }
 
         /// <summary>
@@ -55,7 +57,8 @@ namespace Extremely_Casual_Game_Organizer
         {
             _teamID = teamID;
             _teamMemberManager = new TeamMemberManager();
-            _members = _teamMemberManager.GetAListOfAllMembersByTeamID(_teamID);
+            _membersM = new MemberManager();
+            _members = _membersM.GetAListOfMembersByTeamID(_teamID);
             _starterOrBenchers = _teamMemberManager.SortIntoStarters(_members, _teamID, toggleBench);
             InitializeComponent();
             DisplayTeamMembers();

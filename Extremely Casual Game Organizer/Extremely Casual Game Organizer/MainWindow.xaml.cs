@@ -32,10 +32,11 @@ namespace Extremely_Casual_Game_Organizer
         {
             _memberManager = new MemberManager();
             _pageControl = new PageControl();
-            InitializeComponent();
+            //InitializeComponent();
 
             // Hide all function buttons
-            grdFrameFunctions.Visibility = Visibility.Hidden;
+            //grdFrameFunctions.Visibility = Visibility.Hidden;
+            
 
         }
 
@@ -51,6 +52,12 @@ namespace Extremely_Casual_Game_Organizer
         {
             LeagueManager leagueManager = new LeagueManager();
             _pageControl.LoadPage(new pgViewLeagueList());
+        }
+
+        private void navTeams_Click(object sender, RoutedEventArgs e)
+        {
+            TeamManager teamManager = new TeamManager();
+            _pageControl.LoadPage(new pgViewTeamList());
         }
     }
 }

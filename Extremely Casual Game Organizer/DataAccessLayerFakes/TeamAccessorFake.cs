@@ -57,6 +57,38 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method to select all teams
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public List<Team> SelectAllTeams()
+        {
+            try
+            {
+                if (_teamList.Count > 0)
+                {
+                    return _teamList;//if there are 1 or more teams send list back
+                }
+                else
+                {
+                    return _teamList = new List<Team>();//else make a list of teams and send it back empty
+                }
+            }catch(ApplicationException up)
+            {
+                throw new ApplicationException("There are no teams", up);
+            }
+
+        }
+
         public TeamMember SelectAMembersInATeamWithTeamDetails(int memberID, int teamID)
         {
             throw new NotImplementedException();

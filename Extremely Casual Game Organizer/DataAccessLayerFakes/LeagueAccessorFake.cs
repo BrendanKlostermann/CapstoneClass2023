@@ -44,7 +44,7 @@ namespace DataAccessLayerFakes
 
         public List<League> SelectAllLeagues()
         {
-            throw new NotImplementedException();
+            return _leagues;
         }
 
         public List<Team> SelectATeamByLeagueID(int leagueId)

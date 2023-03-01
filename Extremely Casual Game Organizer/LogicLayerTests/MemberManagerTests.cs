@@ -17,6 +17,7 @@ using LogicLayerInterfaces;
 using DataAccessLayerFakes;
 using DataAccessLayerInterfaces;
 using LogicLayer;
+using System.Collections.Generic;
 
 namespace LogicLayerTests
 {
@@ -24,6 +25,7 @@ namespace LogicLayerTests
     public class MemberManagerTests
     {
         IMemberManager _memberManager = null;
+        
 
         [TestInitialize]
         public void TestSetup()
@@ -159,6 +161,28 @@ namespace LogicLayerTests
             var rowsAffected = _memberManager.ResetPasswordToDefault(memberID);
 
             // Assert - nothing to do, exception checking
+        }
+
+
+        /// <TestMemberManager>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// </summary>
+        /// Test to check if manager class methods work
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        [TestMethod]
+        public void TestGettingListOfAllMembersByMemberID()
+        {
+            List<int> _tempMemberID = new List<int>() { 10000, 10002 };
+
+            List<Member> _tempMembers = _memberManager.RetrieveMembersByMemberID(_tempMemberID);
+            int actual = 2;
+
+            Assert.AreEqual(_tempMembers.Count, actual);
         }
     }
 }

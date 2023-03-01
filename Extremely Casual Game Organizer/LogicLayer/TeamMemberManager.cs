@@ -45,40 +45,6 @@ namespace LogicLayer
             _teamMemberAccessor = tma;
         }
 
-        /// <summary>
-        /// Alex Korte
-        /// Created: 2023/01/24
-        /// 
-        /// Actual summary of the class if needed.
-        /// </summary>
-        /// This method will run through the stack to get a list of members on a team
-        ///
-        /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
-        /// example: Fixed a problem when user inputs bad data
-        /// </remarks>
-        public List<Member> GetAListOfAllMembersByTeamID(int teamID)
-        {
-            try
-            {
-                List<Member> _members = _teamAccessor.SelectAllmembersByTeamID(teamID);
-                if (_members.Count == 0 || _members == null)
-                {
-                    throw new ArgumentException("No data found");
-                }
-                else
-                {
-                    return _members;
-                }
-            }catch(ArgumentException up)
-            {
-                throw new ArgumentException("team is incorrect", up);
-            }catch(ApplicationException down)
-            {
-                throw new ApplicationException("Error getting data", down);
-            }
-        }
 
         /// <summary>
         /// Alex Korte
@@ -172,6 +138,11 @@ namespace LogicLayer
             }
 
             return result;
+        }
+
+        public List<Member> GetAListOfAllMembersByTeamID(int teamID)
+        {
+            throw new NotImplementedException();
         }
     }
 }
