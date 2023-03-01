@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="PageFiles\Leagues\pgViewLeagueList.xaml.cs">
       <DependentUpon>pgViewLeagueList.xaml</DependentUpon>
+    </Compile>	
+    <Compile Include="pgLogIn.xaml.cs">
+      <DependentUpon>pgLogIn.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Member\pgUserDetails.xaml.cs">
       <DependentUpon>pgUserDetails.xaml</DependentUpon>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Leagues\pgViewLeagueList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>	
+    <Page Include="pgLogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

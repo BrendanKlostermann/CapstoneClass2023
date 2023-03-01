@@ -27,6 +27,7 @@ namespace DataAccessLayerFakes
     {
         List<Member> _members = null;
         DataTable _passwords = null;
+        private List<string> passwordHashes = new List<string>();
 
         /// <summary>
         /// Brendan Klostermann
@@ -131,21 +132,6 @@ namespace DataAccessLayerFakes
 
 
 
-        public Member SelectMemberByEmail(string email)
-        {
-            Member returnMember = null;
-
-            foreach (Member member in _members)
-            {
-                if (member.Email == email)
-                {
-                    returnMember = member;
-                    break;
-                }
-            }
-
-            return returnMember;
-        }
 
         public List<Member> SelectMemberByMemberFirstName(string firstName)
         {
@@ -272,6 +258,58 @@ namespace DataAccessLayerFakes
                 }
             }
             return rows;
+        }
+
+
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// fakes for authenticating a member
+        /// </summary>
+        public int AuthenticateMember(string email, string passwordHash)
+        {
+            int result = 0;
+
+            for (int i = 0; i < _members.Count; i++)
+            {
+                if (_members[i].Email == email && passwordHashes[i] == passwordHash)
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
+
+                /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// Fakes for selecting a member
+        /// </summary>
+
+        public Member SelectMemberByEmail(string email)
+        {
+            Member member = null;
+
+            foreach (var fakeMember in _members)
+            {
+                if (fakeMember.Email == email)
+                {
+                   member = fakeMember;
+                    break;
+                }
+            }
+
+            if (member == null)
+            {
+                throw new ApplicationException("User not found.");
+            }
+            return member;
+        }
+
+        public List<string> SelectRolesByMemberID(int memberID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

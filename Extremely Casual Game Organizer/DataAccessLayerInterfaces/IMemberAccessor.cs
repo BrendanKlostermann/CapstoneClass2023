@@ -32,5 +32,7 @@ namespace DataAccessLayerInterfaces
         List<Member> SelectMemberByMemberFullName(string firstName, string lastName);
         List<Member> SelectMemberByMemberFirstName(string firstName);
         int UpdatePasswordHashToDefault(int memberID, string passwordHashes);
+        int AuthenticateMember(string email, string password);
+        List<string> SelectRolesByMemberID(int memberID);
     }
 }
