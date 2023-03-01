@@ -26,6 +26,10 @@ namespace DataObjects
             this.LeagueID = leagueID;
             this.TeamID = teamID;
         }
+        public LeagueTeam()
+        {
+
+        }
     }
 
 }

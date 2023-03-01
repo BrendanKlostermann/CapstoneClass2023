@@ -36,7 +36,7 @@ namespace DataObjects
         public int MemberID { get; set; }//person who made the league
         public bool? Gender { get; set; }//nullable and if there is a gender requirement
         public string Description { get; set; }//description of the league
-        public string Name { get; set; }//name of the league
+        public string Name { get; set; } //name of the league
         public int MaxNumOfTeams { get; set; }
 
 

@@ -36,7 +36,6 @@ namespace DataObjects
         public string FirstName { get; set; }
         public string FamilyName { get; set; }
         public DateTime Birthday { get; set; }
-        public string PasswordHash { get; set; }
         public string PhoneNumber { get; set; }
         public bool? Gender { get; set; }
         public bool Active { get; set; }

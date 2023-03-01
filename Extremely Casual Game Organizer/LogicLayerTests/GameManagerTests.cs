@@ -81,5 +81,36 @@ namespace LogicLayerTests
 
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        /// <summary>
+        /// Created By Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        public void TestRetrievingGameListWithValidTeamID()
+        {
+            const int source = 1001;
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            var gameList = _gameManager.RetrieveTeamGameList(source);
+            actualResult = gameList.Rows.Count;
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        /// <summary>
+        /// Created By Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestRetrievingGameListWithBadTeamID()
+        {
+            const int source = 1;
+            int actualResult = 0;
+
+            var gameList = _gameManager.RetrieveTeamGameList(source);
+            actualResult = gameList.Rows.Count;
+
+        }
     }
 }
