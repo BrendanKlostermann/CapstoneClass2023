@@ -45,6 +45,7 @@ namespace DataAccessLayerInterfaces
 
 
 
+
         /// <MemberAccessor>
         /// Alex Korte
         /// Created: 2023/02/26
@@ -69,5 +70,9 @@ namespace DataAccessLayerInterfaces
         /// Updated: yyyy/mm/dd
         /// </remarks>
         List<Member> SelectAllMembersByTeamID(int memberID);
+
+        int AuthenticateMember(string email, string password);
+        List<string> SelectRolesByMemberID(int memberID);
+
     }
 }

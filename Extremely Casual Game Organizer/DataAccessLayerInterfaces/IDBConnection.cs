@@ -1,8 +1,3 @@
-
-
-
-using System;
-using System.Data.SqlClient;
 /// <IDataBaseConnection>
 /// Alex Korte
 /// Created: 2023/01/24
@@ -14,19 +9,8 @@ using System.Data.SqlClient;
 /// Updater Name
 /// Updated: yyyy/mm/dd
 /// </remarks>
-/// 
-///<summary>
-/// Jacob Lindauer
-/// Created: 2023/01/31
-/// 
-/// Interface for DBConnection Class
-/// </summary>
-///
-/// <remarks>
-/// Updater Name:
-/// Updated: 
-/// 
-/// </remarks>
+using System;
+using System.Data.SqlClient;
 namespace DataAccessLayerInterfaces
 {
     public interface IDBConnection

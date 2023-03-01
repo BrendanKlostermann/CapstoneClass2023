@@ -146,6 +146,40 @@ namespace LogicLayer
             }
             return results;
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/26/02
+        /// 
+        /// Method is going to get a list of league objects from LeagueAccessor based on TeamID provided
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        public List<League> RetrieveLeagueListByTeamID(int team_id)
+        {
+            List<League> leagueList = null;
+
+            try
+            {
+                leagueList = _leagueAccessor.SelectLeaguesByTeamID(team_id);
+                if (leagueList == null || leagueList.Count == 0)
+                {
+                    throw new ArgumentException("Invalid TeamID");
+                }
+            }
+            catch(ArgumentException ae)
+            {
+                throw new ArgumentException("No Leagues found for provided team", ae);
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Error retrieving League List", ex);
+            }
+
+            return leagueList;
+        }
+
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/02/20

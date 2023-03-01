@@ -25,6 +25,8 @@ namespace DataAccessLayerFakes
     {
         DataTable _gameList = null;
         DataTable _gameDetails = null;
+        List<GameRoster> _gameRoster = null;
+
         public GameAccessorFake()
         {
             /// <summary>
@@ -52,6 +54,23 @@ namespace DataAccessLayerFakes
 
             _gameDetails.Rows.Add("1000", "Kyles House", new DateTime(2023, 12, 01), "Flippy Cup");
             _gameDetails.Rows.Add("1001", "123 Lazy BLVD, Waterloo IA, 12345", new DateTime(2023, 12, 01), "Table Tennis");
+
+            // Create GameRoster List
+            _gameRoster = new List<GameRoster>()
+            {
+                new GameRoster
+                { GameID = 1000, TeamID = 1001, MemberID = 100000, Description = "Home Team", GameRosterID = 10, TeamName = "TheFirstTeam", FirstName = "Adam", LastName = "Smith" },
+                new GameRoster
+                { GameID = 1000, TeamID = 1001, MemberID = 100001, Description = "Home Team", GameRosterID = 11, TeamName = "TheFirstTeam", FirstName = "Brad", LastName = "Smith" },
+                 new GameRoster
+                { GameID = 1000, TeamID = 1001, MemberID = 100002, Description = "Home Team", GameRosterID = 12, TeamName = "TheFirstTeam", FirstName = "Charles", LastName = "Smith" },
+                new GameRoster
+                { GameID = 1000, TeamID = 1002, MemberID = 100003, Description = "Away Team", GameRosterID = 13, TeamName = "TheSecondTeam", FirstName = "Dave", LastName = "Smith" },
+                new GameRoster
+                { GameID = 1000, TeamID = 1002, MemberID = 100004, Description = "Away Team", GameRosterID = 14, TeamName = "TheSecondTeam", FirstName = "Edward", LastName = "Smith" },
+                new GameRoster
+                { GameID = 1000, TeamID = 1002, MemberID = 100005, Description = "Away Team", GameRosterID = 15, TeamName = "TheSecondTeam", FirstName = "Frank", LastName = "Smith" },
+            };
         }
 
         public DataTable SelectAllGames()
@@ -91,6 +110,40 @@ namespace DataAccessLayerFakes
             }
             
             return returnRow;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date 2023/25/02
+        /// 
+        /// Method should return game list if the team is participating in game.
+        /// Need to determine what GameRoster objects the TeamID is found and get the Game object based on the return result.
+        /// Add that data to the data table and send that back with the result
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        public DataTable SelectGameListByTeamID(int team_id)
+        {
+            DataTable gameList = new DataTable();
+            // Setup table columns
+            gameList.Columns.Add("game_id", typeof(int));
+            gameList.Columns.Add("Teams", typeof(string));
+            gameList.Columns.Add("Location", typeof(string));
+            gameList.Columns.Add("Date and Time", typeof(DateTime));
+
+            // Get roster data for teamID
+            // Should return multiple if team is in multiple games.
+            var rosterSearch = from game in _gameRoster.AsEnumerable() where game.TeamID.Equals(team_id) select game.GameID;
+
+            // Get game for rosterID to determine if team is participating in a game. Multiple results in rosterSearch, need to select distinct gameID's
+            foreach (var game in rosterSearch.Distinct())
+            {
+                var gameSearch = from row in _gameList.AsEnumerable() where row["game_id"].Equals(game) select row;
+                gameList.Rows.Add(gameSearch.First().ItemArray); // gameSearch should only return 1 result
+            }
+
+
+            return gameList;
         }
     }
 }

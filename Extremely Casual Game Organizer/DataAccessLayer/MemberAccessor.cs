@@ -283,6 +283,7 @@ namespace DataAccessLayer
 
             return rows;
         }
+
         /// <ListOfMembers>
         /// Alex Korte
         /// Created: 2023/02/26
@@ -453,8 +454,7 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
-
-                throw ex;
+				 throw ex;
             }
             finally
             {
@@ -464,5 +464,56 @@ namespace DataAccessLayer
         }
 
 
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// Authenicating the member by email/password
+        /// </summary>
+
+        public int AuthenticateMember(string email, string passwordHash)
+        {
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_authenticate_user";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 254);
+            cmd.Parameters.Add("@PasswordHash", SqlDbType.NVarChar, 100);
+
+            cmd.Parameters["@Email"].Value = email;
+            cmd.Parameters["@PasswordHash"].Value = passwordHash;
+
+            try
+            {
+
+                conn.Open();
+
+                result = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+
+        }
+
+        public List<string> SelectRolesByMemberID(int memberID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,6 +8,7 @@ using DataAccessLayerInterfaces;
 using DataAccessLayerFakes;
 using DataObjects;
 using LogicLayerInterfaces;
+using System.Data;
 
 namespace LogicLayer
 {
@@ -47,6 +48,16 @@ namespace LogicLayer
                 throw new ApplicationException("No teams in the System", up);
             }
         }
+
+        /// <summary>
+        /// Created by: Jacob Lindauer
+        /// Date 2023/20/02
+        /// 
+        /// Method to retreive team object from data accessor.
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        /// 
 
         public Team RetrieveTeamByTeamID(int team_id)
         {

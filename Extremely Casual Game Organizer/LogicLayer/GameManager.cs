@@ -36,6 +36,37 @@ namespace LogicLayer
         {
             _gameAccessor = ga;
         }
+
+        /// <summary>
+        ///  Created By: Jacob Lindauer
+        ///  Date: 2023/25/02
+        ///  
+        /// Method retrieves game list from data accessor and returns the list if data is valid
+        /// </summary>
+        /// <returns></returns>
+        public DataTable RetrieveTeamGameList(int team_id)
+        {
+            DataTable gameList = null;
+
+            try
+            {
+                gameList = _gameAccessor.SelectGameListByTeamID(team_id);
+
+                if (gameList == null || gameList.Rows.Count == 0)
+                {
+                    throw new ApplicationException("No games found for provided team");
+                }
+
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed loading game list", ex);
+            }
+
+            return gameList;
+        }
+
         public DataTable ViewAllGames()
         {
             DataTable gameList = null;

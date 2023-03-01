@@ -1,5 +1,4 @@
-﻿using System.Linq;
-///<summary>
+﻿///<summary>
 /// Jacob Lindauer
 /// Created: 2023/01/31
 /// 
@@ -112,6 +111,55 @@ namespace DataAccessLayer
             }
 
             return returnRow;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/02/28
+        /// 
+        /// Method takes in team_id and gives List of current and previous games for team.
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        public DataTable SelectGameListByTeamID(int team_id)
+        {
+            DataTable returnTable = null;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_game_list_by_team_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+
+            cmd.Parameters["@team_id"].Value = team_id;
+
+            var dataAdapter = new SqlDataAdapter();
+            dataAdapter.SelectCommand = cmd;
+
+            try
+            {
+                returnTable = new DataTable();
+
+                conn.Open();
+
+                dataAdapter.Fill(returnTable);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return returnTable;
         }
     }
 }

@@ -32,8 +32,8 @@ namespace DataObjects
 
         }
 
-        public Team(int teamID, string teamName, bool? gender, int sportID, int memberID,
-            string description) {
+
+        public Team(int teamID, string teamName, bool? gender, int sportID, int memberID, string description){
             this.TeamID = teamID;
             this.TeamName = teamName;
             this.Gender = gender;
@@ -73,6 +73,7 @@ namespace DataObjects
                 this.SportID = sportID;
                 this.Description = description;
                 this.FirstName = firstName;
+
             }
         }
     }

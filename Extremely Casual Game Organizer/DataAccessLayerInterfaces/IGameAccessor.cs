@@ -24,5 +24,7 @@ namespace DataAccessLayerInterfaces
     {
         DataTable SelectAllGames();
         DataRow SelectGameDetails(int game_id);
+        DataTable SelectGameListByTeamID(int team_id);
+
     }
 }

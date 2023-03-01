@@ -293,6 +293,38 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Error getting data", down);
             }
+		}
+		
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// log in for member
+        /// </summary>
+
+        public Member LoginMember(string email, string password)
+        {
+            Member member = null;
+            try
+            {
+                String passwordHash = HashSha256(password);
+                if (1 == _memberAccessor.AuthenticateMember(email, passwordHash))
+                {
+
+                    member = _memberAccessor.SelectMemberByEmail(email);
+
+                }
+                else
+                {
+                    throw new ApplicationException("Bad Username or Password");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Login Failed", ex);
+            }
+
+            return member;
         }
     }
 }

@@ -34,5 +34,6 @@ namespace DataAccessLayerInterfaces
         List<Team> SelectATeamByLeagueID(int leagueId);
 
         int RemoveATeamFromALeague(int teamId, int leagueId);
+        List<League> SelectLeaguesByTeamID(int team_id);
     }
 }

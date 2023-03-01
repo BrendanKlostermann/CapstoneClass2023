@@ -26,7 +26,7 @@ namespace DataAccessLayer
 {
     public class LeagueAccessor : ILeagueAccessor
     {
-        public List<League> league = new List<League>();
+        public List<League> _leagues = new List<League>();
 
 
         /// <summary>
@@ -120,7 +120,10 @@ namespace DataAccessLayer
                         League temp = new League();
                         temp.LeagueID = reader.GetInt32(0);
                         temp.SportID = reader.GetInt32(1);
-                        temp.LeagueDues = reader.GetDecimal(2);
+                        if (reader.IsDBNull(2) == false)
+                        {
+                            temp.LeagueDues = reader.GetDecimal(2);
+                        }
                         temp.Active = reader.GetBoolean(3);
                         temp.MemberID = reader.GetInt32(4);
                         temp.Description = reader.GetString(6);
@@ -203,6 +206,75 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return team;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/28/02
+        /// 
+        /// Method takes in a team_id and returns all active and inactive leagues for provided team.
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        public List<League> SelectLeaguesByTeamID(int team_id)
+        {
+            List<League> leagueList = new List<League>();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_league_list_by_team_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+
+            cmd.Parameters["@team_id"].Value = team_id;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                //process the results
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        League temp = new League();
+                        temp.LeagueID = reader.GetInt32(0);
+                        temp.SportID = reader.GetInt32(1);
+                        if (reader.IsDBNull(2) == false)
+                        {
+                            temp.LeagueDues = reader.GetDecimal(2);
+                        }
+                        temp.Active = reader.GetBoolean(3);
+                        temp.MemberID = reader.GetInt32(4);
+                        temp.Description = reader.GetString(6);
+                        temp.Name = reader.GetString(7);
+
+                        if (reader.IsDBNull(5) == false)
+                        {
+                            temp.Gender = reader.GetBoolean(5);
+                        }
+                        else { temp.Gender = null; }
+
+                        leagueList.Add(temp);
+                    }
+                }
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return leagueList;
         }
     }
 }

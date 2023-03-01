@@ -55,34 +55,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PageFiles\pgAdminResetPassword.xaml.cs">
+    <Compile Include="PageFiles\Administration\pgAdminResetPassword.xaml.cs">
       <DependentUpon>pgAdminResetPassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\PageControler.cs" />
-    <Compile Include="PageFiles\PopUpOptions.xaml.cs">
+    <Compile Include="PageFiles\Teams\Utility\PopUpOptions.xaml.cs">
       <DependentUpon>PopUpOptions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\TeamMemberScreen.xaml.cs">
-      <DependentUpon>TeamMemberScreen.xaml</DependentUpon>
+    <Compile Include="PageFiles\Teams\pgTeamMemberScreen.xaml.cs">
+      <DependentUpon>pgTeamMemberScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pgViewLeagueList.xaml.cs">
+    <Compile Include="PageFiles\Leagues\pgViewLeagueList.xaml.cs">
       <DependentUpon>pgViewLeagueList.xaml</DependentUpon>
+    </Compile>	
+    <Compile Include="pgLogIn.xaml.cs">
+      <DependentUpon>pgLogIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pgUserDetails.xaml.cs">
+    <Compile Include="PageFiles\Member\pgUserDetails.xaml.cs">
       <DependentUpon>pgUserDetails.xaml</DependentUpon>
     </Compile>
-    <Page Include="PageFiles\pgAdminResetPassword.xaml">
+    <Page Include="PageFiles\Administration\pgAdminResetPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="TeamList.xaml.cs">
-      <DependentUpon>TeamList.xaml</DependentUpon>
+    <Compile Include="PageFiles\Teams\pgTeamList.xaml.cs">
+      <DependentUpon>pgTeamList.xaml</DependentUpon>
     </Compile>
-    <Page Include="pgConfirmDeactivate.xaml">
+    <Page Include="PageFiles\Administration\pgConfirmDeactivate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pgEditUserProfile.xaml">
+    <Page Include="PageFiles\Administration\pgEditUserProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -94,72 +96,76 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="pgConfirmDeactivate.xaml.cs">
+    <Compile Include="PageFiles\Administration\pgConfirmDeactivate.xaml.cs">
       <DependentUpon>pgConfirmDeactivate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="pgEditUserProfile.xaml.cs">
+    <Compile Include="PageFiles\Administration\pgEditUserProfile.xaml.cs">
       <DependentUpon>pgEditUserProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PageFiles\PopUpOptions.xaml">
+    <Page Include="PageFiles\Teams\Utility\PopUpOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\TeamMemberScreen.xaml">
+    <Page Include="PageFiles\Teams\pgTeamMemberScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pgViewLeagueList.xaml">
+    <Page Include="PageFiles\Leagues\pgViewLeagueList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>	
+    <Page Include="pgLogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pgUserDetails.xaml">
+    <Page Include="PageFiles\Member\pgUserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\pgGameList.xaml">
+    <Page Include="PageFiles\Games\pgGameList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\pgResetPassword.xaml">
+    <Page Include="PageFiles\Member\pgResetPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\pgViewGameDetails.xaml">
+    <Page Include="PageFiles\Games\pgViewGameDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\pgViewTeamDetails.xaml">
+    <Page Include="PageFiles\Teams\pgViewTeamDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\pgViewTeamList.xaml">
+    <Page Include="PageFiles\Teams\pgViewTeamList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeamList.xaml">
+    <Page Include="PageFiles\Teams\pgTeamList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageFiles\PageControl.cs" />
-    <Compile Include="PageFiles\pgGameList.xaml.cs">
+    <Compile Include="PageFiles\Utility\PageControl.cs" />
+    <Compile Include="PageFiles\Games\pgGameList.xaml.cs">
       <DependentUpon>pgGameList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\pgResetPassword.xaml.cs">
+    <Compile Include="PageFiles\Member\pgResetPassword.xaml.cs">
       <DependentUpon>pgResetPassword.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\pgViewGameDetails.xaml.cs">
+    <Compile Include="PageFiles\Games\pgViewGameDetails.xaml.cs">
       <DependentUpon>pgViewGameDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\pgViewTeamDetails.xaml.cs">
+    <Compile Include="PageFiles\Teams\pgViewTeamDetails.xaml.cs">
       <DependentUpon>pgViewTeamDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\pgViewTeamList.xaml.cs">
+    <Compile Include="PageFiles\Teams\pgViewTeamList.xaml.cs">
       <DependentUpon>pgViewTeamList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -207,5 +213,6 @@
     <Resource Include="Data\mailButton.png" />
     <Resource Include="Data\profileButton.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

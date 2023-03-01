@@ -60,6 +60,12 @@ namespace LogicLayerInterfaces
         /// 
         /// <returns>List of League objects</returns>
         List<League> RetrieveListOfLeagues();
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/26/02
+        /// </summary>
+        List<League> RetrieveLeagueListByTeamID(int team_id);
 	}
 
 }

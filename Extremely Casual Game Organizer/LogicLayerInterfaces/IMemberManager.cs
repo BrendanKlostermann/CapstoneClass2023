@@ -10,6 +10,7 @@
 /// Updated: 2023/02/15
 /// 
 /// Added Edit MemberPassword and HashSha256 Interface Methods.
+/// Added LoginMember - Toney Hale
 /// </remarks>
 
 ﻿using System;
@@ -40,6 +41,7 @@ namespace LogicLayerInterfaces
         bool ResetPasswordToDefault(int memberID);
 
 
+
         /// <TeamObject>
         /// Alex Korte
         /// Created: 2023/02/26
@@ -52,5 +54,8 @@ namespace LogicLayerInterfaces
         /// </remarks>
         List<Member> RetrieveMembersByMemberID(List<int> memberID);
         List<Member> GetAListOfMembersByTeamID(int teamID);
+
+        Member LoginMember(string email, string password);
+
     }
 }

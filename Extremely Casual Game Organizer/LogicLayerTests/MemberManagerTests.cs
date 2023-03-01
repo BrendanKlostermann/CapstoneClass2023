@@ -164,6 +164,7 @@ namespace LogicLayerTests
         }
 
 
+
         /// <TestMemberManager>
         /// Alex Korte
         /// Created: 2023/01/24
@@ -183,6 +184,112 @@ namespace LogicLayerTests
             int actual = 2;
 
             Assert.AreEqual(_tempMembers.Count, actual);
+		}
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for empty string
+        /// </summary>
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestHashSHA256ThrowsExceptionForEmptyString()
+        {
+            // Arrange
+            const string source = "";
+
+            // Act
+            _memberManager.HashSha256(source);
+
+            // Assert
+
+        }
+
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for correct passwordHash
+        /// </summary>
+
+        [TestMethod]
+        public void TestHashSHA256ReturnsCorrectHash()
+        {
+            // Arrange
+            const string source = "newuser";
+            const string expectedResult =
+                "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e";
+            string actualResult = "";
+
+            // Act
+            actualResult = _memberManager.HashSha256(source);
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test with correct info 
+        /// </summary>
+
+        [TestMethod]
+        public void TestLoginUserPassesWithCorrectEmailAndPassword()
+        {
+            // Arrange
+
+            const string email = "test1@gmail.com";
+            const string password = "newuser";
+            int expectedResult = 999999;
+            int actualResult = 0;
+
+            // Act
+
+            Member testUser = _memberManager.LoginMember(email, password);
+            actualResult = testUser.MemberID;
+
+            // Assert
+
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for bad email
+        /// </summary>
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestLoginUserFailsWithBadEmail()
+        {
+            // Arrange
+
+            const string email = "bad-test@gmail.com";
+            const string password = "newuser";
+
+            // Act
+
+            _memberManager.LoginMember(email, password);
+
+        }
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for bad password
+        /// </summary>
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestLoginUserFailsWithBadPassword()
+        {
+            // Arrange
+
+            const string email = "test1@gmail.com";
+            const string password = "bad-newuser";
+
+            // Act
+
+            _memberManager.LoginMember(email, password);
         }
     }
 }

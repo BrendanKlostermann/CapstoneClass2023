@@ -26,6 +26,8 @@ namespace DataAccessLayerFakes
     public class MemberAccessorFake : IMemberAccessor
     {
         List<Member> _members = null;
+        DataTable _passwords = null;
+        private List<string> passwordHashes = new List<string>();
 
         /// <summary>
         /// Brendan Klostermann
@@ -79,6 +81,15 @@ namespace DataAccessLayerFakes
                     Bio = "Yet Another Member bio"
                 }
             };
+            // Create data table and setup columns, then add values to table.
+            // This talbe is used to map password hashes to members since the members do not and should not have a password hash property
+            _passwords = new DataTable();
+            _passwords.Columns.Add("MemberID", typeof(int));
+            _passwords.Columns.Add("PasswordHash", typeof(string));
+
+            _passwords.Rows.Add(10000, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+            _passwords.Rows.Add(10001, "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e");
+            _passwords.Rows.Add(10002, "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e");
         }
 
 
@@ -121,21 +132,6 @@ namespace DataAccessLayerFakes
 
 
 
-        public Member SelectMemberByEmail(string email)
-        {
-            Member returnMember = null;
-
-            foreach (Member member in _members)
-            {
-                if (member.Email == email)
-                {
-                    returnMember = member;
-                    break;
-                }
-            }
-
-            return returnMember;
-        }
 
         public List<Member> SelectMemberByMemberFirstName(string firstName)
         {
@@ -184,36 +180,43 @@ namespace DataAccessLayerFakes
             /// Accessor fake for unit testing resetting the password.
             /// Method to Update Passord should take in both old and new password. Verify memberID and that old input password = old password
             /// </summary>
-            /// <param name="member_id"></param>
-            /// <param name="password"></param>
-            /// <returns></returns>
-            /// PLEASE REVISIT JACOB
-            ////////////////////////////////////////bool result = false;
+            /// <returns>
+            /// Updated by: Jacob Lindauer
+            /// Date: 2023/02/23
+            /// 
+            /// Updated method to not use the PasswordHash property from the Member data object. This property needed to be removed.
+            /// Created the data table above to store password hashes and setup the Linq query to obtain password hash based on provided memberID and reset the password
+            /// if given old passwordHash is the same as hash in data table. This should mimic what the database is doing. 
+            /// </returns>
+            /// 
+            bool result = false;
 
-            ////////////////////////////////////////try
-            ////////////////////////////////////////{
-            ////////////////////////////////////////    int memberID = member_id;
-            ////////////////////////////////////////    string newPassword = password;
-            ////////////////////////////////////////    string currentPassword = oldPassword;
+            try
+            {
+                int memberID = member_id;
+                string newPassword = password;
+                string currentPassword = oldPassword;
 
-            ////////////////////////////////////////    foreach(Member member in _members)
-            ////////////////////////////////////////    {
-            ////////////////////////////////////////        if (member.MemberID == memberID && currentPassword == member.PasswordHash)
-            ////////////////////////////////////////        {
-            ////////////////////////////////////////            member.PasswordHash = newPassword;
+                foreach (Member member in _members)
+                {
+                    var getPassword = from row in _passwords.AsEnumerable() where row["MemberID"].Equals(member.MemberID) select row;
+                    var selectedPassword = getPassword.First(); // Should only return 1 result.
+                    if (member.MemberID == memberID && currentPassword == selectedPassword["PasswordHash"].ToString())
+                    {
+                        _passwords.Rows.RemoveAt(_passwords.Rows.IndexOf(selectedPassword)); // I do not know how to update Data Table entries so remove and re-add will work fine for this test.
+                        _passwords.Rows.Add(memberID, newPassword);
 
-            ////////////////////////////////////////            result = true;
-            ////////////////////////////////////////        }
-            ////////////////////////////////////////    }
-            ////////////////////////////////////////}
-            ////////////////////////////////////////catch (Exception ex)
-            ////////////////////////////////////////{
+                        result = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
-            ////////////////////////////////////////    throw ex;
-            ////////////////////////////////////////}
+                throw ex;
+            }
 
-            ////////////////////////////////////////return result;
-            return false;
+            return result;
         }
         /// <summary>
         /// Michael Haring
@@ -223,29 +226,90 @@ namespace DataAccessLayerFakes
         /// Fake data to test updating member password hash to default
         ///
         /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd
+        /// Updater Name: Jacob Lindauer
+        /// Updated: 2023/02/23
+        /// 
+        /// Applied my method I created above for updating member password. Changed some things to make it work.
+        /// This method previously was trying to apply values to Member PasswordHash property that we removed.
+        /// This resolved those issues. 
         /// </remarks>
         public int UpdatePasswordHashToDefault(int memberID, string passwordHash)
         {
-            ////////    int rows = 0;
-            ////////    var member = _members.Where(b => b.MemberID == memberID).First();
+            int rows = 0;
+            var member = _members.Where(b => b.MemberID == memberID).First();
 
-            ////////    if (member == null)
-            ////////    {
-            ////////        // employee not found
-            ////////        throw new ApplicationException("Bad member id.");
-            ////////    }
+            if (member == null)
+            {
+                // employee not found
+                throw new ApplicationException("Bad member id.");
+            }
 
 
-            ////////    member.PasswordHash = passwordHash;
+            foreach (Member resetMember in _members)
+            {
+                var getPassword = from row in _passwords.AsEnumerable() where row["MemberID"].Equals(member.MemberID) select row;
+                var selectedPassword = getPassword.First(); // Should only return 1 result.
+                if (resetMember.MemberID == memberID)
+                {
+                    _passwords.Rows.RemoveAt(_passwords.Rows.IndexOf(selectedPassword)); // I do not know how to update Data Table entries so remove and re-add will work fine for this test.
+                    _passwords.Rows.Add(memberID, passwordHash);
 
-            ////////    if (member.PasswordHash == "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e")
-            ////////    {
-            ////////        rows = 1;
-            ////////    }
-            ////////    return rows;
-            return 1;
+                    rows = 1;
+                }
+            }
+            return rows;
+        }
+
+
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// fakes for authenticating a member
+        /// </summary>
+        public int AuthenticateMember(string email, string passwordHash)
+        {
+            int result = 0;
+
+            for (int i = 0; i < _members.Count; i++)
+            {
+                if (_members[i].Email == email && passwordHashes[i] == passwordHash)
+                {
+                    result++;
+                }
+            }
+
+            return result;
+        }
+
+                /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// Fakes for selecting a member
+        /// </summary>
+
+        public Member SelectMemberByEmail(string email)
+        {
+            Member member = null;
+
+            foreach (var fakeMember in _members)
+            {
+                if (fakeMember.Email == email)
+                {
+                   member = fakeMember;
+                    break;
+                }
+            }
+
+            if (member == null)
+            {
+                throw new ApplicationException("User not found.");
+            }
+            return member;
+        }
+
+        public List<string> SelectRolesByMemberID(int memberID)
+        {
+            throw new NotImplementedException();
         }
 
 
