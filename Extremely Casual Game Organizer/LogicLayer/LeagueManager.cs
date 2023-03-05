@@ -146,6 +146,7 @@ namespace LogicLayer
             }
             return results;
         }
+
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/02/20
@@ -161,6 +162,43 @@ namespace LogicLayer
             try
             {
                 leagueList = _leagueAccessor.SelectAllLeagues();
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed loading League list", ex);
+            }
+
+            return leagueList;
+        }
+
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// This method calls the LeagueAccessor method SelectLeaguesForGrid and returns it to the 
+        /// presentation layer to be used in the data grid view. 
+        /// </summary>
+        /// 
+        /// <returns>List of LeagueGridVM objects</returns>
+        public List<LeagueGridVM> RetrieveListOfLeaguesForGrid()
+        {
+            List<LeagueGridVM> leagueList = null;
+            try
+            {
+                leagueList = _leagueAccessor.SelectLeaguesForGrid();
+                foreach(var league in leagueList)
+                {
+                    if(league.GenderBool == true)
+                    {
+                        league.Gender = "Male";
+                    }else if(league.GenderBool == false)
+                    {
+                        league.Gender = "Female";
+                    }
+                }
+
             }
             catch (ApplicationException ex)
             {

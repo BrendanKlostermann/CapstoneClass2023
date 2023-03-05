@@ -68,4 +68,16 @@ namespace DataObjects
             this.Name = name;
         }
     }
+
+    public class LeagueGridVM
+    {
+        public int LeagueID { get; set; }
+        public string LeagueName { get; set; }
+        public string Description { get; set; }
+        public string SportName { get; set; }
+        public string LeagueCreator { get; set; }
+        public string Gender { get; set; }
+        public bool GenderBool { get; set; }
+
+    }
 }

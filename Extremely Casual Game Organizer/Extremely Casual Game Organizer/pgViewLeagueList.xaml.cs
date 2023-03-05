@@ -35,7 +35,9 @@ namespace Extremely_Casual_Game_Organizer
     public partial class pgViewLeagueList : Page
     {
         List<League> _leagues = null;
+        List<LeagueGridVM> _leaguesGridVM = null;
         LeagueManager _leagueManager = null;
+        List<LeagueGridVM> _leaguesForGrid = null;
 
         public pgViewLeagueList()
         {
@@ -54,47 +56,25 @@ namespace Extremely_Casual_Game_Organizer
         /// 
         private void datLeagues_Loaded(object sender, RoutedEventArgs e)
         {
-            if(_leagues == null)
+            if(_leaguesForGrid == null)
             {
-                _leagues = new List<League>();
-                _leagues = _leagueManager.RetrieveListOfLeagues();
+                _leaguesForGrid = new List<LeagueGridVM>();
+                _leaguesForGrid = _leagueManager.RetrieveListOfLeaguesForGrid();
 
-                // Create Gender List
-                List<string> genders = new List<string>();
-                foreach(var league in _leagues)
-                {
-                    if(league.Gender == true)
-                    {
-                        genders.Add("Male");
-                    }
-                    if (league.Gender == false)
-                    {
-                        genders.Add("Female");
-                    }
-                    else
-                    {
-                        genders.Add("Unassigned");
-                    }
-                }
-
-                datLeagues.ItemsSource = _leagues;
+                datLeagues.ItemsSource = _leaguesForGrid;
 
 
-
-                //Remove data users do not need, maybe switch to using a ViewModel?
-                // Might need to edit data objects to allow league to hold Sport Description as well
-                //      that way user know what sport it is.
+                ////Remove data users do not need, maybe switch to using a ViewModel?
+                //// Might need to edit data objects to allow league to hold Sport Description as well
+                ////      that way user know what sport it is.
 
                 datLeagues.Columns.RemoveAt(0);
-                datLeagues.Columns.RemoveAt(0);
-                datLeagues.Columns.RemoveAt(1);
-                datLeagues.Columns.RemoveAt(1);
-                datLeagues.Columns.RemoveAt(0);
+                datLeagues.Columns.RemoveAt(5);
 
-                //Edit Columns
-                datLeagues.Columns[3].Header = "Max Number of Players";
-                datLeagues.Columns[2].DisplayIndex = 0;
-                
+                datLeagues.Columns[2].Header = "Sport";
+                datLeagues.Columns[3].Header = "Owner";
+
+
             }
         }
 
@@ -109,6 +89,7 @@ namespace Extremely_Casual_Game_Organizer
         private void datLeagues_Unloaded(object sender, RoutedEventArgs e)
         {
             _leagues = null;
+            _leaguesGridVM = null;
             datLeagues.ItemsSource = null;
         }
     }

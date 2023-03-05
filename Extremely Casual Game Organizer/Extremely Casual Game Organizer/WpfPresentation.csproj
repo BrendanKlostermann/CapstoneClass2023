@@ -75,6 +75,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="StylesTest.xaml.cs">
+      <DependentUpon>StylesTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TeamList.xaml.cs">
       <DependentUpon>TeamList.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\pgViewTeamList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="styles\styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Page Include="StylesTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -26,7 +26,8 @@ namespace DataAccessLayer
 {
     public class LeagueAccessor : ILeagueAccessor
     {
-        public List<League> league = new List<League>();
+        public List<League> leagues = new List<League>();
+        public List<LeagueGridVM> leaguesForGrid = null;
 
 
         /// <summary>
@@ -203,6 +204,112 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return team;
+        }
+
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// a method that gets a list of LeagueGridVM objects from the database;
+        /// 
+        public List<LeagueGridVM> SelectLeaguesForGrid()
+        {
+
+            leaguesForGrid = new List<LeagueGridVM>();
+            MemberAccessor memberAccessor = new MemberAccessor();
+
+            //connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_all_leagues";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+            
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        LeagueGridVM leagueVM = new LeagueGridVM();
+                        leagueVM.LeagueID = reader.GetInt32(0);
+                        leagueVM.LeagueName = reader.GetString(7);
+                        leagueVM.Description = reader.GetString(6);
+                        leagueVM.SportName = SelectSportDescriptionByID(reader.GetInt32(1));
+                        leagueVM.LeagueCreator = memberAccessor.SelectAUserByID(reader.GetInt32(4)).FamilyName;
+                        leagueVM.GenderBool = reader.GetBoolean(5);
+                        leagueVM.Gender = "Undefined";
+
+                        leaguesForGrid.Add(leagueVM);
+
+                    }
+                }
+
+
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+
+            return leaguesForGrid;
+        }
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method that selects the descrption(name) of a sport by the id of the sport
+        public string SelectSportDescriptionByID(int id)
+        {
+            string desc = "";
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_all_leagues";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@sport_id", SqlDbType.Int);
+            cmd.Parameters["@sport_id"].Value = id;
+
+            try
+            {
+                conn.Open();
+                desc = (string)cmd.ExecuteScalar();
+
+            }catch(SqlException ex)
+            {
+                throw ex;
+            }
+
+            return desc;
         }
     }
 }
