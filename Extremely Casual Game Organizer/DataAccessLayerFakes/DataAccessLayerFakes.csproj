@@ -49,6 +49,7 @@
     <Compile Include="TeamAccessorFake.cs" />
     <Compile Include="TeamMemberAccessorFake.cs" />
     <Compile Include="TeamRoleAccessorFakes.cs" />
+    <Compile Include="TournamentAccessorFakes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayerInterfaces\DataAccessLayerInterfaces.csproj">

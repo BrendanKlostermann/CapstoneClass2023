@@ -31,6 +31,7 @@ sqlcmd -S localhost -E -i sp_user_create_team.sql
 sqlcmd -S localhost -E -i sp_authenticate_member.sql
 sqlcmd -S localhost -E -i sp_select_leagues_for_grid.sql
 sqlcmd -S localhost -E -i sp_select_sport_description_by_sportID.sql
+sqlcmd -S localhost -E -i sp_select_all_tournaments.sql
 
 
 

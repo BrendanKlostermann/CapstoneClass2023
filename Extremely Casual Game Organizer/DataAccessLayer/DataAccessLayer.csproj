@@ -50,6 +50,7 @@
     <Compile Include="TeamAccessor.cs" />
     <Compile Include="TeamMemberAccessor.cs" />
     <Compile Include="TeamRoleAccessor.cs" />
+    <Compile Include="TournamentAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayerInterfaces\DataAccessLayerInterfaces.csproj">

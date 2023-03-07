@@ -288,7 +288,7 @@ namespace DataAccessLayer
             var conn = connectionFactory.GetDBConnection();
 
             //command text
-            var cmdText = "sp_select_all_leagues";
+            var cmdText = "sp_select_sports_description_by_sportID";
 
             //create command
             var cmd = new SqlCommand(cmdText, conn);

@@ -59,6 +59,12 @@
       <DependentUpon>pgAdminResetPassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\PageControler.cs" />
+    <Compile Include="PageFiles\pgCreateTournament.xaml.cs">
+      <DependentUpon>pgCreateTournament.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\pgViewTournamentList.xaml.cs">
+      <DependentUpon>pgViewTournamentList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\PopUpOptions.xaml.cs">
       <DependentUpon>PopUpOptions.xaml</DependentUpon>
     </Compile>
@@ -81,6 +87,14 @@
     <Compile Include="TeamList.xaml.cs">
       <DependentUpon>TeamList.xaml</DependentUpon>
     </Compile>
+    <Page Include="PageFiles\pgCreateTournament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\pgViewTournamentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pgConfirmDeactivate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
