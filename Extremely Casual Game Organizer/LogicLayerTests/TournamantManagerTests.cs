@@ -44,6 +44,22 @@ namespace LogicLayerTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
+        [TestMethod]
+        public void TestCreateTournamentSuccess()
+        {
+            Tournament tm = new Tournament()
+            {
+                TournamentID = 1,
+                Gender = true,
+                SportID = 2,
+                MemberID = 11,
+                Name = "Test",
+                Description = "Test",
+                Active = true
+            };
+            bool test = _tournamentManager.CreateTournament(tm);
+            Assert.IsTrue(test);
+        }
 
     }
 

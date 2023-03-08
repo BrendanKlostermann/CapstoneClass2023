@@ -28,7 +28,65 @@ namespace DataAccessLayer
     {
         public Member SelectAUserByID(int member_id)
         {
-            throw new NotImplementedException();
+            Member member = null;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_member_by_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+
+            cmd.Parameters["@member_id"].Value = member_id;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    member = new Member();
+
+                    member.MemberID = reader.GetInt32(0);
+                    member.Email = reader.GetString(1);
+                    member.FirstName = reader.GetString(2);
+                    member.FamilyName = reader.GetString(3);
+                    member.Birthday = reader.GetDateTime(4);
+
+                    if (!reader.IsDBNull(5))
+                    {
+                        member.PhoneNumber = reader.GetString(5);
+                    }
+                    if (!reader.IsDBNull(6))
+                    {
+                        member.Gender = reader.GetBoolean(6);
+                    }
+                    member.Active = reader.GetBoolean(7);
+                    if (!reader.IsDBNull(8))
+                    {
+                        member.Bio = reader.GetString(8);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return member;
         }
 
         /// <summary>

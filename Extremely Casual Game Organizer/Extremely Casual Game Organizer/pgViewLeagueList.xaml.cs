@@ -56,27 +56,35 @@ namespace Extremely_Casual_Game_Organizer
         /// 
         private void datLeagues_Loaded(object sender, RoutedEventArgs e)
         {
-            if(_leaguesForGrid == null)
+            try
             {
-                _leaguesForGrid = new List<LeagueGridVM>();
-                _leaguesForGrid = _leagueManager.RetrieveListOfLeaguesForGrid();
+                if (_leaguesForGrid == null)
+                {
+                    _leaguesForGrid = new List<LeagueGridVM>();
+                    _leaguesForGrid = _leagueManager.RetrieveListOfLeaguesForGrid();
 
-                datLeagues.ItemsSource = _leaguesForGrid;
-
-
-                ////Remove data users do not need, maybe switch to using a ViewModel?
-                //// Might need to edit data objects to allow league to hold Sport Description as well
-                ////      that way user know what sport it is.
-
-                datLeagues.Columns.RemoveAt(0);
-                datLeagues.Columns.RemoveAt(5);
-
-                datLeagues.Columns[2].Header = "Sport";
-                datLeagues.Columns[3].Header = "Owner";
+                    datLeagues.ItemsSource = _leaguesForGrid;
 
 
+                    ////Remove data users do not need, maybe switch to using a ViewModel?
+                    //// Might need to edit data objects to allow league to hold Sport Description as well
+                    ////      that way user know what sport it is.
+
+                    datLeagues.Columns.RemoveAt(0);
+                    datLeagues.Columns.RemoveAt(5);
+
+                    datLeagues.Columns[2].Header = "Sport";
+                    datLeagues.Columns[3].Header = "Owner";
+
+                    datLeagues.Columns[1].DisplayIndex = 4;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
+
 
         /// <summary>
         /// Brendan Klostermann

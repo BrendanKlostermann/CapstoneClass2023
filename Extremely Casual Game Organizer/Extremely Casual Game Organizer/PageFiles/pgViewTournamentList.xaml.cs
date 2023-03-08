@@ -34,8 +34,20 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void datTournamentGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            _tournaments = _tournamentManager.RetrieveAllTournamentVMs();
-            datTournamentGrid.ItemsSource = _tournaments;
+            try
+            {
+                if(_tournaments == null)
+                {
+                    _tournaments = _tournamentManager.RetrieveAllTournamentVMs();
+                    datTournamentGrid.ItemsSource = _tournaments;
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+            
         }
 
         private void datTournamentGrid_Unloaded(object sender, RoutedEventArgs e)

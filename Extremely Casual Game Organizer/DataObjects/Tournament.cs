@@ -17,7 +17,7 @@ namespace DataObjects
     {
         public int TournamentID { get; set; }
         public int SportID { get; set; }
-        public bool Gender { get; set; }
+        public bool? Gender { get; set; }
         public int MemberID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -37,7 +37,7 @@ namespace DataObjects
         public int TournamentID { get; set; }
         public string SportName { get; set; }
         public string Gender { get; set; }
-        public bool GenderBool { get; set; }
+        public bool? GenderBool { get; set; }
         public string CreatorName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

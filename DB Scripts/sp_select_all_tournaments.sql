@@ -13,5 +13,6 @@ AS
     BEGIN
         SELECT	[tournament_id],[sport_id],[gender],[member_id],[name],[description],[active]
 		FROM [Tournament]
+		Where [active] = 1
     END
 GO

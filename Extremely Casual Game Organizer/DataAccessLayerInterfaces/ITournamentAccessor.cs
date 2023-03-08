@@ -18,5 +18,6 @@ namespace DataAccessLayerInterfaces
     {
         List<Tournament> SelectAllTournaments();
         List<TournamentVM> SelectAllTournamentVMs();
+        int InsertTournament(Tournament tm);
     }
 }

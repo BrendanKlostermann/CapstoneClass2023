@@ -20,6 +20,21 @@ namespace DataAccessLayerFakes
         List<Tournament> _tournaments = null;
         List<TournamentVM> _tournamentVMs = null;
 
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// </summary>
+        /// This method inserts a new Tournament into the database
+        public int InsertTournament(Tournament tm)
+        {
+            _tournaments = new List<Tournament>();
+            _tournaments.Add(tm);
+
+            return 1;
+        }
+
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/03/05

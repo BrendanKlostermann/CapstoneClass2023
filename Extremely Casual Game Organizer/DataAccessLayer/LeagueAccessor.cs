@@ -244,12 +244,13 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
+                        Member member = memberAccessor.SelectAUserByID(reader.GetInt32(4));
                         LeagueGridVM leagueVM = new LeagueGridVM();
                         leagueVM.LeagueID = reader.GetInt32(0);
                         leagueVM.LeagueName = reader.GetString(7);
                         leagueVM.Description = reader.GetString(6);
                         leagueVM.SportName = SelectSportDescriptionByID(reader.GetInt32(1));
-                        leagueVM.LeagueCreator = memberAccessor.SelectAUserByID(reader.GetInt32(4)).FamilyName;
+                        leagueVM.LeagueCreator = member.FirstName;
                         leagueVM.GenderBool = reader.GetBoolean(5);
                         leagueVM.Gender = "Undefined";
 
@@ -296,8 +297,8 @@ namespace DataAccessLayer
             //command type
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.Add("@sport_id", SqlDbType.Int);
-            cmd.Parameters["@sport_id"].Value = id;
+            cmd.Parameters.Add("@sportid", SqlDbType.Int);
+            cmd.Parameters["@sportid"].Value = id;
 
             try
             {

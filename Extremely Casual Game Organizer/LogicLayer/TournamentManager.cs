@@ -33,6 +33,37 @@ namespace LogicLayer
             _tournamentAccessor = ta;
         }
 
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// </summary>
+        /// this method takes in a tournament object from the presentation layer and passes it to the 
+        /// data access layer to add it to the database.
+        public bool CreateTournament(Tournament tm)
+        {
+            try
+            {
+                if (_tournamentAccessor.InsertTournament(tm) == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new ApplicationException("Error adding new tournament.", ex);
+            }
+                
+            
+            
+
+        }
+
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/03/05
@@ -43,18 +74,29 @@ namespace LogicLayer
         public List<TournamentVM> RetrieveAllTournamentVMs()
         {
             List<TournamentVM> tournaments = new List<TournamentVM>();
-            tournaments = _tournamentAccessor.SelectAllTournamentVMs();
-            foreach(TournamentVM tourn in tournaments)
+            
+
+            try
             {
-                if(tourn.GenderBool == true)
+                tournaments = _tournamentAccessor.SelectAllTournamentVMs();
+
+                foreach (TournamentVM tourn in tournaments)
                 {
-                    tourn.Gender = "Male";
-                }
-                if(tourn.GenderBool == false)
-                {
-                    tourn.Gender = "Female";
+                    if (tourn.GenderBool == true)
+                    {
+                        tourn.Gender = "Male";
+                    }
+                    if (tourn.GenderBool == false)
+                    {
+                        tourn.Gender = "Female";
+                    }
                 }
             }
+            catch(Exception ex)
+            {
+                throw new ApplicationException("Error retireving tournament list", ex);
+            }
+            
             return tournaments;
         }
         /// <summary>
@@ -66,7 +108,15 @@ namespace LogicLayer
         /// returns a list of tournament objects
         public List<Tournament> RetrieveAllTournamnets()
         {
-            return _tournamentAccessor.SelectAllTournaments();
+            try
+            {
+                return _tournamentAccessor.SelectAllTournaments();
+            }
+            catch(Exception ex)
+            {
+                throw new ApplicationException("Error retireving tournament list", ex);
+            }
+            
         }
     
     }

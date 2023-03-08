@@ -18,5 +18,7 @@ namespace LogicLayerInterfaces
     {
         List<Tournament> RetrieveAllTournamnets();
         List<TournamentVM> RetrieveAllTournamentVMs();
+
+        bool CreateTournament(Tournament tm);
     }
 }

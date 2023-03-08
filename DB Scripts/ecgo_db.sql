@@ -122,8 +122,11 @@ CREATE TABLE [dbo].[Team] (
     [team_name]				[nvarchar](50)					NULL,
 	[gender]				[bit]							NULL,
 	[sport_id]				[int]							NOT NULL,
+	[member_id]				[int]							NOT NULL,
+	[description]            [nvarchar](1000)                NULL,	
 	CONSTRAINT [pk_team_id] PRIMARY KEY([team_id]),
     CONSTRAINT [fk_teamSport_id] FOREIGN KEY([sport_id]) REFERENCES [dbo].[Sport]([sport_id]),
+	CONSTRAINT [fk_team_coach] FOREIGN KEY ([member_id]) REFERENCES [dbo].[member]([member_id]),
 	CONSTRAINT [ak_team_name] Unique ([team_name])
 )
 GO

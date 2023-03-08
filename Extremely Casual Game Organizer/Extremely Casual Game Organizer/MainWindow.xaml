@@ -76,7 +76,7 @@
                     <Image Source="Data\profileButton.png"></Image> </Button>
             </Grid>
             
-            <Button x:Name="navSchedule" Grid.Row="1" Cursor="Hand" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black">Schedule</Button>
+            <Button x:Name="navSchedule" Grid.Row="1" Cursor="Hand" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navSchedule_Click">Schedule</Button>
             <Button x:Name="navEvents" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navEvents_Click">Events</Button>
             <Button x:Name="navLeagues" Grid.Row="1" Cursor="Hand" Focusable="False"  Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navLeagues_Click">Leagues</Button>
             <Button x:Name="navTeams" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black">Teams</Button>

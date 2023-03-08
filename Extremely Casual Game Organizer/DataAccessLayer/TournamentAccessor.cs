@@ -24,6 +24,61 @@ namespace DataAccessLayer
         List<Tournament> _tournaments;
         List<TournamentVM> _tournamentVMs;
 
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// </summary>
+        /// This Method will take in a tournament object and insert its values into the database as a row
+        public int InsertTournament(Tournament tm)
+        {
+            int count = 0;
+
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_insert_tournament";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@sportid", SqlDbType.Int);
+            cmd.Parameters["@sportid"].Value = tm.SportID;
+
+            cmd.Parameters.Add("@gender", SqlDbType.Bit);
+            cmd.Parameters["@gender"].Value = tm.Gender;
+
+            cmd.Parameters.Add("@memberid", SqlDbType.Int);
+            cmd.Parameters["@memberid"].Value = tm.MemberID;
+
+            cmd.Parameters.Add("@name", SqlDbType.NVarChar, 250);
+            cmd.Parameters["@name"].Value = tm.Name;
+
+            cmd.Parameters.Add("@description", SqlDbType.NVarChar, 1000);
+            cmd.Parameters["@description"].Value = tm.Description;
+
+            try
+            {
+                conn.Open();
+
+                count = cmd.ExecuteNonQuery();
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return count;
+
+        }
+
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/03/05
@@ -127,7 +182,7 @@ namespace DataAccessLayer
                         {
                             tournament.GenderBool = reader.GetBoolean(2);
                         }
-                        tournament.Gender = "Undefined";
+                        tournament.Gender = "NB";
                         tournament.CreatorName = memberAccessor.SelectAUserByID(reader.GetInt32(3)).FirstName;
                         tournament.Name = reader.GetString(4);
                         if (!reader.IsDBNull(5))
