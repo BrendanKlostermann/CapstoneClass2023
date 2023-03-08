@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataObjects
 {
-    public class TeamRole
+    public class TeamRoles
     {
         public int MemberID { get; set; }
         public int TeamID { get; set; }

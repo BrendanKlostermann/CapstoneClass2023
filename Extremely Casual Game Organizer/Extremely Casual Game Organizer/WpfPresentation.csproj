@@ -67,6 +67,9 @@
     <Compile Include="PageFiles\MemberPages\pgMemberSchedule.xaml.cs">
       <DependentUpon>pgMemberSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Teams\pgTeamList.xaml.cs">
+      <DependentUpon>pgTeamList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Teams\Utility\PopUpOptions.xaml.cs">
       <DependentUpon>PopUpOptions.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Styles\CalendarResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Teams\pgTeamList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -50,6 +50,7 @@ namespace Extremely_Casual_Game_Organizer
     {
         MasterManager _masterManager = null;
         PageControl _pageControl = null;
+        Member _member = null;
 
         public Page PreviousPage { get; set; }
         public Page CurrentPage { get; set; }
@@ -110,6 +111,8 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
+                TeamManager teamManager = new TeamManager();
+                _pageControl.LoadPage(new pgTeamList());
                 // _pageControl.LoadPage(new pgViewTeamDetails(1030, _masterManager));
             }
             catch (Exception ex)
@@ -148,6 +151,17 @@ namespace Extremely_Casual_Game_Organizer
 
                 MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
+        }
+
+
+        private void updateUIforLogout()
+        {
+            /// <summary>
+            /// Created by Garion Opiola
+            /// Created 02/28/2023
+            /// Logout Logic
+            /// </summary>
+            frameLoad.Visibility = Visibility.Hidden;
         }
     }
 }
