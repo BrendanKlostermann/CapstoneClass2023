@@ -109,7 +109,7 @@ print "" print "*** Inserting into Team"
 GO
 SET IDENTITY_INSERT [dbo].[Team] ON
 INSERT INTO [dbo].[Team] ([team_id], [team_name], [gender], [sport_id], [member_id]) VALUES 
-(1000, N'Chicago Bears', 1, 1012, 100011),
+(1000, N'Chicago Bears', 1, 1012, 100040),
 (1001, N'Lakers', 1, 1010, 100011),
 (1002, N'Chelsea', 0, 1011, 100011),
 (1003, N'Real Madrid', 1, 1011, 100011),
@@ -119,18 +119,18 @@ INSERT INTO [dbo].[Team] ([team_id], [team_name], [gender], [sport_id], [member_
 (1007, N'Power City', 1, 1025, 100011),
 (1008, N'Unstoppables', 1, 1014, 100011),
 (1009, N'Warriors', 1, 1010, 100011),
-(1010, N'Chicago Bulls', 1, 1010, 100011),
+(1010, N'Chicago Bulls', 1, 1010, 100013),
 (1011, N'Suns', 1, 1010, 100011),
-(1012, N'FC Barcelona', 1, 1011, 100011),
+(1012, N'FC Barcelona', 1, 1011, 100012),
 (1013, N'Liverpool', 1, 1011, 100011),
-(1014, N'Manchester City', 0, 1011, 100011),
+(1014, N'Manchester City', 0, 1011, 100014),
 (1015, N'Believers', 0, 1013, 100011),
 (1016, N'Vikings', 1, 1025, 100011),
 (1017, N'Juniors', 1, 1025, 100011),
-(1018, N'Chiefs', 1, 1012, 100011),
+(1018, N'Chiefs', 1, 1012, 100017),
 (1019, N'Bengals', 1, 1012, 100011),
 (1020, N'Eagles', 1, 1012, 100011),
-(1021, N'49ers', 1, 1012, 100011),
+(1021, N'49ers', 1, 1012, 100009),
 (1025, N'Manchester United', 1, 1011, 100011),
 (1026, N'Oklahoma Thunder', 1, 1010, 100011),
 (1027, N'Lighting', 0, 1010, 100011),
@@ -1470,13 +1470,13 @@ print "" print "*** Inserting into Practice"
 GO
 SET IDENTITY_INSERT [dbo].[Practice] ON
 INSERT INTO [dbo].[Practice] ([practice_id], [location], [team_id], [date_time], [description], [zip_code], [city]) VALUES 
-(1000, N'15 St Ave', 1015, N'2023-03-04 09:10:00', N'Be ready to run.', 52401, 'Cedar Rapids'),
-(1006, N'15 St Ave', 1015, N'2023-03-14 08:20:00', N'Weight lighting session',50309, 'Des Moines'),
-(1011, N'15 St Ave', 1015, N'2023-05-23 07:45:00', N'Friendly game.',50703,'Waterloo'),
-(1023, N'15 St Ave', 1015, N'2023-06-05 08:00:00', N'5 miles walk.',51250,'Sioux Center'),
-(1001, N'15 St Ave', 1015, N'2023-05-12 09:00:00', N'Shooting session.',50309, 'Des Moines'),
-(1020, N'15 St Ave', 1015, N'2023-03-09 10:30:00', N'Running till you die.',52241,'Coralville'),
-(1002, N'15 St Ave', 1015, N'2023-04-03 11:20:00', N'Bring your own food.',52241,'Coralville')
+(1000, N'15 St Ave', 1001, N'2023-03-04 09:10:00', N'Be ready to run.', 52401, 'Cedar Rapids'),
+(1006, N'15 St Ave', 1001, N'2023-03-14 08:20:00', N'Weight lighting session',50309, 'Des Moines'),
+(1011, N'15 St Ave', 1001, N'2023-05-23 07:45:00', N'Friendly game.',50703,'Waterloo'),
+(1023, N'15 St Ave', 1001, N'2023-06-05 08:00:00', N'5 miles walk.',51250,'Sioux Center'),
+(1001, N'15 St Ave', 1001, N'2023-05-12 09:00:00', N'Shooting session.',50309, 'Des Moines'),
+(1020, N'15 St Ave', 1001, N'2023-03-09 10:30:00', N'Running till you die.',52241,'Coralville'),
+(1002, N'15 St Ave', 1001, N'2023-04-03 11:20:00', N'Bring your own food.',52241,'Coralville')
 SET IDENTITY_INSERT [dbo].[Practice] OFF
 GO
 
@@ -1555,11 +1555,13 @@ print "" print "*** Inserting into TeamMember"
 GO
 INSERT INTO [dbo].[TeamMember] ([team_id], [description], [starter], [member_id]) VALUES 
 -- Lakers
-(1001, N'Small Forward', 1, 100000),
-(1001, N'Power Forward', 1, 100020),
-(1001, N'Point Guard', 1, 100021),
-(1001, N'Shooting Guard', 1, 100022),
-(1001, N'Center', 1, 100023),
+(1000, N'Small Forward', 1, 100000),
+(1000, N'Power Forward', 1, 100020),
+(1000, N'Point Guard', 0, 100021),
+(1000, N'Shooting Guard', 0, 100022),
+(1000, N'Center', 0, 100023),
+(1000, N'Center', 1, 100040),
+
 
 -- Wariors
 (1009, N'Small Forward', 1, 100024),

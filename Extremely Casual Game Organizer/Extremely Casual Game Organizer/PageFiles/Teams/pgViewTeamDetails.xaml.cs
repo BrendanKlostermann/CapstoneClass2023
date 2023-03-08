@@ -198,7 +198,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+               MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
         /// <summary>
@@ -259,7 +259,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
+               MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
 
             }
         }
@@ -274,19 +274,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         {
             new pgTeamMemberScreen(_masterManager);
 
-            _pageControl.LoadPage(new pgTeamMemberScreen(_teamID));
-        }
-
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            // Need to remove click event, should user return to this page
-
-            _viewRoster.Click -= ViewRosterButton_Click;
-
-            // nulling selected items
-            datPreviousGamesList.SelectedItem = null;
-            datUpcomingGamesList.SelectedItem = null;
-            datLeagueList.SelectedItem = null;
+            _pageControl.LoadPage(new pgTeamMemberScreen(_teamID, _masterManager), new pgViewTeamDetails(_teamID, _masterManager));
         }
 
         private void datLeagueList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -327,9 +315,21 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
+               MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
 
             }
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            // Need to remove click event, should user return to this page
+
+            _viewRoster.Click -= ViewRosterButton_Click;
+
+            // nulling selected items
+            datPreviousGamesList.SelectedItem = null;
+            datUpcomingGamesList.SelectedItem = null;
+            datLeagueList.SelectedItem = null;
         }
     }
 }

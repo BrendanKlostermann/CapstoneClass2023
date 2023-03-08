@@ -25,7 +25,7 @@ namespace LogicLayerTests
         [TestInitialize]
         public void TestSetup()
         {
-            _tmm = new TeamMemberManager(new TeamMemberAccessorFake());
+            _tmm = new TeamMemberManager(new TeamAccessorFake());
 
         }
 

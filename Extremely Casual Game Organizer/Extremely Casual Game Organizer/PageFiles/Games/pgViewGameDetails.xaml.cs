@@ -72,7 +72,14 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             
             DataRow details = _masterManager.GameManager.ViewGameDetails(_game_id);
 
-            txtLocation.Text = details[1].ToString() + " " + details[2].ToString() + " " + details[3].ToString();
+            // Method to parse location to correct format.
+            // details [1] 222 roadName st, IA
+            // details [2] City Name
+            // details [3] ZIP
+            string[] locationString = details[1].ToString().Split(',');
+            string locationFormatted = locationString[0].ToString() + ", " + details[2].ToString()
+                    + ", " + locationString[1] + " " + details[3].ToString();
+            txtLocation.Text = locationFormatted;
             txtVenueName.Text = details[4].ToString();
             txtDate.Text = Convert.ToDateTime(details[5]).ToShortDateString();
             txtTime.Text = Convert.ToDateTime(details[5]).ToShortTimeString();

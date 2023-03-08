@@ -23,7 +23,6 @@ namespace LogicLayerInterfaces
 
     public interface ITeamMemberManager
     {
-        int AddTeamMember(int team_id, int member_id, string description);
 
         List<Member> SortIntoStarters(List<Member> members, int teamID, bool active);
 

@@ -15,6 +15,11 @@
 /// Added class properties for CurrentPage and PreviousPage.
 /// This will allow you to navigate back to previous pages as you navigate throughout the program.
 /// Since this window should not be newed up after it is running, this made the most sense to place them here.
+/// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/03/04
+/// 
+/// Added the CurrentMember property so we can set the current signed in member and get their roles for access
 /// </summary>
 using System;
 using System.Collections.Generic;
@@ -34,6 +39,7 @@ using DataObjects;
 using LogicLayerInterfaces;
 using LogicLayer;
 using Extremely_Casual_Game_Organizer.PageFiles;
+using Extremely_Casual_Game_Organizer.PageFiles.MemberPages;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -43,11 +49,11 @@ namespace Extremely_Casual_Game_Organizer
     public partial class MainWindow : Window
     {
         MasterManager _masterManager = null;
-        Member _member = null;
         PageControl _pageControl = null;
 
         public Page PreviousPage { get; set; }
         public Page CurrentPage { get; set; }
+        public Member CurrentMember { get; set; }
 
         public MainWindow()
         {
@@ -58,6 +64,19 @@ namespace Extremely_Casual_Game_Organizer
             grdFrameFunctions.Visibility = Visibility.Hidden;
             
 
+        }
+
+        private void frmMain_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _pageControl.LoadPage(new pgLogIn(_masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
 
         private void navGames_Click(object sender, RoutedEventArgs e)
@@ -91,7 +110,7 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
-                _pageControl.LoadPage(new pgViewTeamDetails(1030, _masterManager));
+                // _pageControl.LoadPage(new pgViewTeamDetails(1030, _masterManager));
             }
             catch (Exception ex)
             {
@@ -102,8 +121,16 @@ namespace Extremely_Casual_Game_Organizer
 
         private void navTeams_Click(object sender, RoutedEventArgs e)
         {
-            TeamManager teamManager = new TeamManager();
-            _pageControl.LoadPage(new pgViewTeamList());
+            _pageControl.LoadPage(new pgViewTeamList(_masterManager));
+        }
+
+        private void navSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            Member openMember = new Member()
+            {
+                MemberID = 100000
+            };
+            _pageControl.LoadPage(new pgMemberSchedule(openMember, _masterManager));
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1200">
+        Title="MainWindow" Height="900" Width="1200" Loaded="frmMain_Loaded">
 
     <Grid Background="#eeee">
         <Grid.ColumnDefinitions>
@@ -76,7 +76,7 @@
                     <Image Source="Data\profileButton.png"></Image> </Button>
             </Grid>
             
-            <Button x:Name="navSchedule" Grid.Row="1" Cursor="Hand" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black">Schedule</Button>
+            <Button x:Name="navSchedule" Grid.Row="1" Cursor="Hand" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navSchedule_Click">Schedule</Button>
             <Button x:Name="navGame" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navGames_Click">Games</Button>
             <Button x:Name="navLeagues" Grid.Row="1" Cursor="Hand" Focusable="False"  Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navLeagues_Click">Leagues</Button>
 

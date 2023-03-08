@@ -50,7 +50,6 @@
     <Compile Include="SportManager.cs" />
     <Compile Include="TeamManager.cs" />
     <Compile Include="TeamMemberManager.cs" />
-    <Compile Include="TeamRolesManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayerFakes\DataAccessLayerFakes.csproj">

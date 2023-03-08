@@ -260,14 +260,14 @@ namespace DataAccessLayer
                         }
                         team.SportID = reader.GetInt32(3);
                         team.MemberID = reader.GetInt32(4);
-                        if (reader.IsDBNull(5))
-                        {
-                            team.Description = null;
-                        }
-                        else
-                        {
-                            team.Description = reader.GetString(5);
-                        }
+                        //if (reader.IsDBNull(5))
+                        //{
+                        //    team.Description = null;
+                        //}
+                        //else
+                        //{
+                        //    team.Description = reader.GetString(5);
+                        //} // Script does not return Desc (JDL)
                         teams.Add(team);
                     }
                 }

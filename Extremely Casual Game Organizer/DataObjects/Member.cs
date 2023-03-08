@@ -1,5 +1,5 @@
 
-﻿/// <MemberObject>
+/// <MemberObject>
 /// Alex Korte
 /// Created: 2023/01/24
 /// 
@@ -10,17 +10,17 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-﻿    /// <summary>
-    /// Brendan Klostermann
-    /// Created: 2023/01/31
-    /// 
-    /// Member class used to hold Member data.
-    /// </summary>
-    ///
-    /// <remarks>
-    /// Updater Name
-    /// Updated: yyyy/mm/dd
-    /// </remarks>    
+/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/01/31
+/// 
+/// Member class used to hold Member data.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>    
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,10 +59,10 @@ namespace DataObjects
             this.FamilyName = familyName;
             this.Birthday = birthDay;
             this.PhoneNumber = phoneNumber;
-		}
+        }
 
 
-        public Member(int mem_id,string email, string fName, string flName, DateTime bDay, string pNumber, bool gender, bool active, string bio)
+        public Member(int mem_id, string email, string fName, string flName, DateTime bDay, string pNumber, bool gender, bool active, string bio)
         {
             this.MemberID = mem_id;
             this.Email = email;
@@ -79,6 +79,6 @@ namespace DataObjects
         {
 
         }
-	}
+    }
 }
 

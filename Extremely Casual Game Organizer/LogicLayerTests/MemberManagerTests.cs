@@ -291,5 +291,23 @@ namespace LogicLayerTests
 
             _memberManager.LoginMember(email, password);
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Test retreiving member schedule events
+        /// </summary>
+        [TestMethod]
+        public void TestRetrievingMemberSchedule()
+        {
+            const int source = 100000;
+            const int expectedResult = 11;
+            int actualResult = 0;
+
+            actualResult = _memberManager.RetreiveMemberSchedule(source).Count;
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }

@@ -515,5 +515,162 @@ namespace DataAccessLayer
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/04/03
+        /// 
+        /// Method to get Games that the member is participating in to view in their calendar.
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
+        public DataTable SelectGamesByMemberID(int member_id)
+        {
+            DataTable gameTable = new DataTable();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_member_games";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = member_id;
+
+            // Need Data Adapter for DataTables
+            var dataAdapter = new SqlDataAdapter();
+            dataAdapter.SelectCommand = cmd;
+
+            try
+            {
+                conn.Open();
+
+                dataAdapter.Fill(gameTable);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return gameTable;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/04/03
+        /// 
+        /// Method to get Tournament Games that the member is participating in to view in their calendar.
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
+        public DataTable SelectTournamentGamesByMemberID(int member_id)
+        {
+
+            DataTable tgameTable = new DataTable();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_member_tournament_games";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = member_id;
+
+            // Need Data Adapter for DataTables
+            var dataAdapter = new SqlDataAdapter();
+            dataAdapter.SelectCommand = cmd;
+
+            try
+            {
+                conn.Open();
+
+                dataAdapter.Fill(tgameTable);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return tgameTable;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/04/03
+        /// 
+        /// Method to get Tournament Games that the member is participating in to view in their calendar.
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
+        public DataTable SelectPracticesByMemberID(int member_id)
+        {
+            DataTable practiceTable = new DataTable();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_member_practices";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = member_id;
+
+            // Need Data Adapter for DataTables
+            var dataAdapter = new SqlDataAdapter();
+            dataAdapter.SelectCommand = cmd;
+
+            try
+            {
+                conn.Open();
+
+                dataAdapter.Fill(practiceTable);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return practiceTable;
+        }
     }
 }

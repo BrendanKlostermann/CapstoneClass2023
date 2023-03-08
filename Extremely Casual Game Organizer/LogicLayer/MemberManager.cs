@@ -27,6 +27,7 @@ using DataAccessLayerInterfaces;
 using System.Security.Cryptography;
 using DataObjects;
 using DataAccessLayer;
+using System.Data;
 
 namespace LogicLayer
 {
@@ -162,6 +163,7 @@ namespace LogicLayer
 
             return returnMember;
         }
+
 
         public List<Member> SearchMemberByFirstAndLastName(string firstName, string lastName)
         {
@@ -325,6 +327,70 @@ namespace LogicLayer
             }
 
             return member;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/04/03
+        /// 
+        /// Method obtains all events for member by member's ID and puts them into a single list of Calendar Events
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
+        public List<CalendarEvent> RetreiveMemberSchedule(int member_id)
+        {
+            List<CalendarEvent> events = null;
+
+            try
+            {
+                DataTable practices = _memberAccessor.SelectPracticesByMemberID(member_id);
+                DataTable games = _memberAccessor.SelectGamesByMemberID(member_id);
+                DataTable tournamentGames = _memberAccessor.SelectTournamentGamesByMemberID(member_id);
+
+                events = new List<CalendarEvent>();
+
+                // Loop through each table and add to event list
+                foreach (var practice in practices.AsEnumerable())
+                {
+                    CalendarEvent practiceEvent = new CalendarEvent();
+                    practiceEvent.Type = practice[0].ToString();
+                    practiceEvent.EventID = Convert.ToInt32(practice[1]);
+                    practiceEvent.Location = practice[2].ToString();
+                    practiceEvent.Date = Convert.ToDateTime(practice[3]);
+
+                    events.Add(practiceEvent);
+                }
+
+                foreach (var game in games.AsEnumerable())
+                {
+                    CalendarEvent gameEvent = new CalendarEvent();
+                    gameEvent.Type = game[0].ToString();
+                    gameEvent.EventID = Convert.ToInt32(game[1]);
+                    gameEvent.Location = game[2].ToString();
+                    gameEvent.Date = Convert.ToDateTime(game[3]);
+
+                    events.Add(gameEvent);
+                }
+
+                foreach (var tournamentGame in tournamentGames.AsEnumerable())
+                {
+                    CalendarEvent game = new CalendarEvent();
+                    game.Type = tournamentGame[0].ToString();
+                    game.EventID = Convert.ToInt32(tournamentGame[1]);
+                    game.Location = tournamentGame[2].ToString();
+                    game.Date = Convert.ToDateTime(tournamentGame[3]);
+
+                    events.Add(game);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error retrieving events", ex);
+            }
+
+            return events;
         }
     }
 }

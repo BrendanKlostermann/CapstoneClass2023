@@ -27,6 +27,9 @@ namespace DataAccessLayerFakes
     {
         List<Member> _members = null;
         DataTable _passwords = null;
+        DataTable _practices = null;
+        DataTable _games = null;
+        DataTable _tournamentGames = null;
         private List<string> passwordHashes = new List<string>();
 
         /// <summary>
@@ -90,6 +93,38 @@ namespace DataAccessLayerFakes
             _passwords.Rows.Add(10000, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
             _passwords.Rows.Add(10001, "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e");
             _passwords.Rows.Add(10002, "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e");
+
+            // Added By Jacob Lindauer. Need to create data fakes for schedule.
+            _practices = new DataTable();
+            _practices.Columns.Add("Type", typeof(string));
+            _practices.Columns.Add("Location", typeof(string));
+            _practices.Columns.Add("date_and_time", typeof(DateTime));
+
+            _practices.Rows.Add("Practice", "Basketball Court", new DateTime(2023, 03, 04));
+            _practices.Rows.Add("Practice", "YMCA", new DateTime(2023, 05, 12));
+            _practices.Rows.Add("Practice", "Public Court", new DateTime(2023, 04, 03));
+            _practices.Rows.Add("Practice", "The Gym", new DateTime(2023, 03, 14));
+
+            _games = new DataTable();
+            _games.Columns.Add("Type", typeof(string));
+            _games.Columns.Add("Location", typeof(string));
+            _games.Columns.Add("date_and_time", typeof(DateTime));
+
+            _games.Rows.Add("Game", "Basketball Court", new DateTime(2023, 02, 15));
+            _games.Rows.Add("Game", "YMCA", new DateTime(2023, 01, 12));
+            _games.Rows.Add("Game", "Public Court", new DateTime(2023, 08, 03));
+            _games.Rows.Add("Game", "The Gym", new DateTime(2023, 12, 14));
+
+            _tournamentGames = new DataTable();
+            _tournamentGames.Columns.Add("Type", typeof(string));
+            _tournamentGames.Columns.Add("Location", typeof(string));
+            _tournamentGames.Columns.Add("date_and_time", typeof(DateTime));
+
+            _tournamentGames.Rows.Add("Tournament", "Basketball Court", new DateTime(2023, 01, 12));
+            _tournamentGames.Rows.Add("Tournament", "YMCA", new DateTime(2023, 08, 03));
+            _tournamentGames.Rows.Add("Tournament", "The Gym", new DateTime(2023, 12, 14));
+
+
         }
 
 
@@ -281,7 +316,7 @@ namespace DataAccessLayerFakes
             return result;
         }
 
-                /// <summary>
+        /// <summary>
         /// Anthoney Hale
         /// Created: 2023/02/10
         /// Fakes for selecting a member
@@ -342,6 +377,36 @@ namespace DataAccessLayerFakes
         public List<Member> SelectAllMembersByTeamID(int memberID)
         {
             throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/03
+        /// 
+        /// Returns practice list
+        public DataTable SelectPracticesByMemberID(int member_id)
+        {
+            return _practices;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/03
+        /// 
+        /// Returns Game list
+        public DataTable SelectGamesByMemberID(int member_id)
+        {
+            return _games;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/03
+        /// 
+        /// Returns Tournament Game list
+        public DataTable SelectTournamentGamesByMemberID(int member_id)
+        {
+            return _tournamentGames;
         }
     }
 }

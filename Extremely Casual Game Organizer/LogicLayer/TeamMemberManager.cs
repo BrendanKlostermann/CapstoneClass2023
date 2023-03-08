@@ -39,12 +39,6 @@ namespace LogicLayer
             _teamAccessor = ta;
         }
 
-        ITeamMemberAccessor _teamMemberAccessor = null;
-        public TeamMemberManager(ITeamMemberAccessor tma)
-        {
-            _teamMemberAccessor = tma;
-        }
-
 
         /// <summary>
         /// Alex Korte
@@ -123,22 +117,6 @@ namespace LogicLayer
             }
             return _tempMembers;//sending the filtered list of only starters or benched.
 		}
-        public int AddTeamMember(int team_id, int member_id, string description)
-        {
-            int result = 0;
-
-            try
-            {
-                result = _teamMemberAccessor.InsertTeamMember(team_id, member_id, description);
-            }
-            catch (Exception ex)
-            {
-
-                throw new ApplicationException("Team Member Addition Failed", ex);
-            }
-
-            return result;
-        }
 
         public List<Member> GetAListOfAllMembersByTeamID(int teamID)
         {

@@ -58,7 +58,6 @@
     <Compile Include="GameRosterManagerTests.cs" />
     <Compile Include="TeamManagerTests.cs" />
     <Compile Include="GameManagerTests.cs" />
-    <Compile Include="TeamRolesManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -16,8 +16,13 @@
 /// Added a LoadPage method to take in a page to load an current page. Also added a pagecontrol object to get current and previous page.
 /// That way when you load the next page you can go back to the previous page if you choose to set a Go Back button.
 /// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/03/04
+/// 
+/// Added a get and set Member methods so that we can obtain roles and manage access by currently signed in Member
 /// 
 /// </summary>
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -113,6 +118,53 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 MessageBox.Show("Failed loading next page" + "\n\n" + "Page does not exist");
             }
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Returns currently signed in member that is set on the page window properties.
+        /// </summary>
+        /// <returns></returns>
+        public Member GetSignedInMember()
+        {
+            Member member = null;
+
+            try
+            {
+                member = _mainWindow.CurrentMember;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+            return member;
+        }
+
+        public bool SetSignedInMember(Member member)
+        {
+            bool result = false;
+
+            try
+            {
+                _mainWindow.CurrentMember = member;
+
+                if (_mainWindow.CurrentMember != null)
+                {
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Created By: Jacob Linduaer
         /// Date: 2023/02/28

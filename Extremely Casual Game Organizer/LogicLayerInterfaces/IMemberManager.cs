@@ -57,5 +57,11 @@ namespace LogicLayerInterfaces
 
         Member LoginMember(string email, string password);
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        List<CalendarEvent> RetreiveMemberSchedule(int member_id);
+
     }
 }

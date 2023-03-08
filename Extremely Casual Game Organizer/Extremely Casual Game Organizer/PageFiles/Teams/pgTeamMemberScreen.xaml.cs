@@ -1,4 +1,5 @@
 ﻿using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles;
 using LogicLayer;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,8 @@ namespace Extremely_Casual_Game_Organizer
         List<TeamMember> _teamMembers = new List<TeamMember>();
         List<Member> _members = new List<Member>();
         List<Member> _starterOrBenchers = new List<Member>();
-
-        TeamMemberManager _teamMemberManager = null;
-        MemberManager _membersM = null;
+        PageControl _pageControl = null;
+        Button _backButton = null;
 
         MasterManager _masterManager = null;
         bool toggleBench = true; //true = starter false = benched
@@ -39,9 +39,8 @@ namespace Extremely_Casual_Game_Organizer
         public pgTeamMemberScreen(MasterManager masterManager)
         {
             _masterManager = masterManager;
+            _pageControl = new PageControl();
             InitializeComponent();
-            _teamMemberManager = new TeamMemberManager();
-            _membersM = new MemberManager();
         }
 
         /// <summary>
@@ -57,13 +56,13 @@ namespace Extremely_Casual_Game_Organizer
         /// Updated: yyyy/mm/dd 
         /// example: Fixed a problem when user inputs bad data
         /// </remarks>
-        public pgTeamMemberScreen(int teamID)
+        public pgTeamMemberScreen(int teamID, MasterManager masterManager)
         {
             _teamID = teamID;
-            _teamMemberManager = new TeamMemberManager();
-            _membersM = new MemberManager();
-            _members = _membersM.GetAListOfMembersByTeamID(_teamID);
-            _starterOrBenchers = _teamMemberManager.SortIntoStarters(_members, _teamID, toggleBench);
+            _masterManager = masterManager;
+            _members = _masterManager.MemberManager.GetAListOfMembersByTeamID(_teamID);
+            _starterOrBenchers = _masterManager.TeamMemberManager.SortIntoStarters(_members, _teamID, toggleBench);
+            _pageControl = new PageControl();
             InitializeComponent();
             DisplayTeamMembers();
 
@@ -901,6 +900,23 @@ namespace Extremely_Casual_Game_Organizer
             {
                 MessageBox.Show(up.Message + "\n\n" + up.InnerException.Message);
             }
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Page previousPage = _pageControl.GetPreviousPage();
+            _pageControl.LoadPage(previousPage);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            _backButton = _pageControl.ShowGoBack();
+            _backButton.Click += BackButton_Click;
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _backButton.Click -= BackButton_Click;
         }
     }
 }

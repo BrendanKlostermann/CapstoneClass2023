@@ -48,7 +48,6 @@
     <Compile Include="ISportManager.cs" />
     <Compile Include="ITeamManager.cs" />
     <Compile Include="ITeamMemberManager.cs" />
-    <Compile Include="ITeamRolesManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,11 @@ SP for acquiring game details by game_id
 
 Modification Histroy: 
 
+		updated by Gideon Trevor
+		Date: 02/28/2023
+		      adding a way to return the Score since 
+		      it is part of the game table and needed in the details
+
 
 */
 print '' print'*** creating sp_select_game_details_by_game_id ***'
@@ -29,6 +34,7 @@ AS
 			, [Venue].[venue_name]
 			, [Game].[date_and_time]
 			, [Sport].[description]
+			, [Game].[Score]
 			FROM [Game]
 			JOIN [Venue] ON [Venue].[venue_id] = [Game].[venue_id]
 			JOIN [GameRoster] ON [GameRoster].[game_id] = [Game].[game_id]

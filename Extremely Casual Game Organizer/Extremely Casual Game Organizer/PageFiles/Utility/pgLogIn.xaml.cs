@@ -2,6 +2,11 @@
 /// Anthoney Hale
 /// Created: 2023/02/10
 /// page for login
+/// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/03/04
+/// 
+/// Added the Page Control class and Master Manager class funcitons.
 /// </summary>
 using LogicLayer;
 using System;
@@ -19,6 +24,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -29,9 +35,14 @@ namespace Extremely_Casual_Game_Organizer
     public partial class pgLogIn : Page
     {
         private Member _member = null;
-        public pgLogIn()
+        private PageControl _pageControl;
+        private MasterManager _masterManager = new MasterManager();
+        public pgLogIn(MasterManager masterManager)
         {
             InitializeComponent();
+
+            _pageControl = new PageControl();
+            _masterManager = masterManager;
         }
 
         /// <summary>
@@ -85,6 +96,11 @@ namespace Extremely_Casual_Game_Organizer
         /// Anthoney Hale
         /// Created: 2023/02/10
         /// button for logging in
+        /// 
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Added a step to set the currently signed in member for the main window properties
         /// </summary>
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
@@ -116,14 +132,15 @@ namespace Extremely_Casual_Game_Organizer
                 return;
             }
 
-            var memberManager = new MemberManager();
-
 
             try
             {
-                _member = memberManager.LoginMember(email, password);
+                _member = _masterManager.MemberManager.LoginMember(email, password);
                 MessageBox.Show("Hello, " + _member.FirstName + "\n\n" +
                     "You are logged in");
+                
+                // Need to set who the current signed in member is
+                _pageControl.SetSignedInMember(_member);
 
             }
             catch (Exception ex)

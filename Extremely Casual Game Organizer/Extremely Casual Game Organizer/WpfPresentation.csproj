@@ -58,6 +58,9 @@
     <Compile Include="PageFiles\Administration\pgAdminResetPassword.xaml.cs">
       <DependentUpon>pgAdminResetPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\MemberPages\pgMemberSchedule.xaml.cs">
+      <DependentUpon>pgMemberSchedule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Teams\Utility\PopUpOptions.xaml.cs">
       <DependentUpon>PopUpOptions.xaml</DependentUpon>
     </Compile>
@@ -66,20 +69,17 @@
     </Compile>
     <Compile Include="PageFiles\Leagues\pgViewLeagueList.xaml.cs">
       <DependentUpon>pgViewLeagueList.xaml</DependentUpon>
-    </Compile>	
-    <Compile Include="pgLogIn.xaml.cs">
+    </Compile>
+    <Compile Include="PageFiles\Utility\pgLogIn.xaml.cs">
       <DependentUpon>pgLogIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\Member\pgUserDetails.xaml.cs">
+    <Compile Include="PageFiles\MemberPages\pgUserDetails.xaml.cs">
       <DependentUpon>pgUserDetails.xaml</DependentUpon>
     </Compile>
     <Page Include="PageFiles\Administration\pgAdminResetPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="PageFiles\Teams\pgTeamList.xaml.cs">
-      <DependentUpon>pgTeamList.xaml</DependentUpon>
-    </Compile>
     <Page Include="PageFiles\Administration\pgConfirmDeactivate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +106,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PageFiles\MemberPages\pgMemberSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Styles\CalendarResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFiles\Teams\Utility\PopUpOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,12 +125,12 @@
     <Page Include="PageFiles\Leagues\pgViewLeagueList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>	
-    <Page Include="pgLogIn.xaml">
+    </Page>
+    <Page Include="PageFiles\Utility\pgLogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\Member\pgUserDetails.xaml">
+    <Page Include="PageFiles\MemberPages\pgUserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\Member\pgResetPassword.xaml">
+    <Page Include="PageFiles\Utility\pgResetPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,17 +154,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\Teams\pgTeamList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageFiles\Utility\PageControl.cs" />
     <Compile Include="PageFiles\Games\pgGameList.xaml.cs">
       <DependentUpon>pgGameList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\Member\pgResetPassword.xaml.cs">
+    <Compile Include="PageFiles\Utility\pgResetPassword.xaml.cs">
       <DependentUpon>pgResetPassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Games\pgViewGameDetails.xaml.cs">
