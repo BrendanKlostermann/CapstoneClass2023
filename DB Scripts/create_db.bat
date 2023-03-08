@@ -18,9 +18,42 @@ sqlcmd -S localhost -E -i sp_select_league_by_league_id_and_member_id.sql
 sqlcmd -S localhost -E -i sp_select_messages_by_user_id.sql
 sqlcmd -S localhost -E -i sp_select_sports.sql
 sqlcmd -S localhost -E -i sp_select_game_list.sql
+sqlcmd -S localhost -E -i sp_select_team_members_by_member_id_and_team_id.sql
+sqlcmd -S localhost -E -i sp_selecting_all_players_on_a_team_by_team_id.sql
+sqlcmd -S localhost -E -i sp_select_all_sports.sql
+sqlcmd -S localhost -E -i sp_add_league.sql
+sqlcmd -S localhost -E -i sp_delete_league.sql
+sqlcmd -S localhost -E -i sp_add_team_to_league.sql
+sqlcmd -S localhost -E -i sp_select_members_by_name.sql
+sqlcmd -S localhost -E -i sp_select_people_I_texted_by_user_id.sql
+sqlcmd -S localhost -E -i sp_user_create_team.sql
+sqlcmd -S localhost -E -i sp_authenticate_member.sql
+sqlcmd -S localhost -E -i sp_update_league.sql
+sqlcmd -S localhost -E -i sp_user_create_account.sql
 sqlcmd -S localhost -E -i sp_select_game_details_by_game_id.sql
-sqlcmd -S localhost -E -i FakeDataInsert.sql
+sqlcmd -S localhost -E -i sp_reset_password_to_default.sql
+sqlcmd -S localhost -E -i sp_insert_league_registration_by_league_id_by_activity.sql
+sqlcmd -S localhost -E -i sp_select_leagues_by_sport_id.sql
+sqlcmd -S localhost -E -i sp_select_member_by_id.sql
+sqlcmd -S localhost -E -i sp_select_team_by_member_id.sql
+sqlcmd -S localhost -E -i sp_update_user_bio.sql
+sqlcmd -S localhost -E -i sp_update_user_profile_picture.sql
+sqlcmd -S localhost -E -i sp_select_league_list_by_team_id.sql
+sqlcmd -S localhost -E -i sp_select_game_list_by_team_id.sql
+sqlcmd -S localhost -E -i sp_select_team_by_team_name.sql
+sqlcmd -S localhost -E -i sp_select_sport_description_by_sportID.sql
+sqlcmd -S localhost -E -i sp_insert_user_account.sql
+sqlcmd -S localhost -E -i sp_insert_member_into_teamMember_by_teamID_and_memberID.sql
+sqlcmd -S localhost -E -i sp_remove_a_player_from_team_by_member_id.sql
 
+sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
+
+
+sqlcmd -S localhost -E -i fake_data.sql
+
+
+
+sqlcmd -S localhost -E -i sp_select_all_teams.sql
 
 
 rem server is localhost

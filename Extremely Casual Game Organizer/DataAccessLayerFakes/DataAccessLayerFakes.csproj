@@ -46,6 +46,7 @@
     <Compile Include="GameRosterAccessorFake.cs" />
     <Compile Include="MemberAccessorFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SportAccessorFakes.cs" />
     <Compile Include="TeamAccessorFake.cs" />
     <Compile Include="TeamMemberAccessorFake.cs" />
   </ItemGroup>

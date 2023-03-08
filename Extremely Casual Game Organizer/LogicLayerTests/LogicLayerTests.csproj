@@ -51,9 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LeagueManagerTest.cs" />
+    <Compile Include="LeagueManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemberManagerTests.cs" />
     <Compile Include="GameRosterManagerTests.cs" />
+    <Compile Include="SportManagerTests.cs" />
     <Compile Include="TeamManagerTests.cs" />
     <Compile Include="TeamMemberManagerTests.cs" />
     <Compile Include="GameManagerTests.cs" />

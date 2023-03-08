@@ -14,7 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles;
 using LogicLayer;
+using static DataObjects.League;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -38,6 +40,8 @@ namespace Extremely_Casual_Game_Organizer
             {
                 _leagues = new List<League>();
                 _leagues = _leagueManager.RetrieveListOfLeagues();
+
+
 
                 // Create Gender List
                 List<string> genders = new List<string>();
@@ -82,6 +86,29 @@ namespace Extremely_Casual_Game_Organizer
         {
             _leagues = null;
             datLeagues.ItemsSource = null;
+        }
+
+        /// <summary>
+        /// Elijah
+        /// Created: 2023/02/28
+        /// 
+        /// When a item on the datLeagues data grid is selected, the 
+        /// selected item becomes the current League object. This is
+        /// used later when the data from this league is populated 
+        /// in the pgAddEditLeague page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        // Made by Elijah Morgan
+        private void datLeagues_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var league = (League)datLeagues.SelectedItem;
+
+            pgAddEditLeague selectedLeague = new pgAddEditLeague(league);
+
+            PageControl pageController = new PageControl();
+            pageController.LoadPage(selectedLeague);
+            var editWindow = new pgAddEditLeague(league); // use a constructor that takes a league argument
         }
     }
 }

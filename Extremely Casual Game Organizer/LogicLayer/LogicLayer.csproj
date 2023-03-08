@@ -46,6 +46,7 @@
     <Compile Include="GameRosterManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemberManager.cs" />
+    <Compile Include="SportManager.cs" />
     <Compile Include="TeamManager.cs" />
     <Compile Include="TeamMemberManager.cs" />
   </ItemGroup>

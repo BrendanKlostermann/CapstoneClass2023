@@ -1,4 +1,17 @@
-﻿using System;
+﻿/// <summary>
+/// Elijah Morgan
+/// Created: 2023/02/28
+/// 
+/// A data object representing a League of sports
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+/// 
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +27,9 @@ namespace DataObjects
         public bool Active { get; set; }
         public int MemberID { get; set; }
         public bool? Gender { get; set; }
-        public string Description { get; set; }
+        public string LeagueDescription { get; set; }
         public string Name { get; set; }
-        public int Max_Num_Of_Teams { get; set; }
+        public int MaxNumberOfTeams { get; set; }
 
 
         public League(int league_id, int sport_id, decimal league_dues, bool active, int member_id, bool gender, string description, string name, int max)
@@ -27,12 +40,19 @@ namespace DataObjects
             Active = active;
             MemberID = member_id;
             Gender = gender;
-            Description = description;
-            Max_Num_Of_Teams = max;
+            LeagueDescription = description;
+            MaxNumberOfTeams = max;
         }
         public League()
         {
 
         }
+
+        public class LeagueVM : League
+        {
+            public string SportName { get; set; }
+            public string genderAsText { get; set; }
+        }
+
     } 
 }

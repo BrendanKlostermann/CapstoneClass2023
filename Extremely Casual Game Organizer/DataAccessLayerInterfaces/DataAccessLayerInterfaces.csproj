@@ -46,6 +46,7 @@
     <Compile Include="IMemberAccessor.cs" />
     <Compile Include="IDBConnection.cs" />
     <Compile Include="IGameAccessor.cs" />
+    <Compile Include="ISportAccessor.cs" />
     <Compile Include="ITeamAccessor.cs" />
     <Compile Include="ITeamMemberAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
