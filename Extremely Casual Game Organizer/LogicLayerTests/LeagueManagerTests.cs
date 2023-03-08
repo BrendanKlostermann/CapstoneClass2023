@@ -48,5 +48,32 @@ namespace LogicLayerTests
             int actualResult = _leagues.Count;
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/26/02
+        /// </summary>
+        [TestMethod]
+        public void TestRetrievingListOfLeaguesByTeamID()
+        {
+            const int source = 1000;
+            const int expectedResult = 2;
+            int actualResult = 0;
+
+            actualResult = _leagueManager.RetrieveLeagueListByTeamID(source).Count;
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestRetrievingListOfLeaguesByTeamIDWithInvalidTeamID()
+        {
+            const int source = 0;
+            const int expectedResult = 2;
+            int actualResult = 0;
+
+            actualResult = _leagueManager.RetrieveLeagueListByTeamID(source).Count;
+        }
     }
 }

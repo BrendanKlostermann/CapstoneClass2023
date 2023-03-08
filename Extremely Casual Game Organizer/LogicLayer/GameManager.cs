@@ -36,6 +36,39 @@ namespace LogicLayer
         {
             _gameAccessor = ga;
         }
+
+        /// <summary>
+        ///  Created By: Jacob Lindauer
+        ///  Date: 2023/25/02
+        ///  
+        /// Method retrieves game list by TeamID from data accessor and returns the list if teamID is not valid.
+        /// </summary>
+        /// <returns></returns>
+        public DataTable RetrieveTeamGameList(int team_id)
+        {
+            DataTable gameList = null;
+
+            try
+            {
+                gameList = _gameAccessor.SelectGameListByTeamID(team_id);
+
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed loading game list", ex);
+            }
+
+            return gameList;
+        }
+
+        /// <summary>
+        ///  Created By: Jacob Lindauer
+        ///  Date: 2023/25/02
+        ///  
+        /// Method retrieves game list from data accessor and returns the list if data is valid
+        /// </summary>
+        /// <returns></returns>
         public DataTable ViewAllGames()
         {
             DataTable gameList = null;
@@ -59,6 +92,13 @@ namespace LogicLayer
             return gameList;
         }
 
+        /// <summary>
+        ///  Created By: Jacob Lindauer
+        ///  Date: 2023/25/02
+        ///  
+        /// Method retrieves game data from data accessor and returns the game details as a data row.
+        /// </summary>
+        /// <returns></returns>
         public DataRow ViewGameDetails(int gameid)
         {
             DataRow returnRow = null;

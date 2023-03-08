@@ -36,5 +36,6 @@ namespace DataAccessLayerInterfaces
         List<LeagueGridVM> SelectLeaguesForGrid();
 
         int RemoveATeamFromALeague(int teamId, int leagueId);
+        List<League> SelectLeaguesByTeamID(int team_id);
     }
 }

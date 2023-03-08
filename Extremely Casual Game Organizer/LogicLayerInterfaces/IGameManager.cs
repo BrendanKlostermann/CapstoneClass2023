@@ -25,5 +25,7 @@ namespace LogicLayerInterfaces
         DataTable ViewAllGames();
 
         DataRow ViewGameDetails(int gameid);
+        DataTable RetrieveTeamGameList(int team_id);
+
     }
 }

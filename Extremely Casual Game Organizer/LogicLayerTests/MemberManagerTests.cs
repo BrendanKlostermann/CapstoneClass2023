@@ -17,6 +17,7 @@ using LogicLayerInterfaces;
 using DataAccessLayerFakes;
 using DataAccessLayerInterfaces;
 using LogicLayer;
+using System.Collections.Generic;
 
 namespace LogicLayerTests
 {
@@ -24,6 +25,7 @@ namespace LogicLayerTests
     public class MemberManagerTests
     {
         IMemberManager _memberManager = null;
+        
 
         [TestInitialize]
         public void TestSetup()
@@ -159,6 +161,153 @@ namespace LogicLayerTests
             var rowsAffected = _memberManager.ResetPasswordToDefault(memberID);
 
             // Assert - nothing to do, exception checking
+        }
+
+
+
+        /// <TestMemberManager>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// </summary>
+        /// Test to check if manager class methods work
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        [TestMethod]
+        public void TestGettingListOfAllMembersByMemberID()
+        {
+            List<int> _tempMemberID = new List<int>() { 10000, 10002 };
+
+            List<Member> _tempMembers = _memberManager.RetrieveMembersByMemberID(_tempMemberID);
+            int actual = 2;
+
+            Assert.AreEqual(_tempMembers.Count, actual);
+		}
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for empty string
+        /// </summary>
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TestHashSHA256ThrowsExceptionForEmptyString()
+        {
+            // Arrange
+            const string source = "";
+
+            // Act
+            _memberManager.HashSha256(source);
+
+            // Assert
+
+        }
+
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for correct passwordHash
+        /// </summary>
+
+        [TestMethod]
+        public void TestHashSHA256ReturnsCorrectHash()
+        {
+            // Arrange
+            const string source = "newuser";
+            const string expectedResult =
+                "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e";
+            string actualResult = "";
+
+            // Act
+            actualResult = _memberManager.HashSha256(source);
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test with correct info 
+        /// </summary>
+
+        [TestMethod]
+        public void TestLoginUserPassesWithCorrectEmailAndPassword()
+        {
+            // Arrange
+
+            const string email = "test1@gmail.com";
+            const string password = "newuser";
+            int expectedResult = 999999;
+            int actualResult = 0;
+
+            // Act
+
+            Member testUser = _memberManager.LoginMember(email, password);
+            actualResult = testUser.MemberID;
+
+            // Assert
+
+            Assert.AreEqual(expectedResult, actualResult);
+
+        }
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for bad email
+        /// </summary>
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestLoginUserFailsWithBadEmail()
+        {
+            // Arrange
+
+            const string email = "bad-test@gmail.com";
+            const string password = "newuser";
+
+            // Act
+
+            _memberManager.LoginMember(email, password);
+
+        }
+        /// <summary>
+        /// Anthoney Hale
+        /// Created: 2023/02/10
+        /// test for bad password
+        /// </summary>
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestLoginUserFailsWithBadPassword()
+        {
+            // Arrange
+
+            const string email = "test1@gmail.com";
+            const string password = "bad-newuser";
+
+            // Act
+
+            _memberManager.LoginMember(email, password);
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Test retreiving member schedule events
+        /// </summary>
+        [TestMethod]
+        public void TestRetrievingMemberSchedule()
+        {
+            const int source = 100000;
+            const int expectedResult = 11;
+            int actualResult = 0;
+
+            actualResult = _memberManager.RetreiveMemberSchedule(source).Count;
+
+            Assert.AreEqual(expectedResult, actualResult);
         }
     }
 }

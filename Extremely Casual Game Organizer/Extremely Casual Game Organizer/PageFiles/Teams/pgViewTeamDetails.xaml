@@ -1,0 +1,137 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.PageFiles.pgViewTeamDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer.PageFiles"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgViewTeamDetails" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!-- Team Details Grid-->
+        <Grid x:Name="grdTeamDetails" Grid.Row="0" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="lblTeamName" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="25">Team Name</TextBlock>
+            <Label x:Name="lblTeamSport" Grid.Column="0" Grid.Row="1" FontWeight="Bold"  HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="12">Team Sport:</Label>
+            <TextBox x:Name="txtTeamSport" Grid.Column="1" Grid.Row="1" BorderBrush="Transparent" IsReadOnly="True" Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">Sport</TextBox>
+            <Label x:Name="lblTeamGender" Grid.Column="0" Grid.Row="2" FontWeight="Bold"  HorizontalContentAlignment="Right" VerticalContentAlignment="Center" FontSize="12">Gender:</Label>
+            <TextBox x:Name="txtTeamGender" Grid.Column="1" Grid.Row="2" BorderBrush="Transparent" IsReadOnly="True" Background="Transparent" HorizontalContentAlignment="Left" VerticalContentAlignment="Center">Team Gender</TextBox>
+            <Label x:Name="lblDescription" Grid.Column="0" Grid.Row="3" FontWeight="Bold"  HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="12">About Us:</Label>
+            <Label x:Name="txtDescLabel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4"  FontSize="10" Margin="10" BorderBrush="Black" BorderThickness="2">
+                <TextBlock x:Name="txtDescription" TextWrapping="Wrap" >Description</TextBlock>
+            </Label>
+
+        </Grid>
+        <!-- end Team Details Grid -->
+
+        <!-- Team Laague Details Grid-->
+        <Grid x:Name="grdTeamLeagues" Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="txtLeagueInfo" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15">Current Leagues</TextBlock>
+            <DataGrid x:Name="datLeagueList" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" HeadersVisibility="None" BorderBrush="Transparent" MouseDoubleClick="datLeagueList_MouseDoubleClick">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" >
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Margin" Value="0 10 0 10" />
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="BorderBrush" Value="Black" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+            <Label x:Name="lblLeagueEmptyGrid" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18">(Team Is Not in Any Leagues)</Label>
+        </Grid>
+        <!-- End Team League Details Grid-->
+
+        <!-- Upcoming Games Grid -->
+        <Grid x:Name="grnUpcomingGames" Grid.Row="0" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="txtUpcomingGames" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15">Upcoming Games</TextBlock>
+            <DataGrid x:Name="datUpcomingGamesList" Grid.Row="1" Grid.ColumnSpan="2" Margin="5" GridLinesVisibility="None" ColumnWidth="*" BorderBrush="Transparent" Background="Transparent" HeadersVisibility="None" MouseDoubleClick="datUpcomingGamesList_MouseDoubleClick">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" >
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Margin" Value="0 10 0 10" />
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="BorderBrush" Value="Black" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+            <Label x:Name="lblUpcomingEmptyGrid" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18">(No Upcoming Games)</Label>
+        </Grid>
+        <!-- End Upcoming Games Grid -->
+
+        <!-- Previous Games Grid -->
+        <Grid x:Name="grdPreviousGames" Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="txtPreviousGames" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15">Previous Games</TextBlock>
+            <DataGrid x:Name="datPreviousGamesList" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" Background="Transparent" HeadersVisibility="None" BorderBrush="Transparent" MouseDoubleClick="datPreviousGamesList_MouseDoubleClick">
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow" >
+                        <Setter Property="Height" Value="40" />
+                        <Setter Property="Margin" Value="0 10 0 10" />
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="2" />
+                        <Setter Property="BorderBrush" Value="Black" />
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.CellStyle>
+            </DataGrid>
+            <Label x:Name="lblPrevEmptyGrid" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18">(No Previous Games)</Label>
+
+        </Grid>
+        <!-- End Previous Games Grid -->
+    </Grid>
+</Page>

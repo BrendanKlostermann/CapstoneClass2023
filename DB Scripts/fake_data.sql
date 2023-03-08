@@ -1564,25 +1564,52 @@ INSERT INTO [dbo].[TeamMember] ([team_id], [description], [starter], [member_id]
 
 
 -- Wariors
-(1009, N'Small Forward', 1, 100024),
-(1009, N'Power Forward', 1, 100025),
-(1009, N'Point Guard', 1, 100017),
-(1009, N'Shooting Guard', 1, 100026),
-(1009, N'Center', 1, 100027),
+(1001, N'Small Forward', 1, 100024),
+(1001, N'Power Forward', 1, 100025),
+(1001, N'Point Guard', 1, 100017),
+(1001, N'Shooting Guard', 1, 100026),
+(1001, N'Center', 1, 100027),
 
 -- 76ers
-(1030, N'Small Forward', 1, 100028),
-(1030, N'Power Forward', 1, 100030),
-(1030, N'Point Guard', 1, 100031),
-(1030, N'Shooting Guard', 1, 100032),
-(1030, N'Center', 1, 100033),
+(1002, N'Small Forward', 1, 100028),
+(1002, N'Power Forward', 1, 100030),
+(1002, N'Point Guard', 1, 100031),
+(1002, N'Shooting Guard', 1, 100032),
+(1002, N'Center', 1, 100033),
 
 -- Suns
-(1011, N'Small Forward', 1, 100002),
-(1011, N'Power Forward', 1, 100034),
-(1011, N'Point Guard', 1, 100035),
-(1011, N'Shooting Guard', 1, 100036),
-(1011, N'Center', 1, 100037)
+(1003, N'Small Forward', 1, 100002),
+(1003, N'Power Forward', 1, 100034),
+(1003, N'Point Guard', 1, 100035),
+(1003, N'Shooting Guard', 1, 100036),
+(1003, N'Center', 1, 100037),
+
+(1004, N'Small Forward', 1, 100011),
+(1005, N'Small Forward', 1, 100011),
+(1006, N'Small Forward', 1, 100011),
+(1007, N'Small Forward', 1, 100011),
+(1008, N'Small Forward', 1, 100011),
+(1009, N'Small Forward', 1, 100013),
+(1010, N'Small Forward', 1, 100011),
+(1011, N'Small Forward', 1, 100012),
+(1012, N'Small Forward', 1, 100011),
+(1013, N'Small Forward', 1, 100014),
+(1014, N'Small Forward', 1, 100011),
+(1015, N'Small Forward', 1, 100011),
+(1016, N'Small Forward', 1, 100011),
+(1017, N'Small Forward', 1, 100017),
+(1018, N'Small Forward', 1, 100011),
+(1019, N'Small Forward', 1, 100011),
+(1020, N'Small Forward', 1, 100009),
+(1021, N'Small Forward', 1, 100011),
+(1025, N'Small Forward', 1, 100011),
+(1026, N'Small Forward', 1, 100011),
+(1027, N'Small Forward', 1, 100011),
+(1028, N'Small Forward', 1, 100011),
+(1029, N'Small Forward', 1, 100011),
+(1030, N'Small Forward', 1, 100011),
+(1031, N'Small Forward', 1, 100011),
+(1032, N'Small Forward', 1, 100011)
 GO
 
 print "" print "*** Inserting into Dues"

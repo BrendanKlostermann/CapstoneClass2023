@@ -48,7 +48,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamAccessorFake.cs" />
     <Compile Include="TeamMemberAccessorFake.cs" />
-    <Compile Include="TeamRoleAccessorFakes.cs" />
     <Compile Include="TournamentAccessorFakes.cs" />
   </ItemGroup>
   <ItemGroup>

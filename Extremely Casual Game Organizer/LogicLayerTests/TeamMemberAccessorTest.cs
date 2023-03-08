@@ -20,12 +20,16 @@ namespace LogicLayerTests
     [TestClass]
     public class TeamMemberAccessorTest
     {
-        private TeamMemberManager _tmm = null;
+        private TeamMemberManager _teamMemberManager = null;
+        private MemberManager _memberManager = null;
+
+
 
         [TestInitialize]
         public void TestSetup()
         {
-            _tmm = new TeamMemberManager(new TeamMemberAccessorFake());
+            _teamMemberManager = new TeamMemberManager(new TeamAccessorFake());
+            _memberManager = new MemberManager(new MemberAccessorFake());
 
         }
 
@@ -34,7 +38,7 @@ namespace LogicLayerTests
         {
             var expected = 2;
             var team_id = 1000;
-            var actual = _tmm.GetAListOfAllMembersByTeamID(team_id);
+            var actual = _memberManager.GetAListOfMembersByTeamID(team_id);
             Assert.AreEqual(expected, actual.Count);
         }
 
@@ -45,7 +49,7 @@ namespace LogicLayerTests
             var expected = 1;
             var team_id = 1000;
             var member_id = 100000;
-            var actual = _tmm.RemoveAPlayerFromATeamByTeamIDAndMemberID(member_id, team_id);
+            var actual = _teamMemberManager.RemoveAPlayerFromATeamByTeamIDAndMemberID(member_id, team_id);
             Assert.AreEqual(expected, actual);  
         }
 
@@ -56,7 +60,7 @@ namespace LogicLayerTests
             var expected = 1;
             var team_id = 10000;//one extra 0
             var member_id = 100000;
-            var actual = _tmm.RemoveAPlayerFromATeamByTeamIDAndMemberID(member_id, team_id);
+            var actual = _teamMemberManager.RemoveAPlayerFromATeamByTeamIDAndMemberID(member_id, team_id);
             Assert.AreEqual(expected, actual);
         }
 
@@ -66,7 +70,18 @@ namespace LogicLayerTests
         {
             var expected = 1;
             var team_id = 0;// 0
-            var actual = _tmm.GetAListOfAllMembersByTeamID(team_id);
+            var actual = _memberManager.GetAListOfMembersByTeamID(team_id);
+        }
+
+        [TestMethod]
+        public void DeleteAMemberFromATeamByMemberIdAndTeamID()
+        {
+            int expected = 1;
+            int teamID = 1000;
+            int memberID = 10001;
+            int actual = _teamMemberManager.RemoveAPlayerFromATeamByTeamIDAndMemberID(teamID, memberID);
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }

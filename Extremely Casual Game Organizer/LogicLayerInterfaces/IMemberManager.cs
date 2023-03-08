@@ -10,6 +10,7 @@
 /// Updated: 2023/02/15
 /// 
 /// Added Edit MemberPassword and HashSha256 Interface Methods.
+/// Added LoginMember - Toney Hale
 /// </remarks>
 
 ﻿using System;
@@ -38,5 +39,29 @@ namespace LogicLayerInterfaces
         List<Member> SearchMemberByFirstName(string firstName);
         List<Member> SearchMemberByFirstAndLastName(string fistName, string lastName);
         bool ResetPasswordToDefault(int memberID);
+
+
+
+        /// <TeamObject>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// </summary>
+        /// Method to get a list of members by member ID (used to get coaches)
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        List<Member> RetrieveMembersByMemberID(List<int> memberID);
+        List<Member> GetAListOfMembersByTeamID(int teamID);
+
+        Member LoginMember(string email, string password);
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        List<CalendarEvent> RetreiveMemberSchedule(int member_id);
+
     }
 }

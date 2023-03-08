@@ -8,6 +8,7 @@ using DataAccessLayerInterfaces;
 using DataAccessLayerFakes;
 using DataObjects;
 using LogicLayerInterfaces;
+using System.Data;
 
 namespace LogicLayer
 {
@@ -23,6 +24,41 @@ namespace LogicLayer
         {
             _teamAccessor = ta;
         }
+
+        /// <TeamManager Getting list of all teams>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// </summary>
+        /// This method will get us all teams to display
+        /// 
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public List<Team> RetrieveAllTeams()
+        {
+            List<Team> _teams = null;
+            try
+            {
+                _teamAccessor = new TeamAccessor();
+                _teams = _teamAccessor.SelectAllTeams();
+                return _teams;
+            }catch(ApplicationException up)
+            {
+                throw new ApplicationException("No teams in the System", up);
+            }
+        }
+
+        /// <summary>
+        /// Created by: Jacob Lindauer
+        /// Date 2023/20/02
+        /// 
+        /// Method to retreive team object from data accessor.
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        /// 
+
         public Team RetrieveTeamByTeamID(int team_id)
         {
             Team selectedTeam = null;

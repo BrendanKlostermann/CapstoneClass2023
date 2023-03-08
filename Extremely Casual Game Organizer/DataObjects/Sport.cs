@@ -22,7 +22,6 @@ namespace DataObjects
     {
         public int SportId { get; set; }
         public string Description { get; set; }
-		public string SportDescription { get; set; }//will need to come back to this
 
         public Sport()
         {

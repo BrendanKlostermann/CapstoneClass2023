@@ -148,6 +148,35 @@ namespace LogicLayer
         }
 
         /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/26/02
+        /// 
+        /// Method is going to get a list of league objects from LeagueAccessor based on TeamID provided
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/07/03
+        /// 
+        /// Removed the exception catching for null league list. Some teams will not be in any leagues when viewing the team details page.
+        /// <returns></returns>
+        public List<League> RetrieveLeagueListByTeamID(int team_id)
+        {
+            List<League> leagueList = null;
+
+            try
+            {
+                leagueList = _leagueAccessor.SelectLeaguesByTeamID(team_id);
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Error retrieving League List", ex);
+            }
+
+            return leagueList;
+        }
+
+        /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/02/20
         /// 

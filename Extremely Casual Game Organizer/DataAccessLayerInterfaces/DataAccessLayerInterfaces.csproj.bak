@@ -41,16 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="ILeagueAccessor.cs" />
-    <Compile Include="IMemberAccessor.cs" />
-=======
     <Compile Include="IGameRosterAccessor.cs" />
     <Compile Include="IMemberAccessor.cs" />
     <Compile Include="IDBConnection.cs" />
     <Compile Include="IGameAccessor.cs" />
+    <Compile Include="ISportAccessor.cs" />
     <Compile Include="ITeamAccessor.cs" />
+<<<<<<< HEAD
     <Compile Include="ITeamMemberAccessor.cs" />
+    <Compile Include="ITeamRoleAccessor.cs" />
+    <Compile Include="ITournamentAccessor.cs" />
+=======
 >>>>>>> origin/main
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

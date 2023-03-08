@@ -58,7 +58,6 @@
     <Compile Include="GameRosterManagerTests.cs" />
     <Compile Include="TeamManagerTests.cs" />
     <Compile Include="GameManagerTests.cs" />
-    <Compile Include="TeamRolesManagerTests.cs" />
     <Compile Include="TournamantManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -22,12 +22,13 @@ using System.Threading.Tasks;
 using DataAccessLayerInterfaces;
 using DataObjects;
 
-namespace DataAccessLayer 
+namespace DataAccessLayer
 {
     public class LeagueAccessor : ILeagueAccessor
     {
         public List<League> leagues = new List<League>();
         public List<LeagueGridVM> leaguesForGrid = null;
+        public List<League> _leagues = new List<League>();
 
 
         /// <summary>
@@ -121,12 +122,15 @@ namespace DataAccessLayer
                         League temp = new League();
                         temp.LeagueID = reader.GetInt32(0);
                         temp.SportID = reader.GetInt32(1);
-                        temp.LeagueDues = reader.GetDecimal(2);
+                        if (reader.IsDBNull(2) == false)
+                        {
+                            temp.LeagueDues = reader.GetDecimal(2);
+                        }
                         temp.Active = reader.GetBoolean(3);
                         temp.MemberID = reader.GetInt32(4);
                         temp.Description = reader.GetString(6);
                         temp.Name = reader.GetString(7);
-						
+
                         if (reader.IsDBNull(5) == false)
                         {
                             temp.Gender = reader.GetBoolean(5);
@@ -136,10 +140,11 @@ namespace DataAccessLayer
                         league.Add(temp);
                     }
                 }
-            }catch (Exception up)
+            }
+            catch (Exception up)
             {
                 throw up;
-			}
+            }
             finally
             {
                 conn.Close();
@@ -206,7 +211,6 @@ namespace DataAccessLayer
             return team;
         }
 
-
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/03/05
@@ -233,13 +237,11 @@ namespace DataAccessLayer
 
             //command type
             cmd.CommandType = CommandType.StoredProcedure;
-            
 
             try
             {
                 conn.Open();
                 var reader = cmd.ExecuteReader();
-
                 if (reader.HasRows)
                 {
                     while (reader.Read())
@@ -258,7 +260,63 @@ namespace DataAccessLayer
 
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
+            return leaguesForGrid;
+        }
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/28/02
+        /// 
+        /// Method takes in a team_id and returns all active and inactive leagues for provided team.
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        public List<League> SelectLeaguesByTeamID(int team_id)
+        {
+            List<League> leagueList = new List<League>();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_league_list_by_team_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+
+            cmd.Parameters["@team_id"].Value = team_id;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                League temp = new League();
+                temp.LeagueID = reader.GetInt32(0);
+                temp.SportID = reader.GetInt32(1);
+                if (reader.IsDBNull(2) == false)
+                {
+                    temp.LeagueDues = reader.GetDecimal(2);
+                }
+                temp.Active = reader.GetBoolean(3);
+                temp.MemberID = reader.GetInt32(4);
+                temp.Description = reader.GetString(6);
+                temp.Name = reader.GetString(7);
+
+                if (reader.IsDBNull(5) == false)
+                {
+                    temp.Gender = reader.GetBoolean(5);
+                }
+                else { temp.Gender = null; }
+
+                leagueList.Add(temp);
 
             }
             catch (Exception up)
@@ -270,8 +328,7 @@ namespace DataAccessLayer
                 conn.Close();
             }
 
-
-            return leaguesForGrid;
+            return leagueList;
         }
 
         /// <summary>
@@ -305,7 +362,8 @@ namespace DataAccessLayer
                 conn.Open();
                 desc = (string)cmd.ExecuteScalar();
 
-            }catch(SqlException ex)
+            }
+            catch (SqlException ex)
             {
                 throw ex;
             }

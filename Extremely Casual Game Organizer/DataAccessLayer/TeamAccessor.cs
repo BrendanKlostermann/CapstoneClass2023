@@ -36,7 +36,7 @@ namespace DataAccessLayer
         /// Updated: yyyy/mm/dd 
         /// example: Fixed a problem when user inputs bad data
         /// </remarks>
-        public int DeleteAMemberFromATeamByMemberIdAndTeamID(int memberId, int teamId)
+        public int DeleteAMemberFromATeamByMemberIdAndTeamID(int teamID, int memberID)
         {
             //connection
             DBConnection connectionFactory = new DBConnection();
@@ -52,10 +52,11 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             //Add paramaters //values
-            cmd.Parameters.Add("@member_id", SqlDbType.Int);
-            cmd.Parameters["@member_id"].Value = memberId;
             cmd.Parameters.Add("@team_id", SqlDbType.Int);
-            cmd.Parameters["@team_id"].Value = teamId;
+            cmd.Parameters["@team_id"].Value = teamID;
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = memberID;
+
             try
             {
                 conn.Open();
@@ -137,97 +138,7 @@ namespace DataAccessLayer
             return team;
         }
 
-        /// <summary>
-        /// Alex Korte
-        /// Created: 2023/01/24
-        /// 
-        /// Actual summary of the class if needed.
-        /// </summary>
-        /// A method to select all members based on what team they are in
-        /// 
-        /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
-        /// example: Fixed a problem when user inputs bad data
-        /// </remarks>
-        public List<Member> SelectAllmembersByTeamID(int teamId)
-        {
-            List<Member> allMembersOnATeam = new List<Member>();
-
-            //connection
-            DBConnection connectionFactory = new DBConnection();
-            var conn = connectionFactory.GetDBConnection();
-
-            //command text
-            var cmdText = "sp_selecting_all_players_on_a_team_by_team_id";
-
-            //create command
-            var cmd = new SqlCommand(cmdText, conn);
-
-            //command type
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            //Add paramaters //values
-
-            cmd.Parameters.Add("@team_id", SqlDbType.Int);
-            cmd.Parameters["@team_id"].Value = teamId;
-            try
-            {
-                conn.Open();
-
-                var reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        byte[] profile_picture = null;
-                        long? fieldWidth = null;
-                        Member tempMember = new Member();
-                        tempMember.MemberID = reader.GetInt32(0);
-                        tempMember.Email = reader.GetString(1);
-                        tempMember.FirstName = reader.GetString(2);
-                        tempMember.FamilyName = reader.GetString(3);
-                        tempMember.Birthday = reader.GetDateTime(4);
-                        tempMember.PhoneNumber = reader.GetString(5);
-                        tempMember.Gender = reader.GetBoolean(6);
-                        tempMember.Active = reader.GetBoolean(7);
-                        tempMember.Bio = reader.GetString(8);
-
-
-                        int columnIndex = 9;
-                        try
-                        {
-                            fieldWidth = reader.GetBytes(columnIndex, 0, null, 0, Int32.MaxValue);
-                        }
-                        catch (Exception)
-                        {
-                            profile_picture = null;
-                        }
-
-                        if (profile_picture != null)
-                        {
-                            int width = (int)fieldWidth;
-                            profile_picture = new byte[width];
-                            reader.GetBytes(columnIndex, 0, profile_picture, 0, profile_picture.Length);
-                        }
-
-                        tempMember.PhotoMimeType = reader.IsDBNull(10) ? null : reader.GetString(10);
-
-                        allMembersOnATeam.Add(tempMember);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                conn.Close();
-            }
-			return allMembersOnATeam;
-		}
+        
 
         /// <summary>
         /// Alex Korte
@@ -294,6 +205,155 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return _teamMember;
+        }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/02/26
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method to select all teams
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public List<Team> SelectAllTeams()
+        {
+
+            List<Team> teams = new List<Team>();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_all_teams";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        
+                        Team team = new Team();
+                        team.TeamID = reader.GetInt32(0);
+                        team.TeamName = reader.GetString(1);
+                        if (reader.IsDBNull(2))
+                        {
+                            team.Gender = null;
+                        }
+                        else
+                        {
+                            team.Gender = reader.GetBoolean(2);
+                        }
+                        team.SportID = reader.GetInt32(3);
+                        team.MemberID = reader.GetInt32(4);
+                        //if (reader.IsDBNull(5))
+                        //{
+                        //    team.Description = null;
+                        //}
+                        //else
+                        //{
+                        //    team.Description = reader.GetString(5);
+                        //} // Script does not return Desc (JDL)
+                        teams.Add(team);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return teams;
+        }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// Method that will add a player to a team by memberID and TeamID
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// Method to move someone from starter to bench or other way around
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public int MoveAPlayerToBenchOrStarter(int teamID, bool starterOrBench, int memberID)
+        {
+            //connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_update_teamMember_to_bench_or_starter";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+            cmd.Parameters["@team_id"].Value = teamID;
+            cmd.Parameters.Add("@starter", SqlDbType.Bit);
+            cmd.Parameters["@starter"].Value = starterOrBench;
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = memberID;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteNonQuery();
+                return reader;
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

@@ -39,46 +39,6 @@ namespace LogicLayer
             _teamAccessor = ta;
         }
 
-        ITeamMemberAccessor _teamMemberAccessor = null;
-        public TeamMemberManager(ITeamMemberAccessor tma)
-        {
-            _teamMemberAccessor = tma;
-        }
-
-        /// <summary>
-        /// Alex Korte
-        /// Created: 2023/01/24
-        /// 
-        /// Actual summary of the class if needed.
-        /// </summary>
-        /// This method will run through the stack to get a list of members on a team
-        ///
-        /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
-        /// example: Fixed a problem when user inputs bad data
-        /// </remarks>
-        public List<Member> GetAListOfAllMembersByTeamID(int teamID)
-        {
-            try
-            {
-                List<Member> _members = _teamAccessor.SelectAllmembersByTeamID(teamID);
-                if (_members.Count == 0 || _members == null)
-                {
-                    throw new ArgumentException("No data found");
-                }
-                else
-                {
-                    return _members;
-                }
-            }catch(ArgumentException up)
-            {
-                throw new ArgumentException("team is incorrect", up);
-            }catch(ApplicationException down)
-            {
-                throw new ApplicationException("Error getting data", down);
-            }
-        }
 
         /// <summary>
         /// Alex Korte
@@ -157,21 +117,65 @@ namespace LogicLayer
             }
             return _tempMembers;//sending the filtered list of only starters or benched.
 		}
-        public int AddTeamMember(int team_id, int member_id, string description)
+
+        public List<Member> GetAListOfAllMembersByTeamID(int teamID)
         {
-            int result = 0;
+            throw new NotImplementedException();
+		}
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/04
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method used to add a player to a team by memberID
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public int AddAPlayerToATeamByTeamIDAndMemberID(int teamID, int memberID)
+        {
+            int successful = _teamAccessor.AddMemberToTeamByTeamIDAndMemberID(teamID, memberID);
+            return successful;
+        }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/04
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        ///\A method used to move a player to a bench or back to starter
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public String MoveAPlayerToBenchOrStarter(int teamID, bool starter, int memberID)
+        {
+            string success = "";//make a string to return to the presentation layer
 
             try
             {
-                result = _teamMemberAccessor.InsertTeamMember(team_id, member_id, description);
-            }
-            catch (Exception ex)
+                int successful = _teamAccessor.MoveAPlayerToBenchOrStarter(teamID, starter, memberID);//get the int value of the change
+                if (successful == 1)
+                {
+                    success = "Success";
+                }
+                else
+                {
+                    success = "Failed";
+                }
+            }catch(ArgumentException up)
             {
-
-                throw new ApplicationException("Team Member Addition Failed", ex);
+                throw new ArgumentException("Invalid Id", up);
             }
-
-            return result;
+            return success;
         }
     }
 }

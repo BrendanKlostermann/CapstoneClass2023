@@ -23,13 +23,15 @@ namespace LogicLayerInterfaces
 
     public interface ITeamMemberManager
     {
-        int AddTeamMember(int team_id, int member_id, string description);
 
         List<Member> SortIntoStarters(List<Member> members, int teamID, bool active);
 
         int RemoveAPlayerFromATeamByTeamIDAndMemberID(int teamID, int memberID);
 
-        List<Member> GetAListOfAllMembersByTeamID(int teamID);
+
+        int AddAPlayerToATeamByTeamIDAndMemberID(int teamID, int memberID);
+
+        String MoveAPlayerToBenchOrStarter(int teamID, bool starter, int memberID);
 
     }
 }

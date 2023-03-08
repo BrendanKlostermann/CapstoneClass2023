@@ -1,4 +1,27 @@
-﻿using System;
+﻿/// <summary>
+/// Created BY: Jacob Lindauer
+/// Date: 2023/31/01
+/// 
+/// Configuration for the main window of the applicaiton.
+/// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/23/02
+/// 
+/// Updated the Events tab to be Games instead
+/// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/02/28
+/// 
+/// Added class properties for CurrentPage and PreviousPage.
+/// This will allow you to navigate back to previous pages as you navigate throughout the program.
+/// Since this window should not be newed up after it is running, this made the most sense to place them here.
+/// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/03/04
+/// 
+/// Added the CurrentMember property so we can set the current signed in member and get their roles for access
+/// </summary>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +35,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using DataObjects;
 using LogicLayerInterfaces;
 using LogicLayer;
 using Extremely_Casual_Game_Organizer.PageFiles;
+using Extremely_Casual_Game_Organizer.PageFiles.MemberPages;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -25,37 +48,106 @@ namespace Extremely_Casual_Game_Organizer
     /// </summary>
     public partial class MainWindow : Window
     {
-        MemberManager _memberManager = null;
-        Member _member = null;
+        MasterManager _masterManager = null;
         PageControl _pageControl = null;
+
+        public Page PreviousPage { get; set; }
+        public Page CurrentPage { get; set; }
+        public Member CurrentMember { get; set; }
+
         public MainWindow()
         {
-            _memberManager = new MemberManager();
             _pageControl = new PageControl();
+            _masterManager = new MasterManager();
             InitializeComponent();
-
             // Hide all function buttons
             grdFrameFunctions.Visibility = Visibility.Hidden;
+            
 
         }
 
-        private void navEvents_Click(object sender, RoutedEventArgs e)
+        private void frmMain_Loaded(object sender, RoutedEventArgs e)
         {
-            GameManager gameManager = new GameManager();
+            try
+            {
+                _pageControl.LoadPage(new pgLogIn(_masterManager));
+            }
+            catch (Exception ex)
+            {
 
-            _pageControl.LoadPage(new pgGameList(gameManager));
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+        }
+
+        private void navGames_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _pageControl.LoadPage(new pgGameList(_masterManager ));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "/n/n" + ex.InnerException.Message);
+            }
 
         }
 
         private void navLeagues_Click(object sender, RoutedEventArgs e)
         {
-            LeagueManager leagueManager = new LeagueManager();
-            _pageControl.LoadPage(new pgViewLeagueList());
+            try
+            {
+                _pageControl.LoadPage(new pgViewLeagueList(_masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "/n/n" + ex.InnerException.Message);
+            }
+        }
+
+        private void navSearch_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // _pageControl.LoadPage(new pgViewTeamDetails(1030, _masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+        }
+
+        private void navTeams_Click(object sender, RoutedEventArgs e)
+        {		
+			try
+            {
+                TeamManager teamManager = new TeamManager();
+                _pageControl.LoadPage(new pgViewTeamList(_masterManager));
+            }
+            catch(Exception up)
+            {
+                MessageBox.Show(up.Message + "\n\n" + up.InnerException.Message);
+            }
         }
 
         private void navSchedule_Click(object sender, RoutedEventArgs e)
         {
-            
+		
+			 try
+            {
+				Member openMember = new Member()
+            {
+                MemberID = 100000
+            };
+				_pageControl.LoadPage(new pgMemberSchedule(openMember, _masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
     }
 }

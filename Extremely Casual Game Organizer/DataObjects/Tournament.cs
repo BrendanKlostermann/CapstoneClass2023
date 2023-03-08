@@ -1,4 +1,4 @@
-﻿/// Brendan Klostermann
+/// Brendan Klostermann
 /// Created: 2023/02/20
 /// 
 /// This class is for the Tournament data object.
@@ -23,7 +23,6 @@ namespace DataObjects
         public string Description { get; set; }
         public bool Active { get; set; }
 
-
         public Tournament()
         {
         }
@@ -45,7 +44,5 @@ namespace DataObjects
         public TournamentVM()
         {
         }
-
-
     }
 }
