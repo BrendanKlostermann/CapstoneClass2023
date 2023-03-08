@@ -16,9 +16,9 @@
             <RowDefinition Height="22"/>
             <RowDefinition Height="22"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnAdd" Grid.Row="0" Content="Add"/>
-        <Button x:Name="btnBench" Grid.Row="1" Content="Bench"/>
-        <Button x:Name="btnRemove" Grid.Row="2" Content="Remove"/>
+        <Button x:Name="btnAdd" Grid.Row="0" Content="Add" Click="btnAdd_Click"/>
+        <Button x:Name="btnBench" Grid.Row="1" Content="Bench" Click="btnBench_Click"/>
+        <Button x:Name="btnRemove" Grid.Row="2" Content="Remove" Click="btnRemove_Click"/>
         <Button x:Name="btnCancel" Grid.Row="3" Content="Cancel" Click="Button_Click"/>
     </Grid>
 </Window>

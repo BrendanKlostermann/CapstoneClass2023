@@ -102,8 +102,15 @@ namespace Extremely_Casual_Game_Organizer
 
         private void navTeams_Click(object sender, RoutedEventArgs e)
         {
-            TeamManager teamManager = new TeamManager();
-            _pageControl.LoadPage(new pgViewTeamList());
+            try
+            {
+                TeamManager teamManager = new TeamManager();
+                _pageControl.LoadPage(new pgViewTeamList());
+            }
+            catch(Exception up)
+            {
+                MessageBox.Show(up.Message + "\n\n" + up.InnerException.Message);
+            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace DataAccessLayer
         /// Updated: yyyy/mm/dd 
         /// example: Fixed a problem when user inputs bad data
         /// </remarks>
-        public int DeleteAMemberFromATeamByMemberIdAndTeamID(int memberId, int teamId)
+        public int DeleteAMemberFromATeamByMemberIdAndTeamID(int teamID, int memberID)
         {
             //connection
             DBConnection connectionFactory = new DBConnection();
@@ -52,10 +52,11 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             //Add paramaters //values
-            cmd.Parameters.Add("@member_id", SqlDbType.Int);
-            cmd.Parameters["@member_id"].Value = memberId;
             cmd.Parameters.Add("@team_id", SqlDbType.Int);
-            cmd.Parameters["@team_id"].Value = teamId;
+            cmd.Parameters["@team_id"].Value = teamID;
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = memberID;
+
             try
             {
                 conn.Open();
@@ -284,5 +285,75 @@ namespace DataAccessLayer
             return teams;
         }
 
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// Method that will add a player to a team by memberID and TeamID
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/01/24
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// Method to move someone from starter to bench or other way around
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public int MoveAPlayerToBenchOrStarter(int teamID, bool starterOrBench, int memberID)
+        {
+            //connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_update_teamMember_to_bench_or_starter";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+            cmd.Parameters["@team_id"].Value = teamID;
+            cmd.Parameters.Add("@starter", SqlDbType.Bit);
+            cmd.Parameters["@starter"].Value = starterOrBench;
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = memberID;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteNonQuery();
+                return reader;
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

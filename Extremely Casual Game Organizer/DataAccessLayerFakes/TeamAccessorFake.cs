@@ -14,6 +14,8 @@ namespace DataAccessLayerFakes
         List<Team> _teamList = null;
         DataTable _gameTable = null; // For Game Details
         List<GameRoster> _gameRoster = null; // TeamID is stored in these objects
+        List<Member> _members = null;
+        List<TeamMember> _teamMembers = null;
 
 
         public TeamAccessorFake()
@@ -55,8 +57,137 @@ namespace DataAccessLayerFakes
                 }
 
             };
-            // Create Game Table Data
-            _gameTable = new DataTable();
+
+            _members = new List<Member>()
+            {
+                new Member{
+                    MemberID = 10000,
+                    Email = "johns@company.com",
+                    FirstName = "John",
+                    FamilyName = "Smith",
+                    Birthday =  new DateTime(2023, 01, 25),
+                    PhoneNumber = "319-999-9999",
+                    Gender = true,
+                    Active = true,
+                    Bio = "Member bio"
+                },
+
+                new Member{
+                    MemberID = 10001,
+                    Email = "Narkk@company.com",
+                    FirstName = "Mark",
+                    FamilyName = "Johnson",
+                    Birthday =  new DateTime(2022, 02, 12),
+                    PhoneNumber = "319-888-8888",
+                    Gender = true,
+                    Active = false,
+                    Bio = "Another Member bio"
+                },
+
+                new Member{
+                    MemberID = 10002,
+                    Email = "KevinW@company.com",
+                    FirstName = "Kevin",
+                    FamilyName = "Waters",
+                    Birthday =  new DateTime(2020, 08, 10),
+                    PhoneNumber = "319-777-7777",
+                    Gender = true,
+                    Active = true,
+                    Bio = "Yet Another Member bio"
+                }
+            };
+
+            _teamMembers = new List<TeamMember>()
+            {
+                new TeamMember
+                {
+                    TeamID = 1000,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1000,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1000,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                },
+                                new TeamMember
+                {
+                    TeamID = 1001,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1001,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1001,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                },                new TeamMember
+                {
+                    TeamID = 1002,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1002,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                }
+            };
+
+
+
+        // Create Game Table Data
+        _gameTable = new DataTable();
             _gameTable.Columns.Add("game_id", typeof(int));
             _gameTable.Columns.Add("Teams", typeof(string));
             _gameTable.Columns.Add("Location", typeof(string));
@@ -86,7 +217,43 @@ namespace DataAccessLayerFakes
             };
         }
 
+        public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/07
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// this method will remove a member form a team member list where id matches id
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
         public int DeleteAMemberFromATeamByMemberIdAndTeamID(int memberId, int teamId)
+        {
+            int countControl = 0;
+            foreach (var teamMember in _teamMembers)
+            {
+                if(teamMember.MemberID == memberId && teamMember.TeamID == teamId)
+                {
+                    _teamMembers.Remove(teamMember);
+                    countControl = 1;
+                }
+            }
+            return countControl;
+        }
+
+        public int MoveAPlayerToBenchOrStarter(int memberID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int MoveAPlayerToBenchOrStarter(int teamID, bool starterOrBench, int memberID)
         {
             throw new NotImplementedException();
         }

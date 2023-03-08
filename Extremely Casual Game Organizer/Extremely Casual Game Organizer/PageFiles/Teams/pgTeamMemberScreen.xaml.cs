@@ -36,13 +36,13 @@ namespace Extremely_Casual_Game_Organizer
         private int _teamID = 0;
         int _optionStatus = 0; //used to figure out which options to display when clicking on a team member
 
+
         public pgTeamMemberScreen(MasterManager masterManager)
         {
             _masterManager = masterManager;
             InitializeComponent();
-            _teamMemberManager = new TeamMemberManager();
-            _membersM = new MemberManager();
         }
+
 
         /// <summary>
         /// Alex Korte
@@ -59,11 +59,10 @@ namespace Extremely_Casual_Game_Organizer
         /// </remarks>
         public pgTeamMemberScreen(int teamID)
         {
+            _masterManager = new MasterManager();
             _teamID = teamID;
-            _teamMemberManager = new TeamMemberManager();
-            _membersM = new MemberManager();
-            _members = _membersM.GetAListOfMembersByTeamID(_teamID);
-            _starterOrBenchers = _teamMemberManager.SortIntoStarters(_members, _teamID, toggleBench);
+            _members = _masterManager.MemberManager.GetAListOfMembersByTeamID(teamID);
+            _starterOrBenchers = _masterManager.TeamMemberManager.SortIntoStarters(_members, _teamID, toggleBench);
             InitializeComponent();
             DisplayTeamMembers();
 
@@ -368,7 +367,7 @@ namespace Extremely_Casual_Game_Organizer
             {
                 if (spot1.Content == "")
                 {
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -377,7 +376,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -396,7 +395,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot2.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -404,7 +403,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[1].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[1].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -423,7 +422,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot3.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -431,7 +430,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[2].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[2].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -450,7 +449,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot4.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -458,7 +457,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[3].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[3].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -477,7 +476,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot5.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -485,7 +484,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[4].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[4].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -504,7 +503,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot6.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -512,7 +511,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[5].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[5].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -531,7 +530,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot7.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -539,7 +538,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[6].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[6].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -558,14 +557,14 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot8.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
                 }
                 else
                 {
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[7].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[7].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -584,7 +583,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot9.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -592,7 +591,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[8].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[8].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -611,7 +610,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot10.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -619,7 +618,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[9].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[9].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -638,7 +637,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot11.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -646,7 +645,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[10].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[10].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -665,7 +664,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot12.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -673,7 +672,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[11].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[11].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -692,7 +691,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot13.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -700,7 +699,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[12].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[12].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -719,7 +718,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot14.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -727,7 +726,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[13].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[13].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -746,7 +745,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot15.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -754,7 +753,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[14].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[14].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -773,7 +772,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot16.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -781,7 +780,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[15].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[15].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -800,7 +799,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot17.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -808,7 +807,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[16].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[16].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -828,7 +827,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot18.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -836,7 +835,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[17].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[17].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -855,7 +854,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot19.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -863,7 +862,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[18].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[18].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -882,7 +881,7 @@ namespace Extremely_Casual_Game_Organizer
                 if (spot20.Content == "")
                 {
                     _optionStatus = 1;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[0].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();
@@ -890,7 +889,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _optionStatus = 2;
-                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[19].MemberID, _teamID, _optionStatus);
+                    PopUpOptions _options = new PopUpOptions(_starterOrBenchers[19].MemberID, _teamID, _optionStatus, toggleBench);
                     this.IsEnabled = false;
                     _options.ShowDialog();
                     ReloadPage();

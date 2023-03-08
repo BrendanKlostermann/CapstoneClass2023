@@ -22,6 +22,9 @@ namespace DataAccessLayerFakes
             _teamRole = new TeamRole();
             _teamRoleType = new TeamRoleType();
 
+            List<TeamMember> _teamMember = null;
+            List<Member> _member = null;
+            List<Team> _team = null;
             _teamList = new List<Team>
             {
                 new Team()
@@ -29,35 +32,41 @@ namespace DataAccessLayerFakes
                     TeamID = 1000,
                     TeamName = "TheTestTeam1",
                     Gender = true,
-                    SportID = 1001
+                    SportID = 1001,
+                    Description = "TheTestTeam1 Description"
                 },
                 new Team()
                 {
                     TeamID = 1001,
                     TeamName = "TheTestTeam2",
                     Gender = true,
-                    SportID = 1001
+                    SportID = 1001,
+                    Description = "TheTestTeam2 Description"
+
                 },
                 new Team()
                 {
                     TeamID = 1002,
                     TeamName = "TheTestTeam3",
                     Gender = false,
-                    SportID = 1002
+                    SportID = 1002,
+                    Description = "TheTestTeam3 Description"
                 },
                 new Team()
                 {
                     TeamID = 1003,
                     TeamName = "TheTestTeam4",
                     Gender = null,
-                    SportID = 1002
+                    SportID = 1002,
+                    Description = "TheTestTeam4 Description"
                 }
+
             };
 
-            _memberList = new List<Member>()
+            _member = new List<Member>()
             {
                 new Member{
-                    MemberID = 100000,
+                    MemberID = 10000,
                     Email = "johns@company.com",
                     FirstName = "John",
                     FamilyName = "Smith",
@@ -69,7 +78,7 @@ namespace DataAccessLayerFakes
                 },
 
                 new Member{
-                    MemberID = 100001,
+                    MemberID = 10001,
                     Email = "Narkk@company.com",
                     FirstName = "Mark",
                     FamilyName = "Johnson",
@@ -81,7 +90,7 @@ namespace DataAccessLayerFakes
                 },
 
                 new Member{
-                    MemberID = 100002,
+                    MemberID = 10002,
                     Email = "KevinW@company.com",
                     FirstName = "Kevin",
                     FamilyName = "Waters",
@@ -92,6 +101,97 @@ namespace DataAccessLayerFakes
                     Bio = "Yet Another Member bio"
                 }
             };
+
+            _teamMember = new List<TeamMember>()
+            {
+                new TeamMember
+                {
+                    TeamID = 1000,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1000,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1000,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                },
+                                new TeamMember
+                {
+                    TeamID = 1001,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1001,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1001,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                },                new TeamMember
+                {
+                    TeamID = 1002,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1002,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 1",
+                    Starter = true,
+                    MemberID = 10000
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 2",
+                    Starter = true,
+                    MemberID = 10001
+                },
+                new TeamMember
+                {
+                    TeamID = 1003,
+                    Description = "Test team member 3",
+                    Starter = true,
+                    MemberID = 10002
+                }
+            };
+
+
+
+
 
         }
         public int InsertTeamMember(int team_id, int member_id, string description)
