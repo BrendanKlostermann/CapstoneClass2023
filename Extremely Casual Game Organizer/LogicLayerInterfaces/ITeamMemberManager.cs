@@ -28,7 +28,10 @@ namespace LogicLayerInterfaces
 
         int RemoveAPlayerFromATeamByTeamIDAndMemberID(int teamID, int memberID);
 
-        List<Member> GetAListOfAllMembersByTeamID(int teamID);
+
+        int AddAPlayerToATeamByTeamIDAndMemberID(int teamID, int memberID);
+
+        String MoveAPlayerToBenchOrStarter(int teamID, bool starter, int memberID);
 
     }
 }

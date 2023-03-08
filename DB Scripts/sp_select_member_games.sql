@@ -1,4 +1,4 @@
-print '' print '*** Creating sp_select_member_games ***'
+print '' print '*** Creating sp_select_member_games Jacob L ***'
 GO
 
 USE [ecgo_db]
@@ -20,3 +20,5 @@ AS
 		WHERE [dbo].[GameRoster].[member_id] = @member_id
 	END
 GO
+
+/*line 13 does not feel needed*/

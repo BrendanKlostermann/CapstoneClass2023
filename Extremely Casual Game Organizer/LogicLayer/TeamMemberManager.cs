@@ -121,6 +121,61 @@ namespace LogicLayer
         public List<Member> GetAListOfAllMembersByTeamID(int teamID)
         {
             throw new NotImplementedException();
+		}
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/04
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method used to add a player to a team by memberID
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public int AddAPlayerToATeamByTeamIDAndMemberID(int teamID, int memberID)
+        {
+            int successful = _teamAccessor.AddMemberToTeamByTeamIDAndMemberID(teamID, memberID);
+            return successful;
+        }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/04
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        ///\A method used to move a player to a bench or back to starter
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+        public String MoveAPlayerToBenchOrStarter(int teamID, bool starter, int memberID)
+        {
+            string success = "";//make a string to return to the presentation layer
+
+            try
+            {
+                int successful = _teamAccessor.MoveAPlayerToBenchOrStarter(teamID, starter, memberID);//get the int value of the change
+                if (successful == 1)
+                {
+                    success = "Success";
+                }
+                else
+                {
+                    success = "Failed";
+                }
+            }catch(ArgumentException up)
+            {
+                throw new ArgumentException("Invalid Id", up);
+            }
+            return success;
         }
     }
 }

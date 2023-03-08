@@ -43,10 +43,26 @@ sqlcmd -S localhost -E -i sp_select_game_list_by_team_id.sql
 sqlcmd -S localhost -E -i sp_select_team_by_team_name.sql
 sqlcmd -S localhost -E -i sp_select_sport_description_by_sportID.sql
 sqlcmd -S localhost -E -i sp_insert_user_account.sql
-sqlcmd -S localhost -E -i sp_user_create_team.sql
+sqlcmd -S localhost -E -i sp_insert_member_into_teamMember_by_teamID_and_memberID.sql
+sqlcmd -S localhost -E -i sp_remove_a_player_from_team_by_member_id.sql
 sqlcmd -S localhost -E -i sp_select_member_games.sql
 sqlcmd -S localhost -E -i sp_select_member_practices.sql
 sqlcmd -S localhost -E -i sp_select_member_tournament_games.sql
+sqlcmd -S localhost -E -i sp_delete_team_equipment.sql
+sqlcmd -S localhost -E -i sp_delete_team_from_tournament.sql
+sqlcmd -S localhost -E -i sp_insert_team_equipment.sql
+sqlcmd -S localhost -E -i sp_insert_team_to_tournament.sql
+sqlcmd -S localhost -E -i sp_select_team_equipment_by_name_or_sport_name_by_team_id.sql
+sqlcmd -S localhost -E -i sp_select_tournament.sql
+sqlcmd -S localhost -E -i sp_select_tournament_team_by_tournament_id.sql
+sqlcmd -S localhost -E -i sp_update_team_equipment.sql
+sqlcmd -S localhost -E -i sp_select_all_tournaments.sql
+sqlcmd -S localhost -E -i sp_insert_tournament.sql
+
+
+
+sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
+
 
 sqlcmd -S localhost -E -i fake_data.sql
 

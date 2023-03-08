@@ -28,7 +28,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataObjects;
-
+using Extremely_Casual_Game_Organizer.PageFiles;
+using LogicLayer;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -40,11 +41,23 @@ namespace Extremely_Casual_Game_Organizer
         int _teamID; //used to store the team id for methods
         int _memberID; // used to store the member selected
         int _optionStatus; //used to show which options are avaliable
+        bool _starter; //used to get weather or not they are a starter or a bench
+        PageControl _pageControl = null;
+        MasterManager _masterManager = null;
 
-        public PopUpOptions()
+        //public event EventHandler WindowClosed; //handler that manages when the pop up menue closes. 
+
+        public PopUpOptions(MasterManager masterManager)
         {
+            _masterManager = masterManager;
             InitializeComponent();
         }
+
+        //protected override void OnClosed(EventArgs e)
+        //{
+        //    base.OnClosed(e);
+        //    WindowClosed?.Invoke(this, EventArgs.Empty);
+        //}
 
         /// <summary>
         /// Alex Korte
@@ -58,11 +71,14 @@ namespace Extremely_Casual_Game_Organizer
         /// Updated: yyyy/mm/dd 
         /// example: Fixed a problem when user inputs bad data
         /// </remarks>
-        public PopUpOptions(int memberID, int teamID, int optionStatus)
+        public PopUpOptions(int memberID, int teamID, int optionStatus, bool starter, MasterManager masterManager)
         {
+            _masterManager = masterManager;
+            _pageControl = new PageControl();
             _teamID = teamID;
             _memberID = memberID;
             _optionStatus = optionStatus;
+            _starter = starter;
             InitializeComponent();
             this.Topmost = true;
             if(_optionStatus == 1)
@@ -78,6 +94,14 @@ namespace Extremely_Casual_Game_Organizer
                 btnBench.IsEnabled = true;
                 btnRemove.IsEnabled = true;
                 btnCancel.IsEnabled = true;
+                if(_starter == true)
+                {
+                    btnBench.Content = "Bench";
+                }
+                else
+                {
+                    btnBench.Content = "Starter";
+                }
             }
         }
 
@@ -97,6 +121,40 @@ namespace Extremely_Casual_Game_Organizer
         /// </remarks>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
+            _pageControl.LoadPage(_teamMemberScreen);
+            this.Close();
+        }
+
+        private void btnRemove_Click(object sender, RoutedEventArgs e)
+        {
+            int successful = _masterManager.TeamMemberManager.RemoveAPlayerFromATeamByTeamIDAndMemberID(_teamID, _memberID);
+            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
+            _pageControl.LoadPage(_teamMemberScreen);
+            this.Close();
+        }
+
+        private void btnBench_Click(object sender, RoutedEventArgs e)
+        {
+            if (_starter == true)
+            {
+                _starter = false;
+            }
+            else if(_starter == false)
+            {
+                _starter = true;
+            }
+            String successful = _masterManager.TeamMemberManager.MoveAPlayerToBenchOrStarter(_teamID, _starter, _memberID);
+            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
+            _pageControl.LoadPage(_teamMemberScreen);
+            this.Close();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            int successful = _masterManager.TeamMemberManager.AddAPlayerToATeamByTeamIDAndMemberID(_teamID, _memberID);
+            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
+            _pageControl.LoadPage(_teamMemberScreen);
             this.Close();
         }
     }

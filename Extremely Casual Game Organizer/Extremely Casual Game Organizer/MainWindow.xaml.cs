@@ -120,17 +120,34 @@ namespace Extremely_Casual_Game_Organizer
         }
 
         private void navTeams_Click(object sender, RoutedEventArgs e)
-        {
-            _pageControl.LoadPage(new pgViewTeamList(_masterManager));
+        {		
+			try
+            {
+                TeamManager teamManager = new TeamManager();
+                _pageControl.LoadPage(new pgViewTeamList(_masterManager));
+            }
+            catch(Exception up)
+            {
+                MessageBox.Show(up.Message + "\n\n" + up.InnerException.Message);
+            }
         }
 
         private void navSchedule_Click(object sender, RoutedEventArgs e)
         {
-            Member openMember = new Member()
+		
+			 try
+            {
+				Member openMember = new Member()
             {
                 MemberID = 100000
             };
-            _pageControl.LoadPage(new pgMemberSchedule(openMember, _masterManager));
+				_pageControl.LoadPage(new pgMemberSchedule(openMember, _masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-print '' print '*** Creating sp_select_member_practices ***'
+print '' print '*** Creating sp_select_member_practices  Jacob L***'
 GO
 
 USE [ecgo_db]
