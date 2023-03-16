@@ -155,5 +155,15 @@ namespace DataAccessLayerFakes
             }
             return teamsInLeague;
         }
+
+        public List<League> SelectLeaguesByTeamID(int team_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<LeagueGridVM> SelectLeaguesForGrid()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

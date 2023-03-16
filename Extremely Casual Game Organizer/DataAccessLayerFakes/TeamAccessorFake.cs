@@ -1,4 +1,17 @@
-﻿using System;
+﻿/// <summary>
+/// Heritier Otiom
+/// Created: 2023/01/31
+/// 
+/// DataFakes for Team
+/// </summary>
+///
+/// <remarks>
+/// Updater Name: Heritier Otiom
+/// Updated: 2023/02/21
+/// 
+/// </remarks>
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,6 +29,17 @@ namespace DataAccessLayerFakes
         List<GameRoster> _gameRoster = null; // TeamID is stored in these objects
         List<Member> _members = null;
         List<TeamMember> _teamMembers = null;
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Fake Team Accessor
+        /// </summary>
+        List<TeamSport> _teamSports = new List<TeamSport>();
+        List<TeamMemberAndSport> _teamMemberAndSport = new List<TeamMemberAndSport>();
+        List<string> _sports = new List<string>();
 
 
         public TeamAccessorFake()
@@ -215,6 +239,37 @@ namespace DataAccessLayerFakes
                 new GameRoster
                 { GameID = 1000, TeamID = 1002, MemberID = 100005, Description = "Away Team", GameRosterID = 15, TeamName = "TheSecondTeam", FirstName = "Frank", LastName = "Smith" },
             };
+
+            /// <summary>
+            /// Heritier Otiom
+            /// Created: 2023/01/31
+            /// 
+            /// Fake Team Accessor
+            /// </summary>
+            _sports.Add("Soccer");
+            _sports.Add("Basketball");
+            _sports.Add("Fooball");
+            _sports.Add("Tennis");
+
+            _teamSports.Add(new TeamSport()
+            {
+                Description = "Basketball",
+                SportID = 1009,
+                TeamID = 1001,
+                Gender = true,
+                Name = "Lakers"
+            });
+
+            _teamMemberAndSport.Add(new TeamMemberAndSport()
+            {
+                Description = "Sport",
+                Gender = true,
+                TeamID = 1001,
+                SportName = "Basketball",
+                Starter = true,
+                MemberID = 1001,
+                TeamName = "Lakers"
+            });
         }
 
         public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
@@ -316,6 +371,80 @@ namespace DataAccessLayerFakes
             }
 
             return selectedTeam;
+        }
+
+        
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Create a team
+        /// </summary>
+        public int AddTeam(Team team)
+        {
+            if(team.TeamName!="" && team.TeamName != null)
+            {
+                _teamList.Add(team);
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select all sport name
+        /// </summary>
+        public List<string> getSportName()
+        {
+            return _sports;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select Team by Member_ID
+        /// </summary>
+        public List<TeamMemberAndSport> getTeamByMemberID(int member_id)
+        {
+            var teams = _teamMemberAndSport.Where(b => b.MemberID == member_id).ToList();
+
+            if (teams == null)
+            {
+                throw new ApplicationException("Team not found.");
+            }
+
+            return teams;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select Team by team_name
+        /// </summary>
+        public List<TeamSport> getTeamByTeamName(string name, int sport_id)
+        {
+            var teams = _teamSports.Where(b => b.Name == name || b.SportID == sport_id).ToList();
+
+            if (teams == null)
+            {
+                throw new ApplicationException("Team not found.");
+            }
+
+            return teams;
         }
     }
 }

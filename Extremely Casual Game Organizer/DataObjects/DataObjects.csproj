@@ -48,6 +48,7 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameRoster.cs" />
     <Compile Include="Member.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Practice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sport.cs" />
@@ -55,9 +56,12 @@
     <Compile Include="TeamEquipmentList.cs" />
     <Compile Include="TeamGame.cs" />
     <Compile Include="TeamMember.cs" />
+    <Compile Include="TeamMemberAndSport.cs" />
     <Compile Include="TeamRoles.cs" />
     <Compile Include="TeamRoleType.cs" />
+    <Compile Include="TeamSport.cs" />
     <Compile Include="Tournament.cs" />
+    <Compile Include="TournamentTeam.cs" />
     <Compile Include="Venue.cs" />
     <Compile Include="VenueEquipmentList.cs" />
   </ItemGroup>

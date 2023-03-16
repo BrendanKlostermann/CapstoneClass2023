@@ -28,11 +28,7 @@ namespace DataAccessLayer
     {
         public Member SelectAUserByID(int memberID)
         {
-<<<<<<< HEAD
             Member member = null;
-=======
-            Member _member = null;
->>>>>>> origin/main
 
             DBConnection connectionFactory = new DBConnection();
             var conn = connectionFactory.GetDBConnection();
@@ -45,12 +41,7 @@ namespace DataAccessLayer
 
             cmd.Parameters.Add("@member_id", SqlDbType.Int);
 
-<<<<<<< HEAD
-            cmd.Parameters["@member_id"].Value = member_id;
-=======
             cmd.Parameters["@member_id"].Value = memberID;
->>>>>>> origin/main
-
             try
             {
                 conn.Open();
@@ -60,8 +51,7 @@ namespace DataAccessLayer
                 if (reader.HasRows)
                 {
                     reader.Read();
-
-<<<<<<< HEAD
+					
                     member = new Member();
 
                     member.MemberID = reader.GetInt32(0);
@@ -82,28 +72,6 @@ namespace DataAccessLayer
                     if (!reader.IsDBNull(8))
                     {
                         member.Bio = reader.GetString(8);
-=======
-                    _member = new Member();
-
-                    _member.MemberID = reader.GetInt32(0);
-                    _member.Email = reader.GetString(1);
-                    _member.FirstName = reader.GetString(2);
-                    _member.FamilyName = reader.GetString(3);
-                    _member.Birthday = reader.GetDateTime(4);
-
-                    if (!reader.IsDBNull(5))
-                    {
-                        _member.PhoneNumber = reader.GetString(5);
-                    }
-                    if (!reader.IsDBNull(6))
-                    {
-                        _member.Gender = reader.GetBoolean(6);
-                    }
-                    _member.Active = reader.GetBoolean(7);
-                    if (!reader.IsDBNull(8))
-                    {
-                        _member.Bio = reader.GetString(8);
->>>>>>> origin/main
                     }
                 }
             }
@@ -116,12 +84,7 @@ namespace DataAccessLayer
             {
                 conn.Close();
             }
-
-<<<<<<< HEAD
             return member;
-=======
-            return _member;
->>>>>>> origin/main
         }
 
         /// <summary>

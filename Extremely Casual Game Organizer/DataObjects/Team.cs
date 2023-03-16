@@ -1,5 +1,5 @@
 
-﻿/// <TeamObject>
+/// <TeamObject>
 /// Alex Korte
 /// Created: 2023/01/24
 /// 
@@ -10,7 +10,20 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-﻿using System;
+/// <summary>
+/// Heritier Otiom
+/// Created: 2023/01/31
+/// 
+/// Team DataObject
+/// </summary>
+///
+/// <remarks>
+/// Updater Name: Heritier Otiom
+/// Updated: 2023/02/21
+/// 
+/// </remarks>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +40,14 @@ namespace DataObjects
         public int MemberID { get; set; }
         public string Description { get; set; }
 
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Property for Team
+        /// </summary>
+        //public string Name { get; set; }
+
         public Team()
         {
 
@@ -40,6 +61,14 @@ namespace DataObjects
             this.SportID = sportID;
             this.MemberID = memberID;
             this.Description = description;
+        }
+
+        public Team(int teamID, string teamName, bool? gender, int sportID)
+        {
+            this.TeamID = teamID;
+            this.TeamName = teamName;
+            this.Gender = gender;
+            this.SportID = sportID;
         }
 
         /// <TeamView>

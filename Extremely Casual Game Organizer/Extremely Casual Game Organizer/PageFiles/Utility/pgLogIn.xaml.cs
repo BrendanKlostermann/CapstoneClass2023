@@ -145,9 +145,13 @@ namespace Extremely_Casual_Game_Organizer
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
+        }
+
+        private void openSignUp(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgCreateAccount(_masterManager));
         }
     }
 }

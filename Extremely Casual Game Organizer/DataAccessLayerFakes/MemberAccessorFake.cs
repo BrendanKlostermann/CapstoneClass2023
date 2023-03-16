@@ -12,6 +12,17 @@
 /// Added method for UpdateMemberPassword
 /// </remarks>
 
+/// <summary>
+/// Heritier Otiom
+/// Created: 2023/01/31
+/// 
+/// </summary>
+///
+/// <remarks>
+/// Updater Name: Heritier Otiom
+/// Updated: 2023/02/21
+/// 
+/// </remarks>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +42,17 @@ namespace DataAccessLayerFakes
         DataTable _games = null;
         DataTable _tournamentGames = null;
         private List<string> passwordHashes = new List<string>();
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// 
+        /// </summary>
+        // private List<Member> members = new List<Member>();
+        private DateTime adulttxtBirthday = new DateTime(2005, 01, 01);
+
+        private List<Member> testingMembers = new List<Member>();
 
         /// <summary>
         /// Brendan Klostermann
@@ -53,7 +75,7 @@ namespace DataAccessLayerFakes
                     Email = "johns@company.com",
                     FirstName = "John",
                     FamilyName = "Smith",
-                    Birthday =  new DateTime(2023, 01, 25),
+                    Birthday =  new DateTime(2003, 01, 25),
                     PhoneNumber = "319-999-9999",
                     Gender = true,
                     Active = true,
@@ -65,7 +87,7 @@ namespace DataAccessLayerFakes
                     Email = "Narkk@company.com",
                     FirstName = "Mark",
                     FamilyName = "Johnson",
-                    Birthday =  new DateTime(2022, 02, 12),
+                    Birthday =  new DateTime(2002, 02, 12),
                     PhoneNumber = "319-888-8888",
                     Gender = true,
                     Active = false,
@@ -77,7 +99,7 @@ namespace DataAccessLayerFakes
                     Email = "KevinW@company.com",
                     FirstName = "Kevin",
                     FamilyName = "Waters",
-                    Birthday =  new DateTime(2020, 08, 10),
+                    Birthday =  new DateTime(2000, 08, 10),
                     PhoneNumber = "319-777-7777",
                     Gender = true,
                     Active = true,
@@ -407,6 +429,142 @@ namespace DataAccessLayerFakes
         public DataTable SelectTournamentGamesByMemberID(int member_id)
         {
             return _tournamentGames;
+        }
+
+        
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Create a user
+        /// </summary>
+        public int AddUser(Member member)
+        {
+            try
+            {
+                if (member.Email == null || member.Email == ""
+                    || member.Email.Length < 6 || !(member.Email.Contains("@"))
+                    || !(member.Email.Contains("@"))
+                    || member.FirstName == null || member.FirstName == ""
+                    || member.FamilyName == "" || member.FirstName == ""
+                    || member.Birthday.Year > adulttxtBirthday.Year
+                    || member.PhoneNumber.Length < 10
+                   )
+                {
+                    return 0;
+                }
+                else
+                {
+                    _members.Add(member);
+                    return 1;
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select all members
+        /// </summary>
+        public List<Member> GetListOfAllMembers()
+        {
+            return _members;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select Member either by first name, family name or email
+        /// </summary>
+        public List<Member> GetMemberByFirstNameFamilyNameAndEmail(string name)
+        {
+            var members = _members.Where(b => b.FirstName == name ||
+                                        b.FamilyName== name ||
+                                        b.Email == name).ToList();
+            if (members == null)
+            {
+                throw new ApplicationException("Member not found.");
+            }
+            return members;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select Member by member_ID
+        /// </summary>
+        public Member GetMemberByMemberID(int MemberID)
+        {
+            var member = _members.Where(b => b.MemberID == MemberID).ToList();
+
+            if (member == null)
+            {
+                throw new ApplicationException("Member not found");
+            }
+            int num = _members.FindIndex(b => b.MemberID == MemberID);
+            
+            return _members[num];
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Update profile picture of a member
+        /// </summary>
+        public int UpdateProfilePicture(Member _member)
+        {
+            var member = _members.Where(b => b.MemberID == _member.MemberID).ToList();
+
+            if (member == null)
+            {
+                throw new ApplicationException("Update Failed.");
+            }
+
+            int num = _members.FindIndex(b => b.MemberID == _member.MemberID);
+
+            _members[num].ProfilePhoto = _member.ProfilePhoto;
+
+
+            return 1;
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Update bio of a member
+        /// </summary>
+        public int UpdateUserBio(Member _member)
+        {
+            var member = _members.Where(b => b.MemberID == _member.MemberID).ToList();
+
+            if (member == null)
+            {
+                throw new ApplicationException("Update Failed.");
+            }
+
+            int num = _members.FindIndex(b => b.MemberID == _member.MemberID);
+
+            _members[num].Bio = _member.Bio;
+
+
+            return 1;
         }
     }
 }

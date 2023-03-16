@@ -200,6 +200,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             {
                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
+            
         }
         /// <summary>
         /// Created By: Jacob Lindauer

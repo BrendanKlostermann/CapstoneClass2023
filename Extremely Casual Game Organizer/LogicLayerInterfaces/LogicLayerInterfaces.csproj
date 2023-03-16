@@ -41,10 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEquipmentManager.cs" />
     <Compile Include="ILeagueManager.cs" />
     <Compile Include="IGameManager.cs" />
     <Compile Include="IGameRosterManager.cs" />
     <Compile Include="IMemberManager.cs" />
+    <Compile Include="IMessageManager.cs" />
     <Compile Include="ISportManager.cs" />
     <Compile Include="ITeamManager.cs" />
     <Compile Include="ITeamMemberManager.cs" />

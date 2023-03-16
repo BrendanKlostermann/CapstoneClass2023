@@ -42,10 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBConnection.cs" />
+    <Compile Include="EquipmentAccessor.cs" />
     <Compile Include="LeagueAccessor.cs" />
     <Compile Include="GameAccessor.cs" />
     <Compile Include="GameRosterAccessor.cs" />
     <Compile Include="MemberAccessor.cs" />
+    <Compile Include="MessageAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SportAccessor.cs" />
     <Compile Include="TeamAccessor.cs" />

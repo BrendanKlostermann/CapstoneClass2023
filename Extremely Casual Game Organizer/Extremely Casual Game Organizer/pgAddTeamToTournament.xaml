@@ -1,0 +1,27 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.pgAddTeamToTournament"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
+      mc:Ignorable="d"
+      Title="pgAddTeamToTournament" Width="800" Height="500">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="559*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="31" Margin="110,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="284" KeyUp="Blur" FontSize="16"/>
+        <ListBox x:Name="lbTeam" HorizontalAlignment="Left" Height="305" Margin="27,122,0,0" VerticalAlignment="Top" Width="367" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}"/>
+        <Label Content="Search:" HorizontalAlignment="Left" Margin="27,80,0,0" VerticalAlignment="Top" FontSize="16" Width="78"/>
+        <Label Content="Add Team to a tournament" HorizontalAlignment="Left" Margin="27,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="24" FontWeight="Bold"/>
+        <ListBox x:Name="lbTournament" HorizontalAlignment="Left" Height="305" Margin="414,122,0,0" VerticalAlignment="Top" Width="367" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}"/>
+        <Label x:Name="lblTournament" Content="Teams added: 0" HorizontalAlignment="Left" Margin="414,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="20" FontWeight="Bold"/>
+        <Label Content="Tournament:" HorizontalAlignment="Left" Margin="408,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="20"/>
+        <ComboBox x:Name="ddTournament" HorizontalAlignment="Left" Margin="547,27,0,0" VerticalAlignment="Top" Width="234" RenderTransformOrigin="0.209,1.182" Padding="8,3,5,8" FontSize="16" SelectionChanged="ddTournament_SelectionChanged"/>
+        <Button x:Name="btnAddAllTeam" Content="Add all teams" HorizontalAlignment="Left" Margin="27,448,0,0" VerticalAlignment="Top" Width="148" Height="34" FontSize="16" Click="btnAddAllTeam_Click"/>
+        <Button x:Name="btnResetTournament"  Content="Reset Tournament" HorizontalAlignment="Left" Margin="193,448,0,0" VerticalAlignment="Top" Width="148" Height="34" Click="Button_Click" FontSize="16"/>
+
+    </Grid>
+</Page>

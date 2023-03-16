@@ -51,6 +51,7 @@ namespace Extremely_Casual_Game_Organizer
         MasterManager _masterManager = null;
         PageControl _pageControl = null;
         Member _member = null;
+        private TeamManager masterManager;
 
         public Page PreviousPage { get; set; }
         public Page CurrentPage { get; set; }
@@ -71,11 +72,11 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
+                //_pageControl.LoadPage(new pgTeamMemberScreen(1003, _masterManager));
                 _pageControl.LoadPage(new pgLogIn(_masterManager));
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
@@ -84,7 +85,7 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
-                _pageControl.LoadPage(new pgGameList(_masterManager ));
+                _pageControl.LoadPage(new pgGameList(_masterManager));
             }
             catch (Exception ex)
             {
@@ -112,7 +113,8 @@ namespace Extremely_Casual_Game_Organizer
             try
             {
                 TeamManager teamManager = new TeamManager();
-                _pageControl.LoadPage(new pgTeamList());
+                //_pageControl.LoadPage(new pgTeamList());
+                _pageControl.LoadPage(new pgSearchforTeam(_masterManager));
                 // _pageControl.LoadPage(new pgViewTeamDetails(1030, _masterManager));
             }
             catch (Exception ex)
@@ -163,5 +165,21 @@ namespace Extremely_Casual_Game_Organizer
             /// </summary>
             frameLoad.Visibility = Visibility.Hidden;
         }
+
+        private void btnAlerts_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void openMessage(object sender, RoutedEventArgs e)
+        {
+            pgRespondToMessage _pgRespondToMessage = new pgRespondToMessage();
+            _pgRespondToMessage.Show();
+        }
+
+        private void openProfile(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgMemberProfile(_masterManager));
+        }
+
     }
 }

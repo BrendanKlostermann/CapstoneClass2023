@@ -21,6 +21,19 @@
 /// Updater Name
 /// Updated: yyyy/mm/dd
 /// </remarks>    
+
+/// <summary>
+/// Heritier Otiom
+/// Created: 2023/01/31
+/// 
+/// Member DataObject
+/// </summary>
+///
+/// <remarks>
+/// Updater Name: Heritier Otiom
+/// Updated: 2023/02/21
+/// 
+/// </remarks>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +56,17 @@ namespace DataObjects
         public byte[] ProfilePicture { get; set; }
         public string PhotoMimeType { get; set; }
         public List<string> Roles { get; set; }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Property for Member
+        /// </summary>
+        public string PasswordHash { get; set; }
+        public byte[] ProfilePhoto { get; set; }
+
+
 
         public Member(string name)
         {

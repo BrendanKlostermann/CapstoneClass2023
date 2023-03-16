@@ -70,9 +70,9 @@
                 <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent">
                     <Image Source="Data\helpButton.png"></Image> </Button>
                 <TextBox x:Name="txtLogoPlaceholder" Cursor="Hand" Grid.Column="3" FontSize="20" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Logo Placeholder</TextBox>
-                <Button x:Name="btnAlerts" Cursor="Hand" Grid.Column="5" Margin="10 45" BorderBrush="Transparent" Background="Transparent" Foreground="Black">
+                <Button x:Name="btnAlerts" Cursor="Hand" Grid.Column="5" Margin="10 45" BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="openMessage">
                     <Image Source="Data\mailButton.png"></Image> </Button>
-                <Button x:Name="btnProfile" Cursor="Hand" Grid.Column="6" Margin="20 45"  BorderBrush="Transparent" Background="Transparent" Foreground="Black">
+                <Button x:Name="btnProfile" Cursor="Hand" Grid.Column="6" Margin="20 45"  BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="openProfile">
                     <Image Source="Data\profileButton.png"></Image> </Button>
             </Grid>
             
@@ -120,7 +120,7 @@
             <Button x:Name="btnFunction5" Grid.Row="4" Margin="10"></Button>
             <Button x:Name="btnFunction6" Grid.Row="5" Margin="10"></Button>
             <Button x:Name="btnFunction7" Grid.Row="6" Margin="10"></Button>
-            <Button x:Name="btnFunction8" Grid.Row="7" Margin="10"></Button>
+            <Button x:Name="btnFunction8" Grid.Row="7" Margin="10"/>
         </Grid>
         
         <!-- Frame / Page Load Grid-->

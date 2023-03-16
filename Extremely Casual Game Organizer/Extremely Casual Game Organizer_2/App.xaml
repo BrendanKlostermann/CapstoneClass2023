@@ -1,0 +1,9 @@
+﻿<Application x:Class="Extremely_Casual_Game_Organizer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
+             StartupUri="pgViewEquipmentList.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

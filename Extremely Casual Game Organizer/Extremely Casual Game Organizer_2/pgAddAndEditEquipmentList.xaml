@@ -1,0 +1,22 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.pgAddAndEditEquipmentList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
+      mc:Ignorable="d"
+      Title="pgAddAndEditEquipmentList" Height="370.536" Width="690.179">
+
+    <Grid>
+        <Label Content="Sport:" HorizontalAlignment="Left" Margin="336,224,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.558,0.693" FontSize="16"/>
+        <ComboBox x:Name="ddSport" HorizontalAlignment="Left" Margin="336,260,0,0" VerticalAlignment="Top" Width="281" TabIndex="3" FontSize="16" SelectionChanged="ddSport_SelectionChanged"/>
+        <Image x:Name="img_logo" HorizontalAlignment="Left" Height="371" VerticalAlignment="Top" Width="291" Source="sports1.png" Stretch="Fill"/>
+        <Label x:Name="lblTitle" Content="Add an equipment" HorizontalAlignment="Left" Margin="336,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.558,0.693" FontSize="36" FontWeight="Bold" FontFamily="Sorts Mill Goudy"/>
+        <Label Content="Description:" HorizontalAlignment="Left" Margin="336,82,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.558,0.693" FontSize="16"/>
+        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="33" Margin="336,113,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" FontSize="16" TabIndex="1"/>
+        <Label Content="Quantity:" HorizontalAlignment="Left" Margin="336,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.558,0.693" FontSize="16"/>
+        <TextBox x:Name="txtQuantity" HorizontalAlignment="Left" Height="33" Margin="336,183,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="281" FontSize="16" TabIndex="1"/>
+        <Button x:Name="btnAddOrUpdate" HorizontalAlignment="Left" Margin="336,313,0,0" VerticalAlignment="Top" Width="94" Height="34" FontSize="16" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" Foreground="White" Content="Button" Click="btnAddorUpdate_Click"/>
+
+    </Grid>
+</Page>
