@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1200" Loaded="frmMain_Loaded">
+        Title="MainWindow" Height="900" Width="1200" Loaded="frmMain_Loaded" WindowStartupLocation="CenterScreen">
 
     <Grid Background="#eeee">
         <Grid.ColumnDefinitions>

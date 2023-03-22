@@ -59,6 +59,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="PageFiles\pgAddEditSeason.xaml.cs">
+      <DependentUpon>pgAddEditSeason.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\pgViewSeasonList.xaml.cs">
+      <DependentUpon>pgViewSeasonList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pgAddEditLeague.xaml.cs">
+      <DependentUpon>pgAddEditLeague.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="PageFiles\pgAddEditSeason.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\pgViewSeasonList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pgAddEditLeague.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ChatControls\member.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -93,12 +117,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
-    
     <Compile Include="ChatControls\outgoing.xaml.cs">
       <DependentUpon>outgoing.xaml</DependentUpon>
     </Compile>
-    
     <Compile Include="CustomControls\EquipmentListControl.xaml.cs">
       <DependentUpon>EquipmentListControl.xaml</DependentUpon>
     </Compile>
@@ -114,7 +135,6 @@
     <Compile Include="CustomControls\TeamSport.xaml.cs">
       <DependentUpon>TeamSport.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="PageFiles\Administration\pgAdminResetPassword.xaml.cs">
       <DependentUpon>pgAdminResetPassword.xaml</DependentUpon>
     </Compile>
@@ -308,6 +328,10 @@
     <Page Include="PageFiles\Teams\pgViewTeamList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

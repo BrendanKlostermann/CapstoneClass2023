@@ -62,6 +62,7 @@ namespace Extremely_Casual_Game_Organizer
             _pageControl = new PageControl();
             _masterManager = new MasterManager();
             InitializeComponent();
+
             // Hide all function buttons
             grdFrameFunctions.Visibility = Visibility.Hidden;
             
@@ -163,7 +164,6 @@ namespace Extremely_Casual_Game_Organizer
             /// Created 02/28/2023
             /// Logout Logic
             /// </summary>
-            frameLoad.Visibility = Visibility.Hidden;
         }
 
         private void btnAlerts_Click(object sender, RoutedEventArgs e)
@@ -180,6 +180,5 @@ namespace Extremely_Casual_Game_Organizer
         {
             _pageControl.LoadPage(new pgMemberProfile(_masterManager));
         }
-
     }
 }

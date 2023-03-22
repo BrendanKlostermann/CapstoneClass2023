@@ -7,6 +7,7 @@ using LogicLayerInterfaces;
 using DataObjects;
 using DataAccessLayer;
 using DataAccessLayerInterfaces;
+using System.Security.Cryptography;
 
 namespace LogicLayer
 {
@@ -18,30 +19,27 @@ namespace LogicLayer
         {
             _sportAccessor = new SportAccessor();
         }
-        public SportManager(ISportAccessor ta)
+		
+
+        public SportManager(ISportAccessor sportAccessor)
         {
-            _sportAccessor = ta;
+            _sportAccessor = sportAccessor;
         }
+
         public List<Sport> RetrieveAllSports()
         {
-            List<Sport> sportList = null;
+            List<Sport> sports = new List<Sport>();
 
             try
             {
-                sportList = _sportAccessor.SelectAllSports();
-
-                if (sportList == null)
-                {
-                    throw new ApplicationException("No sports found");
-                }
+                sports = _sportAccessor.SelectAllSports();
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-
-                throw new ApplicationException("Unable to retrieve sport list", ex);
+                throw new ApplicationException("Failed loading sport list", ex);
             }
 
-            return sportList;
+            return sports;
         }
     }
 }

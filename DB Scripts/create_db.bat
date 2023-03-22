@@ -58,15 +58,9 @@ sqlcmd -S localhost -E -i sp_select_tournament_team_by_tournament_id.sql
 sqlcmd -S localhost -E -i sp_update_team_equipment.sql
 sqlcmd -S localhost -E -i sp_select_all_tournaments.sql
 sqlcmd -S localhost -E -i sp_insert_tournament.sql
-
-
-
 sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
-
 sqlcmd -S localhost -E -i fake_data.sql
-
 sqlcmd -S localhost -E -i sp_select_all_teams.sql
-
 
 rem server is localhost
 

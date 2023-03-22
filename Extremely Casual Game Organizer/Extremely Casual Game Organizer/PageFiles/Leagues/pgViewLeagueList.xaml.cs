@@ -90,22 +90,62 @@ namespace Extremely_Casual_Game_Organizer
             {
                 MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
-}
+        }
 
 
-/// <summary>
-/// Brendan Klostermann
-/// Created: 2023/02/20
-/// 
-/// When the page is unloaded it will clear out the league list and clear the item
-/// source of the datagrid to ensure they are empty and ready for next time it is loaded.
-/// </summary>
-/// 
-private void datLeagues_Unloaded(object sender, RoutedEventArgs e)
-{
-    _leagues = null;
-    _leaguesGridVM = null;
-    datLeagues.ItemsSource = null;
-}
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/02/20
+        /// 
+        /// When the page is unloaded it will clear out the league list and clear the item
+        /// source of the datagrid to ensure they are empty and ready for next time it is loaded.
+        /// </summary>
+        /// 
+        private void datLeagues_Unloaded(object sender, RoutedEventArgs e)
+        {
+            
+            _leaguesGridVM = null;
+            datLeagues.ItemsSource = null;
+        }
+
+        /// <summary>
+        /// Elijah
+        /// Created: 2023/02/28
+        /// 
+        /// When a item on the datLeagues data grid is selected, the 
+        /// selected item becomes the current League object. This is
+        /// used later when the data from this league is populated 
+        /// in the pgAddEditLeague page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        // Made by Elijah Morgan
+        private void datLeagues_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var leagueGridVM = (LeagueGridVM)datLeagues.SelectedItem;
+
+            if(_leagueManager == null)
+            {
+                _leagueManager = new LeagueManager();
+            }
+
+            League league = null;
+            try
+            {
+                league = _leagueManager.RetrieveLeagueByLeagueID(leagueGridVM.LeagueID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("League not found." + "\n\n" + ex.Message);
+            }
+
+            pgAddEditLeague selectedLeague = new pgAddEditLeague(league);
+
+            PageControl pageController = new PageControl();
+            pageController.LoadPage(selectedLeague);
+            var editWindow = new pgAddEditLeague(league); // use a constructor that takes a league argument
+        }
+
     }
 }
+

@@ -1,6 +1,6 @@
 ﻿/// <summary>
-/// Brendan Klostermann
-/// Created: 2023/01/31
+/// Brendan Klostermann & Elijah Morgan
+/// Created: 2023/01/31 & Created: 2023/02/28
 /// 
 /// This is the test class for the LeagueManager method tests.
 /// </summary>
@@ -9,14 +9,17 @@
 /// Updater Name
 /// Updated: yyyy/mm/dd
 /// </remarks>
-
+/// 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using DataObjects;
+using LogicLayer;
 using DataAccessLayerInterfaces;
 using DataAccessLayerFakes;
-using LogicLayer;
-using System.Collections.Generic;
+using DataObjects;
 
 namespace LogicLayerTests
 {
@@ -26,20 +29,52 @@ namespace LogicLayerTests
         private LeagueManager _leagueManager = null;
 
         [TestInitialize]
-        public void SetupTests()
+        public void TestSetup()
         {
             _leagueManager = new LeagueManager(new LeagueAccessorFake());
         }
 
+
+        /// Elijah & Brendan Klostermann
+        /// Created: 2023/02/28 & 2023/02/20
+        /// 
+        /// Retrieves all active leagues.
+        /// 
+        [TestMethod]
+        public void TestRetrieveLeagueByActiveReturnsCorrectList()
+        {
+            // arrange
+            bool active = true;
+            int expectedCount = 2;
+            int actualCount = 0;
+
+            // act
+            actualCount = (_leagueManager.RetrieveLeagueByActiveStatus(active).Count);
+
+            // assert
+            Assert.AreEqual(expectedCount, actualCount);
+        }
+
         /// <summary>
-        /// Brendan Klostermann
-        /// Created: 2023/02/20
+        /// Elijah
+        /// Created: 2023/02/28
         /// 
-        /// This test is to determine if the RetrieveListOfLeagues method
-        /// returns the correct amount of items as layed out in the 
-        /// fake data constructor.
-        /// </summary>
+        /// retrieves all Leagues.
         /// 
+        [TestMethod]
+        public void TestRetrieveAllLeaguesReturnsCorrectList()
+        {
+            // arrange
+            const int expectedCount = 3;
+            int actualCount;
+
+            // act
+            actualCount = (_leagueManager.RetrieveAllLeagues()).Count;
+
+            // assert
+            Assert.AreEqual(expectedCount, actualCount);
+        }
+
         [TestMethod]
         public void TestRetreivingListOfLeagues()
         {
@@ -48,7 +83,7 @@ namespace LogicLayerTests
             int actualResult = _leagues.Count;
             Assert.AreEqual(expectedResult, actualResult);
         }
-
+		
         /// <summary>
         /// Created By: Jacob Lindauer
         /// Date: 2023/26/02
