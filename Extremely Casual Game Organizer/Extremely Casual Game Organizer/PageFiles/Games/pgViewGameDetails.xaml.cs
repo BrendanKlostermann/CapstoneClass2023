@@ -81,9 +81,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                     + ", " + locationString[1] + " " + details[3].ToString();
             txtLocation.Text = locationFormatted;
             txtVenueName.Text = details[4].ToString();
-            txtDate.Text = Convert.ToDateTime(details[5]).ToShortDateString();
-            txtTime.Text = Convert.ToDateTime(details[5]).ToShortTimeString();
-            txtSport.Text = details[6].ToString();
+            txtDate.Text = Convert.ToDateTime(details[4]).ToShortDateString();
+            txtTime.Text = Convert.ToDateTime(details[4]).ToShortTimeString();
+            txtSport.Text = details[5].ToString();
         }
 
         private void LoadRosterData()
@@ -93,6 +93,11 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             /// Date: 02/15/2023
             /// 
             /// Method for loading roster details from based teams participating in the selected game
+            /// 
+            /// Udpated By: Jacob Lindauer
+            /// Date: 2023/28/03
+            /// 
+            /// Updated Method to apply player position in roster details
             /// </summary>
             
             try
@@ -122,6 +127,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 // Need to loop through player lists and add those items to the list items.
                 foreach (var player in team1PlayerQuery)
                 {
+
+
                     // Create Dock Panel template for list view item addition.
                     // Need to create 2 dock panel to add to a stack panel. One for Name and one for Position.
                     DockPanel dockPanelName = new DockPanel();
@@ -147,7 +154,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                     posLabel.FontWeight = FontWeights.Bold;
                     posLabel.Text = "Position: ";
 
-                    TextBlock posText = new TextBlock { Text = "Member Position" };
+                    TextBlock posText = new TextBlock { Text = player.Description};
 
                     // Add Text Block to Position Dock Panel
                     dockPanelPos.Children.Add(posLabel);
@@ -190,7 +197,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                     posLabel.FontWeight = FontWeights.Bold;
                     posLabel.Text = "Position: ";
 
-                    TextBlock posText = new TextBlock { Text = "Member Position" };
+                    TextBlock posText = new TextBlock { Text = player.Description };
 
                     // Add Text Block to Position Dock Panel
                     dockPanelPos.Children.Add(posLabel);

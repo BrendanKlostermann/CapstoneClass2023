@@ -15,9 +15,9 @@ print "" print "*** Inserting into Members"
 GO
 SET IDENTITY_INSERT [dbo].[Member] ON
 INSERT INTO [dbo].[Member] ([member_id], [email], [first_name], [family_name], [birthday], [phone_number], [passwordHash], [gender], [active], [bio]) VALUES 
-(100000, N'lebronjames@gmail.com', N'Lebron', N'James', N'2000-01-01', N'319-519-1234', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 0, 1, NULL),
-(100002, N'kevindurant@gmail.com', N'Kevin', N'Durant', N'2000-01-04', N'319-519-1235', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 0, 1, NULL),
-(100003, N'angelicasombrano@gmail.com', N'Angelica', N'Sombrano', N'2000-06-01', N'319-519-1236', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 1, 1, NULL),
+(100000, N'lebronjames@gmail.com', N'Lebron', N'James', N'2000-01-01', N'319-519-1234', N'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, NULL),
+(100002, N'kevindurant@gmail.com', N'Kevin', N'Durant', N'2000-01-04', N'319-519-1235', N'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, NULL),
+(100003, N'angelicasombrano@gmail.com', N'Angelica', N'Sombrano', N'2000-06-01', N'319-519-1236', N'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, NULL),
 (100004, N'bryantcopper@gmail.com', N'Bryant', N'Copper', N'2003-11-18', N'319-519-1237', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 0, 1, NULL),
 (100005, N'danielkim@gmail.com', N'Daniel', N'Kim', N'2003-11-28', N'319-519-1238', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 1, 1, NULL),
 (100006, N'elizabethberry@gmail.com', N'Elizabeth', N'Berry', N'2001-06-03', N'319-519-1239', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 1, 1, NULL),
@@ -146,39 +146,39 @@ GO
 print "" print "*** Inserting into Availability"
 GO
 SET IDENTITY_INSERT [dbo].[Availability] ON
-INSERT INTO [dbo].[Availability] ([availability_id], [description], [is_available], [member_id], [start_availability], [end_availability]) VALUES 
-(1001, N'I''m available', 1, 100000, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1002, N'I''m not available', 0, 100000, N'2023-03-01 00:00:00', N'2023-03-30 00:00:00'),
-(1003, N'I''m available', 1, 100000, N'2023-04-01 00:00:00', N'2023-06-30 00:00:00'),
-(1004, N'I''m available', 1, 100003, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1005, N'I''m available', 1, 100003, N'2023-03-01 00:00:00', N'2023-03-30 00:00:00'),
-(1006, N'I''m not available', 0, 100003, N'2023-04-01 00:00:00', N'2023-06-30 00:00:00'),
-(1007, N'I''m not available', 0, 100015, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1008, N'I''m available', 1, 100015, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
-(1009, N'I''m not available', 0, 100005, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1010, N'I''m available', 1, 100005, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
-(1011, N'I''m not available', 0, 100007, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1012, N'I''m available', 1, 100007, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
-(1013, N'I''m not available', 0, 100017, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1014, N'I''m available', 1, 100017, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
-(1015, N'I''m available', 1, 100002, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1016, N'I''m available', 1, 100004, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1017, N'I''m available', 1, 100006, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1018, N'I''m available', 1, 100008, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1019, N'I''m available', 1, 100010, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1020, N'I''m available', 1, 100012, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1021, N'I''m available', 1, 100014, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1022, N'I''m available', 1, 100016, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1023, N'I''m available', 1, 100018, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
-(1024, N'I''m available', 1, 100009, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1025, N'I''m available', 1, 100009, N'2023-03-01 00:00:00', N'2023-04-30 00:00:00'),
-(1026, N'I''m not available', 0, 100009, N'2023-05-01 00:00:00', N'2023-06-30 00:00:00'),
-(1030, N'I''m available', 1, 100013, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1031, N'I''m available', 1, 100013, N'2023-03-01 00:00:00', N'2023-04-30 00:00:00'),
-(1032, N'I''m not available', 0, 100013, N'2023-05-01 00:00:00', N'2023-06-30 00:00:00'),
-(1033, N'I''m available', 1, 100019, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
-(1034, N'I''m available', 1, 100019, N'2023-03-01 00:00:00', N'2023-04-30 00:00:00'),
-(1035, N'I''m not available', 0, 100019, N'2023-05-01 00:00:00', N'2023-06-30 00:00:00')
+INSERT INTO [dbo].[Availability] ([availability_id], [description], [member_id], [start_availability], [end_availability]) VALUES 
+(1001, N'I''m available',100000, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1002, N'I''m not available', 100000, N'2023-03-01 00:00:00', N'2023-03-30 00:00:00'),
+(1003, N'I''m available', 100000, N'2023-04-01 00:00:00', N'2023-06-30 00:00:00'),
+(1004, N'I''m available', 100003, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1005, N'I''m available', 100003, N'2023-03-01 00:00:00', N'2023-03-30 00:00:00'),
+(1006, N'I''m not available', 100003, N'2023-04-01 00:00:00', N'2023-06-30 00:00:00'),
+(1007, N'I''m not available', 100015, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1008, N'I''m available', 100015, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
+(1009, N'I''m not available', 100005, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1010, N'I''m available', 100005, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
+(1011, N'I''m not available', 100007, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1012, N'I''m available', 100007, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
+(1013, N'I''m not available', 100017, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1014, N'I''m available', 100017, N'2023-03-01 00:00:00', N'2023-06-30 00:00:00'),
+(1015, N'I''m available', 100002, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1016, N'I''m available', 100004, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1017, N'I''m available', 100006, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1018, N'I''m available', 100008, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1019, N'I''m available', 100010, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1020, N'I''m available', 100012, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1021, N'I''m available', 100014, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1022, N'I''m available', 100016, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1023, N'I''m available', 100018, N'2023-02-01 00:00:00', N'2023-06-30 00:00:00'),
+(1024, N'I''m available', 100009, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1025, N'I''m available', 100009, N'2023-03-01 00:00:00', N'2023-04-30 00:00:00'),
+(1026, N'I''m not available', 100009, N'2023-05-01 00:00:00', N'2023-06-30 00:00:00'),
+(1030, N'I''m available', 100013, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1031, N'I''m available', 100013, N'2023-03-01 00:00:00', N'2023-04-30 00:00:00'),
+(1032, N'I''m not available', 100013, N'2023-05-01 00:00:00', N'2023-06-30 00:00:00'),
+(1033, N'I''m available', 100019, N'2023-02-01 00:00:00', N'2023-02-28 00:00:00'),
+(1034, N'I''m available', 100019, N'2023-03-01 00:00:00', N'2023-04-30 00:00:00'),
+(1035, N'I''m not available', 100019, N'2023-05-01 00:00:00', N'2023-06-30 00:00:00')
 SET IDENTITY_INSERT [dbo].[Availability] OFF
 GO
 
@@ -1470,10 +1470,10 @@ print "" print "*** Inserting into Practice"
 GO
 SET IDENTITY_INSERT [dbo].[Practice] ON
 INSERT INTO [dbo].[Practice] ([practice_id], [location], [team_id], [date_time], [description], [zip_code], [city]) VALUES 
-(1000, N'15 St Ave', 1015, N'2023-03-04 09:10:00', N'Be ready to run.', 52401, 'Cedar Rapids'),
-(1006, N'15 St Ave', 1015, N'2023-03-14 08:20:00', N'Weight lighting session',50309, 'Des Moines'),
-(1011, N'15 St Ave', 1015, N'2023-05-23 07:45:00', N'Friendly game.',50703,'Waterloo'),
-(1023, N'15 St Ave', 1015, N'2023-06-05 08:00:00', N'5 miles walk.',51250,'Sioux Center'),
+(1000, N'15 St Ave', 1000, N'2023-03-04 09:10:00', N'Be ready to run.', 52401, 'Cedar Rapids'),
+(1006, N'15 St Ave', 1000, N'2023-03-14 08:20:00', N'Weight lighting session',50309, 'Des Moines'),
+(1011, N'15 St Ave', 1000, N'2023-05-23 07:45:00', N'Friendly game.',50703,'Waterloo'),
+(1023, N'15 St Ave', 1000, N'2023-06-05 08:00:00', N'5 miles walk.',51250,'Sioux Center'),
 (1001, N'15 St Ave', 1015, N'2023-05-12 09:00:00', N'Shooting session.',50309, 'Des Moines'),
 (1020, N'15 St Ave', 1015, N'2023-03-09 10:30:00', N'Running till you die.',52241,'Coralville'),
 (1002, N'15 St Ave', 1015, N'2023-04-03 11:20:00', N'Bring your own food.',52241,'Coralville')

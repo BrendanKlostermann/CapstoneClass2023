@@ -17,6 +17,7 @@ namespace DataObjects
         public string Type { get; set; }
         public int EventID { get; set; }
         public string  Location { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
+        public string Description { get; set; }
     }
 }

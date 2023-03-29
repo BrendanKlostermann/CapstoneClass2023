@@ -18,7 +18,7 @@ using DataAccessLayerFakes;
 namespace LogicLayerTests
 {
     [TestClass]
-    public class TeamMemberAccessorTest
+    public class TeamMemberManagerTest
     {
         private TeamMemberManager _teamMemberManager = null;
         private MemberManager _memberManager = null;
@@ -82,6 +82,36 @@ namespace LogicLayerTests
             int actual = _teamMemberManager.RemoveAPlayerFromATeamByTeamIDAndMemberID(teamID, memberID);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/28/03
+        /// 
+        /// Method to test retrieving list of team members for a team
+        /// </summary>
+        /// 
+
+        [TestMethod]
+        public void TestRetrievingTeamMembersByTeamID()
+        {
+            const int source = 1000;
+            const int expectedResult = 3;
+            int actualResult = 0;
+
+            actualResult = _teamMemberManager.RetrieveTeamRosterByTeamID(source).Count;
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestErrorWithInvalidTeamIDWhenRetrievingTeamRoster()
+        {
+            const int source = 0;
+            int actualResult = 0;
+
+            actualResult = _teamMemberManager.RetrieveTeamRosterByTeamID(source).Count;
         }
     }
 }

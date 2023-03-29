@@ -93,12 +93,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
-    
     <Compile Include="ChatControls\outgoing.xaml.cs">
       <DependentUpon>outgoing.xaml</DependentUpon>
     </Compile>
-    
     <Compile Include="CustomControls\EquipmentListControl.xaml.cs">
       <DependentUpon>EquipmentListControl.xaml</DependentUpon>
     </Compile>
@@ -114,9 +111,11 @@
     <Compile Include="CustomControls\TeamSport.xaml.cs">
       <DependentUpon>TeamSport.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="PageFiles\Administration\pgAdminResetPassword.xaml.cs">
       <DependentUpon>pgAdminResetPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\MemberPages\winEventDetails.xaml.cs">
+      <DependentUpon>winEventDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\pgCreateTournament.xaml.cs">
       <DependentUpon>pgCreateTournament.xaml</DependentUpon>
@@ -138,6 +137,9 @@
     </Compile>
     <Compile Include="PageFiles\Leagues\pgViewLeagueList.xaml.cs">
       <DependentUpon>pgViewLeagueList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Utility\pgHomepage.xaml.cs">
+      <DependentUpon>pgHomepage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Utility\pgLogIn.xaml.cs">
       <DependentUpon>pgLogIn.xaml</DependentUpon>
@@ -179,6 +181,10 @@
     <Compile Include="StylesTest.xaml.cs">
       <DependentUpon>StylesTest.xaml</DependentUpon>
     </Compile>
+    <Page Include="PageFiles\MemberPages\winEventDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFiles\pgCreateTournament.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -217,10 +223,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\Styles\CalendarResource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="PageFiles\Teams\pgTeamList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -234,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Leagues\pgViewLeagueList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Utility\pgHomepage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -253,7 +259,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="styles\styles.xaml">
+    <Resource Include="PageFiles\Styles\styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
@@ -372,6 +378,12 @@
     <Resource Include="Data\mailButton.png" />
     <Resource Include="Data\profileButton.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Data\BackButton.png" />
+    <Resource Include="Data\ForwardButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

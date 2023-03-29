@@ -298,25 +298,31 @@ namespace DataAccessLayer
                 conn.Open();
                 var reader = cmd.ExecuteReader();
 
-                League temp = new League();
-                temp.LeagueID = reader.GetInt32(0);
-                temp.SportID = reader.GetInt32(1);
-                if (reader.IsDBNull(2) == false)
+                if (reader.HasRows)
                 {
-                    temp.LeagueDues = reader.GetDecimal(2);
-                }
-                temp.Active = reader.GetBoolean(3);
-                temp.MemberID = reader.GetInt32(4);
-                temp.Description = reader.GetString(6);
-                temp.Name = reader.GetString(7);
+                    while (reader.Read())
+                    {
+                        League temp = new League();
+                        temp.LeagueID = reader.GetInt32(0);
+                        temp.SportID = reader.GetInt32(1);
+                        if (reader.IsDBNull(2) == false)
+                        {
+                            temp.LeagueDues = reader.GetDecimal(2);
+                        }
+                        temp.Active = reader.GetBoolean(3);
+                        temp.MemberID = reader.GetInt32(4);
+                        temp.Description = reader.GetString(6);
+                        temp.Name = reader.GetString(7);
 
-                if (reader.IsDBNull(5) == false)
-                {
-                    temp.Gender = reader.GetBoolean(5);
-                }
-                else { temp.Gender = null; }
+                        if (reader.IsDBNull(5) == false)
+                        {
+                            temp.Gender = reader.GetBoolean(5);
+                        }
+                        else { temp.Gender = null; }
 
-                leagueList.Add(temp);
+                        leagueList.Add(temp);
+                    }
+                }
 
             }
             catch (Exception up)

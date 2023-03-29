@@ -70,11 +70,11 @@ namespace LogicLayer
             {
                 return _memberAccessor.SetUserToInactive(member_id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Member not found.",ex);
+                throw new ApplicationException("Member not found.", ex);
             }
-		}
+        }
         public bool EditMemberPassword(int member_id, string oldPassword, string newPassword)
         {
             /// <summary>
@@ -175,41 +175,6 @@ namespace LogicLayer
             return returnMember;
         }
 
-
-        public List<Member> SearchMemberByFirstAndLastName(string firstName, string lastName)
-        {
-            List<Member> results = null;
-
-            try
-            {
-                results = _memberAccessor.SelectMemberByMemberFullName(firstName, lastName);
-            }
-            catch (Exception ex)
-            {
-
-                throw new ApplicationException("Search Has Failed", ex);
-            }
-
-            return results;
-             
-        }
-
-        public List<Member> SearchMemberByFirstName(string firstName)
-        {
-            List<Member> results = null;
-
-            try
-            {
-                results = _memberAccessor.SelectMemberByMemberFirstName(firstName);
-            }
-            catch (Exception ex)
-            {
-
-                throw new ApplicationException("Search Has Failed", ex);
-            }
-
-            return results;
-        }
         /// <summary>
         /// Michael Haring
         /// Created: 2023/02/14
@@ -266,7 +231,8 @@ namespace LogicLayer
                     _tempMemberList.Add(tempMember);
                 }
                 return _tempMemberList;
-            }catch(ApplicationException up)
+            }
+            catch (ApplicationException up)
             {
                 throw new ApplicationException("Unable to find any members");
             }
@@ -291,7 +257,7 @@ namespace LogicLayer
             {
                 List<Member> _members = new List<Member>();
                 _members = _memberAccessor.SelectAllMembersByTeamID(teamID);
-                if(_members == null)
+                if (_members == null)
                 {
                     throw new ArgumentException("No Team Members");
                 }
@@ -306,8 +272,8 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Error getting data", down);
             }
-		}
-		
+        }
+
         /// <summary>
         /// Anthoney Hale
         /// Created: 2023/02/10
@@ -351,24 +317,41 @@ namespace LogicLayer
         public List<CalendarEvent> RetreiveMemberSchedule(int member_id)
         {
             List<CalendarEvent> events = null;
-
             try
             {
                 DataTable practices = _memberAccessor.SelectPracticesByMemberID(member_id);
                 DataTable games = _memberAccessor.SelectGamesByMemberID(member_id);
                 DataTable tournamentGames = _memberAccessor.SelectTournamentGamesByMemberID(member_id);
+                DataTable availabilityDates = _memberAccessor.SelectAvailabilityByMemberID(member_id);
 
                 events = new List<CalendarEvent>();
 
                 // Loop through each table and add to event list
+                foreach (var availability in availabilityDates.AsEnumerable())
+                {
+                    CalendarEvent calEvent = new CalendarEvent();
+                    calEvent.Type = availability[0].ToString();
+                    calEvent.EventID = Convert.ToInt32(availability[1]);
+                    calEvent.Date = Convert.ToDateTime(availability[2]).ToString("MM/dd/yyyy h:mm tt") + "," + Convert.ToDateTime(availability[3]).ToString("MM/dd/yyyy h:mm tt");
+                    if (availability[4] == null)
+                    {
+                        calEvent.Description = "";
+                    }
+                    else
+                    {
+                        calEvent.Description = availability[4].ToString();
+                    }
+
+                    events.Add(calEvent);
+                }
                 foreach (var practice in practices.AsEnumerable())
                 {
                     CalendarEvent practiceEvent = new CalendarEvent();
                     practiceEvent.Type = practice[0].ToString();
                     practiceEvent.EventID = Convert.ToInt32(practice[1]);
                     practiceEvent.Location = practice[2].ToString();
-                    practiceEvent.Date = Convert.ToDateTime(practice[3]);
-
+                    practiceEvent.Date = Convert.ToDateTime(practice[3]).ToString("MM/dd/yyyy h:mm tt");
+                    practiceEvent.Description = Convert.ToString(practice[4]);
                     events.Add(practiceEvent);
                 }
 
@@ -378,8 +361,7 @@ namespace LogicLayer
                     gameEvent.Type = game[0].ToString();
                     gameEvent.EventID = Convert.ToInt32(game[1]);
                     gameEvent.Location = game[2].ToString();
-                    gameEvent.Date = Convert.ToDateTime(game[3]);
-
+                    gameEvent.Date = Convert.ToDateTime(game[3]).ToString("MM/dd/yyyy h:mm tt"); ;
                     events.Add(gameEvent);
                 }
 
@@ -389,10 +371,11 @@ namespace LogicLayer
                     game.Type = tournamentGame[0].ToString();
                     game.EventID = Convert.ToInt32(tournamentGame[1]);
                     game.Location = tournamentGame[2].ToString();
-                    game.Date = Convert.ToDateTime(tournamentGame[3]);
+                    game.Date = Convert.ToDateTime(tournamentGame[3]).ToString("MM/dd/yyyy h:mm tt");
 
                     events.Add(game);
                 }
+
 
             }
             catch (Exception ex)
@@ -404,7 +387,7 @@ namespace LogicLayer
             return events;
         }
 
-        
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
@@ -536,6 +519,68 @@ namespace LogicLayer
                 requestedUser = 0; ;
             }
             return requestedUser;
+        }
+
+        public bool AddCalendarEvent(CalendarEvent addEvent, int member_id)
+        {
+            bool result = false;
+            try
+            {
+                result = _memberAccessor.InsertCalendarEvent(addEvent, member_id);
+                if (result == false)
+                {
+                    throw new ApplicationException("Event not added");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error adding event", ex);
+            }
+            return result;
+        }
+
+        public bool UpdateCalendarEvent(CalendarEvent calendarEvent, int member_id)
+        {
+            bool result = false;
+
+            try
+            {
+                result = _memberAccessor.UpdateCalendarEvent(calendarEvent, member_id);
+
+                if (result == false)
+                {
+                    throw new ApplicationException("Event not updated");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Updating calendar event", ex);
+            }
+
+            return result;
+        }
+
+        public bool RemoveCalendarEvent(CalendarEvent calendarEvent, int member_id)
+        {
+            bool result = false;
+
+            try
+            {
+                result = _memberAccessor.DeleteCalendarEvent(calendarEvent, member_id);
+
+                if (result == false)
+                {
+                    throw new ApplicationException("Event not updated");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Removing calendar event", ex);
+            }
+
+            return result;
         }
     }
 }

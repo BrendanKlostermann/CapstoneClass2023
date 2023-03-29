@@ -31,7 +31,6 @@ AS
 			, [Venue].[location]
 			, [Venue].[city]
 			, [Venue].[zip_code]
-			, [Venue].[venue_name]
 			, [Game].[date_and_time]
 			, [Sport].[description]
 			, [Game].[Score]

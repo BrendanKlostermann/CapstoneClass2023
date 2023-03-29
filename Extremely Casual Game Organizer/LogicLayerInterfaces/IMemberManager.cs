@@ -48,11 +48,7 @@ namespace LogicLayerInterfaces
         bool EditMemberPassword(int member_id, string oldPassword, string newPassword);
         string HashSha256(string source);
         Member RetrieveMemberByEmail(string email);
-        List<Member> SearchMemberByFirstName(string firstName);
-        List<Member> SearchMemberByFirstAndLastName(string fistName, string lastName);
         bool ResetPasswordToDefault(int memberID);
-
-
 
         /// <TeamObject>
         /// Alex Korte
@@ -74,12 +70,32 @@ namespace LogicLayerInterfaces
         /// </summary>
         /// <returns></returns>
         List<CalendarEvent> RetreiveMemberSchedule(int member_id);
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        bool AddCalendarEvent(CalendarEvent addEvent, int member_id);
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        bool UpdateCalendarEvent(CalendarEvent calendarEvent, int member_id);
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        bool RemoveCalendarEvent(CalendarEvent calendarEvent, int member_id);
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
         /// 
         /// Adding a new user to the member table
         /// </summary>
+
         int AddUser(Member member);
 
 

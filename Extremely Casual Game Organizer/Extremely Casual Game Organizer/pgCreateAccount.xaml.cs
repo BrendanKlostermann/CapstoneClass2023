@@ -90,6 +90,13 @@ namespace Extremely_Casual_Game_Organizer
                 return;
             }
 
+            if (txtBirthday.Text == "" || txtBirthday == null)
+            {
+                MessageBox.Show("You must enter a birthday");
+                txtBirthday.Focus();
+                return;
+            }
+
             // The birthday canmust be above 18 years old
             if (txtBirthday.SelectedDate.Value.Year > adulttxtBirthday.Year)
             {

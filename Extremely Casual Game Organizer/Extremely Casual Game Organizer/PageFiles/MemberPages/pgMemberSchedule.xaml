@@ -7,22 +7,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="pgMemberSchedule" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PageFiles/Styles/CalendarResource.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Page.Resources>
-    
-    <Grid>
+
+    <Grid Background="{StaticResource ColorBackground}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
@@ -30,26 +22,99 @@
             <TextBlock FontSize="30" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center">Schedule</TextBlock>
         </Grid>
         <Grid x:Name="grdEventList" Grid.Row="2">
-            <DataGrid x:Name="datEventList" GridLinesVisibility="None" Grid.Row="1" ColumnWidth="*" BorderBrush="Transparent" HeadersVisibility="None" Background="Transparent">
-                <DataGrid.RowStyle>
-                    <Style TargetType="DataGridRow" >
-                        <Setter Property="Height" Value="40" />
-                        <Setter Property="Margin" Value="0 10 0 10" />
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="BorderThickness" Value="2" />
-                        <Setter Property="BorderBrush" Value="Black" />
-                    </Style>
-                </DataGrid.RowStyle>
-                <DataGrid.CellStyle>
-                    <Style TargetType="DataGridCell" >
-                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                        <Setter Property="Margin" Value="5" />
-                    </Style>
-                </DataGrid.CellStyle>
-            </DataGrid>
+            <ListBox x:Name="lstEvents" Background="Transparent" />
+            <TextBlock x:Name="txtNoEvents" Text="(No Upcomging Events)" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Grid>
-        <Grid x:Name="grdCalendar" Grid.Row="2" Grid.Column="2" Width="200">
-            <Calendar Style="{StaticResource CalendarStyle}" />
+        <Grid x:Name="grdCalendar" Grid.Row="2" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!-- Month Label -->
+            <Label x:Name="lblMonth" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Grid.ColumnSpan="7" FontWeight="Bold" FontSize="15" Content="MonthTitle"/>
+            <!-- Month Functions -->
+            <Button x:Name="btnMonthBack" Margin="10 0 10 20" Focusable="True" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Click="btnMonthBack_Click">
+                <Image Source="/Data/BackButton.png" />
+            </Button>
+            <Button x:Name="btnMonthForward" Margin="10 0 10 20" Focusable="True" Grid.Column="5" Background="Transparent" BorderBrush="Transparent" Click="btnMonthForward_Click">
+                <Image Source="/Data/ForwardButton.png" />
+            </Button>
+            
+            <!-- Week Headers -->
+            <TextBox HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold">Sun</TextBox>
+            <TextBox Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold">Mon</TextBox>
+            <TextBox Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold">Tues</TextBox>
+            <TextBox Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold">Wed</TextBox>
+            <TextBox Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold">Thurs</TextBox>
+            <TextBox Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold">Fri</TextBox>
+            <TextBox Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold">Sat</TextBox>
+            
+
+            <ListBox x:Name="lst1" Grid.Row="1" Background="Transparent" BorderBrush="Black"/>
+            <ListBox x:Name="lst2" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst3" Grid.Row="1" Grid.Column="2" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst4" Grid.Row="1" Grid.Column="3" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst5" Grid.Row="1" Grid.Column="4" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst6" Grid.Row="1" Grid.Column="5" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst7" Grid.Row="1" Grid.Column="6" Background="Transparent" BorderBrush="Black" />
+
+            <ListBox x:Name="lst8" Grid.Row="2" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst9" Grid.Row="2" Grid.Column="1" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst10" Grid.Row="2" Grid.Column="2" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst11" Grid.Row="2" Grid.Column="3" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst12" Grid.Row="2" Grid.Column="4" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst13" Grid.Row="2" Grid.Column="5" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst14" Grid.Row="2" Grid.Column="6" Background="Transparent" BorderBrush="Black" />
+
+            <ListBox x:Name="lst15" Grid.Row="3" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst16" Grid.Row="3" Grid.Column="1" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst17" Grid.Row="3" Grid.Column="2" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst18" Grid.Row="3" Grid.Column="3" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst19" Grid.Row="3" Grid.Column="4" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst20" Grid.Row="3" Grid.Column="5" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst21" Grid.Row="3" Grid.Column="6" Background="Transparent" BorderBrush="Black" />
+
+            <ListBox x:Name="lst22" Grid.Row="4" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst23" Grid.Row="4" Grid.Column="1" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst24" Grid.Row="4" Grid.Column="2" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst25" Grid.Row="4" Grid.Column="3" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst26" Grid.Row="4" Grid.Column="4" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst27" Grid.Row="4" Grid.Column="5" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst28" Grid.Row="4" Grid.Column="6" Background="Transparent" BorderBrush="Black" />
+
+            <ListBox x:Name="lst29" Grid.Row="5" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst30" Grid.Row="5" Grid.Column="1" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst31" Grid.Row="5" Grid.Column="2" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst32" Grid.Row="5" Grid.Column="3" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst33" Grid.Row="5" Grid.Column="4" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst34" Grid.Row="5" Grid.Column="5" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst35" Grid.Row="5" Grid.Column="6" Background="Transparent" BorderBrush="Black" />
+
+            <ListBox x:Name="lst36" Grid.Row="6" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst37" Grid.Row="6" Grid.Column="1" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst38" Grid.Row="6" Grid.Column="2" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst39" Grid.Row="6" Grid.Column="3" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst40" Grid.Row="6" Grid.Column="4" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst41" Grid.Row="6" Grid.Column="5" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst42" Grid.Row="6" Grid.Column="6" Background="Transparent" BorderBrush="Black" />
+            <ListBox x:Name="lst43" Grid.Row="6" Grid.Column="7" Background="Transparent" BorderBrush="Black" />
+
+
         </Grid>
     </Grid>
 </Page>

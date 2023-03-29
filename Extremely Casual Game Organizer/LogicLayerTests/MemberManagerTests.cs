@@ -25,7 +25,7 @@ namespace LogicLayerTests
     public class MemberManagerTests
     {
         IMemberManager _memberManager = null;
-        
+
 
         [TestInitialize]
         public void TestSetup()
@@ -184,7 +184,7 @@ namespace LogicLayerTests
             int actual = 2;
 
             Assert.AreEqual(_tempMembers.Count, actual);
-		}
+        }
         /// <summary>
         /// Anthoney Hale
         /// Created: 2023/02/10
@@ -302,7 +302,7 @@ namespace LogicLayerTests
         public void TestRetrievingMemberSchedule()
         {
             const int source = 100000;
-            const int expectedResult = 11;
+            const int expectedResult = 14;
             int actualResult = 0;
 
             actualResult = _memberManager.RetreiveMemberSchedule(source).Count;
@@ -310,337 +310,438 @@ namespace LogicLayerTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void AddUserGood()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 10000,
-				FirstName = "Heritier",
-				FamilyName = "Otiom",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-3008",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "example@gmail.com",
-				Active = true,
-				Gender = true
-			};
+        [TestMethod]
+        public void TestAddingAvailabiltyEvent()
+        {
+            const int memberID = 100000;
+            CalendarEvent addEvent = new CalendarEvent()
+            {
+                Type = "Availability"
+                , EventID = 1004
+                , Date = new DateTime(2023, 12, 1, 0, 0, 0).ToString() + "," + (new DateTime(2023, 12, 1, 11, 0, 0)).ToString()
+            };
+            const bool expectedResult = true;
+            bool actualResult = false;
 
-			//Act
-			const int expectedResult = 1;
-			int actualResult = _memberManager.AddUser(member);
+            actualResult = _memberManager.AddCalendarEvent(addEvent, memberID);
 
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestErrorWhenAddingCalendarEvent()
+        {
+            const int memberID = 100000;
+            CalendarEvent addEvent = new CalendarEvent();
+            const bool expectedResult = true;
+            bool actualResult = false;
 
+            actualResult = _memberManager.AddCalendarEvent(addEvent, memberID);
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void AddUserBad()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 123,
-				FirstName = "Heritier",
-				FamilyName = "Otiom",
-				Birthday = new DateTime(2010, 02, 24), // Bad birthday (Adult Only. So you have to born after 2005)
-				Bio = "",
-				PhoneNumber = "319-519-3008",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "example@papa.com", // Bad email
-				Active = true,
-				Gender = true
-			};
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
-			//Act
-			const int expectedResult = 0;
-			int actualResult = _memberManager.AddUser(member);
+        [TestMethod]
+        public void TestUpdatingCalendarEvent()
+        {
+            const int memberID = 100000;
+            CalendarEvent updateEvent = new CalendarEvent()
+            {
+                Type = "Availability"
+                , EventID = 1001
+                , Date = new DateTime(2023, 12, 1, 0, 0, 0) + "," + new DateTime(2023, 12, 1, 11, 0, 0)
+            };
+            const bool expectedResult = true;
+            bool actualResult = false;
 
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            actualResult = _memberManager.UpdateCalendarEvent(updateEvent, memberID);
 
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void GetExistingUser()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 10000,
-				FirstName = "John",
-				FamilyName = "Smith",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestErrorWhenUpdatingCalendarEvent()
+        {
+            const int memberID = 100000;
+            CalendarEvent updateEvent = new CalendarEvent()
+            {
+                Type = ""
+                , EventID = 0
+                , Date = new DateTime(2023, 12, 1, 0, 0, 0).ToString() + "," + (new DateTime(2023, 12, 1, 11, 0, 0)).ToString()
+            };
+            const bool expectedResult = true;
+            bool actualResult = false;
 
-			//Act
-			int expectedResult = member.MemberID;
-			List<Member> _members = _memberManager.GetMemberByName(member.FamilyName);
+            actualResult = _memberManager.UpdateCalendarEvent(updateEvent, memberID);
+        }
 
-			int actualResult = _members[0].MemberID;
+        [TestMethod]
+        public void TestRemovingCalendarEvent()
+        {
+            const int memberID = 100000;
+            CalendarEvent updateEvent = new CalendarEvent()
+            {
+                Type = "Availability"
+                , EventID = 1001
+                , Date = new DateTime(2023, 12, 1, 0, 0, 0).ToString() + "," + (new DateTime(2023, 12, 1, 11, 0, 0)).ToString()
+            };
+            const bool expectedResult = true;
+            bool actualResult = false;
 
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            actualResult = _memberManager.RemoveCalendarEvent(updateEvent, memberID);
 
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void GetBadUser()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 0,
-				FirstName = "Heritier", // Unexisting user
-				FamilyName = null,
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestExpectedErrorRemovingCalendarEvent()
+        {
+            const int memberID = 100000;
+            CalendarEvent updateEvent = new CalendarEvent()
+            {
+                Type = ""
+                , EventID = 0
+                , Date = new DateTime(2023, 12, 1, 0, 0, 0).ToString() + "," + (new DateTime(2023, 12, 1, 11, 0, 0)).ToString()
+            };
+            const bool expectedResult = true;
+            bool actualResult = false;
 
-			//Act
-			int expectedResult = member.MemberID;
-			List<Member> _members = _memberManager.GetMemberByName(member.FamilyName);
+            actualResult = _memberManager.RemoveCalendarEvent(updateEvent, memberID);
+        }
 
-			int actualResult = _members.Count;
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void AddUserGood()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 10000,
+                FirstName = "Heritier",
+                FamilyName = "Otiom",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-3008",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "example@gmail.com",
+                Active = true,
+                Gender = true
+            };
 
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            //Act
+            const int expectedResult = 1;
+            int actualResult = _memberManager.AddUser(member);
 
-
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void GetUserByIDGood()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 10000,
-				FirstName = "Lebron",
-				FamilyName = "James",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
-
-			//Act
-			int expectedResult = member.MemberID;
-			Member _member = _memberManager.GetMemberByMemberID(member.MemberID);
-
-			int actualResult = _member.MemberID;
-
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void GetUserByIDBad()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 001,
-				FirstName = "Lebron",
-				FamilyName = "James",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void AddUserBad()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 123,
+                FirstName = "Heritier",
+                FamilyName = "Otiom",
+                Birthday = new DateTime(2010, 02, 24), // Bad birthday (Adult Only. So you have to born after 2005)
+                Bio = "",
+                PhoneNumber = "319-519-3008",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "example@papa.com", // Bad email
+                Active = true,
+                Gender = true
+            };
 
-			//Act
-			int expectedResult = 0;
-			Member _member = _memberManager.GetMemberByMemberID(member.MemberID);
+            //Act
+            const int expectedResult = 0;
+            int actualResult = _memberManager.AddUser(member);
 
-			int actualResult = 0;
-			if (_member != null) actualResult = 1;
-
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void UpdateMemberProfileGood()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 10000,
-				FirstName = "Lebron",
-				FamilyName = "James",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void GetExistingUser()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 10000,
+                FirstName = "John",
+                FamilyName = "Smith",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
 
-			//Act
-			int expectedResult = 1;
+            //Act
+            int expectedResult = member.MemberID;
+            List<Member> _members = _memberManager.GetMemberByName(member.FamilyName);
 
-			int actualResult = _memberManager.UpdateProfilePicture(member);
+            int actualResult = _members[0].MemberID;
 
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
-
-
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void UpdateMemberProfileBad()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 001,
-				FirstName = "Lebron",
-				FamilyName = "James",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
-
-			//Act
-			int expectedResult = _memberManager.UpdateProfilePicture(member);
-
-			int actualResult = 0;
-
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void UpdateMemberBioGood()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 10000,
-				FirstName = "Lebron",
-				FamilyName = "James",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void GetBadUser()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 0,
+                FirstName = "Heritier", // Unexisting user
+                FamilyName = null,
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
 
-			//Act
-			int expectedResult = _memberManager.UpdateUserBio(member);
+            //Act
+            int expectedResult = member.MemberID;
+            List<Member> _members = _memberManager.GetMemberByName(member.FamilyName);
 
-			int actualResult = 1;
+            int actualResult = _members.Count;
 
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
 
-		/// <summary>
-		/// Heritier Otiom
-		/// Created: 2023/01/31
-		/// </summary>
-		[TestMethod]
-		public void UpdateMemberBioBad()
-		{
-			//Arrange
-			Member member = new Member()
-			{
-				MemberID = 001,
-				FirstName = "Lebron",
-				FamilyName = "James",
-				Birthday = new DateTime(2000, 02, 24),
-				Bio = "",
-				PhoneNumber = "319-519-1234",
-				ProfilePhoto = null,
-				PasswordHash = "P@ssw0rd",
-				Email = "lebron@gmail.com",
-				Active = true,
-				Gender = true
-			};
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void GetUserByIDGood()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 10000,
+                FirstName = "Lebron",
+                FamilyName = "James",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
 
-			//Act
-			int expectedResult = _memberManager.UpdateUserBio(member);
+            //Act
+            int expectedResult = member.MemberID;
+            Member _member = _memberManager.GetMemberByMemberID(member.MemberID);
 
-			int actualResult = 0;
+            int actualResult = _member.MemberID;
 
-			//Test
-			Assert.AreEqual(expectedResult, actualResult);
-		}
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
-	}
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void GetUserByIDBad()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 001,
+                FirstName = "Lebron",
+                FamilyName = "James",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
+
+            //Act
+            int expectedResult = 0;
+            Member _member = _memberManager.GetMemberByMemberID(member.MemberID);
+
+            int actualResult = 0;
+            if (_member != null) actualResult = 1;
+
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void UpdateMemberProfileGood()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 10000,
+                FirstName = "Lebron",
+                FamilyName = "James",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
+
+            //Act
+            int expectedResult = 1;
+
+            int actualResult = _memberManager.UpdateProfilePicture(member);
+
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void UpdateMemberProfileBad()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 001,
+                FirstName = "Lebron",
+                FamilyName = "James",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
+
+            //Act
+            int expectedResult = _memberManager.UpdateProfilePicture(member);
+
+            int actualResult = 0;
+
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void UpdateMemberBioGood()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 10000,
+                FirstName = "Lebron",
+                FamilyName = "James",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
+
+            //Act
+            int expectedResult = _memberManager.UpdateUserBio(member);
+
+            int actualResult = 1;
+
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// </summary>
+        [TestMethod]
+        public void UpdateMemberBioBad()
+        {
+            //Arrange
+            Member member = new Member()
+            {
+                MemberID = 001,
+                FirstName = "Lebron",
+                FamilyName = "James",
+                Birthday = new DateTime(2000, 02, 24),
+                Bio = "",
+                PhoneNumber = "319-519-1234",
+                ProfilePhoto = null,
+                PasswordHash = "P@ssw0rd",
+                Email = "lebron@gmail.com",
+                Active = true,
+                Gender = true
+            };
+
+            //Act
+            int expectedResult = _memberManager.UpdateUserBio(member);
+
+            int actualResult = 0;
+
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+    }
 }

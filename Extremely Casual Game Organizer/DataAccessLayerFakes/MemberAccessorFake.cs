@@ -41,6 +41,8 @@ namespace DataAccessLayerFakes
         DataTable _practices = null;
         DataTable _games = null;
         DataTable _tournamentGames = null;
+        DataTable _availability = null;
+        
         private List<string> passwordHashes = new List<string>();
 
         /// <summary>
@@ -119,33 +121,47 @@ namespace DataAccessLayerFakes
             // Added By Jacob Lindauer. Need to create data fakes for schedule.
             _practices = new DataTable();
             _practices.Columns.Add("Type", typeof(string));
+            _practices.Columns.Add("PracticeID", typeof(int));
             _practices.Columns.Add("Location", typeof(string));
             _practices.Columns.Add("date_and_time", typeof(DateTime));
+            _practices.Columns.Add("Description", typeof(string));
 
-            _practices.Rows.Add("Practice", "Basketball Court", new DateTime(2023, 03, 04));
-            _practices.Rows.Add("Practice", "YMCA", new DateTime(2023, 05, 12));
-            _practices.Rows.Add("Practice", "Public Court", new DateTime(2023, 04, 03));
-            _practices.Rows.Add("Practice", "The Gym", new DateTime(2023, 03, 14));
+            _practices.Rows.Add("Practice", 1000, "Basketball Court", new DateTime(2023, 03, 04), "Bring Shoes");
+            _practices.Rows.Add("Practice", 1001, "YMCA", new DateTime(2023, 05, 12), "Running laps");
+            _practices.Rows.Add("Practice", 1002, "Public Court", new DateTime(2023, 04, 03), "Evnet Prep");
+            _practices.Rows.Add("Practice", 1003, "The Gym", new DateTime(2023, 03, 14), "Bring gloves");
 
             _games = new DataTable();
             _games.Columns.Add("Type", typeof(string));
+            _games.Columns.Add("GameID", typeof(int));
             _games.Columns.Add("Location", typeof(string));
             _games.Columns.Add("date_and_time", typeof(DateTime));
 
-            _games.Rows.Add("Game", "Basketball Court", new DateTime(2023, 02, 15));
-            _games.Rows.Add("Game", "YMCA", new DateTime(2023, 01, 12));
-            _games.Rows.Add("Game", "Public Court", new DateTime(2023, 08, 03));
-            _games.Rows.Add("Game", "The Gym", new DateTime(2023, 12, 14));
+            _games.Rows.Add("Game", 100, "Basketball Court", new DateTime(2023, 02, 15));
+            _games.Rows.Add("Game", 1001, "YMCA", new DateTime(2023, 01, 12));
+            _games.Rows.Add("Game", 1002, "Public Court", new DateTime(2023, 08, 03));
+            _games.Rows.Add("Game", 1003, "The Gym", new DateTime(2023, 12, 14));
 
             _tournamentGames = new DataTable();
             _tournamentGames.Columns.Add("Type", typeof(string));
+            _tournamentGames.Columns.Add("GameID", typeof(int));
             _tournamentGames.Columns.Add("Location", typeof(string));
             _tournamentGames.Columns.Add("date_and_time", typeof(DateTime));
 
-            _tournamentGames.Rows.Add("Tournament", "Basketball Court", new DateTime(2023, 01, 12));
-            _tournamentGames.Rows.Add("Tournament", "YMCA", new DateTime(2023, 08, 03));
-            _tournamentGames.Rows.Add("Tournament", "The Gym", new DateTime(2023, 12, 14));
+            _tournamentGames.Rows.Add("Tournament", 1004, "Basketball Court", new DateTime(2023, 01, 12));
+            _tournamentGames.Rows.Add("Tournament", 1005, "YMCA", new DateTime(2023, 08, 03));
+            _tournamentGames.Rows.Add("Tournament", 1006, "The Gym", new DateTime(2023, 12, 14));
 
+            _availability = new DataTable();
+            _availability.Columns.Add("Type", typeof(string));
+            _availability.Columns.Add("AvailabilityID", typeof(int));
+            _availability.Columns.Add("StartAvailability", typeof(DateTime));
+            _availability.Columns.Add("EndAvailability", typeof(DateTime));
+            _availability.Columns.Add("Description", typeof(string));
+
+            _availability.Rows.Add("Availability", 1001, new DateTime(2023, 12, 1, 0, 0, 0), new DateTime(2023, 12, 1, 11, 0, 0), "");
+            _availability.Rows.Add("Availability", 1002, new DateTime(2023, 12, 3, 0, 0, 0), new DateTime(2023, 12, 5, 12, 0, 0), "On Vacation");
+            _availability.Rows.Add("Availability", 1003, new DateTime(2023, 01, 1, 0, 0, 0), new DateTime(2023, 01, 5, 12, 30, 0), "");
 
         }
 
@@ -395,7 +411,6 @@ namespace DataAccessLayerFakes
             }
             return _tempList;//return temp list
         }
-
         public List<Member> SelectAllMembersByTeamID(int memberID)
         {
             throw new NotImplementedException();
@@ -565,6 +580,180 @@ namespace DataAccessLayerFakes
 
 
             return 1;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/03
+        /// 
+        /// Returns Availability list
+        public DataTable SelectAvailabilityByMemberID(int member_id)
+        {
+            return _availability;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/03
+        /// 
+        /// Inserts into data fake table depending on the CalendarEvent Type being inserted
+        public bool InsertCalendarEvent(CalendarEvent insertEvent, int member_id)
+        {
+
+            if (insertEvent.Type == "Availability")
+            {
+                int preCount = _availability.Rows.Count;
+
+                string[] dates = insertEvent.Date.Split(',');
+                _availability.Rows.Add(insertEvent.Type, insertEvent.EventID, dates[0], dates[1]);
+
+                int postCount = _availability.Rows.Count;
+
+                int count = postCount - preCount;
+
+                if (count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            if (insertEvent.Type == "Tournament Game")
+            {
+                int preCount = _tournamentGames.Rows.Count;
+
+                _tournamentGames.Rows.Add(insertEvent.Type, insertEvent.EventID, insertEvent.Location, insertEvent.Date);
+
+                int postCount = _tournamentGames.Rows.Count;
+
+                int count = postCount - preCount;
+
+                if (count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if (insertEvent.Type == "Game")
+            {
+                int preCount = _games.Rows.Count;
+
+                _games.Rows.Add(insertEvent.Type, insertEvent.EventID, insertEvent.Location, insertEvent.Date);
+
+                int postCount = _games.Rows.Count;
+
+                int count = postCount - preCount;
+
+                if (count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if (insertEvent.Type == "Practice")
+            {
+                int preCount = _practices.Rows.Count;
+
+                _practices.Rows.Add(insertEvent.Type, insertEvent.EventID, insertEvent.Location, insertEvent.Date);
+
+                int postCount = _practices.Rows.Count;
+
+                int count = postCount - preCount;
+
+                if (count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/03
+        /// 
+        /// Updates data fake row depending on the CalendarEvent Type being Updated
+        public bool UpdateCalendarEvent(CalendarEvent updateEvent, int member_id)
+        {
+            bool result = false;
+
+            if (updateEvent.Type == "Availability")
+            {
+                // parse dates
+                string[] dates = updateEvent.Date.Split(',');
+
+                int preCount = _availability.Rows.Count;
+
+                var findRow = from row in _availability.AsEnumerable()
+                              where row[0].Equals(updateEvent.Type)
+                              where row[1].Equals(updateEvent.EventID)
+                              select row;
+
+                // Remove old row
+                _availability.Rows.RemoveAt(_availability.Rows.IndexOf(findRow.First()));
+                int postCount = _availability.Rows.Count;
+
+                int count = preCount - postCount;
+
+                if (count == 1)
+                {
+                    // Add new row
+                    _availability.Rows.Add(updateEvent.Type, updateEvent.EventID, dates[0], dates[1]);
+                    return true;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/03
+        /// 
+        /// deletes data fake row depending on the CalendarEvent Type being removed
+        public bool DeleteCalendarEvent(CalendarEvent deleteEvent, int member_id)
+        {
+            bool result = false;
+
+            if (deleteEvent.Type == "Availability")
+            {
+                // parse dates
+                string[] dates = deleteEvent.Date.Split(',');
+
+                int preCount = _availability.Rows.Count;
+
+                var findRow = from row in _availability.AsEnumerable()
+                              where row[0].Equals(deleteEvent.Type)
+                              where row[1].Equals(deleteEvent.EventID)
+                              select row;
+
+                _availability.Rows.Remove(findRow.First());
+
+                int postCount = _availability.Rows.Count;
+
+                int count = preCount - postCount;
+
+                if (count == 1)
+                {
+                    return true;
+                }
+            }
+
+            return result;
         }
     }
 }
