@@ -80,6 +80,16 @@ namespace DataAccessLayerFakes
             _teamMember.Add(temp2);
         }
 
+        public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddTeam(Team team)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /// <summary>
         /// Alex Korte
@@ -105,6 +115,26 @@ namespace DataAccessLayerFakes
                 }
             }
             return count;
+        }
+
+        public List<string> getSportName()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TeamMemberAndSport> getTeamByMemberID(int member_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TeamSport> getTeamByTeamName(string name, int sport_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int MoveAPlayerToBenchOrStarter(int teamID, bool starterOrBench, int memberID)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -148,7 +178,22 @@ namespace DataAccessLayerFakes
             return membersOnTeamList;
         }
 
+        public List<Team> SelectAllTeams()
+        {
+            throw new NotImplementedException();
+        }
+
         public TeamMember SelectAMembersInATeamWithTeamDetails(int memberID, int teamID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Team SelectTeamByTeamID(int team_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TeamMember> SelectTeamMembersByTeamID(int team_id)
         {
             throw new NotImplementedException();
         }

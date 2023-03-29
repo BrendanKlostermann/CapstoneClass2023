@@ -41,14 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FakeEquipmentAccessor.cs" />
+    <Compile Include="FakeMessageAccessor.cs" />
     <Compile Include="LeagueAccessorFake.cs" />
     <Compile Include="GameAccessorFake.cs" />
     <Compile Include="GameRosterAccessorFake.cs" />
+    <Compile Include="LeagueAccessorFakes.cs" />
     <Compile Include="MemberAccessorFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SportAccessorFakes.cs" />
     <Compile Include="TeamAccessorFake.cs" />
     <Compile Include="TeamMemberAccessorFake.cs" />
+    <Compile Include="TeamMemberAccessorFakes.cs" />
     <Compile Include="TeamRoleAccessorFakes.cs" />
+    <Compile Include="TournamentAccessorFakes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayerInterfaces\DataAccessLayerInterfaces.csproj">

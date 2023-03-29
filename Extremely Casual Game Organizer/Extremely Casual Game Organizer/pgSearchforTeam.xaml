@@ -1,0 +1,22 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.pgSearchforTeam"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
+        mc:Ignorable="d"
+        Title="Search a team" Height="500" Width="567.694" FontSize="15">
+    <Grid Margin="0,0,-439,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="511*"/>
+            <ColumnDefinition Width="281*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="27,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" KeyUp="Blur"/>
+        <ComboBox x:Name="ddSport" HorizontalAlignment="Left" Margin="221,42,0,0" VerticalAlignment="Top" Width="139" SelectionChanged="ddSport_SelectionChanged"/>
+        <Label Content="Sport" HorizontalAlignment="Left" Margin="218,10,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ddSeason" HorizontalAlignment="Left" Margin="368,42,0,0" VerticalAlignment="Top" Width="139" Visibility="Hidden"/>
+        <Label Content="Season" HorizontalAlignment="Left" Margin="368,10,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+        <ListBox x:Name="lbTeam" HorizontalAlignment="Left" Height="409" Margin="27,81,0,0" VerticalAlignment="Top" Width="500" FontSize="20" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}"/>
+        <Label Content="Search" HorizontalAlignment="Left" Margin="27,10,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

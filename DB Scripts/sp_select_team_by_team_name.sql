@@ -16,7 +16,7 @@ AS
 
 		-- Search for a team no matter the sport
 		IF (@team_name != '' AND @sport_id=0)
-			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Team].[description]
+			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Sport].[description]
 			FROM [dbo].[Team]
 			INNER JOIN [dbo].[Sport]
 			ON [Sport].[sport_id] = [Team].[sport_id]
@@ -25,7 +25,7 @@ AS
 
 		-- Search for a team by sport_ID
 		ELSE IF (@team_name != '' AND @sport_id!=0)
-			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Team].[description]
+			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Sport].[description]
 			FROM [dbo].[Team]
 			INNER JOIN [dbo].[Sport]
 			ON [Sport].[sport_id] = [Team].[sport_id]
@@ -35,7 +35,7 @@ AS
 
 		-- Select every team by sport_ID
 		ELSE IF (@team_name = '' AND @sport_id!=0)
-			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Team].[description]
+			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Sport].[description]
 			FROM [dbo].[Team]
 			INNER JOIN [dbo].[Sport]
 			ON [Sport].[sport_id] = [Team].[sport_id]
@@ -43,7 +43,7 @@ AS
 
 		-- If nothing is specify, show all teams 
 		ELSE IF (@team_name = '' AND @sport_id=0)
-			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Team].[description]
+			SELECT [team_id], [team_name], [gender], [Team].[sport_id], [Sport].[description]
 			FROM [dbo].[Team]
 			INNER JOIN [dbo].[Sport]
 			ON [Sport].[sport_id] = [Team].[sport_id]

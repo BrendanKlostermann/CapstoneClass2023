@@ -14,7 +14,18 @@
 /// Added HashSha265 Method and EditMemberPassword
 /// </remarks>
 
-
+/// <summary>
+/// Heritier Otiom
+/// Created: 2023/01/31
+/// 
+/// Member Manager
+/// </summary>
+///
+/// <remarks>
+/// Updater Name: Heritier Otiom
+/// Updated: 2023/02/21
+/// 
+/// </remarks>
 
 using System;
 using System.Collections.Generic;
@@ -27,6 +38,7 @@ using DataAccessLayerInterfaces;
 using System.Security.Cryptography;
 using DataObjects;
 using DataAccessLayer;
+using System.Data;
 
 namespace LogicLayer
 {
@@ -58,11 +70,12 @@ namespace LogicLayer
             {
                 return _memberAccessor.SetUserToInactive(member_id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Member not found.",ex);
+                throw new ApplicationException("Member not found.", ex);
             }
-		}
+        }
+		
         public bool EditMemberPassword(int member_id, string oldPassword, string newPassword)
         {
             /// <summary>
@@ -101,6 +114,7 @@ namespace LogicLayer
             }
             return result;
         }
+		
         public string HashSha256(string source)
         {
             /// <summary>
@@ -137,6 +151,7 @@ namespace LogicLayer
 
             return result.ToLower();
         }
+		
         public Member RetrieveMemberByEmail(string email)
         {
             Member returnMember = null;
@@ -209,6 +224,7 @@ namespace LogicLayer
 
             return results;
         }
+		
         /// <summary>
         /// Michael Haring
         /// Created: 2023/02/14
@@ -265,7 +281,8 @@ namespace LogicLayer
                     _tempMemberList.Add(tempMember);
                 }
                 return _tempMemberList;
-            }catch(ApplicationException up)
+            }
+            catch (ApplicationException up)
             {
                 throw new ApplicationException("Unable to find any members");
             }
@@ -290,7 +307,7 @@ namespace LogicLayer
             {
                 List<Member> _members = new List<Member>();
                 _members = _memberAccessor.SelectAllMembersByTeamID(teamID);
-                if(_members == null)
+                if (_members == null)
                 {
                     throw new ArgumentException("No Team Members");
                 }
@@ -305,8 +322,8 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Error getting data", down);
             }
-		}
-		
+        }
+
         /// <summary>
         /// Anthoney Hale
         /// Created: 2023/02/10
@@ -340,6 +357,7 @@ namespace LogicLayer
         }
 
 
+
         /// <summary>
         /// Alex Korte
         /// Created: 2023/03/26
@@ -356,7 +374,284 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Error connecting to database", up);
             }
-            return _searchedMembers;
+            return _searchedMembers;	
+		}
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/04/03
+        /// 
+        /// Method obtains all events for member by member's ID and puts them into a single list of Calendar Events
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
+        public List<CalendarEvent> RetreiveMemberSchedule(int member_id)
+        {
+            List<CalendarEvent> events = null;
+            try
+            {
+                DataTable practices = _memberAccessor.SelectPracticesByMemberID(member_id);
+                DataTable games = _memberAccessor.SelectGamesByMemberID(member_id);
+                DataTable tournamentGames = _memberAccessor.SelectTournamentGamesByMemberID(member_id);
+                DataTable availabilityDates = _memberAccessor.SelectAvailabilityByMemberID(member_id);
+
+                events = new List<CalendarEvent>();
+
+                // Loop through each table and add to event list
+                foreach (var availability in availabilityDates.AsEnumerable())
+                {
+                    CalendarEvent calEvent = new CalendarEvent();
+                    calEvent.Type = availability[0].ToString();
+                    calEvent.EventID = Convert.ToInt32(availability[1]);
+                    calEvent.Date = Convert.ToDateTime(availability[2]).ToString("MM/dd/yyyy h:mm tt") + "," + Convert.ToDateTime(availability[3]).ToString("MM/dd/yyyy h:mm tt");
+                    if (availability[4] == null)
+                    {
+                        calEvent.Description = "";
+                    }
+                    else
+                    {
+                        calEvent.Description = availability[4].ToString();
+                    }
+
+                    events.Add(calEvent);
+                }
+                foreach (var practice in practices.AsEnumerable())
+                {
+                    CalendarEvent practiceEvent = new CalendarEvent();
+                    practiceEvent.Type = practice[0].ToString();
+                    practiceEvent.EventID = Convert.ToInt32(practice[1]);
+                    practiceEvent.Location = practice[2].ToString();
+                    practiceEvent.Date = Convert.ToDateTime(practice[3]).ToString("MM/dd/yyyy h:mm tt");
+                    practiceEvent.Description = Convert.ToString(practice[4]);
+                    events.Add(practiceEvent);
+                }
+
+                foreach (var game in games.AsEnumerable())
+                {
+                    CalendarEvent gameEvent = new CalendarEvent();
+                    gameEvent.Type = game[0].ToString();
+                    gameEvent.EventID = Convert.ToInt32(game[1]);
+                    gameEvent.Location = game[2].ToString();
+                    gameEvent.Date = Convert.ToDateTime(game[3]).ToString("MM/dd/yyyy h:mm tt"); ;
+                    events.Add(gameEvent);
+                }
+
+                foreach (var tournamentGame in tournamentGames.AsEnumerable())
+                {
+                    CalendarEvent game = new CalendarEvent();
+                    game.Type = tournamentGame[0].ToString();
+                    game.EventID = Convert.ToInt32(tournamentGame[1]);
+                    game.Location = tournamentGame[2].ToString();
+                    game.Date = Convert.ToDateTime(tournamentGame[3]).ToString("MM/dd/yyyy h:mm tt");
+
+                    events.Add(game);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error retrieving events", ex);
+            }
+
+            return events;
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Add a new user
+        /// </summary>
+        public int AddUser(Member member) // Add new user
+        {
+            int requestedUser = 0;
+
+            try
+            {
+                requestedUser = _memberAccessor.AddUser(member);
+            }
+            catch (Exception)
+            {
+                requestedUser = 0; ;
+            }
+            return requestedUser;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Get member by memberID
+        /// </summary>
+        public Member GetMemberByMemberID(int MemberID)
+        {
+            Member member = null;
+            try
+            {
+                member = _memberAccessor.GetMemberByMemberID(MemberID);
+            }
+            catch (Exception)
+            {
+                member = null;
+            }
+            return member;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Get member by name
+        /// </summary>
+        public List<Member> GetMemberByName(string name)
+        {
+            List<Member> members = null;
+            try
+            {
+                members = _memberAccessor.GetMemberByFirstNameFamilyNameAndEmail(name);
+            }
+            catch (Exception)
+            {
+                members = null;
+            }
+            return members;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Get all members
+        /// </summary>
+        public List<Member> GetMembers()
+        {
+            List<Member> members = null;
+            try
+            {
+                members = _memberAccessor.GetListOfAllMembers();
+            }
+            catch (Exception)
+            {
+                members = null;
+            }
+            return members;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Update profile picture for a member
+        /// </summary>
+        public int UpdateProfilePicture(Member member)
+        {
+            int requestedUser = 0;
+
+            try
+            {
+                requestedUser = _memberAccessor.UpdateProfilePicture(member);
+            }
+            catch (Exception)
+            {
+                requestedUser = 0;
+            }
+            return requestedUser;
+        }
+
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Update member Bio
+        /// </summary>
+        public int UpdateUserBio(Member member)
+        {
+            int requestedUser = 0;
+
+            try
+            {
+                requestedUser = _memberAccessor.UpdateUserBio(member);
+            }
+            catch (Exception)
+            {
+                requestedUser = 0; ;
+            }
+            return requestedUser;
+        }
+
+        public bool AddCalendarEvent(CalendarEvent addEvent, int member_id)
+        {
+            bool result = false;
+            try
+            {
+                result = _memberAccessor.InsertCalendarEvent(addEvent, member_id);
+                if (result == false)
+                {
+                    throw new ApplicationException("Event not added");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Error adding event", ex);
+            }
+            return result;
+        }
+
+        public bool UpdateCalendarEvent(CalendarEvent calendarEvent, int member_id)
+        {
+            bool result = false;
+
+            try
+            {
+                result = _memberAccessor.UpdateCalendarEvent(calendarEvent, member_id);
+
+                if (result == false)
+                {
+                    throw new ApplicationException("Event not updated");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Updating calendar event", ex);
+            }
+
+            return result;
+        }
+
+        public bool RemoveCalendarEvent(CalendarEvent calendarEvent, int member_id)
+        {
+            bool result = false;
+
+            try
+            {
+                result = _memberAccessor.DeleteCalendarEvent(calendarEvent, member_id);
+
+                if (result == false)
+                {
+                    throw new ApplicationException("Event not updated");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Removing calendar event", ex);
+            }
+
+            return result;
         }
     }
 }

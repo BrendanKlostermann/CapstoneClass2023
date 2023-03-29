@@ -15,7 +15,6 @@ namespace LogicLayer
         public IMemberManager MemberManager { get; set; }
         public ITeamManager TeamManager { get; set; }
         public ITeamMemberManager TeamMemberManager { get; set; }
-        public ITeamRolesManager TeamRolesManager   { get; set; }
         public ISportManager SportManager { get; set; }
 
         public MasterManager()
@@ -26,7 +25,6 @@ namespace LogicLayer
             MemberManager = new MemberManager();
             TeamManager = new TeamManager();
             TeamMemberManager = new TeamMemberManager();
-            TeamRolesManager = new TeamRolesManager();
             SportManager = new SportManager();
         }
     }

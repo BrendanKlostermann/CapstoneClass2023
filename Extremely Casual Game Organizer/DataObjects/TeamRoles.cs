@@ -8,8 +8,8 @@ namespace DataObjects
 {
     public class TeamRoles
     {
-        public int memberID { get; set; }
-        public int teamID { get; set; }
-        public string teamRoleTypeID { get; set; }
+        public int MemberID { get; set; }
+        public int TeamID { get; set; }
+        public string TeamRoleTypeID { get; set; }
     }
 }

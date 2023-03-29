@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="900" Width="1200">
+        Title="MainWindow" Height="900" Width="1200" Loaded="frmMain_Loaded" WindowStartupLocation="CenterScreen">
 
     <Grid Background="#eeee">
         <Grid.ColumnDefinitions>
@@ -24,21 +24,6 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <!--Menu Options-->
-        <Menu Grid.ColumnSpan="6" Margin="0 0 0 15">
-            <MenuItem x:Name="menuFile" Header="File">
-                <MenuItem x:Name="menuLogout" Header="Logout"></MenuItem>
-                <MenuItem x:Name="mnuExit" Header="Exit"></MenuItem>
-            </MenuItem>
-            <MenuItem x:Name="menuEdit" Header="Edit">
-                <MenuItem x:Name="mnuPreferences" Header="Preferences"></MenuItem>
-            </MenuItem>
-            <MenuItem x:Name="mnuHelp" Header="Help">
-                <MenuItem x:Name="mnuAbout" Header="About"></MenuItem>
-            </MenuItem>
-        </Menu>
-        <!--Menu Options-->
-
         <!-- Top Navigation / Information Pane -->
         <Grid x:Name="grdTopNav" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
@@ -52,10 +37,11 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <!-- Nav options-->
-            <Grid x:Name="grdNavMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+            <Grid x:Name="grdNavMain" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="80"/>
@@ -65,23 +51,35 @@
                     <ColumnDefinition Width="80"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnHome" Cursor="Hand" Grid.Column="0" Margin="20 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent">
-                    <Image Source="Data\homeButton.png"></Image></Button>
+
+                <TextBlock x:Name="txtSignedIn" Grid.Column="4" Grid.ColumnSpan="2" Text="Currently Signed in as: " Margin="5" HorizontalAlignment="Right"/>
+                <Button x:Name="btnSignOut" Grid.Column="6" Margin="10 5 10 125" Click="btnSignOut_Click">Logout</Button>
+
+                <Button x:Name="btnHome" Cursor="Hand" Grid.Column="0" Margin="20 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent" Click="btnHome_Click">
+                    <Image Source="Data\homeButton.png"></Image>
+				</Button>
+				
                 <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent">
-                    <Image Source="Data\helpButton.png"></Image> </Button>
-                <TextBox x:Name="txtLogoPlaceholder" Cursor="Hand" Grid.Column="3" FontSize="20" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Logo Placeholder</TextBox>
-                <Button x:Name="btnAlerts" Cursor="Hand" Grid.Column="5" Margin="10 45" BorderBrush="Transparent" Background="Transparent" Foreground="Black">
+                    <Image Source="Data\helpButton.png"></Image>
+                </Button>
+                <Image Grid.Column="3" Source="/Data/Logo.png" />
+                <Button x:Name="btnAlerts" Cursor="Hand" Grid.Column="5" Margin="10 45" BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="openMessage">
                     <Image Source="Data\mailButton.png"></Image> </Button>
-                <Button x:Name="btnProfile" Cursor="Hand" Grid.Column="6" Margin="20 45"  BorderBrush="Transparent" Background="Transparent" Foreground="Black">
+                <Button x:Name="btnProfile" Cursor="Hand" Grid.Column="6" Margin="20 45"  BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="openProfile">
                     <Image Source="Data\profileButton.png"></Image> </Button>
             </Grid>
             
-            <Button x:Name="navSchedule" Grid.Row="1" Cursor="Hand" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black">Schedule</Button>
-            <Button x:Name="navGame" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navGames_Click">Games</Button>
-            <Button x:Name="navLeagues" Grid.Row="1" Cursor="Hand" Focusable="False"  Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navLeagues_Click">Leagues</Button>
+            <Button x:Name="navSchedule" Grid.Row="1" Cursor="Hand" Focusable="False" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navSchedule_Click">Schedule</Button>
 
-            <Button x:Name="navTeams" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navTeams_Click">Teams</Button>
-            <Button x:Name="navSearch" Grid.Row="1" Cursor="Hand" Focusable="False"  Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navSearch_Click">Search</Button>
+            <Button x:Name="navGame" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navGames_Click">Games</Button>
+
+            <Button x:Name="navLeagues" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navLeagues_Click">Leagues</Button>
+            
+            <Button x:Name="navTournaments" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black">Tournaments</Button>
+
+            <Button x:Name="navTeams" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navTeams_Click">Teams</Button>
+            
+            <Button x:Name="navSearch" Grid.Row="1" Cursor="Hand" Focusable="False"  Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navSearch_Click">Search</Button>
 
         </Grid>
         <!-- Top Navigation / Information Pane -->
@@ -93,8 +91,6 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnTofA" Margin="20" Cursor="Hand" Focusable="False"  Background="Transparent" BorderBrush="Transparent" Foreground="Black" FontSize="15">Terms of Agreement</Button>
-            <Button x:Name="btnSocial" Grid.Column="2" Cursor="Hand" Focusable="False" Margin="20" Background="Transparent" BorderBrush="Transparent" Foreground="Black" FontSize="15">Social</Button>
         </Grid>
         <!-- Bottom Navigation -->
         
@@ -118,7 +114,7 @@
             <Button x:Name="btnFunction5" Grid.Row="4" Margin="10"></Button>
             <Button x:Name="btnFunction6" Grid.Row="5" Margin="10"></Button>
             <Button x:Name="btnFunction7" Grid.Row="6" Margin="10"></Button>
-            <Button x:Name="btnFunction8" Grid.Row="7" Margin="10"></Button>
+            <Button x:Name="btnFunction8" Grid.Row="7" Margin="10"/>
         </Grid>
         
         <!-- Frame / Page Load Grid-->

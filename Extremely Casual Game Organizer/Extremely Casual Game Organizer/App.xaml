@@ -1,9 +1,30 @@
-﻿<Application x:Class="Extremely_Casual_Game_Organizer.App"
+﻿<!-- 
+/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/02/06
+/// 
+/// App Xaml page, being used to merge the Customer Resource Dictionary with the custom
+    Resource dictionary for the style sheet.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>       
+-->
+
+<Application x:Class="Extremely_Casual_Game_Organizer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
              StartupUri="MainWindow.xaml">
+
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="PageFiles/Styles/styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
+
 </Application>

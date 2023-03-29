@@ -7,7 +7,7 @@ GO
 CREATE PROCEDURE [dbo].[sp_select_all_teams]
 AS
 	BEGIN
-		SELECT [Team].[team_id], [team_name], [Team].[gender], [sport_id], [Team].[member_id]
+		SELECT [Team].[team_id], [team_name], [Team].[gender], [sport_id], [Team].[member_id], [Team].[description]
 		FROM [dbo].[Team]
 	END
 GO

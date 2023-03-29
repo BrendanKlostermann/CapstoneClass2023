@@ -41,14 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IEquipmentManager.cs" />
     <Compile Include="ILeagueManager.cs" />
     <Compile Include="IGameManager.cs" />
     <Compile Include="IGameRosterManager.cs" />
     <Compile Include="IMemberManager.cs" />
+    <Compile Include="IMessageManager.cs" />
     <Compile Include="ISportManager.cs" />
     <Compile Include="ITeamManager.cs" />
     <Compile Include="ITeamMemberManager.cs" />
     <Compile Include="ITeamRolesManager.cs" />
+    <Compile Include="ITournamentManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

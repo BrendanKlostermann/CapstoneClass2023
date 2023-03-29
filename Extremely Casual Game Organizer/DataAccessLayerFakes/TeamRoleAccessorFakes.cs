@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+/// Garion Opiola
+/// Created: 2023/01/31
+/// 
+/// Fake Data used in place of real Data Accessor for TeamRoles.
+/// </summary>
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,33 +17,28 @@ namespace DataAccessFakes
 {
     public class TeamRoleAccessorFakes : ITeamRoleAccessor
     {
-        List<TeamRoles> teamRoles = new List<TeamRoles>();
+        List<TeamRoles> _teamRoles = new List<TeamRoles>();
 
         public TeamRoleAccessorFakes()
         {
-            teamRoles.Add(new TeamRoles
+            _teamRoles.Add(new TeamRoles
             {
-                memberID = 999998,
-                teamID = 9998,
-                teamRoleTypeID = "Pitcher"
+                MemberID = 999998,
+                TeamID = 9998,
+                TeamRoleTypeID = "Pitcher"
             });
 
-            teamRoles.Add(new TeamRoles
+            _teamRoles.Add(new TeamRoles
             {
-                memberID = 999999,
-                teamID = 9999,
-                teamRoleTypeID = "Catcher"
+                MemberID = 999999,
+                TeamID = 9999,
+                TeamRoleTypeID = "Catcher"
             });
         }
 
         public List<TeamRoles> SelectTeamRolesByMemberID()
         {
-            return teamRoles.ToList();
-        }
-
-        public int UpdateTeamRole(int memberID, string teamRoleType)
-        {
-            throw new NotImplementedException();
+            return _teamRoles.ToList();
         }
     }
 }

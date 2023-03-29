@@ -36,9 +36,11 @@ namespace Extremely_Casual_Game_Organizer
     public partial class pgViewLeagueList : Page
     {
         List<League> _leagues = null;
+        List<LeagueGridVM> _leaguesGridVM = null;
+        LeagueManager _leagueManager = null;
+        List<LeagueGridVM> _leaguesForGrid = null;
         MasterManager _masterManager = null;
         PageControl _pageControl = new PageControl();
-        
 
         public pgViewLeagueList(MasterManager masterManager)
         {
@@ -57,50 +59,39 @@ namespace Extremely_Casual_Game_Organizer
         /// 
         private void datLeagues_Loaded(object sender, RoutedEventArgs e)
         {
-            if(_leagues == null)
+            try
             {
-                _leagues = new List<League>();
-                _leagues = _masterManager.LeagueManager.RetrieveListOfLeagues();
                 _pageControl.ShowFullCRUD();
 
-                // Create Gender List
-                List<string> genders = new List<string>();
-                foreach(var league in _leagues)
+
+                if (_leaguesForGrid == null)
                 {
-                    if(league.Gender == true)
-                    {
-                        genders.Add("Male");
-                    }
-                    if (league.Gender == false)
-                    {
-                        genders.Add("Female");
-                    }
-                    else
-                    {
-                        genders.Add("Unassigned");
-                    }
+
+                    _leaguesForGrid = new List<LeagueGridVM>();
+                    _leaguesForGrid = _masterManager.LeagueManager.RetrieveListOfLeaguesForGrid();
+
+                    datLeagues.ItemsSource = _leaguesForGrid;
+
+
+                    ////Remove data users do not need, maybe switch to using a ViewModel?
+                    //// Might need to edit data objects to allow league to hold Sport Description as well
+                    //// that way user know what sport it is.
+
+                    datLeagues.Columns.RemoveAt(0);
+                    datLeagues.Columns.RemoveAt(5);
+
+                    datLeagues.Columns[2].Header = "Sport";
+                    datLeagues.Columns[3].Header = "Owner";
+
+                    datLeagues.Columns[1].DisplayIndex = 4;
                 }
-
-                datLeagues.ItemsSource = _leagues;
-
-
-
-                //Remove data users do not need, maybe switch to using a ViewModel?
-                // Might need to edit data objects to allow league to hold Sport Description as well
-                //      that way user know what sport it is.
-
-                datLeagues.Columns.RemoveAt(0);
-                datLeagues.Columns.RemoveAt(0);
-                datLeagues.Columns.RemoveAt(1);
-                datLeagues.Columns.RemoveAt(1);
-                datLeagues.Columns.RemoveAt(0);
-
-                //Edit Columns
-                datLeagues.Columns[3].Header = "Max Number of Players";
-                datLeagues.Columns[2].DisplayIndex = 0;
-                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
+
 
         /// <summary>
         /// Brendan Klostermann
@@ -112,8 +103,49 @@ namespace Extremely_Casual_Game_Organizer
         /// 
         private void datLeagues_Unloaded(object sender, RoutedEventArgs e)
         {
-            _leagues = null;
+            
+            _leaguesGridVM = null;
             datLeagues.ItemsSource = null;
         }
+
+        /// <summary>
+        /// Elijah
+        /// Created: 2023/02/28
+        /// 
+        /// When a item on the datLeagues data grid is selected, the 
+        /// selected item becomes the current League object. This is
+        /// used later when the data from this league is populated 
+        /// in the pgAddEditLeague page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        // Made by Elijah Morgan
+        private void datLeagues_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var leagueGridVM = (LeagueGridVM)datLeagues.SelectedItem;
+
+            if(_leagueManager == null)
+            {
+                _leagueManager = new LeagueManager();
+            }
+
+            League league = null;
+            try
+            {
+                league = _leagueManager.RetrieveLeagueByLeagueID(leagueGridVM.LeagueID);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("League not found." + "\n\n" + ex.Message);
+            }
+
+            pgAddEditLeague selectedLeague = new pgAddEditLeague(league);
+
+            PageControl pageController = new PageControl();
+            pageController.LoadPage(selectedLeague);
+            var editWindow = new pgAddEditLeague(league); // use a constructor that takes a league argument
+        }
+
     }
 }
+

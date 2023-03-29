@@ -1,5 +1,5 @@
 
-﻿/// <TeamMemberManager>
+/// <TeamMemberManager>
 /// Alex Korte
 /// Created: 2023/01/24
 /// 
@@ -12,16 +12,12 @@
 /// </remarks>
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccessLayer;
+using DataAccessLayerInterfaces;
 using DataObjects;
 using LogicLayerInterfaces;
-using DataAccessLayerInterfaces;
-using DataAccessLayer;
-using DataAccessLayerFakes;
+using System;
+using System.Collections.Generic;
 
 namespace LogicLayer
 {
@@ -37,12 +33,6 @@ namespace LogicLayer
         public TeamMemberManager(ITeamAccessor ta)
         {
             _teamAccessor = ta;
-        }
-
-        ITeamMemberAccessor _teamMemberAccessor = null;
-        public TeamMemberManager(ITeamMemberAccessor tma)
-        {
-            _teamMemberAccessor = tma;
         }
 
 
@@ -124,6 +114,10 @@ namespace LogicLayer
             return _tempMembers;//sending the filtered list of only starters or benched.
 		}
 
+        public List<Member> GetAListOfAllMembersByTeamID(int teamID)
+        {
+            throw new NotImplementedException();
+		}
 
         /// <summary>
         /// Alex Korte
@@ -178,6 +172,29 @@ namespace LogicLayer
                 throw new ArgumentException("Invalid Id", up);
             }
             return success;
+        }
+
+        public List<TeamMember> RetrieveTeamRosterByTeamID(int team_id)
+        {
+            List<TeamMember> teamMembers = null;
+
+            try
+            {
+                teamMembers = _teamAccessor.SelectTeamMembersByTeamID(team_id);
+
+                if (teamMembers.Count == 0)
+                {
+                    throw new ApplicationException("No Members Found");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error retrieving team roster", ex);
+            }
+
+            return teamMembers;
         }
     }
 }

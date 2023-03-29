@@ -19,4 +19,15 @@ namespace DataObjects
         public string SportDescription { get; set; }
         public string VenueName { get; set; }
     }
+
+    /// <summary>
+    /// Created By: Jacob Lindauer
+    /// Date: 2023/07/03
+    /// 
+    /// Adding this so we can have a tournament game. Should be the same as normal game type but with tournamnetID attached to it.
+    /// </summary>
+    public class TournamentGame : Game
+    {
+        public int TournamentID { get; set; }
+    }
 }

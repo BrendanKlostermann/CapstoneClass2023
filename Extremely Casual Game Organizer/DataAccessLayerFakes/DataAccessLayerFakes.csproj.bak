@@ -41,16 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="LeagueAccessorFake.cs" />
-=======
     <Compile Include="GameAccessorFake.cs" />
     <Compile Include="GameRosterAccessorFake.cs" />
->>>>>>> origin/main
     <Compile Include="MemberAccessorFake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamAccessorFake.cs" />
+<<<<<<< HEAD
     <Compile Include="TeamMemberAccessorFake.cs" />
+    <Compile Include="TeamRoleAccessorFakes.cs" />
+    <Compile Include="TournamentAccessorFakes.cs" />
+=======
+>>>>>>> origin/main
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataAccessLayerInterfaces\DataAccessLayerInterfaces.csproj">

@@ -45,17 +45,17 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
     /// </remarks>
     public partial class pgViewTeamList : Page
     {
-        TeamManager _teamManager = new TeamManager();//Manager to get the team
-        MemberManager _memberManager = null;//manager to get member
         List<int> _memberID = null;//get a list of member ids so we can see who the coaches are
         List<Team> _teams = null;//list of teams
         List<Member> _members = null;//list of members (coaches)
         List<Team.TeamVM> _teamVMs = null; //getting human readable data
         PageControl _pageControl = new PageControl();
         Button _viewBtn = new Button();
+        MasterManager _masterManager = null;
 
-        public pgViewTeamList()
+        public pgViewTeamList(MasterManager masterManager)
         {
+            _masterManager = masterManager;
             InitializeComponent();
             loadData();//method to get all teams
         }
@@ -73,10 +73,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         /// </remarks>
         public void loadData()
         {
-            _memberManager = new MemberManager();
-            _teams = _teamManager.RetrieveAllTeams();
+            _teams = _masterManager.TeamManager.RetrieveAllTeams();
             getMemberID(_teams);
-            _members = _memberManager.RetrieveMembersByMemberID(_memberID);
+            _members = _masterManager.MemberManager.RetrieveMembersByMemberID(_memberID);
             getTeamVM();
             
             dtaGridTeamList.ItemsSource = _teamVMs;
@@ -175,24 +174,32 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             dtaGridTeamList.Columns[5].Width = 75;//sportID
             dtaGridTeamList.Columns.RemoveAt(6);//hiding description
         }
-
+        /// <summary>
+        /// Updated BY: Jacob Lindauer
+        /// 2023/07/03
+        /// 
+        /// Updated method to view team details. On team details page there is a button to edit team roster.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewTeamMemberScreen(object sender, RoutedEventArgs e)
         {
+
             try
             {
                 Team.TeamVM teamVM = (Team.TeamVM)dtaGridTeamList.SelectedItem;
-                if(teamVM != null)
+                if (teamVM != null)
                 {
-                    pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(teamVM.TeamID);
+                    pgViewTeamDetails teamDetails = new pgViewTeamDetails(teamVM.TeamID, _masterManager);
                     //MessageBox.Show("test");
-                    _pageControl.LoadPage(_teamMemberScreen);
+                    _pageControl.LoadPage(teamDetails);
                 }
                 else
                 {
                     MessageBox.Show("Please Select A Team");
                 }
             }
-            catch(Exception up)
+            catch (Exception up)
             {
                 MessageBox.Show("Error, please try again", up.InnerException.Message);
             }

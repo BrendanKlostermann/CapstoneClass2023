@@ -1,7 +1,6 @@
-
 ﻿/// <ILeagueManager>
-/// Alex Korte
-/// Created: 2023/01/24
+/// Alex Korte & Elijah Morgan
+/// Created: 2023/01/24 & 2023/02/28
 /// 
 /// </summary>
 /// This is an interface that helps control leauges
@@ -66,6 +65,66 @@ namespace LogicLayerInterfaces
         /// Date: 2023/26/02
         /// </summary>
         List<League> RetrieveLeagueListByTeamID(int team_id);
-	}
 
+        List<LeagueGridVM> RetrieveListOfLeaguesForGrid();
+
+        /// <summary>
+        /// Elijah Morgan
+        /// Created: 2023/02/28
+        /// 
+        /// Retrieves a league by its active status
+        /// </summary>
+        ///
+        List<League> RetrieveLeagueByActiveStatus(bool Active = true);
+        /// <summary>
+        /// Elijah Morgan
+        /// Created: 2023/02/28
+        /// 
+        /// Retrieve a League by a leagueID
+        /// </summary>
+        ///
+        League RetrieveLeagueByLeagueID(int LeagueID);
+        /// <summary>
+        /// Elijah Morgan
+        /// Created: 2023/02/28
+        /// 
+        /// Retrieves all leagues
+        /// </summary>
+        ///
+        List<League> RetrieveAllLeagues();
+        /// <summary>
+        /// Elijah Morgan
+        /// Created: 2023/02/28
+        /// 
+        /// 
+        /// </summary>
+        ///
+        // Elijah M. is currently working on this
+        //bool EditLeagueRegistration(League OldLeague, League NewlLeague);
+        /// <summary>
+        /// Elijah Morgan
+        /// Created: 2023/02/28
+        /// 
+        /// Edits a League
+        /// </summary>
+        ///
+        bool EditLeague(League OldLeague, League NewlLeague);
+        /// <summary>
+        /// Elijah Morgan
+        /// Created: 2023/02/28
+        /// 
+        /// Edits a league by its activity status
+        /// </summary>
+        ///
+        // Elijah M. is currently working on this
+        //bool EditLeagueActiveStatus(bool Active);
+        /// <summary>
+        /// Elijah Morgan
+        /// Created: 2023/02/28
+        /// 
+        /// Retrieves leagues by sportID
+        /// </summary>
+        ///
+        League RetrieveLeagueBySportID(int SportID);
+    }
 }

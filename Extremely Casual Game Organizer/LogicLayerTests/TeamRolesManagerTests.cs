@@ -1,4 +1,10 @@
-﻿using DataAccessFakes;
+﻿/// <summary>
+/// Garion Opiola
+/// Created: 2023/01/31
+/// 
+///Tests for TeamRoleManager
+/// </summary>
+using DataAccessFakes;
 using System.Collections.Generic;
 using LogicLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,6 +27,12 @@ namespace LogicLayerTests
         [TestMethod]
         public void TestRetriveTeamRolesReturnCorrectList()
         {
+            /// <summary>
+            /// Garion Opiola
+            /// Created: 2023/01/31
+            /// test for retriving all team member and roles
+            /// 
+            /// </summary>
             // Arragne
             int expectedResult = 2;
             int actualResult = 0;

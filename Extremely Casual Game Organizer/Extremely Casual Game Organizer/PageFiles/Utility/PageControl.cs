@@ -16,8 +16,13 @@
 /// Added a LoadPage method to take in a page to load an current page. Also added a pagecontrol object to get current and previous page.
 /// That way when you load the next page you can go back to the previous page if you choose to set a Go Back button.
 /// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/03/04
+/// 
+/// Added a get and set Member methods so that we can obtain roles and manage access by currently signed in Member
 /// 
 /// </summary>
+using DataObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,6 +65,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
                     ResetButtons();
                     _mainWindow.CurrentPage = pageFile;
+
                     _mainWindow.frameLoad.Navigate(pageFile);
                 }
                 catch (Exception ex)
@@ -113,6 +119,69 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 MessageBox.Show("Failed loading next page" + "\n\n" + "Page does not exist");
             }
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Returns currently signed in member that is set on the page window properties.
+        /// </summary>
+        /// <returns></returns>
+        public Member GetSignedInMember()
+        {
+            Member member = null;
+
+            try
+            {
+                member = _mainWindow.CurrentMember;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+            return member;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Sets member object on the main page
+        /// 
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Updated method to show logout button and who is currently signed in.
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public bool SetSignedInMember(Member member)
+        {
+            bool result = false;
+
+            try
+            {
+                _mainWindow.CurrentMember = member;
+
+                if (_mainWindow.CurrentMember != null)
+                {
+                    _mainWindow.btnSignOut.Visibility = Visibility.Visible;
+                    _mainWindow.txtSignedIn.Visibility = Visibility.Visible;
+                    _mainWindow.txtSignedIn.Text = "Current signed in as: " + member.FirstName + " " + member.FamilyName;
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Created By: Jacob Linduaer
         /// Date: 2023/02/28

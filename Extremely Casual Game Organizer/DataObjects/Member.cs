@@ -1,5 +1,5 @@
 
-﻿/// <MemberObject>
+/// <MemberObject>
 /// Alex Korte
 /// Created: 2023/01/24
 /// 
@@ -10,17 +10,30 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-﻿    /// <summary>
-    /// Brendan Klostermann
-    /// Created: 2023/01/31
-    /// 
-    /// Member class used to hold Member data.
-    /// </summary>
-    ///
-    /// <remarks>
-    /// Updater Name
-    /// Updated: yyyy/mm/dd
-    /// </remarks>    
+/// <summary>
+/// Brendan Klostermann
+/// Created: 2023/01/31
+/// 
+/// Member class used to hold Member data.
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>    
+
+/// <summary>
+/// Heritier Otiom
+/// Created: 2023/01/31
+/// 
+/// Member DataObject
+/// </summary>
+///
+/// <remarks>
+/// Updater Name: Heritier Otiom
+/// Updated: 2023/02/21
+/// 
+/// </remarks>
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +57,17 @@ namespace DataObjects
         public string PhotoMimeType { get; set; }
         public List<string> Roles { get; set; }
 
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Property for Member
+        /// </summary>
+        public string PasswordHash { get; set; }
+        public byte[] ProfilePhoto { get; set; }
+
+
+
         public Member(string name)
         {
             this.FirstName = name;
@@ -59,10 +83,10 @@ namespace DataObjects
             this.FamilyName = familyName;
             this.Birthday = birthDay;
             this.PhoneNumber = phoneNumber;
-		}
+        }
 
 
-        public Member(int mem_id,string email, string fName, string flName, DateTime bDay, string pNumber, bool gender, bool active, string bio)
+        public Member(int mem_id, string email, string fName, string flName, DateTime bDay, string pNumber, bool gender, bool active, string bio)
         {
             this.MemberID = mem_id;
             this.Email = email;
@@ -79,6 +103,6 @@ namespace DataObjects
         {
 
         }
-	}
+    }
 }
 

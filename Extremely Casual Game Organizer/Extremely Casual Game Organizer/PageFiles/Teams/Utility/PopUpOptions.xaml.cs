@@ -50,8 +50,9 @@ namespace Extremely_Casual_Game_Organizer
 
         //public event EventHandler WindowClosed; //handler that manages when the pop up menue closes. 
 
-        public PopUpOptions()
+        public PopUpOptions(MasterManager masterManager)
         {
+            _masterManager = masterManager;
             InitializeComponent();
         }
 
@@ -125,15 +126,15 @@ namespace Extremely_Casual_Game_Organizer
         /// </remarks>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID);
+            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
             _pageControl.LoadPage(_teamMemberScreen);
             this.Close();
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            int successful = _teamMemberManager.RemoveAPlayerFromATeamByTeamIDAndMemberID(_teamID, _memberID);
-            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID);
+            int successful = _masterManager.TeamMemberManager.RemoveAPlayerFromATeamByTeamIDAndMemberID(_teamID, _memberID);
+            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
             _pageControl.LoadPage(_teamMemberScreen);
             this.Close();
         }
@@ -148,8 +149,8 @@ namespace Extremely_Casual_Game_Organizer
             {
                 _starter = true;
             }
-            String successful = _teamMemberManager.MoveAPlayerToBenchOrStarter(_teamID, _starter, _memberID);
-            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID);
+            String successful = _masterManager.TeamMemberManager.MoveAPlayerToBenchOrStarter(_teamID, _starter, _memberID);
+            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
             _pageControl.LoadPage(_teamMemberScreen);
             this.Close();
         }
@@ -157,6 +158,9 @@ namespace Extremely_Casual_Game_Organizer
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             PopUpPlayerSearch _playerSearch = new PopUpPlayerSearch(_teamID, _members);
+            //int successful = _masterManager.TeamMemberManager.AddAPlayerToATeamByTeamIDAndMemberID(_teamID, _memberID);
+            //pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
+            //_pageControl.LoadPage(_teamMemberScreen);
             this.Close();
             _playerSearch.ShowDialog();
 

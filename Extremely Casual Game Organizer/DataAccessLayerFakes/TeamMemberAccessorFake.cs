@@ -8,10 +8,10 @@ using DataAccessLayerInterfaces;
 
 namespace DataAccessLayerFakes
 {
-    public class TeamMemberAccessorFake : ITeamMemberAccessor
+    public class TeamMemberAccessorFake //: ITeamMemberAccessor
     {
         List<TeamMember> _teamMemberList = null;
-        TeamRole _teamRole = null;
+        TeamRoles _teamRole = null;
         TeamRoleType _teamRoleType = null;
         List<Team> _teamList = null;
         List<Member> _memberList = null;
@@ -19,7 +19,7 @@ namespace DataAccessLayerFakes
         {
             _teamMemberList = new List<TeamMember>();
 
-            _teamRole = new TeamRole();
+            _teamRole = new TeamRoles();
             _teamRoleType = new TeamRoleType();
 
             List<TeamMember> _teamMember = null;

@@ -1,4 +1,16 @@
-﻿using System;
+﻿/// <summary>
+/// Garion Opiola
+/// Created: 2023/01/31
+/// 
+/// .cs file attached to pgTeamList.
+/// 
+/// This page will allow team members and coachs to view team list and roles.
+/// 
+/// </summary>
+using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles;
+using LogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,59 +22,38 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LogicLayer;
-using DataObjects;
 
 namespace Extremely_Casual_Game_Organizer
 {
     /// <summary>
-    /// Interaction logic for TeamList.xaml
+    /// Made by Garion Opiola
+    /// Date: 01/31/2023
+    /// Interaction logic for pgTeamList.xaml
     /// </summary>
-    public partial class pgTeamList : Window
+    public partial class pgTeamList : Page
     {
+        private TeamRolesManager _teamRoleManager = new TeamRolesManager();
         private List<TeamRoles> _teamRole = null;
-        MasterManager _masterManager = null;
 
-        public pgTeamList(MasterManager masterManager)
+        public pgTeamList()
         {
-            _masterManager = masterManager;
             InitializeComponent();
         }
 
-        private void navLogout_Click(object sender, RoutedEventArgs e)
+        private void frmTeamRoles_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //_member = null;
-                //updateUIforLogout();
-                _masterManager = new MasterManager();
-                var teamList = new pgTeamList(_masterManager);
-                teamList.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-            }
-        }
-
-        //private void updateUIforLogout()
-        //{
-        //    tabTeamRoles.Visibility = Visibility.Hidden;
-        //}
-
-        private void frmTeamList_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void tabTeamRoles_GotFocus(object sender, RoutedEventArgs e)
-        {
+            /// <summary>
+            /// Made by Garion Opiola
+            /// Date: 01/31/2023
+            /// Loads teamRoles list
+            /// </summary>
             if (_teamRole == null)
             {
                 try
                 {
-                    _teamRole = _masterManager.TeamRolesManager.RetrieveTeamRoles();
+                    _teamRole = _teamRoleManager.RetrieveTeamRoles();
                     datRoles.ItemsSource = _teamRole;
                     datRoles.Columns[0].Header = "Player ID";
                     datRoles.Columns[1].Header = "Team Id";
@@ -74,6 +65,5 @@ namespace Extremely_Casual_Game_Organizer
                 }
             }
         }
-
     }
 }

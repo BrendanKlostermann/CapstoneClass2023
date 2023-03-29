@@ -1,4 +1,11 @@
-﻿using System;
+﻿/// <summary>
+/// Garion Opiola
+/// Created: 2023/01/31
+/// 
+/// Loagic for getTeamRoles
+/// 
+/// </summary>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,26 +18,32 @@ namespace LogicLayer
 {
     public class TeamRolesManager : ITeamRolesManager
     { 
-        private ITeamRoleAccessor teamRoleAccessor = null;
+        private ITeamRoleAccessor _teamRoleAccessor = null;
 
         public TeamRolesManager()
         {
-            teamRoleAccessor = new DataAccessLayer.TeamRoleAccessor();
+            _teamRoleAccessor = new DataAccessLayer.TeamRoleAccessor();
         }
 
         public TeamRolesManager(ITeamRoleAccessor playerAccessor)
         {
-            teamRoleAccessor = playerAccessor;
+            _teamRoleAccessor = playerAccessor;
         }
-
 
         public List<TeamRoles> RetrieveTeamRoles()
         {
+            /// <summary>
+            /// Garion Opiola
+            /// Created: 2023/01/31
+            /// 
+            /// Logic for RetriveTeamRoles
+            /// 
+            /// </summary>
             List<TeamRoles> teamRoles = null;
 
             try
             {
-                teamRoles = teamRoleAccessor.SelectTeamRolesByMemberID();
+                teamRoles = _teamRoleAccessor.SelectTeamRolesByMemberID();
             }
             catch (Exception ex)
             {
@@ -39,5 +52,7 @@ namespace LogicLayer
 
             return teamRoles;
         }
+
+
     }
 }

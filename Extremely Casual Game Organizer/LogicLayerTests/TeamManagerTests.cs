@@ -10,6 +10,8 @@ using DataAccessLayerInterfaces;
 using DataAccessLayerFakes;
 using LogicLayerInterfaces;
 using LogicLayer;
+using DataObjects;
+using System.Collections.Generic;
 
 namespace LogicLayerTests
 {
@@ -74,5 +76,155 @@ namespace LogicLayerTests
 
             Assert.AreEqual(expectedResults, actual);
         }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Insert a good team
+        /// </summary>
+        [TestMethod]
+        public void AddTeamGood()
+        {
+            // Arrange
+            Team team = new Team()
+            {
+                TeamID = 0147,
+                TeamName = null, // Name can't be null
+                MemberID = 1230,
+                SportID = 1002,
+                Gender = true
+            };
+
+            // Act
+            int expectedResult = 0;
+            int actualResult = _teamManager.AddTeam(team);
+
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Insert a wrong team
+        /// </summary>
+        [TestMethod]
+        public void AddTeamBad()
+        {
+            // Arrange
+            Team team = new Team()
+            {
+                TeamID = 0147,
+                TeamName = null,
+                MemberID = 1230,
+                SportID = 1009,
+                Gender = true
+            };
+
+            // Act
+            int expectedResult = 0;
+            int actualResult = _teamManager.AddTeam(team);
+
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// Select team with the existing team ID
+        /// </summary>
+        [TestMethod]
+        public void getTeamByIDGood()
+        {
+            // Arrange
+            int memberID = 1001;
+
+            // Act
+            int expectedResult = 1;
+            List<TeamMemberAndSport> sports = _teamManager.getTeamByMemberID(memberID);
+
+            int actualResult = 0;
+            if (sports != null) actualResult = sports.Count;
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select team with the unexisting team ID
+        /// </summary>
+        [TestMethod]
+        public void getTeamByIDBad()
+        {
+            // Arrange
+            int memberID = 001;
+
+            // Act
+            int expectedResult = 0;
+            List<TeamMemberAndSport> sports = _teamManager.getTeamByMemberID(memberID);
+
+            int actualResult = 0;
+            if (sports != null) actualResult = sports.Count;
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// Select existing team team
+        /// </summary>
+        [TestMethod]
+        public void getTeamByNameGood()
+        {
+            // Arrange
+            string name = "Lakers";
+            int sportID = 1009;
+
+            // Act
+            int expectedResult = 1;
+            List<TeamSport> sports = _teamManager.getTeamByTeamName(name, sportID);
+
+            int actualResult = 0;
+            if (sports != null) actualResult = sports.Count;
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select the unexisting team
+        /// </summary>
+        [TestMethod]
+        public void getTeamByNameBad()
+        {
+            // Arrange
+            string name = "Lak"; // Wrong team 
+            int sportID = 10045;
+
+            // Act
+            int expectedResult = 0;
+            List<TeamSport> sports = _teamManager.getTeamByTeamName(name, sportID);
+
+            int actualResult = 0;
+            if (sports != null) actualResult = sports.Count;
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
     }
 }
