@@ -159,11 +159,7 @@ namespace Extremely_Casual_Game_Organizer
 
         private void updateUIforLogout()
         {
-            /// <summary>
-            /// Created by Garion Opiola
-            /// Created 02/28/2023
-            /// Logout Logic
-            /// </summary>
+ 
         }
 
         private void btnAlerts_Click(object sender, RoutedEventArgs e)
@@ -179,6 +175,11 @@ namespace Extremely_Casual_Game_Organizer
         private void openProfile(object sender, RoutedEventArgs e)
         {
             _pageControl.LoadPage(new pgMemberProfile(_masterManager));
+        }
+
+        private void btnHelp_Click(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgHelp(), _pageControl.GetCurrentPage());
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.PageFiles.pgHelp"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer.PageFiles"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="pgHelp">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="200,15,100,15" TextWrapping="Wrap" VerticalAlignment="Top" Height="475" Width="500" FontSize="11.5"><Run Text="Welcome to the help page of our small sports tournament website. We are here to assist you in navigating our website and ensure you have the best possible experience."/><LineBreak/><Run/><LineBreak/><Run Text="How to Register for a Tournament"/><LineBreak/><Run Text="To register for a tournament, simply click on the &quot;Register&quot; button located on the homepage of our website. Follow the steps to complete the registration process. You will need to provide some personal information and select the tournament you want to participate in."/><LineBreak/><Run/><LineBreak/><Run Text="How to Pay for a Tournament"/><LineBreak/><Run Text="After registering for a tournament, you will need to pay the registration fee. To pay for a tournament, click on the &quot;Pay&quot; button located on the tournament page. You will be directed to a payment gateway where you can pay using your preferred payment method."/><LineBreak/><Run/><LineBreak/><Run Text="How to View Tournament Information"/><LineBreak/><Run Text="To view tournament information such as dates, times, and locations, click on the &quot;Tournaments&quot; tab located on the homepage of our website. Select the tournament you are interested in, and all relevant information will be displayed."/><LineBreak/><Run/><LineBreak/><Run Text="How to View Tournament Results"/><LineBreak/><Run Text="To view tournament results, click on the &quot;Results&quot; tab located on the homepage of our website. Select the tournament you are interested in, and all the results will be displayed."/><LineBreak/><Run/><LineBreak/><Run Text="How to Contact Us"/><LineBreak/><Run Text="If you have any questions or concerns about our website or any tournaments, please click on the &quot;Contact Us&quot; tab located on the homepage of our website. You can send us a message, and we will respond as soon as possible."/><LineBreak/><Run/><LineBreak/><Run Text="Thank you for using our small sports tournament website. We hope this help page has provided you with the information you need. If you have any further questions, please do not hesitate to contact us."/></TextBlock>
+        <Button x:Name="btnBack" Content="Back" HorizontalAlignment="Left" Margin="50 450 0 0" VerticalAlignment="Top" Width="75" Click="btnBack_Click"/>
+    </Grid>
+</Page>

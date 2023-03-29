@@ -67,8 +67,13 @@
                 </Grid.ColumnDefinitions>
                 <Button x:Name="btnHome" Cursor="Hand" Grid.Column="0" Margin="20 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent">
                     <Image Source="Data\homeButton.png"></Image></Button>
-                <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent">
-                    <Image Source="Data\helpButton.png"></Image> </Button>
+                <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent" Click="btnHelp_Click">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="Data\helpButton.png"></Image>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
                 <TextBox x:Name="txtLogoPlaceholder" Cursor="Hand" Grid.Column="3" FontSize="20" Background="Transparent" Foreground="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">Logo Placeholder</TextBox>
                 <Button x:Name="btnAlerts" Cursor="Hand" Grid.Column="5" Margin="10 45" BorderBrush="Transparent" Background="Transparent" Foreground="Black" Click="openMessage">
                     <Image Source="Data\mailButton.png"></Image> </Button>

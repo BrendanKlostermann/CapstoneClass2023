@@ -62,6 +62,9 @@
     <Compile Include="PageFiles\pgAddEditSeason.xaml.cs">
       <DependentUpon>pgAddEditSeason.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\pgHelp.xaml.cs">
+      <DependentUpon>pgHelp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\pgViewSeasonList.xaml.cs">
       <DependentUpon>pgViewSeasonList.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
       <DependentUpon>TestWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="PageFiles\pgAddEditSeason.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\pgHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
