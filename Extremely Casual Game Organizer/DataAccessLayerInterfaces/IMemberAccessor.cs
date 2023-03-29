@@ -74,5 +74,7 @@ namespace DataAccessLayerInterfaces
         int AuthenticateMember(string email, string password);
         List<string> SelectRolesByMemberID(int memberID);
 
+        List<Member> SelectAListOfMembersByNameAndOrEmail(string firstName, string lastName, string email);
+
     }
 }

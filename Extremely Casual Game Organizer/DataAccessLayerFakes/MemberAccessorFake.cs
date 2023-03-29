@@ -343,5 +343,10 @@ namespace DataAccessLayerFakes
         {
             throw new NotImplementedException();
         }
+
+        public List<Member> SelectAListOfMembersByNameAndOrEmail(string firstName, string lastName, string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

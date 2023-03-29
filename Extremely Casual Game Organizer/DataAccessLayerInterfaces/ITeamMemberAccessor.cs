@@ -8,6 +8,6 @@ namespace DataAccessLayerInterfaces
 {
     public interface ITeamMemberAccessor
     {
-        int InsertTeamMember(int team_id, int member_id, string description);
+        int InsertTeamMember(int team_id, int member_id);
     }
 }

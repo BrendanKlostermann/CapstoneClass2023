@@ -61,15 +61,15 @@ namespace LogicLayerTests
         /// Test that the number of teams is equal to expected.
         /// 
         /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
+        /// Alex Korte
+        /// Updated: y1989/03/28
         /// example: Fixed a problem when user inputs bad data
         /// </remarks>
         [TestMethod]
         public void TestRetreivingAllTeams()
         {
 
-            const int actual = 15;
+            const int actual = 30;
             int expectedResults = _teamManager.RetrieveAllTeams().Count;
 
             Assert.AreEqual(expectedResults, actual);

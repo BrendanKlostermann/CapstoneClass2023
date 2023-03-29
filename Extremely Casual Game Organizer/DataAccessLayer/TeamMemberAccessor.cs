@@ -10,7 +10,7 @@ namespace DataAccessLayer
 {
     public class TeamMemberAccessor : ITeamMemberAccessor
     {
-        public int InsertTeamMember(int team_id, int member_id, string description)
+        public int InsertTeamMember(int team_id, int member_id)
         {
             throw new NotImplementedException();
         }

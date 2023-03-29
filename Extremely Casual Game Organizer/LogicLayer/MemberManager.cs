@@ -181,6 +181,18 @@ namespace LogicLayer
              
         }
 
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/28
+        /// 
+        /// </summary>
+        /// Method for searching for members, passing a string
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
         public List<Member> SearchMemberByFirstName(string firstName)
         {
             List<Member> results = null;
@@ -325,6 +337,26 @@ namespace LogicLayer
             }
 
             return member;
+        }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/26
+        /// searching for list of members by first name, last name or email
+        /// </summary>
+        /// 
+        public List<Member> SearchingForMembersByNameAndOrEmail(String firstName, String lastName, String email)
+        {
+            List<Member> _searchedMembers = new List<Member>();
+            try
+            {
+                _searchedMembers = _memberAccessor.SelectAListOfMembersByNameAndOrEmail(firstName, lastName, email);
+            }catch(Exception up)
+            {
+                throw new ApplicationException("Error connecting to database", up);
+            }
+            return _searchedMembers;
         }
     }
 }

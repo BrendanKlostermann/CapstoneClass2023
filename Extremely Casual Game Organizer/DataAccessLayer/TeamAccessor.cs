@@ -301,7 +301,40 @@ namespace DataAccessLayer
         /// </remarks>
         public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
         {
-            throw new NotImplementedException();
+            // connection
+            DBConnection connectionFactory = new DBConnection();//AddMemberToTeamByTeamIDAndMemberID
+            var conn = connectionFactory.GetDBConnection();//AddMemberToTeamByTeamIDAndMemberID
+
+            // command text
+            var cmdText = "sp_add_member_to_team_by_member_id_and_team_id";//AddMemberToTeamByTeamIDAndMemberID
+
+            // create command
+            var cmd = new SqlCommand(cmdText, conn);//AddMemberToTeamByTeamIDAndMemberID
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure;//AddMemberToTeamByTeamIDAndMemberID
+
+            // add parameters and values
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);//AddMemberToTeamByTeamIDAndMemberID
+            cmd.Parameters["@team_id"].Value = teamID;//AddMemberToTeamByTeamIDAndMemberID
+
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);//AddMemberToTeamByTeamIDAndMemberID
+            cmd.Parameters["@member_id"].Value = memberID;//AddMemberToTeamByTeamIDAndMemberID
+
+            try
+            {
+                conn.Open();//AddMemberToTeamByTeamIDAndMemberID
+                var reader = cmd.ExecuteNonQuery();//AddMemberToTeamByTeamIDAndMemberID
+                return reader;//AddMemberToTeamByTeamIDAndMemberID
+            }
+            catch (Exception up)
+            {
+                throw up;//AddMemberToTeamByTeamIDAndMemberID
+            }
+            finally
+            {
+                conn.Close(); //AddMemberToTeamByTeamIDAndMemberID
+            }
         }
 
         /// <summary>
