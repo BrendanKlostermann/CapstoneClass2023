@@ -3,7 +3,7 @@
 
 
     <!-- Base Colors -->
-    <Brush x:Key="ColorBackground">#EEEEEE</Brush>
+    <Brush x:Key="ColorBackground">#DEDEDE</Brush>
     <Brush x:Key="ColorButton">#BBBBBB</Brush>
     <Brush x:Key="ColorBanner">#333333</Brush>
     <!-- End Base Colors -->

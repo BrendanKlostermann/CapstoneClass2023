@@ -631,5 +631,66 @@ namespace DataAccessLayer
             }
             return teams;
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/28/03
+        /// 
+        /// Method returns team roster for provided ID.
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        public List<TeamMember> SelectTeamMembersByTeamID(int team_id)
+        {
+            List<TeamMember> teamMembers = new List<TeamMember>();
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // command text
+            var cmdText = "sp_select_team_members_by_team_id";
+
+            // command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // parameters
+            cmd.Parameters.Add("@teamid", SqlDbType.Int);
+
+            // parameter values
+            cmd.Parameters["@teamid"].Value = team_id;
+
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    //var a = reader.FieldCount;
+                    while (reader.Read())
+                    {
+                        TeamMember addMember = new TeamMember();
+                        addMember.Description = reader.GetString(0);
+                        addMember.MemberID = reader.GetInt32(1);
+                        addMember.Starter = reader.GetBoolean(2);
+                        addMember.TeamID = team_id;
+
+                        teamMembers.Add(addMember);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return teamMembers;
+        }
     }
 }

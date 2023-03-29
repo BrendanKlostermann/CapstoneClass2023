@@ -45,7 +45,7 @@ namespace Extremely_Casual_Game_Organizer.CustomControls
 
         private void btnMember_Click(object sender, RoutedEventArgs e)
         {
-            _pageControl.LoadPage(new pgTeamMemberScreen(teamSport.TeamID, masterManager));
+            _pageControl.LoadPage(new pgTeamMemberScreen(teamSport.TeamID, masterManager), _pageControl.GetCurrentPage());
         }
     }
 }

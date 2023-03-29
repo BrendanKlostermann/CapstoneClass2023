@@ -18,3 +18,4 @@ AS
 		VALUES
 		(@TeamID, @LeagueID)
 	END
+GO

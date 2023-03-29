@@ -584,9 +584,9 @@ public class LeagueAccessor : ILeagueAccessor
         }
         catch (Exception ex)
         {
-            newLeague = oldLeague;
+			newLeague = oldLeague;
             throw new ApplicationException("Could not find data", ex);
-        }
+		}
         finally
         {
             conn.Close();

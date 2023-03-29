@@ -1,8 +1,14 @@
 ﻿/// <summary>
 /// Heritier Otiom
 /// Created: 2023/01/31
+/// 
+/// Updated By: Jacob Lindauer
+/// Date: 2023/26/03
+/// 
+/// Updated memberID to pull from main page. Also updated MemberID fields to use memberID from member object
 /// </summary>
 using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles;
 using LogicLayer;
 using Microsoft.Win32;
 using System;
@@ -30,14 +36,16 @@ namespace Extremely_Casual_Game_Organizer
         MemberManager memberManager = null;
         MasterManager _masterManager = null;
         TeamManager teamManager = null;
+        PageControl _pageControl;
         private Member member = null;
-        private int MemberID = 100017;
         private byte[] data; // For image
         public pgMemberProfile(MasterManager _masterManager)
         {
+            _pageControl = new PageControl();
             memberManager = new MemberManager();
             teamManager = new TeamManager();
             this._masterManager = _masterManager;
+            member = _pageControl.GetSignedInMember();
             InitializeComponent();
             getMemberByID();
             getTeams();
@@ -48,7 +56,7 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
-                member = memberManager.GetMemberByMemberID(MemberID);
+                member = memberManager.GetMemberByMemberID(member.MemberID);
 
                 // If there's a member
                 if (member != null)
@@ -110,7 +118,7 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
-                List<TeamMemberAndSport> team = teamManager.getTeamByMemberID(MemberID);
+                List<TeamMemberAndSport> team = teamManager.getTeamByMemberID(member.MemberID);
                 // Remove all items from the list of team
                 lbTeam.Items.Clear();
 
@@ -252,9 +260,7 @@ namespace Extremely_Casual_Game_Organizer
         // Let the user create another team
         private void btnCreateTeam_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new pgCreateTeam(_masterManager, MemberID));
-            //pgCreateTeam_2 _pgCreateTeam = new pgCreateTeam_2(MemberID); //Pass his memberID
-            //_pgCreateTeam.Show();
+            _pageControl.LoadPage(new pgCreateTeam(_masterManager, member.MemberID), _pageControl.GetCurrentPage());
         }
     }
 }

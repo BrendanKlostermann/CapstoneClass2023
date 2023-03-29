@@ -65,6 +65,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
                     ResetButtons();
                     _mainWindow.CurrentPage = pageFile;
+
                     _mainWindow.frameLoad.Navigate(pageFile);
                 }
                 catch (Exception ex)
@@ -143,6 +144,19 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             return member;
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Sets member object on the main page
+        /// 
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Updated method to show logout button and who is currently signed in.
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         public bool SetSignedInMember(Member member)
         {
             bool result = false;
@@ -153,6 +167,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
                 if (_mainWindow.CurrentMember != null)
                 {
+                    _mainWindow.btnSignOut.Visibility = Visibility.Visible;
+                    _mainWindow.txtSignedIn.Visibility = Visibility.Visible;
+                    _mainWindow.txtSignedIn.Text = "Current signed in as: " + member.FirstName + " " + member.FamilyName;
                     result = true;
                 }
             }

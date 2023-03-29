@@ -329,6 +329,7 @@ CREATE TABLE [dbo].[Practice] (
 	[description]	[nvarchar](1000) NULL, 
 	[zip_code]		[int]					NOT NULL,
 	[city]			[nvarchar] (250)		NOT NULL,
+	[state_name]	[nvarchar] (50)		NULL,
 	CONSTRAINT [pk_practice_id] PRIMARY KEY([practice_id]),
 	CONSTRAINT [fk_Practice_team_id] FOREIGN KEY([team_id])
 		REFERENCES [Team]([team_id])
@@ -510,7 +511,6 @@ GO
 CREATE TABLE [dbo].[Availability] (
 	[availability_id]		[int]			IDENTITY(1000, 1) 		NOT NULL, 
 	[description]			[nvarchar](250)							NULL,
-	[is_available]			[bit]									NOT NULL DEFAULT 0,
 	[member_id]				[int]									NOT NULL,
 	[start_availability]	[datetime]								NOT NULL,
 	[end_availability]		[datetime]								NOT NULL,

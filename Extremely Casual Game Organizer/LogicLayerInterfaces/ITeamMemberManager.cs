@@ -33,5 +33,15 @@ namespace LogicLayerInterfaces
 
         String MoveAPlayerToBenchOrStarter(int teamID, bool starter, int memberID);
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/28/03
+        /// 
+        /// Method to retrieve roster by teamID
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        List<TeamMember> RetrieveTeamRosterByTeamID(int team_id);
+
     }
 }

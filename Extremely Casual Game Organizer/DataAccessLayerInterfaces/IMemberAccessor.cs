@@ -59,16 +59,6 @@ namespace DataAccessLayerInterfaces
         /// </summary>
         /// <returns></returns>
         Member SelectMemberByEmail(string email);
-        /// <summary>
-        /// Created By: Jacob Lindauer
-        /// </summary>
-        /// <returns></returns>
-        List<Member> SelectMemberByMemberFullName(string firstName, string lastName);
-        /// <summary>
-        /// Created By: Jacob Lindauer
-        /// </summary>
-        /// <returns></returns>
-        List<Member> SelectMemberByMemberFirstName(string firstName);
         int UpdatePasswordHashToDefault(int memberID, string passwordHashes);
 
         /// <MemberAccessor>
@@ -97,7 +87,6 @@ namespace DataAccessLayerInterfaces
         List<Member> SelectAllMembersByTeamID(int memberID);
 
         int AuthenticateMember(string email, string password);
-        List<string> SelectRolesByMemberID(int memberID);
 
         /// <summary>
         /// Created By: Jacob Lindauer
@@ -117,7 +106,29 @@ namespace DataAccessLayerInterfaces
         /// <returns></returns>
         DataTable SelectTournamentGamesByMemberID(int member_id);
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        DataTable SelectAvailabilityByMemberID(int member_id);
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        bool InsertCalendarEvent(CalendarEvent insertEvent, int member_id);
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        bool UpdateCalendarEvent(CalendarEvent updateEvent, int member_id);
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// </summary>
+        /// <returns></returns>
+        bool DeleteCalendarEvent(CalendarEvent deleteEvent, int member_id);
 
         /// <summary>
         /// Heritier Otiom
@@ -171,6 +182,8 @@ namespace DataAccessLayerInterfaces
         /// Assign a profile picture to the member table
         /// </summary>
         int UpdateProfilePicture(Member member);
+
+
 
     }
 }

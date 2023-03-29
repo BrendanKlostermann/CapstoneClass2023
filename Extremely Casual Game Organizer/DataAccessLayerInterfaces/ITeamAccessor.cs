@@ -103,6 +103,16 @@ namespace DataAccessLayerInterfaces
         /// </summary>
         List<TeamSport> getTeamByTeamName(string name, int sport_id); //Get team by team name
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/28/03
+        /// 
+        /// Method returns team roster for provided ID.
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        List<TeamMember> SelectTeamMembersByTeamID(int team_id);
+
 
         /// <summary>
         /// Heritier Otiom

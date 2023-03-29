@@ -40,6 +40,7 @@ using LogicLayerInterfaces;
 using LogicLayer;
 using Extremely_Casual_Game_Organizer.PageFiles;
 using Extremely_Casual_Game_Organizer.PageFiles.MemberPages;
+using Extremely_Casual_Game_Organizer.PageFiles.Utility;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -65,16 +66,23 @@ namespace Extremely_Casual_Game_Organizer
 
             // Hide all function buttons
             grdFrameFunctions.Visibility = Visibility.Hidden;
-            
+
 
         }
-
+        /// <summary>
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Redirected loaded to set UI for logout and load the homepage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmMain_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                //_pageControl.LoadPage(new pgTeamMemberScreen(1003, _masterManager));
-                _pageControl.LoadPage(new pgLogIn(_masterManager));
+                updateUIforLogout();
+                _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
             }
             catch (Exception ex)
             {
@@ -114,9 +122,7 @@ namespace Extremely_Casual_Game_Organizer
             try
             {
                 TeamManager teamManager = new TeamManager();
-                //_pageControl.LoadPage(new pgTeamList());
                 _pageControl.LoadPage(new pgSearchforTeam(_masterManager));
-                // _pageControl.LoadPage(new pgViewTeamDetails(1030, _masterManager));
             }
             catch (Exception ex)
             {
@@ -126,28 +132,37 @@ namespace Extremely_Casual_Game_Organizer
         }
 
         private void navTeams_Click(object sender, RoutedEventArgs e)
-        {		
-			try
+        {
+            try
             {
                 TeamManager teamManager = new TeamManager();
                 _pageControl.LoadPage(new pgViewTeamList(_masterManager));
             }
-            catch(Exception up)
+            catch (Exception up)
             {
                 MessageBox.Show(up.Message + "\n\n" + up.InnerException.Message);
             }
         }
 
+        /// <summary>
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Setup button to make sure user is signed in first
+        /// </summary>
         private void navSchedule_Click(object sender, RoutedEventArgs e)
         {
-		
-			 try
+
+            try
             {
-				Member openMember = new Member()
-            {
-                MemberID = 100000
-            };
-				_pageControl.LoadPage(new pgMemberSchedule(openMember, _masterManager));
+                if (CurrentMember == null)
+                {
+                    MessageBox.Show("Please sign in to view your schedule");
+                }
+                else
+                {
+                    _pageControl.LoadPage(new pgMemberSchedule(CurrentMember, _masterManager));
+                }
             }
             catch (Exception ex)
             {
@@ -156,27 +171,112 @@ namespace Extremely_Casual_Game_Organizer
             }
         }
 
-
+        /// <summary>
+        /// Created by Garion Opiola
+        /// Created 02/28/2023
+        /// Logout Logic
+        /// 
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Updated method to implement useful logout logic
+        /// Set buttons to be hidden upon logout and set member to null then load the homepage to the main view. 
+        /// </summary>
+        /// 
         private void updateUIforLogout()
         {
- 
+            btnSignOut.Visibility = Visibility.Hidden;
+            txtSignedIn.Visibility = Visibility.Hidden;
+            CurrentMember = null;
+            _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
         }
 
         private void btnAlerts_Click(object sender, RoutedEventArgs e)
         {
         }
 
+        /// <summary>
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Setup button to make sure user is signed in first
+        /// </summary>
         private void openMessage(object sender, RoutedEventArgs e)
         {
-            pgRespondToMessage _pgRespondToMessage = new pgRespondToMessage();
-            _pgRespondToMessage.Show();
+            try
+            {
+                if (CurrentMember == null)
+                {
+                    MessageBox.Show("Please sign in to view your messages");
+                }
+                else
+                {
+                    pgRespondToMessage _pgRespondToMessage = new pgRespondToMessage();
+                    _pgRespondToMessage.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
 
+        /// <summary>
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Setup button to make sure user is signed in first
+        /// </summary>
         private void openProfile(object sender, RoutedEventArgs e)
         {
-            _pageControl.LoadPage(new pgMemberProfile(_masterManager));
+            try
+            {
+                if (CurrentMember == null)
+                {
+                    MessageBox.Show("Please sign in to view your profile");
+                }
+                else
+                {
+                    _pageControl.LoadPage(new pgMemberProfile(_masterManager));
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
 
+        /// <summary>
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Setup button to direct to created homepage page
+        /// </summary>
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/26/03
+        /// 
+        /// Button preforms logout method
+        /// </summary>
+        private void btnSignOut_Click(object sender, RoutedEventArgs e)
+        {
+            updateUIforLogout();
+		}
+		
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             _pageControl.LoadPage(new pgHelp(), _pageControl.GetCurrentPage());

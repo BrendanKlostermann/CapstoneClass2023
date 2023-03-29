@@ -25,6 +25,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataObjects;
 using Extremely_Casual_Game_Organizer.PageFiles;
+using Extremely_Casual_Game_Organizer.PageFiles.Utility;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -100,7 +101,7 @@ namespace Extremely_Casual_Game_Organizer
         /// Updated By: Jacob Lindauer
         /// Date: 2023/03/04
         /// 
-        /// Added a step to set the currently signed in member for the main window properties
+        /// Added a step to set the currently signed in member for the main window properties. Redirected login to go to homepage window
         /// </summary>
         private void btnSignIn_Click(object sender, RoutedEventArgs e)
         {
@@ -138,9 +139,12 @@ namespace Extremely_Casual_Game_Organizer
                 _member = _masterManager.MemberManager.LoginMember(email, password);
                 MessageBox.Show("Hello, " + _member.FirstName + "\n\n" +
                     "You are logged in");
-                
+
                 // Need to set who the current signed in member is
                 _pageControl.SetSignedInMember(_member);
+
+                // Load to homepage
+                _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
 
             }
             catch (Exception ex)
@@ -151,7 +155,15 @@ namespace Extremely_Casual_Game_Organizer
 
         private void openSignUp(object sender, RoutedEventArgs e)
         {
-            _pageControl.LoadPage(new pgCreateAccount(_masterManager));
+            try
+            {
+                _pageControl.LoadPage(new pgCreateAccount(_masterManager));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
     }
 }
