@@ -156,12 +156,37 @@ namespace DataAccessLayerFakes
             return teamsInLeague;
         }
 
+        public List<League> SelectLeagueByActiveStatus(bool active)
+        {
+            throw new NotImplementedException();
+        }
+
+        public League SelectLeagueByLeagueID(int leagueID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public League SelectLeaguesBySportID(int sportID)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<League> SelectLeaguesByTeamID(int team_id)
         {
             throw new NotImplementedException();
         }
 
         public List<LeagueGridVM> SelectLeaguesForGrid()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<League> SelectListOfLeagues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateLeague(League oldLeague, League newLeague)
         {
             throw new NotImplementedException();
         }

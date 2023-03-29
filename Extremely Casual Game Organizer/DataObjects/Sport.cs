@@ -1,7 +1,6 @@
-
 ﻿/// <Sport>
-/// Alex Korte
-/// Created: 2023/01/24
+/// Alex Korte & Elijah Morgan
+/// Created: 2023/01/24, 2023/02/28
 /// 
 /// </summary>
 /// This class is used to create the Sport Object
@@ -9,6 +8,7 @@
 /// Updater Name
 /// Updated: yyyy/mm/dd
 /// </remarks>
+
 
 using System;
 using System.Collections.Generic;

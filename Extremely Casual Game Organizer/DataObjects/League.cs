@@ -1,5 +1,4 @@
-
-﻿/// <LeagueObject>
+/// <LeagueObject>
 /// Alex Korte
 /// Created: 2023/02/04
 /// 
@@ -17,7 +16,19 @@
 /// This class will contain the properties and View Models for the
 /// League data Object.
 /// </summary>
-
+///
+﻿/// <summary>
+/// Elijah Morgan
+/// Created: 2023/02/28
+/// 
+/// A data object representing a League of sports
+/// </summary>
+///
+/// <remarks>
+/// Updater Name
+/// Updated: yyyy/mm/dd
+/// </remarks>
+/// 
 
 using System;
 using System.Collections.Generic;
@@ -39,8 +50,7 @@ namespace DataObjects
         public string Name { get; set; } //name of the league
         public int MaxNumOfTeams { get; set; }
 
-
-        public League(int league_id, int sport_id, decimal league_dues, bool active, int member_id, bool gender, string description, string name, int max)
+        public League(int league_id, int sport_id, decimal league_dues, bool active, int member_id, bool? gender, string description, string name, int max = 0)
         {
             LeagueID = league_id;
             SportID = sport_id;
@@ -49,25 +59,15 @@ namespace DataObjects
             MemberID = member_id;
             Gender = gender;
             Description = description;
+			Name = name;
             MaxNumOfTeams = max;
         }
+		
         public League()
         {
 
         }
-        public League(int leagueID, int sportID, decimal leagueDues, bool active, int memberID, bool? gender
-            , string description, string name)
-        {
-            this.LeagueID = leagueID;
-            this.SportID = sportID;
-            this.LeagueDues = leagueDues;
-            this.Active = active;
-            this.MemberID = memberID;
-            this.Gender = gender;
-            this.Description = description;
-            this.Name = name;
-        }
-    }
+	}
 
     public class LeagueGridVM
     {
@@ -80,4 +80,11 @@ namespace DataObjects
         public bool GenderBool { get; set; }
 
     }
+
+	public class LeagueVM : League
+	{
+		public string SportName { get; set; }
+		public string genderAsText { get; set; }
+	}
+ 
 }

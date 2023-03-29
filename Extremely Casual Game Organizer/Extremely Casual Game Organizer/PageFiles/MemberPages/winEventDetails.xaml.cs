@@ -39,8 +39,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.MemberPages
             _editMode = true;
             _pageControl = new PageControl();
             _masterManager = masterManager;
-            //_memberID = _pageControl.GetSignedInMember().MemberID;
-            _memberID = 100000;
+            _memberID = _pageControl.GetSignedInMember().MemberID;
             InitializeComponent();
         }
         public winEventDetails(CalendarEvent calendarEvent, MasterManager masterManager)
@@ -49,8 +48,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.MemberPages
             _calendarEvent = calendarEvent;
             _editMode = false;
             _pageControl = new PageControl();
-            // _memberID = _pageControl.GetSignedInMember().MemberID;
-            _memberID = 100000;
+            _memberID = _pageControl.GetSignedInMember().MemberID;
             InitializeComponent();
         }
 

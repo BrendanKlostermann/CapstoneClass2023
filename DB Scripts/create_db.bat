@@ -75,10 +75,7 @@ sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
 
 sqlcmd -S localhost -E -i fake_data.sql
 
-
-
 sqlcmd -S localhost -E -i sp_select_all_teams.sql
-
 
 rem server is localhost
 
