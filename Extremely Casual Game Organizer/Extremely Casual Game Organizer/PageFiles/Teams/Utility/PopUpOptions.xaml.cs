@@ -158,9 +158,6 @@ namespace Extremely_Casual_Game_Organizer
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             PopUpPlayerSearch _playerSearch = new PopUpPlayerSearch(_teamID, _members);
-            //int successful = _masterManager.TeamMemberManager.AddAPlayerToATeamByTeamIDAndMemberID(_teamID, _memberID);
-            //pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
-            //_pageControl.LoadPage(_teamMemberScreen);
             this.Close();
             _playerSearch.ShowDialog();
 

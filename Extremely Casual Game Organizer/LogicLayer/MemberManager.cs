@@ -184,7 +184,7 @@ namespace LogicLayer
 
             try
             {
-                results = _memberAccessor.SelectMemberByMemberFullName(firstName, lastName);
+                //results = _memberAccessor.SelectMemberByMemberFullName(firstName, lastName);
             }
             catch (Exception ex)
             {
@@ -214,7 +214,7 @@ namespace LogicLayer
 
             try
             {
-                results = _memberAccessor.SelectMemberByMemberFirstName(firstName);
+                //results = _memberAccessor.SelectMemberByMemberFirstName(firstName);
             }
             catch (Exception ex)
             {

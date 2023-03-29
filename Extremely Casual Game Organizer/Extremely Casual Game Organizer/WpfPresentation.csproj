@@ -68,6 +68,9 @@
     <Compile Include="PageFiles\pgViewSeasonList.xaml.cs">
       <DependentUpon>pgViewSeasonList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml.cs">
+      <DependentUpon>PopUpPlayerSearch.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pgAddEditLeague.xaml.cs">
       <DependentUpon>pgAddEditLeague.xaml</DependentUpon>
     </Compile>
@@ -83,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\pgViewSeasonList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
