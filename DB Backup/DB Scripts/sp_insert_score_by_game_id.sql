@@ -6,15 +6,15 @@ GO
 
 CREATE PROCEDURE [dbo].[sp_insert_score_by_game_id]
 (
-	@game_id	[int],
-	@score		[nvarchar](1000)
+	@game_id		[int],
+	@team_id		[int],
+	@score			[nvarchar](1000)
 )
 AS
 	BEGIN
-		UPDATE [dbo].[GAME]
-			SET [score] = @score
-		WHERE
-			@game_id = [game_id]
+		INSERT INTO [dbo].[Score]([team_id], [game_id], [score])
+		VALUES
+			(@team_id, @game_id, @score)
 		RETURN
 			@@ROWCOUNT
 	END

@@ -15,9 +15,9 @@ print "" print "*** Inserting into Members"
 GO
 SET IDENTITY_INSERT [dbo].[Member] ON
 INSERT INTO [dbo].[Member] ([member_id], [email], [first_name], [family_name], [birthday], [phone_number], [passwordHash], [gender], [active], [bio]) VALUES 
-(100000, N'lebronjames@gmail.com', N'Lebron', N'James', N'2000-01-01', N'319-519-1234', N'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, NULL),
-(100002, N'kevindurant@gmail.com', N'Kevin', N'Durant', N'2000-01-04', N'319-519-1235', N'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, NULL),
-(100003, N'angelicasombrano@gmail.com', N'Angelica', N'Sombrano', N'2000-06-01', N'319-519-1236', N'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, NULL),
+(100000, N'lebronjames@gmail.com', N'Lebron', N'James', N'2000-01-01', N'319-519-1234', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 0, 1, NULL),
+(100002, N'kevindurant@gmail.com', N'Kevin', N'Durant', N'2000-01-04', N'319-519-1235', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 0, 1, NULL),
+(100003, N'angelicasombrano@gmail.com', N'Angelica', N'Sombrano', N'2000-06-01', N'319-519-1236', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 1, 1, NULL),
 (100004, N'bryantcopper@gmail.com', N'Bryant', N'Copper', N'2003-11-18', N'319-519-1237', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 0, 1, NULL),
 (100005, N'danielkim@gmail.com', N'Daniel', N'Kim', N'2003-11-28', N'319-519-1238', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 1, 1, NULL),
 (100006, N'elizabethberry@gmail.com', N'Elizabeth', N'Berry', N'2001-06-03', N'319-519-1239', N'B03DDF3CA2E714A6548E7495E2A03F5E824EAAC9837CD7F159C67B90FB4B7342', 1, 1, NULL),
@@ -1628,22 +1628,22 @@ GO
 print "" print "*** Inserting into Game"
 GO
 SET IDENTITY_INSERT [dbo].[Game] ON
-INSERT INTO [dbo].[Game] ([game_id], [score], [venue_id], [date_and_time], [sport_id]) VALUES 
+INSERT INTO [dbo].[Game] ([game_id], [venue_id], [date_and_time], [sport_id]) VALUES 
 --Basketball
-(1000, N'105 vs 120', 1002, N'2023-02-15 12:00:00', 1010),
-(1002, N'98 vs 99', 1006, N'2023-02-22 08:30:00', 1010),
-(1003, N'117 vs 102', 1006, N'2023-02-15 14:00:00', 1010),
-(1004, N'100 vs 87', 1006, N'2023-02-15 13:45:00', 1010),
-(1005, N'120 vs 117', 1004, N'2023-02-15 13:45:00', 1010),
-(1006, N'93 vs 95', 1017, N'2023-02-15 13:45:00', 1010),
-(1007, N'146 vs 139', 1006, N'2023-02-15 13:45:00', 1010),
-(1008, N'76 vs 80', 1017, N'2023-02-15 13:45:00', 1010),
+(1000, 1002, N'2023-02-15 12:00:00', 1010),
+(1002, 1006, N'2023-02-22 08:30:00', 1010),
+(1003, 1006, N'2023-02-15 14:00:00', 1010),
+(1004, 1006, N'2023-02-15 13:45:00', 1010),
+(1005, 1004, N'2023-02-15 13:45:00', 1010),
+(1006, 1017, N'2023-02-15 13:45:00', 1010),
+(1007, 1006, N'2023-02-15 13:45:00', 1010),
+(1008, 1017, N'2023-02-15 13:45:00', 1010),
 
 -- Football
-(1009, N'13 vs 28', 1015, N'2023-02-17 14:00:00', 1012),
-(1011, N'21 vs 20', 1004, N'2023-02-23 12:00:00', 1012),
-(1012, N'17 vs 20', 1004, N'2023-02-17 10:30:00', 1012),
-(1016, N'33 vs 17', 1017, N'2023-02-23 20:00:00', 1012)
+(1009, 1015, N'2023-02-17 14:00:00', 1012),
+(1011, 1004, N'2023-02-23 12:00:00', 1012),
+(1012, 1004, N'2023-02-17 10:30:00', 1012),
+(1016, 1017, N'2023-02-23 20:00:00', 1012)
 SET IDENTITY_INSERT [dbo].[Game] OFF
 GO
 
@@ -1831,6 +1831,27 @@ INSERT INTO [dbo].[TournamentGame] ([tournament_id], [game_id]) VALUES
 (100000, 1004),
 (100002, 1009),
 (100002, 1011)
+GO
+
+print '' print '*** Inserting into Score Table ***'
+Go
+INSERT INTO [dbo].[Score] ([game_id], [team_id], [score]) VALUES
+(1000, 1001, 72),
+(1000, 1009, 80),
+(1002, 1001, NULL),
+(1002, 1011, NULL),
+(1003, 1009, 89),
+(1003, 1030, 88),
+(1004, 1001, 92),
+(1004, 1030, 87),
+(1005, 1030, 104),
+(1005, 1009, 72),
+(1006, 1011, 110),
+(1006, 1009, 105),
+(1007, 1011, 82),
+(1007, 1001, 64),
+(1008, 1011, NULL),
+(1008, 1030, NULL)
 GO
 
 print "" print "*** Inserting into GameRoster"

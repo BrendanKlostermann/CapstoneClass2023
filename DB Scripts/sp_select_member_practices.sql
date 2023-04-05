@@ -12,12 +12,11 @@ AS
 		SELECT
 			'Practice'
 			, [Practice].[practice_id]
-			, CONCAT([Practice].[location] , " " , [Practice].[city] ,  ", " , [Practice].[state_name] , " " , [Practice].[zip_code])
+			, [Practice].[location]
 			, [Practice].[date_time]
-			, [Practice].[description]
-		FROM [dbo].[TeamMember]
-		JOIN [dbo].[Team] ON [Team].[team_id] = [TeamMember].[team_id]
+		FROM [dbo].[TeamRole]
+		JOIN [dbo].[Team] ON [Team].[team_id] = [TeamRole].[team_id]
 		JOIN [dbo].[Practice] ON [Practice].[team_id] = [Team].[team_id]
-		WHERE [dbo].[TeamMember].[member_id] = @member_id
+		WHERE [dbo].[TeamRole].[member_id] = @member_id
 	END
 GO

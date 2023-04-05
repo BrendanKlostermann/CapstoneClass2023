@@ -13,6 +13,7 @@ namespace DataObjects
         public int MemberID { get; set; }
         public string Description { get; set; }
         public int TeamID { get; set; }
+        public string TeamScore { get; set; }
     }
     public class GameRosterVM
     {

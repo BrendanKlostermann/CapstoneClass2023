@@ -14,7 +14,7 @@ AS
 		SELECT [TeamMember].[team_id], [TeamMember].[description],
                 [TeamMember].[starter], [TeamMember].[member_id], 
                 [Team].[team_name], [Team].[gender], 
-                [Sport].[description]
+                [Sport].[description], [Team].[active]
 		FROM [dbo].[TeamMember]
         INNER JOIN [dbo].[Team]
 		ON [Team].[team_id] = [TeamMember].[team_id]

@@ -14,8 +14,8 @@ AS
 	BEGIN
 		SELECT 	COUNT([member_id])
 		FROM	[Member]
-		WHERE	[email] = @email
-		  AND	[passwordHash] = @passwordHash
+		WHERE	@email = [email]
+		  AND	@passwordHash = [passwordHash]
 		  AND	ACTIVE = 1;
 	END
 GO

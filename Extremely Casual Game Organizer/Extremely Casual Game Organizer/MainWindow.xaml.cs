@@ -275,8 +275,8 @@ namespace Extremely_Casual_Game_Organizer
         private void btnSignOut_Click(object sender, RoutedEventArgs e)
         {
             updateUIforLogout();
-		}
-		
+        }
+
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             _pageControl.LoadPage(new pgHelp(), _pageControl.GetCurrentPage());

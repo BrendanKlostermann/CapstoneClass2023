@@ -1,0 +1,125 @@
+﻿@model DataRow
+@using System.Data
+@using DataObjects;
+
+@{
+    ViewBag.Title = "Details";
+    Team team1 = ViewBag.Team1;
+    Team team2 = ViewBag.Team2;
+    IEnumerable<GameRoster> team1Roster = ViewBag.Team1Roster;
+    IEnumerable<GameRoster> team2Roster = ViewBag.Team2Roster;
+    string[] location = Model[1].ToString().Split(',');
+    string locationFormatted = location[0] + ", " + Model[2].ToString() + ", " + location[1] + " " + Model[3].ToString();
+    Score team1Score = ViewBag.Team1Score;
+    Score team2Score = ViewBag.Team2Score;
+}
+
+<h2>Game Details</h2>
+
+<div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    <h4>Game</h4>
+    <div class="row">
+        <div class="col-lg-4">
+            <center><h3>@team1.TeamName</h3></center>
+            <center><h6>@if (team1Score != null)
+            {
+               @team1Score.TeamScore
+            }</h6></center>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Player </th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                @foreach (var player in team1Roster)
+                {
+                    <tr class="">
+                        <td>
+                            @String.Concat(player.FirstName, " ", player.LastName)
+                        </td>
+                        <td>
+                            @player.Description
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <div class="col-lg-4">
+            <center><h4>Game Information</h4></center>
+            <br />
+            <br />
+            <dl class="dl-horizontal">
+                <dt>
+                    <b>Venue: </b>
+                </dt>
+                <dd>
+                    @Model[4].ToString()
+                </dd>
+
+                <dt>
+                    <b>Location: </b>
+                </dt>
+                <dd>
+                    @locationFormatted
+                </dd>
+
+
+                <dt>
+                    <b>Date: </b>
+                </dt>
+                <dd>
+                    @Convert.ToDateTime(Model[4]).ToShortDateString()
+                </dd>
+
+
+                <dt>
+                    <b>Time: </b>
+                </dt>
+                <dd>
+                    @Convert.ToDateTime(Model[4]).ToShortTimeString()
+                </dd>
+
+                <dt>
+                    <b>Sport: </b>
+                </dt>
+                <dd>
+                    @Model[5]
+                </dd>
+            </dl>
+        </div>
+        <div class="col-lg-4">
+            <center><h3>@team2.TeamName</h3></center>
+            <center>
+                <h6>
+                    @if (team2Score != null)
+                    {
+                        @team2Score.TeamScore
+                    }
+            </h6>
+        </center>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Player </th>
+                    <th>Position</th>
+                </tr>
+            </thead>
+            @foreach (var player in team2Roster)
+            {
+                <tr class="">
+                    <td>
+                        @String.Concat(player.FirstName, " ", player.LastName)
+                    </td>
+                    <td>
+                        @player.Description
+                    </td>
+                </tr>
+            }
+        </table>
+        </div>
+    </div>
+</div>

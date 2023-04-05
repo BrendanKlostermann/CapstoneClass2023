@@ -14,22 +14,6 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" VerticalContentAlignment="Bottom" FontSize="30" FontWeight="Bold">Current Game List</Label>
-        <DataGrid x:Name="datGameList" Margin="5" GridLinesVisibility="None" Grid.Row="1" ColumnWidth="*" BorderBrush="Transparent" HeadersVisibility="None" Background="Transparent" MouseDoubleClick="datGameList_MouseDoubleClick">
-            <DataGrid.RowStyle>
-                <Style TargetType="DataGridRow" >
-                    <Setter Property="Height" Value="40" />
-                    <Setter Property="Margin" Value="0 10 0 10" />
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderThickness" Value="2" />
-                    <Setter Property="BorderBrush" Value="Black" />
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" >
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="Margin" Value="5" />
-                </Style>
-            </DataGrid.CellStyle>
-        </DataGrid>
+        <ListBox x:Name="lstGameList" Grid.Row="1" Background="Transparent" MouseDoubleClick="lstGameList_MouseDoubleClick" />
     </Grid>
 </Page>

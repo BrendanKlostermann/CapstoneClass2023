@@ -59,7 +59,7 @@
                     <Image Source="Data\homeButton.png"></Image>
 				</Button>
 				
-                <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent">
+                <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent" Click="btnHelp_Click">
                     <Image Source="Data\helpButton.png"></Image>
                 </Button>
                 <Image Grid.Column="3" Source="/Data/Logo.png" />

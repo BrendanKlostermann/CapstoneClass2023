@@ -26,6 +26,7 @@ namespace DataAccessLayerFakes
         DataTable _gameList = null;
         DataTable _gameDetails = null;
         List<GameRoster> _gameRoster = null;
+        List<Score> _scoreList = null;
 
         public GameAccessorFake()
         {
@@ -37,14 +38,14 @@ namespace DataAccessLayerFakes
             /// </summary>
             _gameList = new DataTable();
             _gameList.Columns.Add("game_id", typeof(int));
-            _gameList.Columns.Add("Teams", typeof(string));
+            _gameList.Columns.Add("Sport", typeof(string));
             _gameList.Columns.Add("Location", typeof(string));
             _gameList.Columns.Add("Date and Time", typeof(DateTime));
 
-            _gameList.Rows.Add("1000", "TheMediocreTeam VS TheWorstTeam", "Kyles House", new DateTime(2023, 12, 01));
-            _gameList.Rows.Add("1001", "TheBestTeam VS TheOkayTeam ", "123 Lazy BLVD, Waterloo IA, 12345", new DateTime(2023, 12, 01));
-            _gameList.Rows.Add("1002", "TheBestTeam VS TheMediocreTeam ", "123 Lazy BLVD, Waterloo IA, 12345", new DateTime(2023, 02, 04));
-            _gameList.Rows.Add("1003", "TheBestTeam VS TheOkayTeam ", "1251 Main St SW, Cedar Rapids IA, 52401", new DateTime(2023, 06, 03));
+            _gameList.Rows.Add(1000, "Backetball", "Kyles House", new DateTime(2023, 12, 01));
+            _gameList.Rows.Add(1001, "BaseBall", "123 Lazy BLVD, Waterloo IA, 12345", new DateTime(2023, 12, 01));
+            _gameList.Rows.Add(1002, "Basketball", "123 Lazy BLVD, Waterloo IA, 12345", new DateTime(2023, 02, 04));
+            _gameList.Rows.Add(1003, "Baseball", "1251 Main St SW, Cedar Rapids IA, 52401", new DateTime(2023, 06, 03));
 
             _gameDetails = new DataTable();
             _gameDetails.Columns.Add("game_id", typeof(int));
@@ -70,6 +71,14 @@ namespace DataAccessLayerFakes
                 { GameID = 1000, TeamID = 1002, MemberID = 100004, Description = "Away Team", GameRosterID = 14, TeamName = "TheSecondTeam", FirstName = "Edward", LastName = "Smith" },
                 new GameRoster
                 { GameID = 1000, TeamID = 1002, MemberID = 100005, Description = "Away Team", GameRosterID = 15, TeamName = "TheSecondTeam", FirstName = "Frank", LastName = "Smith" },
+            };
+
+            _scoreList = new List<Score>()
+            {
+                new Score {GameID = 1000, TeamID = 1001, TeamScore = 10},
+                new Score {GameID = 1000, TeamID = 1002, TeamScore = 20},
+                new Score {GameID = 1001, TeamID = 1003, TeamScore = 15},
+                new Score {GameID = 1001, TeamID = 1004, TeamScore = 12},
             };
         }
 
@@ -125,25 +134,50 @@ namespace DataAccessLayerFakes
         public DataTable SelectGameListByTeamID(int team_id)
         {
             DataTable gameList = new DataTable();
-            // Setup table columns
+            // Setup return table columns
             gameList.Columns.Add("game_id", typeof(int));
             gameList.Columns.Add("Teams", typeof(string));
             gameList.Columns.Add("Location", typeof(string));
             gameList.Columns.Add("Date and Time", typeof(DateTime));
 
-            // Get roster data for teamID
-            // Should return multiple if team is in multiple games.
-            var rosterSearch = from game in _gameRoster.AsEnumerable() where game.TeamID.Equals(team_id) select game.GameID;
-
-            // Get game for rosterID to determine if team is participating in a game. Multiple results in rosterSearch, need to select distinct gameID's
-            foreach (var game in rosterSearch.Distinct())
+            try
             {
-                var gameSearch = from row in _gameList.AsEnumerable() where row["game_id"].Equals(game) select row;
-                gameList.Rows.Add(gameSearch.First().ItemArray); // gameSearch should only return 1 result
+                // Get roster data for teamID
+                // Should return multiple if team is in multiple games.
+                var rosterSearch = _gameRoster.AsEnumerable().Where(x => x.TeamID == team_id);
+
+                // Get game for rosterID to determine if team is participating in a game. Multiple results in rosterSearch
+                foreach (var game in rosterSearch.GroupBy(x => x.GameID))
+                {
+                    var gameSearch = from row in _gameList.AsEnumerable() where row[0].Equals(game.Key) select row;
+                    gameList.Rows.Add(gameSearch.First().ItemArray); // gameSearch should only return 1 result
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
 
 
             return gameList;
+        }
+
+        public List<Score> SelectScoreByGameID(int game_id)
+        {
+            List<Score> returnList = null;
+            try
+            {
+                returnList = _scoreList.Where(x => x.GameID == game_id).ToList();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return returnList;
         }
     }
 }

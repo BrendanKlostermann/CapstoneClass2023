@@ -38,6 +38,40 @@ namespace LogicLayer
         }
 
         /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/03/04
+        /// 
+        /// Method retrieves score list by game ID.
+        /// Null values are expected so there is no need to check for null values. 
+        /// </summary>
+        /// <param name="game_id"></param>
+        /// <returns></returns>
+        public List<Score> RetreiveScoresByGameID(int game_id)
+        {
+            List<Score> scoreList = null;
+            try
+            {
+                scoreList = _gameAccessor.SelectScoreByGameID(game_id);
+
+                if (scoreList.Count == 0 || scoreList == null)
+                {
+                    throw new ApplicationException("Scores not found for provided game_id");
+                }
+
+            }
+            catch (ApplicationException ae)
+            {
+                throw new ApplicationException("Error retreiving game score", ae);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error retrieving game score", ex);
+            }
+            return scoreList;
+        }
+
+        /// <summary>
         ///  Created By: Jacob Lindauer
         ///  Date: 2023/25/02
         ///  
@@ -124,5 +158,7 @@ namespace LogicLayer
 
             return returnRow;
         }
+
+
     }
 }

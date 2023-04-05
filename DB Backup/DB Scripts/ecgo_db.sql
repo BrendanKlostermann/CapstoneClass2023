@@ -197,15 +197,29 @@ print '' print '*** creating game table Rith'
 GO
 CREATE TABLE [dbo].[Game] (
 	[game_id]				[int] IDENTITY(1000,1)	NOT NULL,
-	[score]					[nvarchar](1000)		NULL,
 	[venue_id]				[int]					NOT NULL,
 	[date_and_time]			[dateTime]				NOT NULL,
-	[sport_id]				[int]					NOT NULL
+	[sport_id]				[int]					NOT NULL,
+	[active]				[bit]					NULL	DEFAULT(1),
 	CONSTRAINT [pk_game_id] PRIMARY KEY([game_id]),
 	CONSTRAINT [fk_venue_id] FOREIGN KEY([venue_id])
 		REFERENCES [Venue]([venue_id]),
 	CONSTRAINT [fk_sport_id_game_table] FOREIGN KEY([sport_id])
 		REFERENCES [Sport]([sport_id])
+)
+GO
+
+Print '' Print'*** Creating score table Jacob Lindauer ***'
+GO
+CREATE TABLE [dbo].[Score](
+	[team_id]			[int]					NOT NULL,
+	[game_id]			[int]					NOT NULL,
+	[score]				[decimal](5,2)				NULL
+	CONSTRAINT [fk_teamscore_id] FOREIGN KEY ([team_id])
+		REFERENCES [Team]([team_id]),
+	CONSTRAINT [fk_gamescore_id] FOREIGN KEY ([game_id])
+		REFERENCES [Game]([game_id]),
+	CONSTRAINT [pk_TeamGameScores] PRIMARY KEY ([team_id], [game_id])
 )
 GO
 
@@ -329,6 +343,7 @@ CREATE TABLE [dbo].[Practice] (
 	[description]	[nvarchar](1000) NULL, 
 	[zip_code]		[int]					NOT NULL,
 	[city]			[nvarchar] (250)		NOT NULL,
+	[state_name]	[nvarchar] (50)		NULL,
 	CONSTRAINT [pk_practice_id] PRIMARY KEY([practice_id]),
 	CONSTRAINT [fk_Practice_team_id] FOREIGN KEY([team_id])
 		REFERENCES [Team]([team_id])
@@ -510,7 +525,6 @@ GO
 CREATE TABLE [dbo].[Availability] (
 	[availability_id]		[int]			IDENTITY(1000, 1) 		NOT NULL, 
 	[description]			[nvarchar](250)							NULL,
-	[is_available]			[bit]									NOT NULL DEFAULT 0,
 	[member_id]				[int]									NOT NULL,
 	[start_availability]	[datetime]								NOT NULL,
 	[end_availability]		[datetime]								NOT NULL,
