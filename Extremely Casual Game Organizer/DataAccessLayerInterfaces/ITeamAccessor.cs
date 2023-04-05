@@ -122,5 +122,12 @@ namespace DataAccessLayerInterfaces
         /// </summary>
         List<TeamMemberAndSport> getTeamByMemberID(int member_id); //Get team by member ID and details about the sport, gender and others.
 
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/02/21
+        /// 
+        /// Get all teams a user is into
+        /// </summary>
+        int DeactivateOwnTeam(int teamID, int memberID);
     }
 }

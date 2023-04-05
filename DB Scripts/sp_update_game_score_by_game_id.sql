@@ -9,14 +9,16 @@ USE [ecgo_db]
 GO
 CREATE PROCEDURE [dbo].[sp_update_game_score_by_game_id]
 (
-	@game_id	int,
+	@game_id	[int],
+	@team_id	[int],
 	@score	NVARCHAR(1000)
 )
 AS
 	BEGIN
-		UPDATE 	[Game]
-		SET		[Score]		=	@score
-		WHERE		@game_id 	= 	[game_id]
-				RETURN 	@@ROWCOUNT
+		UPDATE 	[Score]
+		SET		[score] = @score
+		WHERE	[game_id] = @game_id
+		AND		[team_id] = @team_id
+		RETURN 	@@ROWCOUNT
 	END
 GO

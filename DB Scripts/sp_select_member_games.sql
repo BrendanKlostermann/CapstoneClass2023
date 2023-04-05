@@ -20,3 +20,5 @@ AS
 		WHERE [dbo].[GameRoster].[member_id] = @member_id
 	END
 GO
+
+/*line 13 does not feel needed*/

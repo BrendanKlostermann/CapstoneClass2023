@@ -64,18 +64,27 @@ sqlcmd -S localhost -E -i sp_create_practice.sql
 sqlcmd -S localhost -E -i sp_update_game_score_by_game_id.sql
 sqlcmd -S localhost -E -i sp_select_game.sql
 sqlcmd -S localhost -E -i sp_select_venue.sql
-sqlcmd -S localhost -E -i sp_delete_member_availability.sql
-sqlcmd -S localhost -E -i sp_insert_member_availability.sql
-sqlcmd -S localhost -E -i sp_select_member_availability.sql
-sqlcmd -S localhost -E -i sp_update_member_availability.sql
-sqlcmd -S localhost -E -i sp_select_team_members_by_team_id.sql
+sqlcmd -S localhost -E -i sp_add_member_to_team_by_member_id_and_team_id.sql
+sqlcmd -S localhost -E -i sp_remove_season.sql
+sqlcmd -S localhost -E -i sp_update_season.sql
+sqlcmd -S localhost -E -i sp_select_seasons_by_league_id.sql
+sqlcmd -S localhost -E -i sp_deactivate_own_team.sql
+sqlcmd -S localhost -E -i sp_select_tournament_by_tournamentid.sql
+sqlcmd -S localhost -E -i sp_deactivate_tournament.sql
+
+
+
+sqlcmd -S localhost -E -i sp_select_members_by_name_and_or_email.sql
 
 sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
 
 
 sqlcmd -S localhost -E -i fake_data.sql
 
+
+
 sqlcmd -S localhost -E -i sp_select_all_teams.sql
+sqlcmd -S localhost -E -i zipcodes.sql
 
 rem server is localhost
 

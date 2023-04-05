@@ -7,7 +7,7 @@ GO
 use [ecgo_db]
 go
 
-CREATE PROCEDURE [dbo].[usp_InsertData]
+CREATE PROCEDURE [dbo].[sp_insert_tournament]
 (
 	@sportid		int,
     @Gender 		bit,

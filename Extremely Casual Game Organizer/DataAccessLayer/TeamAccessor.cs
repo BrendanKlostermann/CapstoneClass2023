@@ -510,11 +510,15 @@ namespace DataAccessLayer
             }
             return sports;
         }
-        
-        
+
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
+        /// 
+        /// /// Updated By: Garion Opiola
+        /// Date: 2023/03/28
+        /// Added Active bit
         /// 
         /// Get all teams a user is into
         /// </summary>
@@ -561,7 +565,8 @@ namespace DataAccessLayer
                             Starter = reader.GetBoolean(2),
                             MemberID = reader.GetInt32(3),
                             TeamName = reader.GetString(4),
-                            SportName = reader.GetString(6)
+                            SportName = reader.GetString(6),
+                            Active = reader.GetBoolean(7)
                         };
 
                         if (reader.IsDBNull(5) == false)
@@ -724,6 +729,51 @@ namespace DataAccessLayer
                 throw ex;
             }
             return teamMembers;
+        }
+
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// A method that Deactivates a team the user made
+        /// </summary>
+        public int DeactivateOwnTeam(int teamID, int memberID)
+        {
+            int rows = 0;
+            //connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_deactivate_own_team";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+            cmd.Parameters["@team_id"].Value = teamID;
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = memberID;
+
+            try
+            {
+                conn.Open();
+                rows = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return rows;
         }
     }
 }

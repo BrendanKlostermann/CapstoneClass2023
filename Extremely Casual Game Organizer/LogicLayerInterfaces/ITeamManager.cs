@@ -60,5 +60,14 @@ namespace LogicLayerInterfaces
         /// </summary>
         List<TeamMemberAndSport> getTeamByMemberID(int member_id); //Get team by member ID and details about the sport, gender and others.
 
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// removes a team that's not in a league
+        int RemoveOwnTeam(int teamID, int memberID);
+
     }
 }

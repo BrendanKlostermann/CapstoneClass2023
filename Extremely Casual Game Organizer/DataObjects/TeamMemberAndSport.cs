@@ -6,8 +6,9 @@
 /// </summary>
 ///
 /// <remarks>
-/// Updater Name: Heritier Otiom
-/// Updated: 2023/02/21
+/// Updater Name: Garion Opiola
+/// Updated: 2023/03/28
+/// Added Active bit
 /// 
 /// </remarks>
 using System;
@@ -24,6 +25,10 @@ namespace DataObjects
         /// Heritier Otiom
         /// Created: 2023/01/31
         /// 
+        /// Updated By: Garion Opiola
+        /// Date: 2023/03/28
+        /// Added Active bit
+        /// 
         /// Property for Team Member and Sport
         /// </summary>
         public int TeamID { get; set; }
@@ -33,5 +38,6 @@ namespace DataObjects
         public int MemberID { get; set; }
         public string SportName { get; set; }
         public bool? Gender { get; set; }
+        public bool Active { get; set; }
     }
 }

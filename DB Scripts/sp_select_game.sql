@@ -7,7 +7,7 @@ GO
 CREATE PROCEDURE [dbo].[sp_select_game]
 AS 
 	BEGIN
-		SELECT  [game_id],[score],[venue_id],[date_and_time],[sport_id]			
+		SELECT  [game_id],[venue_id],[date_and_time],[sport_id]			
 		FROM 	[dbo].[Game]
 	END
 GO

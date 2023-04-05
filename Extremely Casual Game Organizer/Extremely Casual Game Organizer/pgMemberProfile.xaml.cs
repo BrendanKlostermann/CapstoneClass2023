@@ -2,10 +2,9 @@
 /// Heritier Otiom
 /// Created: 2023/01/31
 /// 
-/// Updated By: Jacob Lindauer
-/// Date: 2023/26/03
-/// 
-/// Updated memberID to pull from main page. Also updated MemberID fields to use memberID from member object
+/// Updater Name: Garion Opiola
+/// Updated: 2023/03/28
+/// updated getMemberByID and added buttton to access deactivate teams
 /// </summary>
 using DataObjects;
 using Extremely_Casual_Game_Organizer.PageFiles;
@@ -30,22 +29,25 @@ namespace Extremely_Casual_Game_Organizer
 {
     /// <summary>
     /// Interaction logic for pgMemberProfile_2.xaml
+    /// 
+    /// Updater Name: Garion Opiola
+    /// Updated: 2023/03/28
+    /// uses page control for getMemberByID()
     /// </summary>
     public partial class pgMemberProfile : Page
     {
         MemberManager memberManager = null;
         MasterManager _masterManager = null;
-        TeamManager teamManager = null;
-        PageControl _pageControl;
-        private Member member = null;
+        TeamManager _teamManager = null;
+        private Member _member = null;
+        PageControl _pgControl = new PageControl();
         private byte[] data; // For image
         public pgMemberProfile(MasterManager _masterManager)
         {
-            _pageControl = new PageControl();
             memberManager = new MemberManager();
-            teamManager = new TeamManager();
+            _teamManager = new TeamManager();
+            _member = new Member();
             this._masterManager = _masterManager;
-            member = _pageControl.GetSignedInMember();
             InitializeComponent();
             getMemberByID();
             getTeams();
@@ -54,29 +56,32 @@ namespace Extremely_Casual_Game_Organizer
         // Get Member by id
         private void getMemberByID()
         {
+            ///Updater Name: Garion Opiola
+            /// Updated: 2023/03/28
+            /// uses page control for getMemberByID
             try
             {
-                member = memberManager.GetMemberByMemberID(member.MemberID);
+                _member = _pgControl.GetSignedInMember();
 
                 // If there's a member
-                if (member != null)
+                if (_member != null)
                 {
-                    lblName.Content = member.FirstName + " " + member.FamilyName;
-                    lblEmail.Content = "Email: " + member.Email;
+                    lblName.Content = _member.FirstName + " " + _member.FamilyName;
+                    lblEmail.Content = "Email: " + _member.Email;
 
                     //Gender
-                    if (member.Gender == false) lblGender.Content = "Gender: Male";
-                    else if (member.Gender == true) lblGender.Content = "Gender: Female";
+                    if (_member.Gender == false) lblGender.Content = "Gender: Male";
+                    else if (_member.Gender == true) lblGender.Content = "Gender: Female";
                     else lblGender.Content = "Gender: Not specify";
-                    lblPhone.Content = "Phone Number: " + member.PhoneNumber;
-                    txtBio.Text = member.Bio;
+                    lblPhone.Content = "Phone Number: " + _member.PhoneNumber;
+                    txtBio.Text = _member.Bio;
 
                     // If the user has a profile picture, 
                     // convert the byte array into an image
                     // otherwise, set a default picture
-                    if (member.ProfilePhoto != null)
+                    if (_member.ProfilePhoto != null)
                     {
-                        img.Source = ByteToImage(member.ProfilePhoto);
+                        img.Source = ByteToImage(_member.ProfilePhoto);
                     }
                     else
                     {
@@ -118,7 +123,7 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
-                List<TeamMemberAndSport> team = teamManager.getTeamByMemberID(member.MemberID);
+                List<TeamMemberAndSport> team = _teamManager.getTeamByMemberID(_member.MemberID);
                 // Remove all items from the list of team
                 lbTeam.Items.Clear();
 
@@ -186,12 +191,12 @@ namespace Extremely_Casual_Game_Organizer
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // Update User Bio
-            if (member != null)
+            if (_member != null)
             {
                 try
                 {
-                    member.Bio = txtBio.Text;
-                    int rowsAffected = memberManager.UpdateUserBio(member);
+                    _member.Bio = txtBio.Text;
+                    int rowsAffected = memberManager.UpdateUserBio(_member);
 
                     if (rowsAffected == 1) MessageBox.Show("Update successfully!");
                     else MessageBox.Show("Error !");
@@ -238,8 +243,8 @@ namespace Extremely_Casual_Game_Organizer
                     //Update Profile Picture
                     try
                     {
-                        member.ProfilePhoto = data;
-                        int rowsAffected = memberManager.UpdateProfilePicture(member);
+                        _member.ProfilePhoto = data;
+                        int rowsAffected = memberManager.UpdateProfilePicture(_member);
 
                         if (rowsAffected == 1) MessageBox.Show("Update successfully!");
                         else
@@ -260,7 +265,19 @@ namespace Extremely_Casual_Game_Organizer
         // Let the user create another team
         private void btnCreateTeam_Click(object sender, RoutedEventArgs e)
         {
-            _pageControl.LoadPage(new pgCreateTeam(_masterManager, member.MemberID), _pageControl.GetCurrentPage());
+            NavigationService.Navigate(new pgCreateTeam(_masterManager, _member.MemberID));
+            //pgCreateTeam_2 _pgCreateTeam = new pgCreateTeam_2(MemberID); //Pass his memberID
+            //_pgCreateTeam.Show();
+        }
+
+        private void btnDeleteTeam_Click(object sender, RoutedEventArgs e)
+        {
+            // <summary>
+            // Created by Garion Opiola
+            // Created 03/19/2023
+            // Let the user delete a team
+            // </summary>
+            NavigationService.Navigate(new pgDeactivateTeam());
         }
     }
 }

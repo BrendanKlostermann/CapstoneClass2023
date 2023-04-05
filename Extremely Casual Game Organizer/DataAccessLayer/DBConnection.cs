@@ -27,7 +27,7 @@ namespace DataAccessLayer
         {
             SqlConnection conn = null;
 
-            string connectionString = @"Data Source=Localhost;Initial Catalog=ecgo_db;Integrated Security=True";
+            string connectionString = @"Data Source=LAPTOP-7LV38TIC\MSSQLSERVER05;Initial Catalog=ecgo_db;Integrated Security=True";
 
             conn = new SqlConnection(connectionString);
 
