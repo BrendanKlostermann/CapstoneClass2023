@@ -29,6 +29,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DataObjects;
 using Extremely_Casual_Game_Organizer.PageFiles;
+using Extremely_Casual_Game_Organizer.PageFiles.Teams.Utility;
 using LogicLayer;
 
 namespace Extremely_Casual_Game_Organizer
@@ -42,8 +43,10 @@ namespace Extremely_Casual_Game_Organizer
         int _memberID; // used to store the member selected
         int _optionStatus; //used to show which options are avaliable
         bool _starter; //used to get weather or not they are a starter or a bench
-        PageControl _pageControl = null;
-        MasterManager _masterManager = null;
+        TeamMemberManager _teamMemberManager;
+        PageControl _pageControl;
+        MasterManager _masterManager;
+        List<Member> _members = null;
 
         //public event EventHandler WindowClosed; //handler that manages when the pop up menue closes. 
 
@@ -71,14 +74,16 @@ namespace Extremely_Casual_Game_Organizer
         /// Updated: yyyy/mm/dd 
         /// example: Fixed a problem when user inputs bad data
         /// </remarks>
-        public PopUpOptions(int memberID, int teamID, int optionStatus, bool starter, MasterManager masterManager)
+        public PopUpOptions(int memberID, int teamID, int optionStatus, bool starter, List<Member> members)
         {
-            _masterManager = masterManager;
             _pageControl = new PageControl();
+            _teamMemberManager = new TeamMemberManager();
+            _masterManager = new MasterManager();
             _teamID = teamID;
             _memberID = memberID;
             _optionStatus = optionStatus;
             _starter = starter;
+            _members = members;
             InitializeComponent();
             this.Topmost = true;
             if(_optionStatus == 1)
@@ -152,10 +157,10 @@ namespace Extremely_Casual_Game_Organizer
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            int successful = _masterManager.TeamMemberManager.AddAPlayerToATeamByTeamIDAndMemberID(_teamID, _memberID);
-            pgTeamMemberScreen _teamMemberScreen = new pgTeamMemberScreen(_teamID, _masterManager);
-            _pageControl.LoadPage(_teamMemberScreen);
+            PopUpPlayerSearch _playerSearch = new PopUpPlayerSearch(_teamID, _members);
             this.Close();
+            _playerSearch.ShowDialog();
+
         }
     }
 }

@@ -1328,5 +1328,111 @@ namespace DataAccessLayer
             // return the result
             return result;
         }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/26
+        /// searching for members by first, last or email
+        /// </summary>
+        public List<Member> SelectAListOfMembersByNameAndOrEmail(string firstName, string familyName, string email)
+        {
+            List<Member> _members = new List<Member>(); //get list of members
+            //connection
+            DBConnection connectionFactory = new DBConnection(); //for sp_select_members_by_name_and_or_email
+            var conn = connectionFactory.GetDBConnection(); //for sp_select_members_by_name_and_or_email
+
+            //command text
+            var cmdText = "sp_select_members_by_name_and_or_email";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn); //for sp_select_members_by_name_and_or_email
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+
+            cmd.Parameters.Add("@first_name", SqlDbType.NVarChar, 25);
+            cmd.Parameters["@first_name"].Value = firstName;
+
+            cmd.Parameters.Add("@family_name", SqlDbType.NVarChar, 25);
+            cmd.Parameters["@family_name"].Value = familyName;
+
+            cmd.Parameters.Add("@email", SqlDbType.NVarChar, 254);
+            cmd.Parameters["@email"].Value = email;
+            try
+            {
+                conn.Open(); //for sp_select_members_by_name_and_or_email
+
+                var reader = cmd.ExecuteReader(); //for sp_select_members_by_name_and_or_email
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        byte[] profile_picture = null;
+                        long? fieldWidth = null;
+                        Member tempMember = new Member();
+                        tempMember.MemberID = reader.GetInt32(0);
+                        tempMember.Email = reader.GetString(1);
+                        tempMember.FirstName = reader.GetString(2);
+                        tempMember.FamilyName = reader.GetString(3);
+                        tempMember.Birthday = reader.GetDateTime(4);
+                        tempMember.PhoneNumber = reader.IsDBNull(5) ? null : reader.GetString(5);
+                        tempMember.Gender = reader.IsDBNull(6) ? null : (bool?)reader.GetBoolean(6);
+                        tempMember.Active = reader.GetBoolean(7);
+                        try
+                        {
+                            tempMember.Bio = reader.IsDBNull(8) ? null : reader.GetString(8);
+                        }
+                        catch (Exception)
+                        {
+                            tempMember.Bio = null;
+                        }
+
+                        int columnIndex = 9;
+                        try
+                        {
+                            fieldWidth = reader.GetBytes(columnIndex, 0, null, 0, Int32.MaxValue);
+                        }
+                        catch (Exception)
+                        {
+                            profile_picture = null;
+                        }
+
+                        if (fieldWidth != null && fieldWidth > 0)
+                        {
+                            int width = (int)fieldWidth;
+                            profile_picture = new byte[width];
+                            reader.GetBytes(columnIndex, 0, profile_picture, 0, profile_picture.Length);
+                        }
+
+                        tempMember.ProfilePicture = profile_picture;
+
+                        if (reader.FieldCount > 10 && !reader.IsDBNull(10))
+                        {
+                            tempMember.PhotoMimeType = reader.GetString(10);
+                        }
+                        else
+                        {
+                            tempMember.PhotoMimeType = null;
+                        }
+
+                        _members.Add(tempMember);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex; //for sp_select_members_by_name_and_or_email
+            }
+            finally
+            {
+                conn.Close(); //for sp_select_members_by_name_and_or_email
+            }
+            return _members;  //for sp_select_members_by_name_and_or_email
+        }
     }
 }

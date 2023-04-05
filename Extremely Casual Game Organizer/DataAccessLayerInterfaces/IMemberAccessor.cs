@@ -183,7 +183,10 @@ namespace DataAccessLayerInterfaces
         /// </summary>
         int UpdateProfilePicture(Member member);
 
+        //List<Member> SearchMemberByFirstAndLastName(string firstName, string lastName);
 
+
+        List<Member> SelectAListOfMembersByNameAndOrEmail(string firstName, string lastName, string email);
 
     }
 }

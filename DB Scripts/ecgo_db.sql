@@ -120,11 +120,11 @@ GO
 CREATE TABLE [dbo].[Team] (
 	[team_id]				[int] IDENTITY(1000, 1)			NOT NULL,
     [team_name]				[nvarchar](50)					NULL,
+	[active]				[bit]							NULL DEFAULT 1,
 	[gender]				[bit]							NULL,
 	[sport_id]				[int]							NOT NULL,
 	[member_id]				[int]							NOT NULL,
-	[description]            [nvarchar](1000)                NULL,	
-	[active]				[bit]							NOT NULL DEFAULT(1),
+	[description]           [nvarchar](1000)                NULL,	
 	CONSTRAINT [pk_team_id] PRIMARY KEY([team_id]),
     CONSTRAINT [fk_teamSport_id] FOREIGN KEY([sport_id]) REFERENCES [dbo].[Sport]([sport_id]),
 	CONSTRAINT [fk_team_coach] FOREIGN KEY ([member_id]) REFERENCES [dbo].[member]([member_id]),
@@ -578,3 +578,15 @@ CREATE TABLE [dbo].[VolunteerSignUp]
 		FOREIGN KEY ([member_id]) REFERENCES [dbo].[Member]([member_id])
 )
 GO 
+
+print '' print '*** creating zipcode TABLE'
+GO
+
+CREATE TABLE [dbo].[zipcode]
+(
+	[zip_code]  [int] NOT NULL,
+	[city]		[nvarchar] (256) NOT NULL,
+	[st]		[VARCHAR] (2) NOT NULL,
+	CONSTRAINT [pk_zip_code] PRIMARY KEY ([zip_code])
+)
+GO

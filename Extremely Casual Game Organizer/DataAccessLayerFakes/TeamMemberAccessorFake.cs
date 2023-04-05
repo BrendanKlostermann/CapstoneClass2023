@@ -215,5 +215,10 @@ namespace DataAccessLayerFakes
 
             return result;
         }
+
+        public int InsertTeamMember(int team_id, int member_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

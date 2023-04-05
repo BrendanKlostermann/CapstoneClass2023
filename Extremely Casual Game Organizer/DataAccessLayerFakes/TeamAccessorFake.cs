@@ -78,9 +78,17 @@ namespace DataAccessLayerFakes
                     Gender = null,
                     SportID = 1002,
                     Description = "TheTestTeam4 Description"
+                },
+                new Team()
+                {
+                    TeamID = 1001,
+                    TeamName = null, // Name can't be null
+                    MemberID = 1230,
+                    SportID = 1002,
+                    Gender = true
                 }
 
-            };
+        };
 
             _members = new List<Member>()
             {
@@ -460,6 +468,25 @@ namespace DataAccessLayerFakes
 
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// Remove own Team
+        /// </summary>
+        public int DeactivateOwnTeam(int teamID, int memberID)
+        {
+            for (int i = 0; i < _teamList.Count; i++)
+            {
+                if (teamID == _teamList[i].TeamID && memberID == _teamList[i].MemberID)
+                {
+                    _teamList[i].Active = false;
+                    return 1;
+                }
+            }
+            return 0;
         }
     }
 }

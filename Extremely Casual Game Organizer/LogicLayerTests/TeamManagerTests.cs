@@ -63,15 +63,15 @@ namespace LogicLayerTests
         /// Test that the number of teams is equal to expected.
         /// 
         /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
+        /// Alex Korte
+        /// Updated: y1989/03/28
         /// example: Fixed a problem when user inputs bad data
         /// </remarks>
         [TestMethod]
         public void TestRetreivingAllTeams()
         {
 
-            const int actual = 15;
+            const int actual = 30;
             int expectedResults = _teamManager.RetrieveAllTeams().Count;
 
             Assert.AreEqual(expectedResults, actual);
@@ -225,6 +225,44 @@ namespace LogicLayerTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// Proper team deactivate
+        /// </summary>
+        [TestMethod]
+        public void TestRemoveTeamGood()
+        {
+            // Arrange
+            
 
+            // Act
+            int expectedResult = 1;
+            int actualResult = _teamManager.RemoveOwnTeam(1001, 1230);
+
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// incorrect team decativate
+        /// </summary
+        [TestMethod]
+        public void TestRemoveTeamBad()
+        {
+            // Arrange
+            
+
+            // Act
+            int expectedResult = 0;
+            int actualResult = _teamManager.RemoveOwnTeam(1001, 1231);
+
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }

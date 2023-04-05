@@ -188,5 +188,26 @@ namespace LogicLayer
             }
             return team;
         }
+
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// Deactivate team
+        /// </summary>
+        public int RemoveOwnTeam(int teamID, int memberID)
+        {
+            int requestTeam = 0;
+
+            try
+            {
+                requestTeam = _teamAccessor.DeactivateOwnTeam(teamID, memberID);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot Deactivate the team");
+            }
+            return requestTeam;
+        }
     }
 }

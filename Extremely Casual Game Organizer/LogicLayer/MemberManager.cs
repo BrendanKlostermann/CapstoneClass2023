@@ -75,6 +75,7 @@ namespace LogicLayer
                 throw new ApplicationException("Member not found.", ex);
             }
         }
+		
         public bool EditMemberPassword(int member_id, string oldPassword, string newPassword)
         {
             /// <summary>
@@ -113,6 +114,7 @@ namespace LogicLayer
             }
             return result;
         }
+		
         public string HashSha256(string source)
         {
             /// <summary>
@@ -149,6 +151,7 @@ namespace LogicLayer
 
             return result.ToUpper();
         }
+		
         public Member RetrieveMemberByEmail(string email)
         {
             Member returnMember = null;
@@ -175,6 +178,53 @@ namespace LogicLayer
             return returnMember;
         }
 
+        public List<Member> SearchMemberByFirstAndLastName(string firstName, string lastName)
+        {
+            List<Member> results = null;
+
+            try
+            {
+                //results = _memberAccessor.SelectMemberByMemberFullName(firstName, lastName);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Search Has Failed", ex);
+            }
+
+            return results;
+             
+        }
+
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/28
+        /// 
+        /// </summary>
+        /// Method for searching for members, passing a string
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd
+        /// </remarks>
+        public List<Member> SearchMemberByFirstName(string firstName)
+        {
+            List<Member> results = null;
+
+            try
+            {
+                //results = _memberAccessor.SelectMemberByMemberFirstName(firstName);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Search Has Failed", ex);
+            }
+
+            return results;
+        }
+		
         /// <summary>
         /// Michael Haring
         /// Created: 2023/02/14
@@ -305,6 +355,27 @@ namespace LogicLayer
 
             return member;
         }
+
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/26
+        /// searching for list of members by first name, last name or email
+        /// </summary>
+        /// 
+        public List<Member> SearchingForMembersByNameAndOrEmail(String firstName, String lastName, String email)
+        {
+            List<Member> _searchedMembers = new List<Member>();
+            try
+            {
+                _searchedMembers = _memberAccessor.SelectAListOfMembersByNameAndOrEmail(firstName, lastName, email);
+            }catch(Exception up)
+            {
+                throw new ApplicationException("Error connecting to database", up);
+            }
+            return _searchedMembers;	
+		}
 
         /// <summary>
         /// Created By: Jacob Lindauer

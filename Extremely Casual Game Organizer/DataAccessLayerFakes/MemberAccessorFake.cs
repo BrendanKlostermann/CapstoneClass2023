@@ -416,6 +416,12 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
+        public List<Member> SelectAListOfMembersByNameAndOrEmail(string firstName, string lastName, string email)
+        {
+            throw new NotImplementedException();
+		}
+		
+		
         /// <summary>
         /// Created By: Jacob Lindauer
         /// Date: 2023/03/03

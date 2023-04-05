@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,8 +60,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="PageFiles\Seasons\pgAddEditSeason.xaml.cs">
-      <DependentUpon>pgAddEditSeason.xaml</DependentUpon>
+    <Compile Include="PageFiles\Seasons\AddEditSeason.xaml.cs">
+      <DependentUpon>AddEditSeason.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Utility\pgHelp.xaml.cs">
       <DependentUpon>pgHelp.xaml</DependentUpon>
@@ -71,7 +72,13 @@
     <Compile Include="PageFiles\Leagues\pgAddEditLeague.xaml.cs">
       <DependentUpon>pgAddEditLeague.xaml</DependentUpon>
     </Compile>
-    <Page Include="PageFiles\Seasons\pgAddEditSeason.xaml">
+    <Compile Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml.cs">
+      <DependentUpon>PopUpPlayerSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pgDeactivateTeam.xaml.cs">
+      <DependentUpon>pgDeactivateTeam.xaml</DependentUpon>
+    </Compile>
+    <Page Include="PageFiles\Seasons\AddEditSeason.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,6 +93,10 @@
     <Page Include="PageFiles\Leagues\pgAddEditLeague.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ChatControls\member.xaml">
       <SubType>Designer</SubType>
@@ -307,6 +318,10 @@
     <Page Include="PageFiles\MemberPages\pgMemberList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="pgDeactivateTeam.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\MemberPages\pgMemberProfile.xaml">
       <Generator>MSBuild:Compile</Generator>

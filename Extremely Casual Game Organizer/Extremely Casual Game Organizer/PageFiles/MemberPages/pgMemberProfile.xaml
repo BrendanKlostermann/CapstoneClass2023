@@ -18,9 +18,14 @@
         </StackPanel>
         <StackPanel Margin="271,148,5,10" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
             <Label x:Name="lblTeamTitle" Content="My Teams" Margin="10,10,10,0" FontSize="20" Foreground="Black" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+
             <ListBox x:Name="lbTeam" HorizontalAlignment="Left" Height="221" VerticalAlignment="Top" Width="504" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" Margin="10,10,0,10"/>
-            <Button x:Name="btnCreateTeam" Content="Create a team" Height="31" Margin="186,8,186,0" Width="110" Background="White" HorizontalAlignment="Center" FontSize="14" Click="btnCreateTeam_Click"/>
+
         </StackPanel>
+        <Grid>
+            <Button x:Name="btnDeleteTeam" Content="Deactivate a team" Height="31" Margin="0 0 260 30" Width="120" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="14" Click="btnDeleteTeam_Click" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnCreateTeam" Content="Create a team" Height="31" Margin="0 0 135 30" Width="120" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="14" Click="btnCreateTeam_Click"/>
+        </Grid>
         <StackPanel Margin="7,148,534,10" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
             <Label Content="Bio" Margin="10,10,10,0" FontSize="20" Foreground="Black" FontWeight="Bold" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
             <TextBox x:Name="txtBio" Height="221" Margin="12,10,10,10" TextWrapping="Wrap" Padding="5" MaxLength="1000" />
