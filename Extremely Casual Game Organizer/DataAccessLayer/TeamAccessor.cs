@@ -450,9 +450,9 @@ namespace DataAccessLayer
                 // .ExecuteScalar() returns a System.Object (aggregate queries)
                 rowsAffected = cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Cannot create the team");
+                throw new ApplicationException("Cannot create the team "+ ex.Message);
             }
             finally
             {

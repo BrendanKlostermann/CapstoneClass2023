@@ -171,6 +171,8 @@
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,6 +191,42 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\all.png" />
+    <Content Include="Images\all_2.png" />
+    <Content Include="Images\Archery.png" />
+    <Content Include="Images\Badminton.png" />
+    <Content Include="Images\Baseball.png" />
+    <Content Include="Images\Basketball.png" />
+    <Content Include="Images\Biathlon.png" />
+    <Content Include="Images\Bobsleigh.png" />
+    <Content Include="Images\Bowling.png" />
+    <Content Include="Images\Boxing.png" />
+    <Content Include="Images\Cricket.png" />
+    <Content Include="Images\Cycling.png" />
+    <Content Include="Images\Diving.png" />
+    <Content Include="Images\Equestrian jumping.png" />
+    <Content Include="Images\Figure skating.png" />
+    <Content Include="Images\Football.png" />
+    <Content Include="Images\Freestyle wrestling.png" />
+    <Content Include="Images\Golf.png" />
+    <Content Include="Images\Gymnastics.png" />
+    <Content Include="Images\Ice hockey.png" />
+    <Content Include="Images\Judo.png" />
+    <Content Include="Images\Kayak slalom.png" />
+    <Content Include="Images\Rhythmic gymnastics.png" />
+    <Content Include="Images\Rowing.png" />
+    <Content Include="Images\Sailing.png" />
+    <Content Include="Images\Ski jumping.png" />
+    <Content Include="Images\Snooker.png" />
+    <Content Include="Images\Snowboarding.png" />
+    <Content Include="Images\Soccer.png" />
+    <Content Include="Images\Sports.png" />
+    <Content Include="Images\Swimming.png" />
+    <Content Include="Images\Table tennis.png" />
+    <Content Include="Images\Tennis.png" />
+    <Content Include="Images\Triathalon.png" />
+    <Content Include="Images\Volleyball.png" />
+    <Content Include="Images\Weightlifting.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -238,6 +276,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Games\AllGames.cshtml" />
     <Content Include="Views\Games\Details.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Team\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

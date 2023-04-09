@@ -281,5 +281,10 @@ namespace Extremely_Casual_Game_Organizer
         {
             _pageControl.LoadPage(new pgHelp(), _pageControl.GetCurrentPage());
         }
+
+        private void OpenTournament(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgGenerateTournamentGame(), _pageControl.GetCurrentPage());
+        }
     }
 }

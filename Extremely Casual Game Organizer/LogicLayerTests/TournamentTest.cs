@@ -63,6 +63,7 @@ namespace LogicLayerTests
             //Test
             Assert.AreEqual(expectedResult, actualResult);
         }
+
         //me worked on this
         [TestMethod]
         public void RemoveTeamToTournamentGood()
@@ -81,6 +82,7 @@ namespace LogicLayerTests
             //Test
             Assert.AreEqual(expectedResult, actualResult);
         }
+
         [TestMethod]
         public void RemoveTeamToTournamentBad()
         {
@@ -119,6 +121,7 @@ namespace LogicLayerTests
             //Test
             Assert.AreEqual(expectedResult, actualResult);
         }
+
         [TestMethod]
         public void GetTournamentTeamByIDBad()
         {
@@ -139,5 +142,50 @@ namespace LogicLayerTests
             //Test
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        [TestMethod]
+        public void GetTournamentTeamGameGood()
+        {
+            //Arrange
+            TournamentTeamGame tournamentTeamGame = new TournamentTeamGame()
+            {
+                TournamentID = 100,
+                GameID = 1001,
+                TeamID = 1001
+            };
+
+            //Act
+            const int expectedResult = 1;
+            List<TournamentTeamGame> TournamentTeams = _tournamentManager.SelectTournamentTeamAndGame(tournamentTeamGame.TournamentID);
+
+            int actualResult = 0;
+            if (TournamentTeams.Count > 0) actualResult = 1;
+
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestMethod]
+        public void GetTournamentTeamGameBad()
+        {
+            //Arrange
+            TournamentTeamGame tournamentTeamGame = new TournamentTeamGame()
+            {
+                TournamentID = 1004, // Bad tournament
+                GameID = 1001,
+                TeamID = 1001
+            };
+
+            //Act
+            const int expectedResult = 0;
+            List<TournamentTeamGame> TournamentTeams = _tournamentManager.SelectTournamentTeamAndGame(tournamentTeamGame.TournamentID);
+
+            int actualResult = 0;
+            if (TournamentTeams.Count > 0) actualResult = 1;
+
+            //Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
     }
 }

@@ -63,7 +63,9 @@
     <Compile Include="TeamRoleType.cs" />
     <Compile Include="TeamSport.cs" />
     <Compile Include="Tournament.cs" />
+    <Compile Include="TournamentGenerateGames.cs" />
     <Compile Include="TournamentTeam.cs" />
+    <Compile Include="TournamentTeamGame.cs" />
     <Compile Include="Venue.cs" />
     <Compile Include="VenueEquipmentList.cs" />
   </ItemGroup>

@@ -28,6 +28,8 @@ namespace DataAccessLayerFakes
         /// </summary>
 
         List<TournamentTeam> _tournamentTeams = new List<TournamentTeam>();
+        List<TournamentTeamGame> _tournamentTeamsAndGames = new List<TournamentTeamGame>();
+        List<TournamentGenerateGames> _tournamentGenerateGames = new List<TournamentGenerateGames>();
 
         public TournamentAccessorFakes()
         {
@@ -36,6 +38,13 @@ namespace DataAccessLayerFakes
             _tournamentTeams.Add(new TournamentTeam()
             {
                 TournamentID = 100,
+                TeamID = 1001
+            });
+
+            _tournamentTeamsAndGames.Add(new TournamentTeamGame()
+            {
+                TournamentID = 100,
+                GameID = 1001,
                 TeamID = 1001
             });
 
@@ -252,5 +261,41 @@ namespace DataAccessLayerFakes
             _tournamentTeams.Remove(_tournamentTeams[num]);
             return 1;
         }
+        public List<TournamentTeamGame> SelectTournamentTeamAndGame(int tournament_id)
+        {
+            var tournaments = _tournamentTeamsAndGames.Where(b => b.TournamentID == tournament_id).ToList();
+
+            if (tournaments == null)
+            {
+                throw new ApplicationException("Tournament not found.");
+            }
+
+            return tournaments;
+        }
+
+        public int InsertTournamentGame(TournamentGenerateGames tournamentGenerateGames)
+        {
+            if (tournamentGenerateGames.TeamID_1 > 0 && tournamentGenerateGames.TournamentID > 0)
+            {
+                _tournamentGenerateGames.Add(tournamentGenerateGames);
+            }
+
+            return _tournamentGenerateGames.Count;
+        }
+
+        public int deleteTournamentGameGenerated(int tournament_id)
+        {
+            var team = _tournamentGenerateGames.Where(b => b.TournamentID == tournament_id).ToList();
+
+            if (team == null || team.Count <= 0)
+            {
+                return 0;
+            }
+
+            int num = _tournamentGenerateGames.FindIndex(b => b.TournamentID == tournament_id);
+            _tournamentGenerateGames.Remove(_tournamentGenerateGames[num]);
+            return 1;
+        }
+
     }
 }

@@ -217,6 +217,69 @@ namespace LogicLayer
             }
             return rowsAffected;
         }
-    
+        
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Select tournament game
+        /// </summary>
+        public List<TournamentTeamGame> SelectTournamentTeamAndGame(int tournament_id)
+        {
+            List<TournamentTeamGame> tournaments = null;
+
+            try
+            {
+                tournaments = _tournamentAccessor.SelectTournamentTeamAndGame(tournament_id);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Tournament not found");
+            }
+            return tournaments;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Insert tournament game
+        /// </summary>
+        public int InsertTournamentGame(TournamentGenerateGames tournamentGenerateGames)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = _tournamentAccessor.InsertTournamentGame(tournamentGenerateGames);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot add these games to the tournament");
+            }
+            return rowsAffected;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Delete tournament game
+        /// </summary>
+        public int deleteTournamentGameGenerated(int tournament_id)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = _tournamentAccessor.deleteTournamentGameGenerated(tournament_id);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot add these games to the tournament");
+            }
+            return rowsAffected;
+        }
+
     }
 }
