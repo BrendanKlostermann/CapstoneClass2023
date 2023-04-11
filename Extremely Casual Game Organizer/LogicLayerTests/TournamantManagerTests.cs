@@ -44,6 +44,32 @@ namespace LogicLayerTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
+
+        /// Nick Vroom
+        /// Created: 2023/04/10
+        /// 
+        /// This test method is for testing the SelectTournament method
+        /// 
+        /// </summary>
+        /* [TestMethod]
+        public void TestSelectTournament()
+        {
+            Tournament actualResult = _tournamentManager.SelectTournament(1);
+            Tournament expectedResult = new Tournament
+            {
+                TournamentID = 1,
+                SportName = "Baseball",
+                Gender = "Undefined",
+                GenderBool = true,
+                CreatorName = "Dan",
+                Name = "Test 1",
+                Description = "Baseball tournament 1"
+            };
+            Assert.AreEqual(expectedResult.TournamentID, actualResult.TournamentID);
+            Assert.AreEqual(expectedResult.SportName, actualResult.SportName);
+        }*/
+
+
         [TestMethod]
         public void TestCreateTournamentSuccess()
         {

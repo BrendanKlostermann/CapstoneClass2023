@@ -297,5 +297,21 @@ namespace DataAccessLayerFakes
             return 1;
         }
 
+        public Tournament SelectTournamentByID(int tournament_id)
+        {
+            Tournament returnTournament = null;
+
+            foreach (Tournament tournament in _tournaments)
+            {
+                if (tournament.TournamentID == tournament_id)
+                {
+                    returnTournament = tournament;
+                    break;
+
+                }
+
+            }
+            return returnTournament;
+        }
     }
 }

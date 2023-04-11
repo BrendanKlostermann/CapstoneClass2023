@@ -632,6 +632,57 @@ namespace DataAccessLayer
             // return the result
             return rowsAffected;
         }
+        //returns a Tournament Object by taking in the parameter tournament_id
+        public Tournament SelectTournamentByID(int tournament_id)
+        {
+            Tournament returnedTournament = new Tournament();
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+            var cmdText = "sp_select_tournament_by_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //tournament_id is an identity
+            cmd.Parameters.Add("@tournament_id", SqlDbType.Int);
+            cmd.Parameters["@tournament_id"].Value = tournament_id;
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                var reader = cmd.ExecuteReader();
+                // process the results
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    returnedTournament.TournamentID = reader.GetInt32(0);
+                    returnedTournament.SportID = reader.GetInt32(1);
+                    if (!reader.IsDBNull(2))
+                    {
+                        returnedTournament.Gender = reader.GetBoolean(2);
+                    }
+                    else
+                    {
+                        returnedTournament.Gender = null;
+                    }
+                    returnedTournament.MemberID = reader.GetInt32(3);
+                    returnedTournament.Name = reader.GetString(4);
+                    returnedTournament.Description = reader.GetString(5);
+                    returnedTournament.Active = reader.GetBoolean(6);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                // close the connection
+                conn.Close();
+            }
+
+            return returnedTournament;
+        }
 
     }
 }

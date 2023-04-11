@@ -36,6 +36,14 @@ namespace LogicLayerInterfaces
         /// </summary>
         List<Tournament> GetTournaments();
 
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/10
+        /// 
+        /// Get a specific tournament
+        /// </summary>
+        Tournament SelectTournament(int tournament_id);
+
 
         /// <summary>
         /// Heritier Otiom
