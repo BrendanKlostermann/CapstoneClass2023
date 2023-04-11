@@ -65,10 +65,32 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Error adding new tournament.", ex);
             }
-                
-            
-            
 
+        }
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/10
+        /// 
+        /// </summary>
+        /// this method calls to get a Tournament object by its ID
+        /// then, it returns the object.
+        public Tournament SelectTournament(int tournament_id)
+        {
+            Tournament requestTournament = new Tournament();
+            try
+            {
+                requestTournament = _tournamentAccessor.SelectTournamentByID(tournament_id);
+            }
+            catch (ArgumentException ae)
+            {
+                throw new ArgumentException("Error viewing tournament", ae);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error viewing tournament", ex);
+            }
+            return requestTournament;
         }
 
         /// <summary>

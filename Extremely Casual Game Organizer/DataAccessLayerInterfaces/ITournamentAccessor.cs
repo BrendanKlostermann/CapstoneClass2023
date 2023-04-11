@@ -85,5 +85,13 @@ namespace DataAccessLayerInterfaces
         /// delete tournament games that it's genereated so that we can generate new games
         /// </summary>
         int deleteTournamentGameGenerated(int tournament_id);
+
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/11
+        /// 
+        /// Select details about a specific tournament by tournamentID
+        /// </summary>
+        Tournament SelectTournamentByID(int tournament_id);
     }
 }

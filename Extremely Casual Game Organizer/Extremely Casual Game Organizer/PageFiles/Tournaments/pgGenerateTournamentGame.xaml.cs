@@ -152,7 +152,6 @@ namespace Extremely_Casual_Game_Organizer
         private void getTournamentGames()
         {
 
-
             //try
             //{
             tournamentTeamGame = _tournamentManager.SelectTournamentTeamAndGame(_tournament_id);
