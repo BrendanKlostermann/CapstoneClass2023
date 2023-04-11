@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MvcPresentation.Controllers
 {
-    public class TeamController : Controller
+    public class TeamsController : Controller
     {
         TeamManager teamManager = new TeamManager();
         List<Team> teams = new List<Team>();
@@ -23,7 +23,7 @@ namespace MvcPresentation.Controllers
         }
 
         // GET: Create Team
-        public ActionResult Create()
+        public ActionResult CreateTeam()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace MvcPresentation.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(string TeamName, bool? Gender, string sportname)
+        public ActionResult CreateTeam(string TeamName, bool? Gender, string sportname)
         {
             try
             {
@@ -64,8 +64,16 @@ namespace MvcPresentation.Controllers
                 };
 
                 int result = teamManager.AddTeam(team);
-                if(result>0) ViewBag.Message = "Team created successfully!";
-                else ViewBag.Message = "An error has occurred!";
+                if (result > 0)
+                {
+                    ViewBag.Message = "Team created successfully!";
+                    ViewBag.Error = false;
+                }
+                else
+                {
+                    ViewBag.Message = "An error has occurred!";
+                    ViewBag.Error = true;
+                }
             }
             catch (Exception ex)
             {

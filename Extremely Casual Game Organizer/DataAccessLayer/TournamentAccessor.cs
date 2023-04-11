@@ -358,8 +358,8 @@ namespace DataAccessLayer
             // parameter values
             cmd.Parameters["@tournament_id"].Value = tournament_id;
 
-            //try
-            //{
+            try
+            {
                 // open the connection
                 conn.Open();
 
@@ -379,11 +379,11 @@ namespace DataAccessLayer
                         tournaments.Add(tournament);
                     }
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return tournaments;
         }
         
