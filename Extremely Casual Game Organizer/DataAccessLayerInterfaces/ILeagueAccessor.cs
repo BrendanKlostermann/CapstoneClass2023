@@ -96,5 +96,14 @@ namespace DataAccessLayerInterfaces
         /// </summary>
         ///
         League SelectLeaguesBySportID(int sportID);
+
+        int AddALeague(League league);
+        int RemoveALeague(int LeagueID);
+        List<League> SelectLeaguesByMemberID(int MemberID);
+        int ChangeLeagueRegistration(int LeagueID, bool OpenOrClose);
+        int UpdateALeague(League league);
+
+        List<LeagueRequest> SelectRequestsByLeagueID(int LeagueID);
+
     }
 }

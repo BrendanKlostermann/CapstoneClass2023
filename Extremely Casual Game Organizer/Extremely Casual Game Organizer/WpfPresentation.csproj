@@ -66,6 +66,18 @@
     <Compile Include="CustomControls\Team.xaml.cs">
       <DependentUpon>Team.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Leagues\pgAddLeague.xaml.cs">
+      <DependentUpon>pgAddLeague.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgLeagueDetails.xaml.cs">
+      <DependentUpon>pgLeagueDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgMyLeagues.xaml.cs">
+      <DependentUpon>pgMyLeagues.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgViewLeague.xaml.cs">
+      <DependentUpon>pgViewLeague.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Seasons\AddEditSeason.xaml.cs">
       <DependentUpon>AddEditSeason.xaml</DependentUpon>
     </Compile>
@@ -92,6 +104,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CustomControls\Team.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgAddLeague.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgLeagueDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgMyLeagues.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgViewLeague.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
