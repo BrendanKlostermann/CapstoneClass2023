@@ -48,8 +48,28 @@ namespace MvcPresentation.Controllers
                 ViewBag.Team1Roster = team1Roster;
                 ViewBag.Team2Roster = team2Roster;
 
-                ViewBag.Team1Score = (from score in gameScores where score.TeamID == team1.TeamID select score).First();
-                ViewBag.Team2Score = (from score in gameScores where score.TeamID == team2.TeamID select score).First();
+                Score team1Score = (from score in gameScores where score.TeamID == team1.TeamID select score).First();
+                Score team2Score = (from score in gameScores where score.TeamID == team2.TeamID select score).First();
+
+                if (team1Score != null && team2Score != null)
+                {
+                    if (team1Score.TeamScore % 1 == 0 || team2Score.TeamScore % 1 == 0)
+                    {
+                        if (team1Score.TeamScore % 1 == 0)
+                        {
+                            ViewBag.Team1Score = Convert.ToInt32(team1Score.TeamScore);
+                        }
+                        if (team2Score.TeamScore % 1 == 0)
+                        {
+                            ViewBag.Team2Score = Convert.ToInt32(team2Score.TeamScore);
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Team1Score = team1Score.TeamScore;
+                        ViewBag.Team2Score = team2Score.TeamScore;
+                    }
+                }
                 // Placeholder until implemented
 
                 return View(details);

@@ -37,6 +37,76 @@ namespace LogicLayer
             _gameAccessor = ga;
         }
 
+        public int AddGame(Game game, int member_id)
+        {
+            int result = 0;
+
+            try
+            {
+                
+                result = _gameAccessor.InsertGame(game, member_id);
+
+                if (result == 0)
+                {
+                    throw new ApplicationException("Game not added");
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Adding Game", ex);
+            }
+
+            return result;
+        }
+
+        public int EditGame(Game game, int member_id)
+        {
+            int result = 0;
+
+            try
+            {
+                result = _gameAccessor.UpdateGame(game, member_id);
+
+
+                if (result == 0)
+                {
+                    throw new ApplicationException("Game not updated");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Updating Game", ex);
+            }
+
+            return result;
+        }
+
+        public int RemoveGame(Game game, int member_id)
+        {
+            int result = 0;
+
+            try
+            {
+                result = _gameAccessor.DeleteGame(game, member_id);
+
+
+                if (result == 0)
+                {
+                    throw new ApplicationException("Game not removed");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error Removing Game", ex);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Created By: Jacob Lindauer
         /// Date: 2023/03/04
@@ -94,6 +164,11 @@ namespace LogicLayer
             }
 
             return gameList;
+        }
+
+        public Dictionary<string, string> RetrieveZipCodeInforamtion(int zip_code)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -696,10 +696,10 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             // parameters
-            cmd.Parameters.Add("@teamid", SqlDbType.Int);
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
 
             // parameter values
-            cmd.Parameters["@teamid"].Value = team_id;
+            cmd.Parameters["@team_id"].Value = team_id;
 
             try
             {
@@ -716,8 +716,8 @@ namespace DataAccessLayer
                     {
                         TeamMember addMember = new TeamMember();
                         addMember.Description = reader.GetString(0);
-                        addMember.MemberID = reader.GetInt32(1);
-                        addMember.Starter = reader.GetBoolean(2);
+                        addMember.Starter = reader.GetBoolean(1);
+                        addMember.MemberID = reader.GetInt32(2);
                         addMember.TeamID = team_id;
 
                         teamMembers.Add(addMember);

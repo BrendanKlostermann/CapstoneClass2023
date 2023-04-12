@@ -26,6 +26,10 @@ namespace DataAccessLayerInterfaces
         DataRow SelectGameDetails(int game_id);
         DataTable SelectGameListByTeamID(int team_id);
         List<Score> SelectScoreByGameID(int game_id);
+        int InsertGame(Game game, int member_id);
+        int UpdateGame(Game game, int member_id);
+        int DeleteGame(Game game, int member_id);
+        Dictionary<string, string> SelectZipCodeInformation(int zip_code);
 
     }
 }

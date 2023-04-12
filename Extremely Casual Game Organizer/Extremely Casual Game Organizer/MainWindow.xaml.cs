@@ -171,6 +171,19 @@ namespace Extremely_Casual_Game_Organizer
             }
         }
 
+        private void navTournaments_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _pageControl.LoadPage(new pgViewTournamentList());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+        }
+
         /// <summary>
         /// Created by Garion Opiola
         /// Created 02/28/2023
@@ -280,11 +293,6 @@ namespace Extremely_Casual_Game_Organizer
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             _pageControl.LoadPage(new pgHelp(), _pageControl.GetCurrentPage());
-        }
-
-        private void OpenTournament(object sender, RoutedEventArgs e)
-        {
-            _pageControl.LoadPage(new pgGenerateTournamentGame(), _pageControl.GetCurrentPage());
         }
     }
 }

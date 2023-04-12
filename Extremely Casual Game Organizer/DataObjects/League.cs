@@ -77,7 +77,7 @@ namespace DataObjects
         public string SportName { get; set; }
         public string LeagueCreator { get; set; }
         public string Gender { get; set; }
-        public bool GenderBool { get; set; }
+        public bool? GenderBool { get; set; }
 
     }
 

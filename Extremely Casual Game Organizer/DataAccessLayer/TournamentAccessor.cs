@@ -29,6 +29,178 @@ namespace DataAccessLayer
         List<Tournament> _tournaments;
         List<TournamentVM> _tournamentVMs;
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/21
+        /// 
+        /// </summary>
+        /// This Method will create a tournament object based off of the id given to it.
+        public Tournament SelectTournamentByTournamentID(int id)
+        {
+            Tournament tournament = new Tournament();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_tournament_by_tournamentid";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@tournamentid", SqlDbType.Int);
+            cmd.Parameters["@tournamentid"].Value = id;
+
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    tournament.TournamentID = reader.GetInt32(0);
+                    tournament.SportID = reader.GetInt32(1);
+                    if (!reader.IsDBNull(2))
+                    {
+                        tournament.Gender = reader.GetBoolean(2);
+                    }
+                    tournament.MemberID = reader.GetInt32(3);
+                    tournament.Name = reader.GetString(4);
+                    if (!reader.IsDBNull(5))
+                    {
+                        tournament.Description = reader.GetString(5);
+                    }
+                    tournament.Active = reader.GetBoolean(6);
+                }
+                return tournament;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/29
+        /// 
+        /// </summary>
+        /// This method takes in a memberID and tournamentID and runs the stored procedure to deactivate the tournament.
+        public int DeactivateTournament(int memberid, int tournamentID)
+        {
+            int count = 0;
+
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_deactivate_tournament";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@memberid", SqlDbType.Int);
+            cmd.Parameters["@memberid"].Value = memberid;
+
+            cmd.Parameters.Add("@tournamentid", SqlDbType.Int);
+            cmd.Parameters["@tournamentid"].Value = tournamentID;
+
+            try
+            {
+                conn.Open();
+
+                count = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return count;
+        }
+
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/21
+        /// 
+        /// </summary>
+        /// This Method will take in a tournament object and update the tournament in the database returning
+        /// the row count
+        public int UpdateTournament(int memberid, Tournament tm)
+        {
+            int count = 0;
+
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_update_tournament";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@tournamentID", SqlDbType.Int);
+            cmd.Parameters["@tournamentID"].Value = tm.TournamentID;
+
+            cmd.Parameters.Add("@sportid", SqlDbType.Int);
+            cmd.Parameters["@sportid"].Value = tm.SportID;
+
+            cmd.Parameters.Add("@gender", SqlDbType.Bit);
+            if(tm.Gender == null)
+            {
+                cmd.Parameters["@gender"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@gender"].Value = tm.Gender;
+            }
+
+            cmd.Parameters.Add("@memberid", SqlDbType.Int);
+            cmd.Parameters["@memberid"].Value = tm.MemberID;
+
+            cmd.Parameters.Add("@name", SqlDbType.NVarChar, 250);
+            cmd.Parameters["@name"].Value = tm.Name;
+
+            cmd.Parameters.Add("@description", SqlDbType.NVarChar, 1000);
+            cmd.Parameters["@description"].Value = tm.Description;
+
+            cmd.Parameters.Add("@editorID", SqlDbType.Int);
+            cmd.Parameters["@editorID"].Value = memberid;
+
+            try
+            {
+                conn.Open();
+
+                count = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return count;
+
+        }
 
         /// <summary>
         /// Brendan Klostermann

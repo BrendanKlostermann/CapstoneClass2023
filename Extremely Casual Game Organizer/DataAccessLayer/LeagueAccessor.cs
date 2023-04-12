@@ -125,6 +125,10 @@ public class LeagueAccessor : ILeagueAccessor
                     {
                         temp.LeagueDues = reader.GetDecimal(2);
                     }
+                    else
+                    {
+                        temp.LeagueDues = 0;
+                    }
                     temp.Active = reader.GetBoolean(3);
                     temp.MemberID = reader.GetInt32(4);
                     temp.Description = reader.GetString(6);
@@ -252,7 +256,14 @@ public class LeagueAccessor : ILeagueAccessor
                     leagueVM.Description = reader.GetString(6);
                     leagueVM.SportName = SelectSportDescriptionByID(reader.GetInt32(1));
                     leagueVM.LeagueCreator = member.FirstName;
-                    leagueVM.GenderBool = reader.GetBoolean(5);
+                    if (reader.IsDBNull(5))
+                    {
+                        leagueVM.GenderBool = null;
+                    }
+                    else
+                    {
+                        leagueVM.GenderBool = reader.GetBoolean(5);
+                    }
                     leagueVM.Gender = "Undefined";
 
                     leaguesForGrid.Add(leagueVM);

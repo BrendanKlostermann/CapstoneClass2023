@@ -27,6 +27,7 @@ using System.Windows.Shapes;
 using LogicLayer;
 using DataObjects;
 using System.Data;
+using Extremely_Casual_Game_Organizer.PageFiles.Games;
 
 namespace Extremely_Casual_Game_Organizer.PageFiles
 {
@@ -232,7 +233,25 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //if (_pageControl.GetSignedInMember() != null)
+                //{
+                //    _pageControl.LoadPage(new pgAddEditGame(_masterManager));
+
+                //}
+                //else
+                //{
+                //    MessageBox.Show("You must be signed in to create a game");
+                //    return;
+                //}
+                _pageControl.LoadPage(new pgAddEditGame(_masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
+            }
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
