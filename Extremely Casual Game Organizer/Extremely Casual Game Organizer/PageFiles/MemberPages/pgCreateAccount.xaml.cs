@@ -185,12 +185,14 @@ namespace Extremely_Casual_Game_Organizer
                     Bio = "",
                     ProfilePhoto = data
                 };
+                member.MemberID = _memberManager.AddUser(member);
 
                 // Add user to the database
-                if (_memberManager.AddUser(member) > 0)
+                if (member.MemberID > 0)
                 {
                     MessageBox.Show("Your account has been created!");
                     resetForm();
+                    
                     _pageControl.SetSignedInMember(member);
                     _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
 

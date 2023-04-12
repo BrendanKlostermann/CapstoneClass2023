@@ -406,7 +406,14 @@ namespace DataAccessLayer
                         tempMember.FirstName = reader.GetString(2);
                         tempMember.FamilyName = reader.GetString(3);
                         tempMember.Birthday = reader.GetDateTime(4);
-                        tempMember.PhoneNumber = reader.GetString(5);
+                        if (reader.IsDBNull(5))
+                        {
+                            tempMember.PhoneNumber = "";
+                        }
+                        else
+                        {
+                            tempMember.PhoneNumber = reader.GetString(5);
+                        }
                         tempMember.Gender = reader.GetBoolean(6);
                         tempMember.Active = reader.GetBoolean(7);
                         try
@@ -678,14 +685,14 @@ namespace DataAccessLayer
         public int AddUser(Member member)
         {
             // return object
-            int rowsAffected = 0;
+            int addedMemberID = 0;
 
             // connection
             DBConnection connectionFactory = new DBConnection();
             var conn = connectionFactory.GetDBConnection();
 
             // command text
-            string commandText = @"sp_insert_user_account";
+            string commandText = "sp_insert_user_account";
 
             // command
             var cmd = new SqlCommand(commandText, conn);
@@ -708,7 +715,14 @@ namespace DataAccessLayer
             // parameter values
             cmd.Parameters["@first_name"].Value = member.FirstName;
             cmd.Parameters["@family_name"].Value = member.FamilyName;
-            cmd.Parameters["@gender"].Value = member.Gender;
+            if (member.Gender == null)
+            {
+                cmd.Parameters["@gender"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@gender"].Value = member.Gender;
+            }
             cmd.Parameters["@birthday"].Value = member.Birthday;
             cmd.Parameters["@phone_number"].Value = member.PhoneNumber;
             cmd.Parameters["@email"].Value = member.Email;
@@ -728,7 +742,8 @@ namespace DataAccessLayer
                 // .ExecuteReadet() returns row/column data (normal select statements)
                 // .ExecuteNonQuery() returns Int32 rows affected (action statements (update/delete/insert))
                 // .ExecuteScalar() returns a System.Object (aggregate queries)
-                rowsAffected = cmd.ExecuteNonQuery();
+                addedMemberID = Convert.ToInt32(cmd.ExecuteScalar());
+
             }
             catch (Exception)
             {
@@ -740,7 +755,7 @@ namespace DataAccessLayer
             }
 
             // return the result
-            return rowsAffected;
+            return addedMemberID;
         }
 
         /// <summary>
@@ -932,11 +947,13 @@ namespace DataAccessLayer
                             FirstName = reader.GetString(2),
                             FamilyName = reader.GetString(3),
                             Birthday = reader.GetDateTime(4),
-                            PhoneNumber = reader.GetString(5),
                             Active = reader.GetBoolean(7)
                         };
 
-                        if (reader.IsDBNull(6) == false) member.Gender = reader.GetBoolean(6);
+                        if (reader.IsDBNull(5) == false) member.PhoneNumber = reader.GetString(5);
+                        else member.PhoneNumber = "";
+
+                        if (reader.IsDBNull(6) == false || reader.GetInt32(6) == 0) member.Gender = reader.GetBoolean(6);
                         else member.Gender = null;
 
                         if (reader.IsDBNull(8) == false) member.Bio = reader.GetString(8);

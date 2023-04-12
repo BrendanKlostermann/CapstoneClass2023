@@ -27,6 +27,7 @@ namespace DataAccessLayerFakes
         DataTable _gameDetails = null;
         List<GameRoster> _gameRoster = null;
         List<Score> _scoreList = null;
+        List<Sport> _sportList = null;
 
         public GameAccessorFake()
         {
@@ -36,16 +37,44 @@ namespace DataAccessLayerFakes
             /// 
             /// Constructor creates mock data tables columns and rows for unit testing.
             /// </summary>
+            /// 
+
             _gameList = new DataTable();
             _gameList.Columns.Add("game_id", typeof(int));
-            _gameList.Columns.Add("Sport", typeof(string));
-            _gameList.Columns.Add("Location", typeof(string));
+            _gameList.Columns.Add("sport_id", typeof(int));
+            _gameList.Columns.Add("venue_id", typeof(int));
             _gameList.Columns.Add("Date and Time", typeof(DateTime));
+            _gameList.Columns.Add("member_id", typeof(int));
+            _gameList.Columns.Add("active", typeof(bool));
 
-            _gameList.Rows.Add(1000, "Backetball", "Kyles House", new DateTime(2023, 12, 01));
-            _gameList.Rows.Add(1001, "BaseBall", "123 Lazy BLVD, Waterloo IA, 12345", new DateTime(2023, 12, 01));
-            _gameList.Rows.Add(1002, "Basketball", "123 Lazy BLVD, Waterloo IA, 12345", new DateTime(2023, 02, 04));
-            _gameList.Rows.Add(1003, "Baseball", "1251 Main St SW, Cedar Rapids IA, 52401", new DateTime(2023, 06, 03));
+            _gameList.Rows.Add(1000, 1001, 1000, new DateTime(2023, 12, 01), 100000, true);
+            _gameList.Rows.Add(1001, 1002, 1001, new DateTime(2023, 12, 01), 100001, true);
+            _gameList.Rows.Add(1002, 1000, 1000, new DateTime(2023, 02, 04), 100000, true);
+            _gameList.Rows.Add(1003, 1003, 1001, new DateTime(2023, 06, 03), 100001, true);
+
+            _sportList = new List<Sport>()
+            {
+                new Sport()
+                {
+                    SportId = 1000,
+                    Description = "Basketball"
+                },
+                new Sport()
+                {
+                    SportId = 1001,
+                    Description = "Baseball"
+                },
+                new Sport()
+                {
+                    SportId = 1002,
+                    Description = "Football"
+                },
+                new Sport()
+                {
+                    SportId = 1003,
+                    Description = "Soccer"
+                }
+            };
 
             _gameDetails = new DataTable();
             _gameDetails.Columns.Add("game_id", typeof(int));
@@ -80,6 +109,66 @@ namespace DataAccessLayerFakes
                 new Score {GameID = 1001, TeamID = 1003, TeamScore = 15},
                 new Score {GameID = 1001, TeamID = 1004, TeamScore = 12},
             };
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/08/04
+        /// 
+        /// Data fake method for removing game from game table.
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        public int DeleteGame(Game game, int member_id)
+        {
+            int result = 0;
+
+            try
+            {
+                // Select game to delete. Result should return only 1 row
+                var deleteGame = _gameList.AsEnumerable().Where(x => Convert.ToInt32(x[0]) == game.GameID);
+
+                // Count list before removal
+                int preRemoval = _gameList.Rows.Count;
+
+                // Remove
+                _gameList.Rows.Remove(deleteGame.First());
+
+                // Count list after
+                int postRemoval = _gameList.Rows.Count;
+
+                // return results based on rows affected.
+                result = preRemoval - postRemoval;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
+         }
+
+        public int InsertGame(Game game, int member_id)
+        {
+            int result = 0;
+
+            try
+            {
+                int preCount = _gameList.Rows.Count;
+                _gameList.Rows.Add(game.GameID, game.SportID, game.VenueID, game.DateAndTime, member_id, true);
+
+                int postCount = _gameList.Rows.Count;
+
+                result = postCount - preCount;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
         }
 
         public DataTable SelectAllGames()
@@ -139,6 +228,8 @@ namespace DataAccessLayerFakes
             gameList.Columns.Add("Teams", typeof(string));
             gameList.Columns.Add("Location", typeof(string));
             gameList.Columns.Add("Date and Time", typeof(DateTime));
+            gameList.Columns.Add("member_id", typeof(int));
+            gameList.Columns.Add("active", typeof(bool));
 
             try
             {
@@ -149,7 +240,7 @@ namespace DataAccessLayerFakes
                 // Get game for rosterID to determine if team is participating in a game. Multiple results in rosterSearch
                 foreach (var game in rosterSearch.GroupBy(x => x.GameID))
                 {
-                    var gameSearch = from row in _gameList.AsEnumerable() where row[0].Equals(game.Key) select row;
+                    var gameSearch = from row in _gameList.AsEnumerable() where row[0].Equals(game.Key) where row[5].Equals(true) select row;
                     gameList.Rows.Add(gameSearch.First().ItemArray); // gameSearch should only return 1 result
                 }
             }
@@ -178,6 +269,56 @@ namespace DataAccessLayerFakes
             }
 
             return returnList;
+        }
+
+        public Dictionary<string, string> SelectZipCodeInformation(int zip_code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateGame(Game game, int member_id)
+        {
+            int result = 0;
+
+            try
+            {
+                var updateRow = _gameList.AsEnumerable().Where(x => x[0].Equals(game.GameID)).First();
+
+                // Update Row
+                foreach (var row in _gameList.AsEnumerable())
+                {
+                    if (row[0].Equals(game.GameID))
+                    {
+                        row[1] = game.SportID;
+                        row[2] = game.VenueID;
+                        row[3] = game.DateAndTime;
+                        row[4] = updateRow[4];
+                        row[5] = updateRow[5];
+                    }
+                }
+
+                // Check if new row exists
+                var rowUpdated = from row
+                                 in _gameList.AsEnumerable()
+                                 where row[0].Equals(game.GameID)
+                                 where row[1].Equals(game.SportID)
+                                 where row[2].Equals(game.VenueID)
+                                 where row[3].Equals(game.DateAndTime)
+                                 select row;
+
+                if (rowUpdated.Count() == 1)
+                {
+                    result = 1;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
         }
     }
 }

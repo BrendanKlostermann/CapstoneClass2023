@@ -21,16 +21,15 @@ AS
 	BEGIN
 		SELECT
 			DISTINCT [Game].[game_id]
+			, [Venue].[venue_name]
 			, [Venue].[location]
-			, [Venue].[city]
-			, [Venue].[zip_code]
+			, CONCAT([zipcode].[city], ', ', [zipcode].[st], ' ', [zipcode].[zip_code])
 			, [Game].[date_and_time]
 			, [Sport].[description]
 			FROM [Game]
 			JOIN [Venue] ON [Venue].[venue_id] = [Game].[venue_id]
-			JOIN [GameRoster] ON [GameRoster].[game_id] = [Game].[game_id]
-			JOIN [Team] ON [Team].[team_id] = [GameRoster].[team_id]
 			JOIN [Sport] ON [Game].[sport_id] = [Sport].[sport_id]
+			JOIN [zipcode] ON [zipcode].[zip_code] = [Venue].[zip_code]
 			WHERE @game_id = [Game].[game_id]
 	END
 GO

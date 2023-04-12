@@ -202,9 +202,12 @@ CREATE TABLE [dbo].[Game] (
 	[date_and_time]			[dateTime]				NOT NULL,
 	[sport_id]				[int]					NOT NULL,
 	[active]				[bit]					NULL	DEFAULT(1),
+	[member_id]				[int]					NOT NULL,
 	CONSTRAINT [pk_game_id] PRIMARY KEY([game_id]),
 	CONSTRAINT [fk_venue_id] FOREIGN KEY([venue_id])
 		REFERENCES [Venue]([venue_id]),
+	CONSTRAINT [fk_game_member_id] FOREIGN KEY([member_id])
+		REFERENCES [Member]([member_id]),
 	CONSTRAINT [fk_sport_id_game_table] FOREIGN KEY([sport_id])
 		REFERENCES [Sport]([sport_id])
 )
@@ -241,10 +244,10 @@ print '' print '*** creating game roster table Rith'
 GO
 CREATE TABLE [dbo].[GameRoster] (
 	[game_roster_id]			[int] IDENTITY(1000,1)	NOT NULL,
-	[team_id]					[int]				NOT NULL,
-	[member_id]					[int]				NOT NULL,
-	[description]				[nvarchar](250)		NULL,
-	[game_id]					[int]				NOT NULL,
+	[team_id]					[int]					NOT NULL,
+	[member_id]					[int]					NOT NULL,
+	[description]				[nvarchar](250)			NULL,
+	[game_id]					[int]					NOT NULL,
 	CONSTRAINT [pk_game_roster_id] PRIMARY KEY([game_roster_id]),
 	CONSTRAINT [fk_GamePost_game_id] FOREIGN KEY([game_id])
 		REFERENCES [Game]([game_id]),

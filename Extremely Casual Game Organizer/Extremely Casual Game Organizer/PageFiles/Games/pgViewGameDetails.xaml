@@ -82,10 +82,6 @@
             <Label x:Name="lblTeam1Name" Margin="10 50 10 65" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Black">Team</Label>
             <Label x:Name="txtTeam1" Margin="10 80 10 40" HorizontalContentAlignment="Center" FontSize="15">Team Name</Label>
 
-            <!-- Coach Info -->
-            <Label x:Name="lblTeam1Coach" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontWeight="Bold" >Team Coach:</Label>
-            <Label x:Name="lblTeam1CoachName" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="80 0 0 0">Coach Name</Label>
-
             <!-- Team Roster Info -->
             <Grid x:Name="grdTeam1Roster" Grid.Row="2">
                 <ListBox x:Name="listTeam1RosterList" Background="Transparent" BorderBrush="Transparent"/>
@@ -104,10 +100,6 @@
             <Label x:Name="lblTeam2Name" Margin="10 50 10 65" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Black">Team</Label>
             <Label x:Name="txtTeam2" Margin="10 80 10 40" HorizontalContentAlignment="Center" FontSize="15">Team Name</Label>
             
-            <!-- Coach Info -->
-            <Label x:Name="lblTeam2Coach" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" FontWeight="Bold" >Team Coach:</Label>
-            <Label x:Name="lblTeam2CoachName" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="80 0 0 0">Coach Name</Label>
-
             <!-- Team Roster Info -->
             <Grid x:Name="grdTeam2Roster" Grid.Row="2">
                 <ListBox x:Name="listTeam2RosterList" Background="Transparent" BorderBrush="Transparent"/>

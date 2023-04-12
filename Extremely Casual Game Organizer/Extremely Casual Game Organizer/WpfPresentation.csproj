@@ -60,8 +60,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="CustomControls\TeamSearchItem.xaml.cs">
+      <DependentUpon>TeamSearchItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Games\pgAddEditGame.xaml.cs">
+      <DependentUpon>pgAddEditGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Seasons\AddEditSeason.xaml.cs">
       <DependentUpon>AddEditSeason.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Teams\Utility\winTeamSearch.xaml.cs">
+      <DependentUpon>winTeamSearch.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Utility\pgHelp.xaml.cs">
       <DependentUpon>pgHelp.xaml</DependentUpon>
@@ -78,7 +87,19 @@
     <Compile Include="pgDeactivateTeam.xaml.cs">
       <DependentUpon>pgDeactivateTeam.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomControls\TeamSearchItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Games\pgAddEditGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFiles\Seasons\AddEditSeason.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Teams\Utility\winTeamSearch.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

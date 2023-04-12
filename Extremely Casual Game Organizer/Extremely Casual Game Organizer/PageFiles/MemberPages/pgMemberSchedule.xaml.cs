@@ -193,10 +193,18 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.MemberPages
                     ListBoxItem selectedListItem = (ListBoxItem)lstEvents.SelectedItem;
 
                     CalendarEvent selectedEvent = (CalendarEvent)selectedListItem.DataContext;
+                    if (selectedEvent.Type != "Game" && selectedEvent.Type != "Tournament Game")
+                    {
+                        MessageBox.Show("Select a valid game to view");
+                        lstEvents.SelectedItem = null;
+                        return;
+                    }
+                    else
+                    {
+                        gameID = selectedEvent.EventID;
 
-                    gameID = selectedEvent.EventID;
-
-                    lstEvents.SelectedItem = null;
+                        lstEvents.SelectedItem = null;
+                    }
                 }
 
                 if (gameID != 0)

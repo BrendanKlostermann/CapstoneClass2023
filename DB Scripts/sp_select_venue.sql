@@ -5,10 +5,11 @@ GO
 
 USE [ecgo_db]
 GO
-CREATE PROCEDURE [dbo].[sp_select_venue]
+CREATE PROCEDURE [dbo].[sp_select_venues]
 AS 
 	BEGIN
-		SELECT  [venue_id],[venue_name],[parking],[description],[location],[zip_code],[city]			
+		SELECT  [venue_id],[venue_name],[parking],[description],[location],[zipcode].[zip_code],[zipcode].[city], [zipcode].[st]			
 		FROM 	[Venue]
+		JOIN [zipcode] ON [zipcode].[zip_code] = [Venue].[zip_code]
 	END
 GO
