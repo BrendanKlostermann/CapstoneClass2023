@@ -53,7 +53,7 @@ public class LeagueAccessor : ILeagueAccessor
 
         //create command
         var cmd = new SqlCommand(cmdText, conn);
-
+        
         //command type
         cmd.CommandType = CommandType.StoredProcedure;
 
@@ -295,32 +295,36 @@ public class LeagueAccessor : ILeagueAccessor
         try
         {
             conn.Open();
+
             var reader = cmd.ExecuteReader();
 
-            League temp = new League();
-            temp.LeagueID = reader.GetInt32(0);
-            temp.SportID = reader.GetInt32(1);
-            if (reader.IsDBNull(2) == false)
+            while (reader.Read())
             {
-                temp.LeagueDues = reader.GetDecimal(2);
-            }
-            temp.Active = reader.GetBoolean(3);
-            temp.MemberID = reader.GetInt32(4);
-            temp.Description = reader.GetString(6);
-            temp.Name = reader.GetString(7);
+                League temp = new League();
+                temp.LeagueID = reader.GetInt32(0);
+                temp.SportID = reader.GetInt32(1);
+                if (reader.IsDBNull(2) == false)
+                {
+                    temp.LeagueDues = reader.GetDecimal(2);
+                }
+                temp.Active = reader.GetBoolean(3);
+                temp.MemberID = reader.GetInt32(4);
+                temp.Description = reader.GetString(6);
+                temp.Name = reader.GetString(7);
 
-            if (reader.IsDBNull(5) == false)
-            {
-                temp.Gender = reader.GetBoolean(5);
-            }
-            else { temp.Gender = null; }
+                if (reader.IsDBNull(5) == false)
+                {
+                    temp.Gender = reader.GetBoolean(5);
+                }
+                else { temp.Gender = null; }
 
-            leagueList.Add(temp);
+                leagueList.Add(temp);
+            }
 
         }
-        catch (Exception up)
+        catch (Exception ex)
         {
-            throw up;
+            throw ex;
         }
         finally
         {
@@ -445,7 +449,7 @@ public class LeagueAccessor : ILeagueAccessor
                     {
                         leagues.LeagueDues = reader.GetDecimal(1);
                     }
-                    
+
                     leagues.Active = reader.GetBoolean(2);
                     leagues.MemberID = reader.GetInt32(3);
 
@@ -584,9 +588,9 @@ public class LeagueAccessor : ILeagueAccessor
         }
         catch (Exception ex)
         {
-			newLeague = oldLeague;
+            newLeague = oldLeague;
             throw new ApplicationException("Could not find data", ex);
-		}
+        }
         finally
         {
             conn.Close();
@@ -751,5 +755,260 @@ public class LeagueAccessor : ILeagueAccessor
             throw ex;
         }
         return leagues;
+    }
+
+public int AddALeague(League league)
+{
+    int leagueID = 0;
+
+    // connection
+    DBConnection connectionFactory = new DBConnection();
+    var conn = connectionFactory.GetDBConnection();
+
+    // cmdText
+    var cmdText = "sp_create_league";
+
+    // command
+    var cmd = new SqlCommand(cmdText, conn);
+
+    // type
+    cmd.CommandType = CommandType.StoredProcedure;
+
+    // parameters
+    cmd.Parameters.AddWithValue("@SportID", league.SportID);
+    cmd.Parameters.AddWithValue("@Dues", league.LeagueDues);
+    cmd.Parameters.AddWithValue("@Active", league.Active);
+    cmd.Parameters.AddWithValue("@MemberID", league.MemberID);
+    if (league.Gender == null)
+    {
+        cmd.Parameters.AddWithValue("@Gender", DBNull.Value);
+    }
+    else
+    {
+        cmd.Parameters.AddWithValue("@Gender", league.Gender);
+    }
+    cmd.Parameters.AddWithValue("@Description", league.Description);
+    cmd.Parameters.AddWithValue("@Name", league.Name);
+    cmd.Parameters.AddWithValue("@Max_Num_Teams", league.MaxNumOfTeams);
+    try
+    {
+        conn.Open();
+
+        leagueID = Convert.ToInt32(cmd.ExecuteScalar());
+    }
+    catch (Exception ex)
+    {
+        throw ex;
+    }
+    finally
+    {
+        conn.Close();
+    }
+    return leagueID;
+}
+
+
+public int ChangeLeagueRegistration(int LeagueID, bool OpenOrClose)
+{
+    //connection
+    DBConnection connectionFactory = new DBConnection();
+    var conn = connectionFactory.GetDBConnection();
+
+    //command text
+    var cmdText = "sp_update_registration_by_league_id";
+
+    //create command
+    var cmd = new SqlCommand(cmdText, conn);
+
+    //command type
+    cmd.CommandType = CommandType.StoredProcedure;
+
+    //Add paramaters //values
+    cmd.Parameters.Add("@Active", SqlDbType.Int);
+    cmd.Parameters["@Active"].Value = OpenOrClose;
+    cmd.Parameters.Add("@league_id", SqlDbType.Int);
+    cmd.Parameters["@league_id"].Value = LeagueID;
+
+    try
+    {
+        conn.Open();
+        var reader = cmd.ExecuteNonQuery();
+        return reader;
+    }
+    catch (Exception up)
+    {
+        throw up;
+    }
+    finally
+    {
+        conn.Close();
+    }
+}
+
+/// <summary>
+/// Rith
+/// Data access method to delete a league
+/// </summary>
+public int RemoveALeague(int LeagueID)
+{
+    int rowcount = 0;
+    //connection
+    DBConnection connectionFactory = new DBConnection();
+    var conn = connectionFactory.GetDBConnection();
+
+    //command text
+    var cmdText = "sp_delete_league";
+
+    //create command
+    var cmd = new SqlCommand(cmdText, conn);
+
+    //command type
+    cmd.CommandType = CommandType.StoredProcedure;
+
+    //Add paramaters //values
+    cmd.Parameters.Add("@LeagueID", SqlDbType.Int);
+    cmd.Parameters["@LeagueID"].Value = LeagueID;
+
+    try
+    {
+        conn.Open();
+        rowcount = cmd.ExecuteNonQuery();
+    }
+    catch (Exception up)
+    {
+        throw up;
+    }
+    finally
+    {
+        conn.Close();
+    }
+    return rowcount;
+}
+
+/// <summary>
+/// Rith
+/// Data access method to get the leagues that a specific member created
+/// </summary>
+public List<League> SelectLeaguesByMemberID(int MemberID)
+{
+
+    List<League> leagues = new List<League>();
+
+    DBConnection connectionFactory = new DBConnection();
+    var conn = connectionFactory.GetDBConnection();
+
+    //command text
+    var cmdText = "sp_select_leagues_by_member_id";
+
+    //create command
+    var cmd = new SqlCommand(cmdText, conn);
+
+    //command type
+    cmd.CommandType = CommandType.StoredProcedure;
+
+    cmd.Parameters.Add("@member_id", SqlDbType.Int);
+    cmd.Parameters["@member_id"].Value = MemberID;
+
+    try
+    {
+        conn.Open();
+        var reader = cmd.ExecuteReader();
+        if (reader.HasRows)
+        {
+            while (reader.Read())
+            {
+                League temp = new League();
+                temp.LeagueID = reader.GetInt32(0);
+                temp.SportID = reader.GetInt32(1);
+                if (reader.IsDBNull(2) == false)
+                {
+                    temp.LeagueDues = reader.GetDecimal(2);
+                }
+                temp.Active = reader.GetBoolean(3);
+                temp.MemberID = reader.GetInt32(4);
+                temp.Description = reader.GetString(6);
+                temp.Name = reader.GetString(7);
+
+                if (reader.IsDBNull(5) == false)
+                {
+                    temp.Gender = reader.GetBoolean(5);
+                }
+                else { temp.Gender = null; }
+
+                leagues.Add(temp);
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        throw ex;
+    }
+    finally
+    {
+        conn.Close();
+    }
+    return leagues;
+}
+
+/// <summary>
+/// Rith
+/// Data access method to update the fields in a league
+/// </summary>
+public int UpdateALeague(League league)
+{
+    //connection
+    DBConnection connectionFactory = new DBConnection();
+    var conn = connectionFactory.GetDBConnection();
+
+    //command text
+    var cmdText = "sp_update_league";
+
+    //create command
+    var cmd = new SqlCommand(cmdText, conn);
+
+    //command type
+    cmd.CommandType = CommandType.StoredProcedure;
+
+    //Add parameters //values
+    cmd.Parameters.Add("@league_id", SqlDbType.Int);
+    cmd.Parameters["@league_id"].Value = league.LeagueID;
+    cmd.Parameters.Add("@newLeague_dues", SqlDbType.Money);
+    cmd.Parameters["@newLeague_dues"].Value = league.LeagueDues;
+    cmd.Parameters.Add("@newActive", SqlDbType.Bit);
+    cmd.Parameters["@newActive"].Value = league.Active;
+    if (league.Gender == null)
+    {
+        cmd.Parameters.AddWithValue("@newGender", DBNull.Value);
+    }
+    else
+    {
+        cmd.Parameters.AddWithValue("@newGender", league.Gender);
+    }
+    cmd.Parameters.Add("@newDescription", SqlDbType.VarChar);
+    cmd.Parameters["@newDescription"].Value = league.Description;
+    cmd.Parameters.Add("@newName", SqlDbType.VarChar);
+    cmd.Parameters["@newName"].Value = league.Name;
+    cmd.Parameters.Add("@newMax_num_of_teams", SqlDbType.Int);
+    cmd.Parameters["@newMax_num_of_teams"].Value = league.MaxNumOfTeams;
+
+    try
+    {
+        conn.Open();
+        var reader = cmd.ExecuteNonQuery();
+        return reader;
+    }
+    catch (Exception up)
+    {
+        throw up;
+    }
+    finally
+    {
+        conn.Close();
+    }
+}
+
+    public List<LeagueRequest> SelectRequestsByLeagueID(int LeagueID)
+    {
+        throw new NotImplementedException();
     }
 }

@@ -17,6 +17,7 @@ using LogicLayerInterfaces;
 using LogicLayer;
 using DataObjects;
 using DataAccessLayerFakes;
+using System.Linq;
 
 namespace LogicLayerTests
 {
@@ -98,18 +99,35 @@ namespace LogicLayerTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
-        /// <summary>
-        /// Created By Jacob Lindauer
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        public void TestRetreivingGameScoresByGameID()
+        {
+            const int source = 1000;
+            const decimal expectedResult = 10;
+            decimal? actualResult = 0;
+
+            var scoreList = _gameManager.RetreiveScoresByGameID(source);
+            actualResult = (decimal?)scoreList.Where(x => x.TeamID == 1001).Select(s => s.TeamScore).First();
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ApplicationException))]
-        public void TestRetrievingGameListWithBadTeamID()
+        public void TestErrorRetreivingGameScoresByGameID()
         {
             const int source = 1;
-            int actualResult = 0;
+            const decimal expectedResult = 10;
+            decimal? actualResult = 0;
 
-            var gameList = _gameManager.RetrieveTeamGameList(source);
-            actualResult = gameList.Rows.Count;
+            var scoreList = _gameManager.RetreiveScoresByGameID(source);
+            actualResult = (decimal?)scoreList.Where(x => x.TeamID == 1001).Select(s => s.TeamScore).First();
 
         }
     }

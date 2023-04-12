@@ -1,0 +1,36 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.pgMemberProfile"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
+        mc:Ignorable="d" Height="500" Width="800" >
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="151" Width="123" VerticalAlignment="Top">
+            <Image x:Name="img" Height="79" Width="92" Source="bryant.jpg" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,18,15,18"/>
+            <Button x:Name="btnEditProfile" Content="Edit profile" Height="24" Margin="16,0,15,0" Width="92" HorizontalAlignment="Center" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="White" FontSize="14" Click="btnEditProfile_Click" RenderTransformOrigin="0.489,0"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="151" Width="667" Margin="123,0,0,0" VerticalAlignment="Top">
+            <Label x:Name="lblName" Content="First Name and Family Name" VerticalAlignment="Center" Margin="0,10,15,0" FontSize="24" Foreground="Black" FontWeight="Bold" Padding="1"/>
+            <Label x:Name="lblEmail" Content="Email:" VerticalAlignment="Center" Margin="0,5,15,0" FontSize="16" Foreground="Black" Padding="1"/>
+            <Label x:Name="lblPhone" Content="Phone:" VerticalAlignment="Center" Margin="0,5,15,0" FontSize="16" Foreground="Black" Padding="1"/>
+            <Label x:Name="lblGender" Content="Gender:" Margin="0,5,15,0" FontSize="16" Foreground="Black" VerticalAlignment="Top" Padding="1"/>
+        </StackPanel>
+        <StackPanel Margin="271,148,5,10" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+            <Label x:Name="lblTeamTitle" Content="My Teams" Margin="10,10,10,0" FontSize="20" Foreground="Black" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+
+            <ListBox x:Name="lbTeam" HorizontalAlignment="Left" Height="221" VerticalAlignment="Top" Width="504" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" Margin="10,10,0,10"/>
+
+        </StackPanel>
+        <Grid>
+            <Button x:Name="btnDeleteTeam" Content="Deactivate a team" Height="31" Margin="0 0 260 30" Width="120" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="14" Click="btnDeleteTeam_Click" VerticalContentAlignment="Center"/>
+            <Button x:Name="btnCreateTeam" Content="Create a team" Height="31" Margin="0 0 135 30" Width="120" Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="14" Click="btnCreateTeam_Click"/>
+        </Grid>
+        <StackPanel Margin="7,148,534,10" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+            <Label Content="Bio" Margin="10,10,10,0" FontSize="20" Foreground="Black" FontWeight="Bold" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+            <TextBox x:Name="txtBio" Height="221" Margin="12,10,10,10" TextWrapping="Wrap" Padding="5" MaxLength="1000" />
+            <Button x:Name="brnEditBio" Content="Edit Bio" Height="31" Margin="0,8,0,0" Width="80" Background="White" Click="Button_Click" FontSize="14"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

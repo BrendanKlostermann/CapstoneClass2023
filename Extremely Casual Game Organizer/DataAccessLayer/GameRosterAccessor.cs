@@ -31,6 +31,8 @@ namespace DataAccessLayer
             /// Created: 2023/02/10
             /// 
             /// Retrieves game roster based on provided game_id
+            /// 
+            /// Updated By: Jacob Lindauer
             /// </summary>
             
             List<GameRoster> _rosterList = null;

@@ -161,5 +161,71 @@ namespace DataAccessLayer
 
             return returnTable;
         }
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/02/04
+        /// 
+        /// Method returns score list based on game id provided
+        /// </summary>
+        /// <param name="team_id"></param>
+        /// <returns></returns>
+        public List<Score> SelectScoreByGameID(int game_id)
+        {
+            List<Score> result = null;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_score_by_game_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@game_id", SqlDbType.Int);
+
+            cmd.Parameters["@game_id"].Value = game_id;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                result = new List<Score>();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Score addScore = new Score();
+                        addScore.TeamID = reader.GetInt32(0);
+                        if (reader.IsDBNull(1))
+                        {
+                            addScore.TeamScore = null;
+                        }
+                        else
+                        {
+                            addScore.TeamScore = reader.GetDecimal(1);
+                        }
+                        addScore.GameID = game_id;
+
+                        result.Add(addScore);
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
     }
 }

@@ -35,6 +35,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         MasterManager _masterManager = null;
         PageControl _pageControl = null;
         Button _viewButton = null;
+        Button _updateButton = null;
+        Button _createButton = null;
+        Button _deleteButton = null;
         DataRowView _selectedItem = null;
         public pgGameList(MasterManager masterManager)
         {
@@ -55,10 +58,17 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             /// </summary>
 
             // Load buttons
-            _viewButton = _pageControl.ShowReadOnly();
+            var buttons = _pageControl.ShowFullCRUD();
+            _createButton = buttons[0];
+            _viewButton = buttons[1];
+            _updateButton = buttons[2];
+            _deleteButton = buttons[3];
 
             // Need to set button the ability to be clicked.
             _viewButton.Click += ViewButton_Click;
+            _createButton.Click += CreateButton_Click;
+            _updateButton.Click += UpdateButton_Click;
+            _deleteButton.Click += DeleteButton_Click;
         }
 
         private void LoadGameList()
@@ -68,78 +78,108 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             /// Date: 02/15/2023
             /// 
             /// Method for generating the game list.
-            /// </summary>
-
-            DataTable gameList = _masterManager.GameManager.ViewAllGames();
-
-            // Data Grid Properties
-            datGameList.AutoGenerateColumns = false;
-            datGameList.Focusable = false;
-            datGameList.IsReadOnly = true;
-
-
-            //// In order to hide the first column (which the game_id is needed but does not need to be visible) each column needs to be set manually.
-            DataGridTextColumn column1 = new DataGridTextColumn();
-            // Binding is determined from column names returned from stored procedure
-            column1.Binding = new Binding("game_id");
-            column1.Header = "game_id";
-            column1.Visibility = Visibility.Hidden;
-            datGameList.Columns.Add(column1);
-
-            DataGridTextColumn column2 = new DataGridTextColumn();
-            column2.Binding = new Binding("Teams");
-            column2.Header = "Teams";
-            column2.Width = new DataGridLength(200);
-            datGameList.Columns.Add(column2);
-
-            DataGridTextColumn column3 = new DataGridTextColumn();
-            column3.Binding = new Binding("Location");
-            column3.Width = new DataGridLength(400);
-            column3.Header = "Location";
-            datGameList.Columns.Add(column3);
-
-            DataGridTextColumn column4 = new DataGridTextColumn();
-            column4.Binding = new Binding("Date and Time");
-            column4.Width = new DataGridLength(160);
-            column4.Header = "Date and Time";
-            datGameList.Columns.Add(column4);
-
-            datGameList.ItemsSource = gameList.DefaultView;
-        }
-
-        private void datGameList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
             /// 
-            /// Grid double click event. Displays game details page for selected game.
+            /// Udpated By: Jacob Lindauer
+            /// Date: 2023/04/04
+            /// 
+            /// Updated game list to be a listbox instead of data table for better formatting
             /// </summary>
             try
             {
-                _selectedItem = (DataRowView)datGameList.SelectedItem;
+                DataTable gameList = _masterManager.GameManager.ViewAllGames();
 
-                if (_selectedItem == null)
+                foreach (var game in gameList.AsEnumerable())
                 {
-                    MessageBox.Show("Please select an item");
+                    ListBoxItem addGame = new ListBoxItem();
+                    addGame.BorderBrush = Brushes.Black;
+                    addGame.Margin = new Thickness(5);
+                    addGame.Width = 765;
+                    addGame.Height = 50;
+                    addGame.DataContext = game[0];
+
+
+                    TextBlock sportText = new TextBlock()
+                    {
+                        Text = game[1].ToString(),
+                        Width = 230
+                    };
+
+                    TextBlock boldLocation = new TextBlock()
+                    {
+                        Text = "@ ",
+                        FontWeight = FontWeights.Bold,
+                    };
+
+                    TextBlock locationText = new TextBlock()
+                    {
+                        Text = game[2].ToString(),
+                        Width = 340
+                    };
+
+                    TextBlock dateTitle = new TextBlock()
+                    {
+                        Text = "Date: ",
+                        FontWeight = FontWeights.Bold
+                    };
+
+                    TextBlock dateText = new TextBlock()
+                    {
+                        Text = game[3].ToString(),
+                        Width = 230
+                    };
+
+                    DockPanel gameListItem = new DockPanel();
+
+                    gameListItem.Children.Add(sportText);
+                    gameListItem.Children.Add(boldLocation);
+                    gameListItem.Children.Add(locationText);
+                    gameListItem.Children.Add(dateTitle);
+                    gameListItem.Children.Add(dateText);
+
+                    addGame.Content = gameListItem;
+
+                    lstGameList.Items.Add(addGame);
                 }
-                else
-                {
-                    int gameID = Convert.ToInt32(_selectedItem["game_id"]);
-
-                    // Prepare page to be loaded
-                    pgViewGameDetails viewGame = new pgViewGameDetails(gameID, _masterManager);
-
-                    _pageControl.LoadPage(viewGame, new pgGameList(_masterManager));
-                }
-
-
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
+            }
+        }
+        private void lstGameList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            /// <summary>
+            /// Created By: Jacob Lindauer
+            /// Date: 02/15/2023
+            /// 
+            /// View button click event
+            /// </summary>
+            try
+            {
 
+                if (lstGameList.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select an item");
+                }
+                else
+                {
+
+                    ListBoxItem selectedItem = (ListBoxItem)lstGameList.SelectedItem;
+
+                    // Retieve GameID from Row (Should be first column)
+                    int gameID = (int)selectedItem.DataContext;
+
+                    // Prepare page to be loaded
+                    pgViewGameDetails viewGame = new pgViewGameDetails(gameID, _masterManager);
+
+                    _pageControl.LoadPage(viewGame, new pgGameList(_masterManager));
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
             }
         }
 
@@ -154,25 +194,17 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             try
             {
 
-                if (datGameList.SelectedItem == null)
+                if (lstGameList.SelectedItem == null)
                 {
                     MessageBox.Show("Please select an item");
                 }
                 else
                 {
 
-                    DataRowView selectedItem = (DataRowView)datGameList.SelectedItem;
+                    ListBoxItem selectedItem = (ListBoxItem)lstGameList.SelectedItem;
 
                     // Retieve GameID from Row (Should be first column)
-                    int gameID = Convert.ToInt32(selectedItem["game_id"]);
-
-                    // Get Selected Row
-                    selectedItem = (DataRowView)datGameList.SelectedItem;
-
-                    // Create Managers to process next page.
-                    TeamManager teamManager = new TeamManager();
-                    GameRosterManager gameRosterManager = new GameRosterManager();
-                    GameManager gameManager = new GameManager();
+                    int gameID = (int)selectedItem.DataContext;
 
                     // Prepare page to be loaded
                     pgViewGameDetails viewGame = new pgViewGameDetails(gameID, _masterManager);
@@ -188,6 +220,20 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             }
 
         }
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -201,6 +247,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
             // Remove previous click events to avoid event loops
             _viewButton.Click -= ViewButton_Click;
+            _createButton.Click -= CreateButton_Click;
+            _updateButton.Click -= UpdateButton_Click;
+            _deleteButton.Click -= DeleteButton_Click;
         }
     }
 }

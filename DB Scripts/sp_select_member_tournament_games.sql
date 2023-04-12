@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[sp_select_member_tournament_games](
 AS
 	BEGIN
 		SELECT
-			'Tournament Game'
+			'Tourament Game'
 			, [Game].[game_id]
 			, [Venue].[venue_name]
 			, [Game].[date_and_time]

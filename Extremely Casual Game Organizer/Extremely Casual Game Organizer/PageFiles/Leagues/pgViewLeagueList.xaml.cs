@@ -26,6 +26,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataObjects;
 using Extremely_Casual_Game_Organizer.PageFiles;
+using Extremely_Casual_Game_Organizer.PageFiles.Leagues;
 using LogicLayer;
 
 namespace Extremely_Casual_Game_Organizer
@@ -36,11 +37,14 @@ namespace Extremely_Casual_Game_Organizer
     public partial class pgViewLeagueList : Page
     {
         List<League> _leagues = null;
+        Member _member = null;
         List<LeagueGridVM> _leaguesGridVM = null;
         LeagueManager _leagueManager = null;
         List<LeagueGridVM> _leaguesForGrid = null;
         MasterManager _masterManager = null;
         PageControl _pageControl = new PageControl();
+        Button _myLeaguesButton;
+        Button _addButton;
 
         public pgViewLeagueList(MasterManager masterManager)
         {
@@ -61,8 +65,14 @@ namespace Extremely_Casual_Game_Organizer
         {
             try
             {
-                _pageControl.ShowFullCRUD();
-
+                _member = _pageControl.GetSignedInMember();
+                if (_member != null)
+                {
+                    _addButton = _pageControl.SetCustomButton("Add new", 1);
+                    _myLeaguesButton = _pageControl.SetCustomButton("My Leagues", 2);
+                    _addButton.Click += AddButton_Click;
+                    _myLeaguesButton.Click += MyLeaguesButton_Click;
+                }
 
                 if (_leaguesForGrid == null)
                 {
@@ -106,6 +116,11 @@ namespace Extremely_Casual_Game_Organizer
             
             _leaguesGridVM = null;
             datLeagues.ItemsSource = null;
+            if (_member!=null)
+            {
+                _addButton.Click -= AddButton_Click;
+                _myLeaguesButton.Click -= MyLeaguesButton_Click;
+            }
         }
 
         /// <summary>
@@ -144,6 +159,16 @@ namespace Extremely_Casual_Game_Organizer
             PageControl pageController = new PageControl();
             pageController.LoadPage(selectedLeague);
             var editWindow = new pgAddEditLeague(league); // use a constructor that takes a league argument
+        }
+        private void MyLeaguesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            _pageControl.LoadPage(new pgMyLeagues(_pageControl.GetSignedInMember(), new LeagueManager()));
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgAddLeague(_pageControl.GetSignedInMember(), new LeagueManager(), new SportManager()));
         }
 
     }

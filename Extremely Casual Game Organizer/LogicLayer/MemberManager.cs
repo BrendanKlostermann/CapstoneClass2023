@@ -149,7 +149,7 @@ namespace LogicLayer
 
             result = stringBuilder.ToString();
 
-            return result.ToLower();
+            return result.ToUpper();
         }
 		
         public Member RetrieveMemberByEmail(string email)

@@ -59,7 +59,7 @@
                     <Image Source="Data\homeButton.png"></Image>
 				</Button>
 				
-                <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent">
+                <Button x:Name="btnHelp" Cursor="Hand"  Grid.Column="1" Margin="10 45" BorderBrush="Transparent" Foreground="Black" Background="Transparent" Click="btnHelp_Click">
                     <Image Source="Data\helpButton.png"></Image>
                 </Button>
                 <Image Grid.Column="3" Source="/Data/Logo.png" />
@@ -76,6 +76,7 @@
             <Button x:Name="navLeagues" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navLeagues_Click">Leagues</Button>
             
             <Button x:Name="navTournaments" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navTournaments_Click">Tournaments</Button>
+
 
             <Button x:Name="navTeams" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navTeams_Click">Teams</Button>
             

@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - ECGO</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -17,13 +17,52 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("ECGO", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("View Schedule", "Schedule", "Members")</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("View All Games", "AllGames", "Games")</li>
+                            <li>@Html.ActionLink("Create a Game", "CreateGame", "Games")</li>
+                            <li>@Html.ActionLink("Manage My Games", "EditGames", "Games")</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Leagues</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("View All Leagues", "AllLeagues", "Leagues")</li>
+                            <li>@Html.ActionLink("My Leagues", "MemberLeagues", "Leagues")</li>
+                            <li>@Html.ActionLink("Create a League", "CreateLeague", "Leagues")</li>
+                            <li>@Html.ActionLink("Manage My Leagues", "EditLeagues", "Leagues")</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tournaments</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("View All Tournaments", "AllTournaments", "Tournaments")</li>
+                            <li>@Html.ActionLink("My Tournaments", "MemberTournaments", "Tournaments")</li>
+                            <li>@Html.ActionLink("Create a Tournament", "CreateTournament", "Tournaments")</li>
+                            <li>@Html.ActionLink("Manage My Tournaments", "EditTournaments", "Tournaments")</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teams</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("View All Teams", "AllTeams", "Teams")</li>
+                            <li>@Html.ActionLink("My Teams", "MemberTeams", "Teams")</li>
+                            <li>@Html.ActionLink("Create a Team", "CreateTeam", "Teams")</li>
+                            <li>@Html.ActionLink("Manage My Teams", "EditTeams", "Teams")</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>@Html.ActionLink("Search", "Search", "Search")</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -33,7 +72,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Extremely Casual Game Organizer</p>
         </footer>
     </div>
 

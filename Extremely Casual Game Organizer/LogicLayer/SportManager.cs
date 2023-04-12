@@ -41,5 +41,29 @@ namespace LogicLayer
 
             return sports;
         }
+
+        /// <summary>
+        /// Rith
+        /// method to call select a specific sport method and pass results to the presentation layer
+        /// </summary>
+        public string RetrieveSportBySportID(int SportID)
+        {
+            string sportDescription = null;
+            try
+            {
+                sportDescription = _sportAccessor.SelectSportBySportID(SportID);
+
+                if (sportDescription == null)
+                {
+                    throw new ApplicationException("No sport found");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Unable to retrieve sport", ex);
+            }
+            return sportDescription;
+        }
     }
 }

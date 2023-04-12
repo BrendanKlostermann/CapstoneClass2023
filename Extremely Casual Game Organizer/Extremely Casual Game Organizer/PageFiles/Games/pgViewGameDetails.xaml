@@ -18,13 +18,14 @@
         <!--Details Grid-->
         <Grid x:Name="grdDetails" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
+                <RowDefinition Height="80" />
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
-                <RowDefinition Height="120"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
@@ -34,18 +35,39 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Label x:Name="lblGameDetails" Grid.Row="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Bold"> Game Details</Label>
-            <Label x:Name="lblGameLocaiton" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10 10 5 10">Location: </Label>
-            <Label x:Name="lblVanueName" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Venue:</Label>
-            <Label x:Name="lblGameDate" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Date: </Label>
-            <Label x:Name="lblGameTime" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Time: </Label>
-            <Label x:Name="lblGameType" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Sport:</Label>
+            <Grid x:Name="grdScore" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label x:Name="lblScore" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Content="Score" FontSize="18" FontWeight="Bold"/>
+                <Label x:Name="lblTeam1Winner" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold">Winner</Label>
+                <Label x:Name="lblTeam2Winner" Grid.Column="2" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold">Winner</Label>
 
-            <TextBox x:Name="txtLocation" Grid.Row="2" Grid.Column="1" Margin="10 10 10 5" HorizontalContentAlignment="Left" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
-            <TextBox x:Name="txtVenueName" Grid.Row="1" Grid.Column="1" Margin="10 10 10 5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
-            <TextBox x:Name="txtDate" Grid.Row="3" Grid.Column="1" Margin="10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
-            <TextBox x:Name="txtTime" Grid.Row="4" Grid.Column="1" Margin="10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
-            <TextBox x:Name="txtSport" Grid.Row="5" Grid.Column="1" Margin="10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
+                <TextBox x:Name="txtTeam1Score" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Focusable="False" FontSize="15" IsReadOnly="True"  Background="Transparent" Margin="10 5 10 5" BorderBrush="Transparent" FontWeight="Black"/>
+                <TextBox x:Name="txtToLabel"  Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Focusable="False" IsReadOnly="True"  Background="Transparent" Margin="10 5 10 5" BorderBrush="Transparent">To</TextBox>
+                <TextBox x:Name="txtTeam2Score" Grid.Row="1" Grid.Column="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="15" Focusable="False" IsReadOnly="True"  Background="Transparent" Margin="10 5 10 5" BorderBrush="Transparent" FontWeight="Black"/>
+            </Grid>
+            
+            
+
+            <Label x:Name="lblGameDetails" Grid.Row="0" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" FontWeight="Bold"> Game Details</Label>
+            <Label x:Name="lblVenueName" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Venue:</Label>
+            <Label x:Name="lblGameLocaiton" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10 10 5 10">Location:</Label>
+            <Label x:Name="lblGameDate" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Date: </Label>
+            <Label x:Name="lblGameTime" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Time: </Label>
+            <Label x:Name="lblGameType" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Margin="10">Sport:</Label>
+
+            <TextBox x:Name="txtLocation" Grid.Row="4" Grid.Column="1" Margin="10 10 10 5" HorizontalContentAlignment="Left" TextWrapping="WrapWithOverflow" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
+            <TextBox x:Name="txtVenueName" Grid.Row="3" Grid.Column="1" Margin="10 10 10 5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
+            <TextBox x:Name="txtDate" Grid.Row="5" Grid.Column="1" Margin="10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
+            <TextBox x:Name="txtTime" Grid.Row="6" Grid.Column="1" Margin="10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
+            <TextBox x:Name="txtSport" Grid.Row="7" Grid.Column="1" Margin="10" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" IsReadOnly="True" Focusable="False" Background="Transparent" BorderBrush="Transparent"/>
 
         </Grid>
         <!--Team 1 Grid-->

@@ -90,6 +90,11 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
+        public int DeactivateOwnTeam(int teamID, int memberID)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /// <summary>
         /// Alex Korte

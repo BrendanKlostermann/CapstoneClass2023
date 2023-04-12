@@ -35,7 +35,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         MasterManager _masterManager = null;
         Button _backButton = null;
         int _game_id;
+        DateTime _gameDate;
         PageControl _pageControl = null;
+        List<Score> _gameScores = null;
         public pgViewGameDetails(int game_id, MasterManager masterManager)
         {
             _game_id = game_id;
@@ -57,8 +59,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             _backButton = _pageControl.ShowGoBack();
             _backButton.Click += BackButton_Click;
 
-            LoadRosterData();
             LoadGameDetails();
+            LoadRosterData();
         }
 
         private void LoadGameDetails()
@@ -69,7 +71,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             /// 
             /// Method for loading game details from based on values provided in constructor when class file was called. 
             /// </summary>
-            
+
             DataRow details = _masterManager.GameManager.ViewGameDetails(_game_id);
 
             // Method to parse location to correct format.
@@ -84,22 +86,29 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             txtDate.Text = Convert.ToDateTime(details[4]).ToShortDateString();
             txtTime.Text = Convert.ToDateTime(details[4]).ToShortTimeString();
             txtSport.Text = details[5].ToString();
+            _gameDate = Convert.ToDateTime(details[4]);
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// Method for loading roster details from based teams participating in the selected game
+        /// 
+        /// Udpated By: Jacob Lindauer
+        /// Date: 2023/28/03
+        /// 
+        /// Updated Method to apply player position in roster details
+        /// 
+        /// Updated By: Jacob Lindauer
+        /// Date: 2023/01/04
+        /// 
+        /// Added score area and applied scored to game details
+        /// *** Score will ONLY show if game is past its scheduled date ***
+        /// </summary>
         private void LoadRosterData()
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// Method for loading roster details from based teams participating in the selected game
-            /// 
-            /// Udpated By: Jacob Lindauer
-            /// Date: 2023/28/03
-            /// 
-            /// Updated Method to apply player position in roster details
-            /// </summary>
-            
+
             try
             {
                 Team team1 = new Team();
@@ -123,6 +132,49 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 var team1PlayerQuery = from player in _masterManager.GameRosterManager.RetrieveGameRoster(_game_id) where player.TeamID.Equals(team1.TeamID) select player;
 
                 var team2PlayerQuery = from player in _masterManager.GameRosterManager.RetrieveGameRoster(_game_id) where player.TeamID.Equals(team2.TeamID) select player;
+
+                // Update Score if score is valid and game date is past current date time
+
+                _gameScores = _masterManager.GameManager.RetreiveScoresByGameID(_game_id);
+                Score team1Score = (from score in _gameScores where score.TeamID == team1.TeamID select score).First();
+                Score team2Score = (from score in _gameScores where score.TeamID == team2.TeamID select score).First();
+
+                // Check if teams have score applied
+                if (team1Score.TeamScore != null && team2Score.TeamScore != null)
+                {
+                    if (team1Score.TeamScore % 1 == 0 || team2Score.TeamScore % 1 == 0)
+                    {
+                        if (team1Score.TeamScore % 1 == 0)
+                        {
+                            txtTeam1Score.Text = Convert.ToInt32(team1Score.TeamScore).ToString();
+                        }
+                        if (team2Score.TeamScore % 1 == 0)
+                        {
+                            txtTeam2Score.Text = Convert.ToInt32(team2Score.TeamScore).ToString();
+                        }
+                    }
+                    else
+                    {
+                        txtTeam1Score.Text = team1Score.TeamScore.ToString();
+                        txtTeam2Score.Text = team2Score.TeamScore.ToString();
+                    }
+
+                    if (team1Score.TeamScore > team2Score.TeamScore)
+                    {
+                        lblTeam1Winner.Visibility = Visibility.Visible;
+                        lblTeam2Winner.Visibility = Visibility.Hidden;
+                    }
+                    else if (team2Score.TeamScore > team1Score.TeamScore)
+                    {
+                        lblTeam1Winner.Visibility = Visibility.Hidden;
+                        lblTeam2Winner.Visibility = Visibility.Visible;
+                    }
+                }
+                else
+                {
+                    grdScore.Visibility = Visibility.Hidden;
+                }
+
 
                 // Need to loop through player lists and add those items to the list items.
                 foreach (var player in team1PlayerQuery)
@@ -154,7 +206,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                     posLabel.FontWeight = FontWeights.Bold;
                     posLabel.Text = "Position: ";
 
-                    TextBlock posText = new TextBlock { Text = player.Description};
+                    TextBlock posText = new TextBlock { Text = player.Description };
 
                     // Add Text Block to Position Dock Panel
                     dockPanelPos.Children.Add(posLabel);
@@ -216,7 +268,6 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             {
 
                 MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
-                return;
             }
         }
         private void BackButton_Click(object sender, RoutedEventArgs e)

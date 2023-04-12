@@ -530,8 +530,8 @@ namespace DataAccessLayer
             // parameter values
             cmd.Parameters["@tournament_id"].Value = tournament_id;
 
-            //try
-            //{
+            try
+            {
                 // open the connection
                 conn.Open();
 
@@ -551,11 +551,11 @@ namespace DataAccessLayer
                         tournaments.Add(tournament);
                     }
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return tournaments;
         }
         
@@ -617,5 +617,244 @@ namespace DataAccessLayer
             // return the result
             return rowsAffected;
         }
+
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Select tournament team games
+        /// </summary>
+        public List<TournamentTeamGame> SelectTournamentTeamAndGame(int tournament_id)
+        {
+            List<TournamentTeamGame> tournaments = new List<TournamentTeamGame>();
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // command text
+            var cmdText = "sp_select_tournament_games";
+
+            // command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // parameters
+            cmd.Parameters.Add("@tournament_id", SqlDbType.Int);
+
+            // parameter values
+            cmd.Parameters["@tournament_id"].Value = tournament_id;
+
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        TournamentTeamGame tournament = new TournamentTeamGame()
+                        {
+                            TournamentID = reader.GetInt32(0),
+                            GameID = reader.GetInt32(1),
+                            TeamID = reader.GetInt32(2)
+                        };
+
+                        tournaments.Add(tournament);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return tournaments;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// Insert tournament game
+        /// </summary>
+        public int InsertTournamentGame(TournamentGenerateGames tournamentGenerateGames)
+        {
+            // return object
+            int rowsAffected = 0;
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // command text
+            string commandText = @"sp_generate_tournament_team";
+
+            // command
+            var cmd = new SqlCommand(commandText, conn);
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // parameters
+            cmd.Parameters.Add("@tournament_id", SqlDbType.Int);
+
+            cmd.Parameters.Add("@team_id_1", SqlDbType.Int);
+            cmd.Parameters.Add("@team_id_2", SqlDbType.Int);
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+
+            cmd.Parameters.Add("@content", SqlDbType.NVarChar, 1000);
+
+            cmd.Parameters.Add("@group", SqlDbType.Bit);
+
+            // parameter values
+            cmd.Parameters["@tournament_id"].Value = tournamentGenerateGames.TournamentID;
+
+            cmd.Parameters["@team_id_1"].Value = tournamentGenerateGames.TeamID_1;
+            cmd.Parameters["@team_id_2"].Value = tournamentGenerateGames.TeamID_2;
+            cmd.Parameters["@member_id"].Value = tournamentGenerateGames.MemberID;
+
+            cmd.Parameters["@content"].Value = tournamentGenerateGames.Content;
+
+            cmd.Parameters["@group"].Value = tournamentGenerateGames.IsAGroup;
+
+            try
+            {
+                // 8. open the connection
+                conn.Open();
+
+            // 9. Execute the command qnd capture the results
+            // three basic execution modes:
+            // .ExecuteReadet() returns row/column data (normal select statements)
+            // .ExecuteNonQuery() returns Int32 rows affected (action statements (update/delete/insert))
+            // .ExecuteScalar() returns a System.Object (aggregate queries)
+            rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Update Failed. "+ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            // return the result
+            return rowsAffected;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/01/31
+        /// 
+        /// delete all tournament games
+        /// </summary>
+        public int deleteTournamentGameGenerated(int tournament_id)
+        {
+            // return object
+            int rowsAffected = 0;
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // command text
+            string commandText = @"sp_delete_generate_tournament_team";
+
+            // command
+            var cmd = new SqlCommand(commandText, conn);
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // parameters
+            cmd.Parameters.Add("@tournament_id", SqlDbType.Int);
+
+            // parameter values
+            cmd.Parameters["@tournament_id"].Value = tournament_id;
+
+            try
+            {
+                // 8. open the connection
+                conn.Open();
+
+            // 9. Execute the command qnd capture the results
+            // three basic execution modes:
+            // .ExecuteReadet() returns row/column data (normal select statements)
+            // .ExecuteNonQuery() returns Int32 rows affected (action statements (update/delete/insert))
+            // .ExecuteScalar() returns a System.Object (aggregate queries)
+                rowsAffected = cmd.ExecuteNonQuery();
+                rowsAffected = 1;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Delete Failed. "+ ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            // return the result
+            return rowsAffected;
+        }
+        //returns a Tournament Object by taking in the parameter tournament_id
+        public Tournament SelectTournamentByID(int tournament_id)
+        {
+            Tournament returnedTournament = new Tournament();
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+            var cmdText = "sp_select_tournament_by_id";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            //tournament_id is an identity
+            cmd.Parameters.Add("@tournament_id", SqlDbType.Int);
+            cmd.Parameters["@tournament_id"].Value = tournament_id;
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                var reader = cmd.ExecuteReader();
+                // process the results
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    returnedTournament.TournamentID = reader.GetInt32(0);
+                    returnedTournament.SportID = reader.GetInt32(1);
+                    if (!reader.IsDBNull(2))
+                    {
+                        returnedTournament.Gender = reader.GetBoolean(2);
+                    }
+                    else
+                    {
+                        returnedTournament.Gender = null;
+                    }
+                    returnedTournament.MemberID = reader.GetInt32(3);
+                    returnedTournament.Name = reader.GetString(4);
+                    returnedTournament.Description = reader.GetString(5);
+                    returnedTournament.Active = reader.GetBoolean(6);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                // close the connection
+                conn.Close();
+            }
+
+            return returnedTournament;
+        }
+
     }
 }

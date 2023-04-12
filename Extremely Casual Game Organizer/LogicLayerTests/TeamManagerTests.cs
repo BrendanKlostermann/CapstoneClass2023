@@ -225,6 +225,44 @@ namespace LogicLayerTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// Proper team deactivate
+        /// </summary>
+        [TestMethod]
+        public void TestRemoveTeamGood()
+        {
+            // Arrange
+            
 
+            // Act
+            int expectedResult = 1;
+            int actualResult = _teamManager.RemoveOwnTeam(1001, 1230);
+
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        /// <summary>
+        /// Garion Opiola
+        /// Created: 2023/03/21
+        /// 
+        /// incorrect team decativate
+        /// </summary
+        [TestMethod]
+        public void TestRemoveTeamBad()
+        {
+            // Arrange
+            
+
+            // Act
+            int expectedResult = 0;
+            int actualResult = _teamManager.RemoveOwnTeam(1001, 1231);
+
+            // Test
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }

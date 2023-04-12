@@ -26,5 +26,6 @@ AS
 			JOIN [GameRoster] ON [GameRoster].[game_id] = [Game].[game_id]
 			JOIN [Venue] ON [Venue].[venue_id] = [Game].[venue_id]
 			JOIN [Team] ON [Team].[team_id] = [GameRoster].[team_id]
+		WHERE [Game].[active] = 1;
 	END
 GO

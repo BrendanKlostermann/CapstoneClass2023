@@ -65,10 +65,32 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Error adding new tournament.", ex);
             }
-                
-            
-            
 
+        }
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/10
+        /// 
+        /// </summary>
+        /// this method calls to get a Tournament object by its ID
+        /// then, it returns the object.
+        public Tournament SelectTournament(int tournament_id)
+        {
+            Tournament requestTournament = new Tournament();
+            try
+            {
+                requestTournament = _tournamentAccessor.SelectTournamentByID(tournament_id);
+            }
+            catch (ArgumentException ae)
+            {
+                throw new ArgumentException("Error viewing tournament", ae);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error viewing tournament", ex);
+            }
+            return requestTournament;
         }
 
         /// <summary>
@@ -290,6 +312,69 @@ namespace LogicLayer
             }
             return rowsAffected;
         }
-    
+        
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Select tournament game
+        /// </summary>
+        public List<TournamentTeamGame> SelectTournamentTeamAndGame(int tournament_id)
+        {
+            List<TournamentTeamGame> tournaments = null;
+
+            try
+            {
+                tournaments = _tournamentAccessor.SelectTournamentTeamAndGame(tournament_id);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Tournament not found");
+            }
+            return tournaments;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Insert tournament game
+        /// </summary>
+        public int InsertTournamentGame(TournamentGenerateGames tournamentGenerateGames)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = _tournamentAccessor.InsertTournamentGame(tournamentGenerateGames);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot add these games to the tournament");
+            }
+            return rowsAffected;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Delete tournament game
+        /// </summary>
+        public int deleteTournamentGameGenerated(int tournament_id)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = _tournamentAccessor.deleteTournamentGameGenerated(tournament_id);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot add these games to the tournament");
+            }
+            return rowsAffected;
+        }
+
     }
 }
