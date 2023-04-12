@@ -14,7 +14,7 @@
         <Label x:Name="label_1" Content="Name:" HorizontalAlignment="Left" Margin="90,0,0,0" VerticalAlignment="Top" Width="64" FontSize="14"/>
         <Label x:Name="label_1_Copy" Content="Gender:" HorizontalAlignment="Left" Margin="90,21,0,0" VerticalAlignment="Top" Width="64" FontSize="14"/>
         <Label x:Name="label_1_Copy1" Content="Sport:" HorizontalAlignment="Left" Margin="91,43,0,0" VerticalAlignment="Top" Width="64" FontSize="14"/>
-        <Button x:Name="btnMember" Content="Members" HorizontalAlignment="Left" Margin="370,23,0,0" VerticalAlignment="Top" Width="76" Padding="2,2,2,4" Background="#FF35ABEE" BorderBrush="Black" Foreground="White"  Height="28" FontSize="16" Click="btnMember_Click"/>
+        <Button x:Name="btnMember" Content="Details" HorizontalAlignment="Left" Margin="370,23,0,0" VerticalAlignment="Top" Width="76" Padding="2,2,2,4" Background="#FF35ABEE" BorderBrush="Black" Foreground="White"  Height="28" FontSize="16" Click="btnMember_Click"/>
 
     </Grid>
 </UserControl>

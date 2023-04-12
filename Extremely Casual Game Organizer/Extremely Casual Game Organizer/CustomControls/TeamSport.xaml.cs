@@ -45,7 +45,14 @@ namespace Extremely_Casual_Game_Organizer.CustomControls
 
         private void btnMember_Click(object sender, RoutedEventArgs e)
         {
-            _pageControl.LoadPage(new pgTeamMemberScreen(teamSport.TeamID, masterManager), _pageControl.GetCurrentPage());
+            /// <summary>
+            /// Heritier Otiom
+            /// 03/01/2023
+            /// 
+            /// update directs to teamDetails page
+            /// Garion Opiola
+            /// </summary>
+            _pageControl.LoadPage(new pgViewTeamDetails(teamSport.TeamID, masterManager), _pageControl.GetCurrentPage());
         }
     }
 }
