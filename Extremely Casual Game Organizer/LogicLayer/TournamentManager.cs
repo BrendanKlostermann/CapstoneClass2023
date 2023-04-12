@@ -65,10 +65,32 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Error adding new tournament.", ex);
             }
-                
-            
-            
 
+        }
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/10
+        /// 
+        /// </summary>
+        /// this method calls to get a Tournament object by its ID
+        /// then, it returns the object.
+        public Tournament SelectTournament(int tournament_id)
+        {
+            Tournament requestTournament = new Tournament();
+            try
+            {
+                requestTournament = _tournamentAccessor.SelectTournamentByID(tournament_id);
+            }
+            catch (ArgumentException ae)
+            {
+                throw new ArgumentException("Error viewing tournament", ae);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error viewing tournament", ex);
+            }
+            return requestTournament;
         }
 
         /// <summary>
@@ -127,6 +149,62 @@ namespace LogicLayer
         }
 
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/21
+        /// 
+        /// </summary>
+        /// this method calls the UpdateTournament method in the accessor class
+        /// it returns true or false depending on if the correct number of lines effected is returned.
+        public bool EditTournament(int memberid, Tournament tm)
+        {
+            try
+            {
+                int count = _tournamentAccessor.UpdateTournament(memberid, tm);
+                if (count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Tournament could not be updated.", ex);
+            }
+
+
+        } // end EditTournament
+
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/21
+        /// 
+        /// </summary>
+        /// This method is used to deactivate a tournament in the database. returns true or false
+        /// depending if the correct amount lines are changed.
+        public bool DeleteTournament(int memberid, int tournamentID)
+        {
+            try
+            {
+                _tournamentAccessor = new TournamentAccessor();
+                if (1 == _tournamentAccessor.DeactivateTournament(memberid, tournamentID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error deleting tournament", ex);
+            }
+        }
 
         /// <summary>
         /// Heritier Otiom
@@ -149,6 +227,23 @@ namespace LogicLayer
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// </summary>
+        /// this method takes in an id number and will return a Tournament object that has the same id
+        public Tournament RetrieveTournamentByTournamentID(int id)
+        {
+            try
+            {
+                return _tournamentAccessor.SelectTournamentByTournamentID(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error finding tournament", ex);
+            }
+        }
 
 
         /// <summary>
@@ -217,6 +312,69 @@ namespace LogicLayer
             }
             return rowsAffected;
         }
-    
+        
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Select tournament game
+        /// </summary>
+        public List<TournamentTeamGame> SelectTournamentTeamAndGame(int tournament_id)
+        {
+            List<TournamentTeamGame> tournaments = null;
+
+            try
+            {
+                tournaments = _tournamentAccessor.SelectTournamentTeamAndGame(tournament_id);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Tournament not found");
+            }
+            return tournaments;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Insert tournament game
+        /// </summary>
+        public int InsertTournamentGame(TournamentGenerateGames tournamentGenerateGames)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = _tournamentAccessor.InsertTournamentGame(tournamentGenerateGames);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot add these games to the tournament");
+            }
+            return rowsAffected;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Delete tournament game
+        /// </summary>
+        public int deleteTournamentGameGenerated(int tournament_id)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = _tournamentAccessor.deleteTournamentGameGenerated(tournament_id);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot add these games to the tournament");
+            }
+            return rowsAffected;
+        }
+
     }
 }

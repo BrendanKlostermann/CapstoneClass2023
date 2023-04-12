@@ -22,6 +22,7 @@
         <ComboBox x:Name="ddTournament" HorizontalAlignment="Left" Margin="547,27,0,0" VerticalAlignment="Top" Width="234" RenderTransformOrigin="0.209,1.182" Padding="8,3,5,8" FontSize="16" SelectionChanged="ddTournament_SelectionChanged"/>
         <Button x:Name="btnAddAllTeam" Content="Add all teams" HorizontalAlignment="Left" Margin="27,448,0,0" VerticalAlignment="Top" Width="148" Height="34" FontSize="16" Click="btnAddAllTeam_Click"/>
         <Button x:Name="btnResetTournament"  Content="Reset Tournament" HorizontalAlignment="Left" Margin="193,448,0,0" VerticalAlignment="Top" Width="148" Height="34" Click="Button_Click" FontSize="16"/>
+        <Button x:Name="btnBack"  Content="Back" HorizontalAlignment="Left" Margin="659,448,0,0" VerticalAlignment="Top" Width="122" Height="34" Click="btnBackToGenerate" FontSize="20" Background="#FFFB8787" Foreground="White"/>
 
     </Grid>
 </Page>

@@ -56,5 +56,51 @@ namespace DataAccessLayer
             }
             return sportList;
         }
+
+        /// <summary>
+        /// Rith
+        /// Data access method for selecting a specific sport by sport id
+        /// </summary>
+        public string SelectSportBySportID(int SportID)
+        {
+            string sportDescription = null;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_sports_description_by_sportID";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@sportID", SqlDbType.Int);
+            cmd.Parameters["@sportID"].Value = SportID;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        sportDescription = reader.GetString(0);
+                    }
+                }
+            }
+            catch (Exception up)
+            {
+                throw up;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return sportDescription;
+        }
     }
 }

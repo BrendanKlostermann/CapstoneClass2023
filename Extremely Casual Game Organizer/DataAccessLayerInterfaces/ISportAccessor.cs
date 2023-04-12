@@ -10,5 +10,7 @@ namespace DataAccessLayerInterfaces
     public interface ISportAccessor
     {
         List<Sport> SelectAllSports();
+
+        string SelectSportBySportID(int SportID);
     }
 }

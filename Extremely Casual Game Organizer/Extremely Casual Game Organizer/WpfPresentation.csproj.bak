@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,24 +56,196 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ChatControls\incoming.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="CustomControls\Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Team.xaml.cs">
+      <DependentUpon>Team.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgAddLeague.xaml.cs">
+      <DependentUpon>pgAddLeague.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgLeagueDetails.xaml.cs">
+      <DependentUpon>pgLeagueDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgMyLeagues.xaml.cs">
+      <DependentUpon>pgMyLeagues.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgViewLeague.xaml.cs">
+      <DependentUpon>pgViewLeague.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Seasons\AddEditSeason.xaml.cs">
+      <DependentUpon>AddEditSeason.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgGenerateTournamentGame.xaml.cs">
+      <DependentUpon>pgGenerateTournamentGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Utility\pgHelp.xaml.cs">
+      <DependentUpon>pgHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Seasons\pgViewSeasonList.xaml.cs">
+      <DependentUpon>pgViewSeasonList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgAddEditLeague.xaml.cs">
+      <DependentUpon>pgAddEditLeague.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml.cs">
+      <DependentUpon>PopUpPlayerSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgCreateTournament.xaml.cs">
+      <DependentUpon>pgCreateTournament.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgModifyTournament.xaml.cs">
+      <DependentUpon>pgModifyTournament.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgViewTournamentList.xaml.cs">
+      <DependentUpon>pgViewTournamentList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pgAddEditLeague.xaml.cs">
+      <DependentUpon>pgAddEditLeague.xaml</DependentUpon>
+	 </compile>
+    <Compile Include="pgDeactivateTeam.xaml.cs">
+      <DependentUpon>pgDeactivateTeam.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CustomControls\Game.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CustomControls\Team.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgAddLeague.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgLeagueDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgMyLeagues.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgViewLeague.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Seasons\AddEditSeason.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgGenerateTournamentGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Utility\pgHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Seasons\pgViewSeasonList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgAddEditLeague.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgCreateTournament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgModifyTournament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgViewTournamentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pgAddEditLeague.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ChatControls\member.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="ChatControls\incoming.xaml.cs">
+      <DependentUpon>incoming.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ChatControls\member.xaml.cs">
+      <DependentUpon>member.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ChatControls\outgoing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\EquipmentListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\TeamAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\TeamMemberAndSport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\TeamRemove.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomControls\TeamSport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="ChatControls\outgoing.xaml.cs">
+      <DependentUpon>outgoing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\EquipmentListControl.xaml.cs">
+      <DependentUpon>EquipmentListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TeamAdd.xaml.cs">
+      <DependentUpon>TeamAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TeamMemberAndSport.xaml.cs">
+      <DependentUpon>TeamMemberAndSport.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TeamRemove.xaml.cs">
+      <DependentUpon>TeamRemove.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\TeamSport.xaml.cs">
+      <DependentUpon>TeamSport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Administration\pgAdminResetPassword.xaml.cs">
       <DependentUpon>pgAdminResetPassword.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="PageFiles\PageControler.cs" />
-    <Compile Include="PageFiles\pgCreateTournament.xaml.cs">
+    <Compile Include="PageFiles\MemberPages\winEventDetails.xaml.cs">
+      <DependentUpon>winEventDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgCreateTournament.xaml.cs">
       <DependentUpon>pgCreateTournament.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\pgViewTournamentList.xaml.cs">
+    <Compile Include="PageFiles\Tournaments\pgViewTournamentList.xaml.cs">
       <DependentUpon>pgViewTournamentList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\PopUpOptions.xaml.cs">
-=======
     <Compile Include="PageFiles\MemberPages\pgMemberSchedule.xaml.cs">
       <DependentUpon>pgMemberSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Teams\pgTeamList.xaml.cs">
+      <DependentUpon>pgTeamList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Teams\Utility\PopUpOptions.xaml.cs">
->>>>>>> origin/main
       <DependentUpon>PopUpOptions.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Teams\pgTeamMemberScreen.xaml.cs">
@@ -80,6 +253,9 @@
     </Compile>
     <Compile Include="PageFiles\Leagues\pgViewLeagueList.xaml.cs">
       <DependentUpon>pgViewLeagueList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Utility\pgHomepage.xaml.cs">
+      <DependentUpon>pgHomepage.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Utility\pgLogIn.xaml.cs">
       <DependentUpon>pgLogIn.xaml</DependentUpon>
@@ -91,25 +267,46 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
-    <Compile Include="StylesTest.xaml.cs">
-      <DependentUpon>StylesTest.xaml</DependentUpon>
+    <Compile Include="PageFiles\Equipment\pgAddAndEditEquipmentList.xaml.cs">
+      <DependentUpon>pgAddAndEditEquipmentList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TeamList.xaml.cs">
-      <DependentUpon>TeamList.xaml</DependentUpon>
+    <Compile Include="PageFiles\Tournaments\pgAddTeamToTournament.xaml.cs">
+      <DependentUpon>pgAddTeamToTournament.xaml</DependentUpon>
     </Compile>
-    <Page Include="PageFiles\pgCreateTournament.xaml">
+    <Compile Include="PageFiles\MemberPages\pgCreateAccount.xaml.cs">
+      <DependentUpon>pgCreateAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Teams\pgCreateTeam.xaml.cs">
+      <DependentUpon>pgCreateTeam.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\MemberPages\pgMemberList.xaml.cs">
+      <DependentUpon>pgMemberList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\MemberPages\pgMemberProfile.xaml.cs">
+      <DependentUpon>pgMemberProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Utility\Messaging\pgRespondToMessage.xaml.cs">
+      <DependentUpon>pgRespondToMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Utility\pgSearchforTeam.xaml.cs">
+      <DependentUpon>pgSearchforTeam.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Equipment\pgViewEquipmentList.xaml.cs">
+      <DependentUpon>pgViewEquipmentList.xaml</DependentUpon>
+    </Compile>
+    <Page Include="PageFiles\MemberPages\winEventDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\pgViewTournamentList.xaml">
+    <Page Include="PageFiles\Tournaments\pgCreateTournament.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="pgConfirmDeactivate.xaml">
-=======
+    <Page Include="PageFiles\Tournaments\pgViewTournamentList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFiles\Administration\pgConfirmDeactivate.xaml">
->>>>>>> origin/main
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,7 +336,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFiles\Styles\CalendarResource.xaml">
+    <Page Include="PageFiles\Teams\pgTeamList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +349,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Leagues\pgViewLeagueList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Utility\pgHomepage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,17 +372,50 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
-    <Resource Include="styles\styles.xaml">
+    <Resource Include="PageFiles\Styles\styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
-    <Page Include="StylesTest.xaml">
+    <Page Include="PageFiles\Equipment\pgAddAndEditEquipmentList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgAddTeamToTournament.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\MemberPages\pgCreateAccount.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Teams\pgCreateTeam.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\MemberPages\pgMemberList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="pgDeactivateTeam.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TeamList.xaml">
-=======
+    <Page Include="PageFiles\MemberPages\pgMemberProfile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Utility\Messaging\pgRespondToMessage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Utility\pgSearchforTeam.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Equipment\pgViewEquipmentList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PageFiles\Games\pgViewGameDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -191,7 +425,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Teams\pgViewTeamList.xaml">
->>>>>>> origin/main
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,6 +491,12 @@
     <Resource Include="Data\mailButton.png" />
     <Resource Include="Data\profileButton.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Data\BackButton.png" />
+    <Resource Include="Data\ForwardButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\Logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

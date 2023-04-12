@@ -208,7 +208,6 @@ namespace Extremely_Casual_Game_Organizer
                 img = AppDomain.CurrentDomain.BaseDirectory + "/Images/Sports/Sports.png";
             }
             img_logo.Source = new BitmapImage(new Uri(@img, UriKind.RelativeOrAbsolute));
-
         }
 
     }

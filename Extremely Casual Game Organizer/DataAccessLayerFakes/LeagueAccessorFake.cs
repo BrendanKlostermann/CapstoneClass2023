@@ -247,5 +247,35 @@ namespace DataAccessLayerFakes
             }
             return selectedLeague;
         }
+
+        public int AddALeague(League league)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RemoveALeague(int LeagueID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<League> SelectLeaguesByMemberID(int MemberID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ChangeLeagueRegistration(int LeagueID, bool OpenOrClose)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateALeague(League league)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<LeagueRequest> SelectRequestsByLeagueID(int LeagueID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

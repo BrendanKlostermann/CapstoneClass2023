@@ -813,6 +813,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.MemberPages
             _viewButton.Click -= ViewButton_Click;
             _createButton.Click -= CreateButton_Click;
             _fullDetails.Click -= FullDetails_Click;
+            _removeButton.Click -= RemoveButton_Click;
         }
     }
 }

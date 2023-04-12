@@ -302,5 +302,10 @@ namespace Extremely_Casual_Game_Organizer
                 MessageBox.Show("Cannot remove the team from the tournament!");
             }
         }
+
+        private void btnBackToGenerate(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new pgGenerateTournamentGame());
+        }
     }
 }

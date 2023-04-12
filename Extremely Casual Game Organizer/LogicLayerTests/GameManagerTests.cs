@@ -158,7 +158,7 @@ namespace LogicLayerTests
             const int expectedResult = 1;
             int actualResult = 0;
 
-            actualResult = _gameManager.EditGame(game);
+            actualResult = _gameManager.EditGame(game, 100000);
 
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -173,7 +173,7 @@ namespace LogicLayerTests
             const int expectedResult = 1;
             int actualResult = 0;
 
-            actualResult = _gameManager.RemoveGame(game);
+            actualResult = _gameManager.RemoveGame(game, 100000);
 
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -206,7 +206,7 @@ namespace LogicLayerTests
             const int expectedResult = 1;
             int actualResult = 0;
 
-            actualResult = _gameManager.RemoveGame(game);
+            actualResult = _gameManager.RemoveGame(game, 100000);
 
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -222,7 +222,7 @@ namespace LogicLayerTests
             const int expectedResult = 1;
             int actualResult = 0;
 
-            actualResult = _gameManager.RemoveGame(game);
+            actualResult = _gameManager.RemoveGame(game, 100000);
 
             Assert.AreEqual(expectedResult, actualResult);
         }
