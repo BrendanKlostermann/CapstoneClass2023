@@ -1451,5 +1451,84 @@ namespace DataAccessLayer
             }
             return _members;  //for sp_select_members_by_name_and_or_email
         }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/25
+        /// 
+        /// get a list of all members by first name, last or email
+        /// </summary>
+        public List<Member> SearchMembersByFirstNameLastNameOrEmail(string firstName, string lastName, string email)
+        {
+            List<Member> members = new List<Member>();//SearchMembersByFirstNameLastNameOrEmail
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();//SearchMembersByFirstNameLastNameOrEmail
+            var conn = connectionFactory.GetDBConnection();//SearchMembersByFirstNameLastNameOrEmail
+
+            // command text
+            var cmdText = "sp_select_members_by_name_and_or_email";//SearchMembersByFirstNameLastNameOrEmail
+
+            // command
+            var cmd = new SqlCommand(cmdText, conn);//SearchMembersByFirstNameLastNameOrEmail
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure; //SearchMembersByFirstNameLastNameOrEmail
+
+            cmd.Parameters.Add("@first_name", SqlDbType.NVarChar, 25);
+            cmd.Parameters["@first_name"].Value = firstName;
+            cmd.Parameters.Add("@family_name", SqlDbType.NVarChar, 25);
+            cmd.Parameters["@family_name"].Value = lastName;
+            cmd.Parameters.Add("@email", SqlDbType.NVarChar, 254);
+            cmd.Parameters["@email"].Value = email;
+
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                var reader = cmd.ExecuteReader();//SearchMembersByFirstNameLastNameOrEmail
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())//SearchMembersByFirstNameLastNameOrEmail
+                    {
+                        Member member = new Member();//SearchMembersByFirstNameLastNameOrEmail
+                        member.MemberID = reader.GetInt32(0);
+                        member.Email = reader.GetString(1);
+                        member.FirstName = reader.GetString(2);
+                        member.FamilyName = reader.GetString(3);
+                        member.Birthday = reader.GetDateTime(4);
+                        if (!reader.IsDBNull(5))
+                        {
+                            member.PhoneNumber = reader.GetString(5);
+                        }
+                        if (!reader.IsDBNull(6))
+                        {
+                            member.Gender = reader.GetBoolean(6);
+                        }
+
+
+                        member.Active = reader.GetBoolean(7);
+
+                        if (!reader.IsDBNull(8))
+                        {
+                            member.Bio = reader.GetString(8);
+                        }
+
+
+                        members.Add(member);//SearchMembersByFirstNameLastNameOrEmail
+
+                    }
+                }
+            }
+            catch (Exception ex)//SearchMembersByFirstNameLastNameOrEmail
+            {
+                throw ex;//SearchMembersByFirstNameLastNameOrEmail
+            }
+            return members;//SearchMembersByFirstNameLastNameOrEmail
+        }
     }
 }

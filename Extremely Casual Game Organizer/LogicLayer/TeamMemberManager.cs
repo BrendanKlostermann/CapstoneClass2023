@@ -134,7 +134,15 @@ namespace LogicLayer
         /// </remarks>
         public int AddAPlayerToATeamByTeamIDAndMemberID(int teamID, int memberID)
         {
-            int successful = _teamAccessor.AddMemberToTeamByTeamIDAndMemberID(teamID, memberID);
+            int successful = 0;
+            try
+            {
+                successful = _teamAccessor.AddMemberToTeamByTeamIDAndMemberID(teamID, memberID);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("issue adding the member");
+            }
             return successful;
         }
 

@@ -653,5 +653,20 @@ namespace LogicLayer
 
             return result;
         }
+
+
+        public List<Member> GetAListOfMembersByFirstNameLastNameOrEmail(string firstName, string lastName, string email)
+        {
+            List<Member> _members = new List<Member>();
+            try
+            {
+                _members = _memberAccessor.SearchMembersByFirstNameLastNameOrEmail(firstName, lastName, email);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error with data");
+            }
+            return _members;
+        }
     }
 }

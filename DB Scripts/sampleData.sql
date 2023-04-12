@@ -22,37 +22,53 @@ GO
 print ''print 'sample adminrole table'
 INSERT INTO [dbo].[AdminRole] ([admin_role_id], [admin_role_type])
 VALUES
-('AR001', 'Super Admin'),
-('AR002', 'Admin'),
-('AR003', 'Editor'),
-('AR004', 'Moderator'),
-('AR005', 'Support'),
-('AR006', 'Developer'),
-('AR007', 'Tester'),
-('AR008', 'Analyst'),
-('AR009', 'Manager'),
-('AR010', 'Designer');
+('Super Admin', 'Super Admin'),
+('Admin', 'Admin'),
+('Editor', 'Editor'),
+('Moderator', 'Moderator'),
+('Support', 'Support'),
+('Developer', 'Developer'),
+('Tester', 'Tester'),
+('Analyst', 'Analyst'),
+('Manager', 'Manager'),
+('Designer', 'Designer');
 GO
 
 print ''print 'sample role table'
 INSERT INTO [dbo].[Role] ([role_id], [description])
 VALUES
-('R001', 'Coach'),
-('R002', 'Manager'),
-('R003', 'Captain'),
-('R004', 'Player'),
-('R005', 'Vender');
+(N'Admin', N'Admin'),
+(N'Score Reporter', N'Score Reporter'),
+(N'Player', N'Player'),
+(N'Coach', N'Coach'),
+(N'Assistant Coach', N'Assistant Coach'),
+(N'Team Captain', N'Team Captain'),
+(N'Logistics', N'Logistics'),
+(N'Moderators', N'Moderators'),
+(N'Volunteers', N'Volunteers'),
+(N'Commentator', N'Commentator'),
+(N'Referee', N'Referee'),
+(N'Tournament Admin', N'Tournament Admin'),
+(N'League Admin', N'League Admin'),
+(N'Treasurer', N'Treasurer'),
+(N'Recruiter', N'Recruiter'),
+(N'Equipment Manager', N'Equipment Manager'),
+(N'Vendor', N'Vendor'),
+(N'Venue Rep', N'Venue Rep'),
+(N'Videographer', N'Videographer'),
+(N'Spectator', N'Spectator'),
+(N'Potential Player', N'Potential Player')
 GO
 
 
 print ''print 'sample leagueroles table'
 INSERT INTO [dbo].[LeagueRole] ([league_role_id], [description])
 VALUES
-('LR001', 'League Admin'),
-('LR002', 'League Manager'),
-('LR003', 'Team Captain'),
-('LR004', 'Player'),
-('LR005', 'Spectator');
+('League Admin', 'League Admin'),
+('League Manager', 'League Manager'),
+('Team Captain', 'Team Captain'),
+('Player', 'Player'),
+('Spectator', 'Spectator');
 GO
 
 print ''print 'sample sport table'
@@ -89,11 +105,11 @@ GO
 print ''print 'sample leagueRoleAssignment table'
 INSERT INTO [dbo].[LeagueRoleAssignment] ([member_id], [league_role_id], [league_id])
 VALUES
-(100001, 'LR001', 1001),
-(100002, 'LR003', 1002),
-(100003, 'LR002', 1003),
-(100004, 'LR004', 1001),
-(100005, 'LR005', 1002);
+(100001, 'League Admin', 1001),
+(100002, 'League Manager', 1002),
+(100003, 'Spectator 	', 1003),
+(100004, 'Player', 1001),
+(100005, 'League Manager', 1002);
 GO
 
 print ''print 'sample team table'
@@ -143,7 +159,10 @@ VALUES
 (1003, 'Backup', 0, 100008),
 (1004, 'Starting lineup', 1, 100004),
 (1004, 'Backup', 0, 100009),
-(1005, 'Starting lineup', 1, 100005);
+(1005, 'Starting lineup', 1, 100005),
+(1006, 'Starting lineup', 1, 100009),
+(1007, 'Starting lineup', 1, 100007),
+(1008, 'Starting lineup', 1, 100009);
 GO
 
 print ''print 'sample tournament table'
@@ -245,20 +264,19 @@ GO
 print '' print 'sample MemberRole table'
 INSERT INTO [dbo].[MemberRole] ([member_id], [role_id])
 VALUES
-(100001, 'R002'),
-(100001, 'R004'),
-(100002, 'R001'),
-(100002, 'R004'),
-(100003, 'R004'),
-(100004, 'R004'),
-(100005, 'R004'),
-(100006, 'R004'),
-(100007, 'R004'),
-(100008, 'R004'),
-(100009, 'R004'),
-(100010, 'R004');
+(100001, 'Player'),
+(100001, 'Assistant Coach'),
+(100002, 'Admin'),
+(100002, 'Assistant Coach'),
+(100003, 'Assistant Coach'),
+(100004, 'Assistant Coach'),
+(100005, 'Coach'),
+(100006, 'Coach'),
+(100007, 'Coach'),
+(100008, 'Coach'),
+(100009, 'Coach'),
+(100010, 'Coach');
 GO
-
 
 print '' print 'sample Message table'
 INSERT INTO [dbo].[Message] ([user_id_sender], [user_id_reciever], [date_and_time], [important], [message])

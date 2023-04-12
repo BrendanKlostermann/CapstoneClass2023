@@ -142,5 +142,9 @@ namespace LogicLayerInterfaces
         /// Get a member by memberID
         /// </summary>
         Member GetMemberByMemberID(int MemberID);
+
+
+        List<Member> GetAListOfMembersByFirstNameLastNameOrEmail(String firstName, String lastName, String email);
+
     }
 }
