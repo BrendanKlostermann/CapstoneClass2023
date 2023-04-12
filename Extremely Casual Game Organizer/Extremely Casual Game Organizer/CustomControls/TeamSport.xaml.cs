@@ -43,7 +43,7 @@ namespace Extremely_Casual_Game_Organizer.CustomControls
             this.masterManager = masterManager;
         }
 
-        private void btnMember_Click(object sender, RoutedEventArgs e)
+        private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
             /// <summary>
             /// Heritier Otiom
