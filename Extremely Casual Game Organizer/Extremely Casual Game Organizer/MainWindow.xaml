@@ -75,7 +75,7 @@
 
             <Button x:Name="navLeagues" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navLeagues_Click">Leagues</Button>
             
-            <Button x:Name="navTournaments" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black">Tournaments</Button>
+            <Button x:Name="navTournaments" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navTournaments_Click">Tournaments</Button>
 
             <Button x:Name="navTeams" Grid.Row="1" Cursor="Hand" Focusable="False" Grid.Column="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="3" BorderBrush="Black" Background="Transparent" FontSize="25" Foreground="Black" Click="navTeams_Click">Teams</Button>
             

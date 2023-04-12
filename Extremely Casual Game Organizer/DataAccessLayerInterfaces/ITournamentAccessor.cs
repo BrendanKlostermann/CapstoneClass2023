@@ -24,6 +24,9 @@ namespace DataAccessLayerInterfaces
         List<Tournament> SelectAllTournaments();
         List<TournamentVM> SelectAllTournamentVMs();
         int InsertTournament(Tournament tm);
+        int UpdateTournament(int memberid, Tournament tm);
+        Tournament SelectTournamentByTournamentID(int id);
+        int DeactivateTournament(int memberid, int tournamentID);
 
         /// <summary>
         /// Heritier Otiom

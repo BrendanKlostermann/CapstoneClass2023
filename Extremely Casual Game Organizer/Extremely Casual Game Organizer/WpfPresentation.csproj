@@ -71,6 +71,15 @@
     <Compile Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml.cs">
       <DependentUpon>PopUpPlayerSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Tournaments\pgCreateTournament.xaml.cs">
+      <DependentUpon>pgCreateTournament.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgModifyTournament.xaml.cs">
+      <DependentUpon>pgModifyTournament.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgViewTournamentList.xaml.cs">
+      <DependentUpon>pgViewTournamentList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pgAddEditLeague.xaml.cs">
       <DependentUpon>pgAddEditLeague.xaml</DependentUpon>
     </Compile>
@@ -90,6 +99,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Teams\Utility\PopUpPlayerSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgCreateTournament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgModifyTournament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgViewTournamentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,12 +176,6 @@
     <Compile Include="PageFiles\MemberPages\winEventDetails.xaml.cs">
       <DependentUpon>winEventDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFiles\pgCreateTournament.xaml.cs">
-      <DependentUpon>pgCreateTournament.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="PageFiles\pgViewTournamentList.xaml.cs">
-      <DependentUpon>pgViewTournamentList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="PageFiles\MemberPages\pgMemberSchedule.xaml.cs">
       <DependentUpon>pgMemberSchedule.xaml</DependentUpon>
     </Compile>
@@ -220,14 +235,6 @@
       <DependentUpon>StylesTest.xaml</DependentUpon>
     </Compile>
     <Page Include="PageFiles\MemberPages\winEventDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgCreateTournament.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PageFiles\pgViewTournamentList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,6 +9,6 @@
       Title="pgViewTournamentList">
 
     <Grid Background="{StaticResource ColorBackground}">
-        <DataGrid x:Name="datTournamentGrid" Loaded="datTournamentGrid_Loaded" Unloaded="datTournamentGrid_Unloaded"></DataGrid>
+        <DataGrid x:Name="datTournamentGrid" Loaded="datTournamentGrid_Loaded" Unloaded="datTournamentGrid_Unloaded" IsReadOnly="True"></DataGrid>
     </Grid>
 </Page>

@@ -45,6 +45,11 @@ namespace LogicLayerInterfaces
         /// </summary>
         List<TournamentTeam> GetTournamentTeamByID(int tournament_id);
 
+        bool EditTournament(int id, Tournament tm);
+
+        Tournament RetrieveTournamentByTournamentID(int id);
+        bool DeleteTournament(int id, int tournamentID);
+
 
         /// <summary>
         /// Heritier Otiom
