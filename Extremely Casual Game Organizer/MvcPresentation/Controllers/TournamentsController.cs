@@ -15,7 +15,8 @@ namespace MvcPresentation.Controllers
         private List<Tournament> tournaments = null;
         private List<TournamentTeam> tournamentTeams = null;
         private List<TournamentTeamGame> tournamentGames = null;
-        private List<Team> teams = new List<Team>();
+        private List<Team> tournamentTeamname = new List<Team>();
+        private List<TeamSport> teams = new List<TeamSport>();
         private List<TournamentGenerateGames> games = new List<TournamentGenerateGames>();
 
         List<string> sports = new List<string>();
@@ -39,7 +40,7 @@ namespace MvcPresentation.Controllers
         }
 
         // GET: Tournament Detail
-        public ActionResult Details(int id, int? type)
+        public ActionResult Details(int id, int? type, int? error)
         {
             try
             {
@@ -50,10 +51,10 @@ namespace MvcPresentation.Controllers
                 tournamentTeams = tournamentManager.GetTournamentTeamByID(id);
                 tournamentGames = tournamentManager.SelectTournamentTeamAndGame(id);
 
-                getTeamName(tournamentTeams);
+                getTournamentTeamName(tournamentTeams);
                 getTeamGame(tournamentGames);
 
-                ViewBag.TournamentTeams = teams;
+                ViewBag.TournamentTeams = tournamentTeamname;
                 ViewBag.TournamentGames = games;
                 ViewBag.NbreTeam = tournamentTeams.Count;
                 ViewBag.NbreGame = tournamentGames.Count/2;
@@ -69,13 +70,31 @@ namespace MvcPresentation.Controllers
                     ViewBag.Sportname = getSportName(tournament.SportID);
                 }
 
+                if (error == 2)
+                {
+                    ViewBag.Message = "Tournament updated successfully!";
+                    ViewBag.Error = false;
+                }
+                else if(error == 1)
+                {
+                    ViewBag.Message = "An error has occurred!";
+                    ViewBag.Error = true;
+                }
+                else
+                {
+                    ViewBag.Message = null;
+                    ViewBag.Error = false;
+                }
+
             }
             catch (Exception ex)
             {
                 ViewBag.Message = ex.Message;
             }
 
+
             ViewBag.TournamentID = id;
+            ViewBag.Me = memberID;
             return View(tournament);
         }
 
@@ -146,7 +165,80 @@ namespace MvcPresentation.Controllers
         // GET: Tournament Delete
         public ActionResult Delete(int id)
         {
-            return View();
+
+            int error = 0;
+            string message = "";
+
+            try
+            {
+                getSports();
+                ViewBag.sports = sports;
+
+
+                bool result = tournamentManager.DeleteTournament(memberID, id);
+                if (result == true)
+                {
+                    message = "Tournament deleted successfully!";
+                    error = 2;
+                }
+                else
+                {
+                    message = "An error has occurred!";
+                    error = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.MessageError = ex.Message;
+            }
+
+            ViewBag.Message = message;
+            ViewBag.Error = error;
+
+            return RedirectToAction("Details", new { 
+                id = id,
+                error = error
+            });
+        }
+
+        // GET: Tournament Delete
+        public ActionResult Activate(int id)
+        {
+
+            int error = 0;
+            string message = "";
+
+            try
+            {
+                getSports();
+                ViewBag.sports = sports;
+
+
+                bool result = tournamentManager.ActivateTournament(memberID, id);
+                if (result == true)
+                {
+                    message = "Tournament activated successfully!";
+                    error = 2;
+                }
+                else
+                {
+                    message = "An error has occurred!";
+                    error = 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.MessageError = ex.Message;
+            }
+
+            ViewBag.Message = message;
+            ViewBag.Error = error;
+
+            return RedirectToAction("Details", new
+            {
+                id = id,
+                error = error
+            });
         }
 
         // GET: Tournament Edit
@@ -185,10 +277,11 @@ namespace MvcPresentation.Controllers
 
             Tournament _tournament = new Tournament()
             {
+                TournamentID = id,
                 Name = name,
                 Gender = gender,
                 Description = description,
-                MemberID = memberID
+                MemberID = memberID,
             };
 
             try
@@ -208,8 +301,7 @@ namespace MvcPresentation.Controllers
                 _tournament.SportID = sport_id;
                 ViewBag.sportname = sportname;
 
-                //bool result = tournamentManager.Update(tournament);
-                bool result = false;
+                bool result = tournamentManager.EditTournament(memberID, _tournament);
                 if (result == true)
                 {
                     ViewBag.Error = false;
@@ -218,7 +310,7 @@ namespace MvcPresentation.Controllers
                 else
                 {
                     ViewBag.Error = true;
-                    ViewBag.Message = "sp_update_tournament not found!";
+                    ViewBag.Message = "An error has occurred !";
                 }
             }
             catch (Exception ex)
@@ -228,6 +320,114 @@ namespace MvcPresentation.Controllers
             }
 
             return View(_tournament);
+        }
+
+        // GET: Tournament Edit
+        public ActionResult TournamentTeam(int id, int sport_id)
+        {
+            try
+            {
+                getSports();
+                ViewBag.sports = sports;
+                
+                tournaments = tournamentManager.GetTournaments();
+                //teams = teamManager.();
+
+                tournament = tournaments.Where(b => b.TournamentID == id).First();
+                tournamentTeams = tournamentManager.GetTournamentTeamByID(id);
+
+                getTournamentTeamName(tournamentTeams);
+                getTeamName(sport_id);
+
+                ViewBag.Name = tournament.Name;
+                ViewBag.TournamentTeams = tournamentTeamname;
+                ViewBag.NbreTeam = tournamentTeams.Count;
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+
+            ViewBag.TournamentID = id;
+            ViewBag.SportID = sport_id;
+            ViewBag.Me = memberID;
+            @ViewBag.png = ".png";
+            return View(teams);
+        }
+
+
+        // Remove a team from the tournament
+        public ActionResult DeleteTeamFromTournament(int id, int sport_id, int team_id)
+        {
+            int result = 0;
+            try
+            {
+                TournamentTeam tournamentTeam = new TournamentTeam()
+                {
+                    TournamentID = id,
+                    TeamID = team_id
+                };
+
+                result = tournamentManager.RemoveTeamToTournament(tournamentTeam);
+                if (result>0)
+                {
+                    ViewBag.Error = false;
+                    ViewBag.Message = "Team deleted successfully!";
+                }
+                else
+                {
+                    ViewBag.Error = true;
+                    ViewBag.Message = "An error has occurred!";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+
+            return RedirectToAction("TournamentTeam", new
+            {
+                id = id,
+                sport_id = sport_id
+            });
+        }
+
+
+        // Add a team to the tournament
+        public ActionResult AddTeamToTournament(int id, int sport_id, int team_id)
+        {
+            int result = 0;
+            try
+            {
+                TournamentTeam tournamentTeam = new TournamentTeam()
+                {
+                    TournamentID = id,
+                    TeamID = team_id
+                };
+
+                result = tournamentManager.AddTeamToTournament(tournamentTeam);
+                if (result > 0)
+                {
+                    ViewBag.Error = false;
+                    ViewBag.Message = "Team added successfully!";
+                }
+                else
+                {
+                    ViewBag.Error = true;
+                    ViewBag.Message = "An error has occurred!";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+
+            return RedirectToAction("TournamentTeam", new
+            {
+                id = id,
+                sport_id = sport_id
+            });
         }
 
         private void getSports()
@@ -259,7 +459,30 @@ namespace MvcPresentation.Controllers
             return sportname;
         }
 
-        private void getTeamName(List<TournamentTeam> tournamentTeams)
+        private void getTeamName(int sport_id)
+        {
+            try
+            {
+                List<TeamSport> _teams = teamManager.getTeamByTeamName("", sport_id);
+
+                foreach (TeamSport line in _teams)
+                {
+                    var item = tournamentTeams.Find(b => b.TeamID == line.TeamID);
+                    // if the teams is already in the tournament, then skip it
+                    if (item == null)
+                    {
+                        teams.Add(line);
+                        string a = line.Name;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+        }
+
+        private void getTournamentTeamName(List<TournamentTeam> tournamentTeams)
         {
             try
             {
@@ -272,14 +495,15 @@ namespace MvcPresentation.Controllers
                         Team team = new Team
                         {
                             TeamName = line.Name,
-                            TeamID = line.TeamID
+                            TeamID = line.TeamID,
+                            Description = line.Description
                         };
 
-                        teams.Add(team);
+                        tournamentTeamname.Add(team);
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ViewBag.Message = ex.Message;
             }
@@ -320,5 +544,6 @@ namespace MvcPresentation.Controllers
                 ViewBag.Message = ex.Message;
             }
         }
+
     }
 }

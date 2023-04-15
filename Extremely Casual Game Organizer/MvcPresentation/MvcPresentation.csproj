@@ -283,6 +283,7 @@
     <Content Include="Views\Tournaments\Details.cshtml" />
     <Content Include="Views\Tournaments\CreateTournament.cshtml" />
     <Content Include="Views\Tournaments\EditTournaments.cshtml" />
+    <Content Include="Views\Tournaments\TournamentTeam.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

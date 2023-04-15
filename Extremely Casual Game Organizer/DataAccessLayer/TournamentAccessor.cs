@@ -145,7 +145,6 @@ namespace DataAccessLayer
         {
             int count = 0;
 
-
             DBConnection connectionFactory = new DBConnection();
             var conn = connectionFactory.GetDBConnection();
 
@@ -804,6 +803,7 @@ namespace DataAccessLayer
             // return the result
             return rowsAffected;
         }
+
         //returns a Tournament Object by taking in the parameter tournament_id
         public Tournament SelectTournamentByID(int tournament_id)
         {
@@ -855,6 +855,46 @@ namespace DataAccessLayer
 
             return returnedTournament;
         }
+
+        // Heritier Otiom
+        //return a Tournament Object by taking in the parameter tournament_id
+        public int ActivateTournament(int memberid, int tournamentID)
+        {
+            int count = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_activate_tournament";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@memberid", SqlDbType.Int);
+            cmd.Parameters["@memberid"].Value = memberid;
+
+            cmd.Parameters.Add("@tournamentid", SqlDbType.Int);
+            cmd.Parameters["@tournamentid"].Value = tournamentID;
+
+            try
+            {
+                conn.Open();
+
+                count = cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return count;
+        }
+
 
     }
 }
