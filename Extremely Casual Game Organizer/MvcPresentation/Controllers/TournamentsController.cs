@@ -39,6 +39,22 @@ namespace MvcPresentation.Controllers
             return View(tournaments);
         }
 
+        // GET: Tournament
+        public ActionResult MemberTournaments()
+        {
+            try
+            {
+                tournaments = tournamentManager.GetTournaments();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex;
+            }
+            ViewBag.Me = memberID;
+            return View(tournaments);
+        }
+        
+
         // GET: Tournament Detail
         public ActionResult Details(int id, int? type, int? error)
         {
@@ -341,7 +357,7 @@ namespace MvcPresentation.Controllers
 
                 ViewBag.Name = tournament.Name;
                 ViewBag.TournamentTeams = tournamentTeamname;
-                ViewBag.NbreTeam = tournamentTeams.Count;
+                ViewBag.NbreTeam = tournamentTeamname.Count;
 
             }
             catch (Exception ex)

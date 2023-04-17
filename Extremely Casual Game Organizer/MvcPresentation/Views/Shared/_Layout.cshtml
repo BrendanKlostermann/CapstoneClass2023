@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - ECGO</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -45,7 +45,7 @@
                             <li>@Html.ActionLink("View All Tournaments", "AllTournaments", "Tournaments")</li>
                             <li>@Html.ActionLink("My Tournaments", "MemberTournaments", "Tournaments")</li>
                             <li>@Html.ActionLink("Create a Tournament", "CreateTournament", "Tournaments")</li>
-                            <li>@Html.ActionLink("Manage My Tournaments", "EditTournaments", "Tournaments")</li>
+                            @*<li>@Html.ActionLink("Manage My Tournaments", "EditTournaments", "Tournaments")</li>*@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -68,13 +68,58 @@
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
+
         <hr />
-        <footer>
+
+        <footer id="footer">
             <p>&copy; @DateTime.Now.Year - Extremely Casual Game Organizer</p>
         </footer>
     </div>
+
+    @*This is a popup window for Message*@
+<div id="Message" style="display:flex;justify-content:end; width:700px; padding:20px">
+    <div class="chat-popup" id="myForm" data-aos="slide-up">
+        <div style="display:flex;justify-content:end; padding:0px 20px">
+            <a href="" style="text-align:right" class="closeBtn" onclick="closeForm()">
+                <img src="~/Images/close.png"
+                     alt="sms" class="img-fluid img-responsive text-center" width="40" />
+
+            </a>
+        </div>
+        <div id="frame" style="border: 3px solid gray; overflow: hidden; margin:0px 15px 15px auto; max-width: 700px;">
+            <iframe scrolling="no" src="@Url.Action("PeopleITexted","Messages")"
+                    style="border: 0px none; height: 900px; max-height: 90vh; margin-top: -60px; width: 500px">
+            </iframe>
+        </div>
+    </div>
+    <div id="messageForDestop" style="padding:0px 10px; text-align:center">
+        <button type="button" id="btnOpen" class="btn btn-info btn-lg" onclick="openForm()">
+            <span style="display:flex;align-items:center; flex-direction:column;">
+                <img src="~/Images/sms.png"
+                     alt="sms" class="img-fluid img-responsive text-center" width="50" />
+                @*Messages*@
+            </span>
+        </button>
+    </div>
+    <div id="messageForMobile" style="padding:0px 10px; text-align:center">
+        <a href="~/Messages/PeopleITexted" type="button" id="btnOpenMobile" class="btn btn-info btn-lg">
+            <span style="display:flex;align-items:center; flex-direction:column;">
+                <img src="~/Images/sms.png"
+                     alt="sms" class="img-fluid img-responsive text-center" width="50" />
+                @*Messages*@
+            </span>
+        </a>
+    </div>
+</div>
+    @*Message popup window end*@
+
+
+    @*@Scripts.Render("~/Content/App.js")*@
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    @Scripts.Render("~/Content/App.js")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
