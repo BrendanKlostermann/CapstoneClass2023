@@ -123,7 +123,7 @@ a.closeBtn{
     .form-container .btn:hover, .open-button:hover {
         opacity: 1;
     }
-
+    
      @media (max-width: 611px) {
         #messageForDestop {
             display:none;
@@ -132,7 +132,7 @@ a.closeBtn{
             display: block;
         }
      }
-     @media (min-width: 612px) {
+     @media (min-width: 611px) {
         #messageForDestop{
             display:block;
         }

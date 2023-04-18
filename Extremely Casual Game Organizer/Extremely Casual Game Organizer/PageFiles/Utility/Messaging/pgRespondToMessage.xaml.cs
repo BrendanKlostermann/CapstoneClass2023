@@ -11,6 +11,7 @@
 /// </remarks>
 
 using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles;
 using LogicLayer;
 using System;
 using System.Collections.Generic;
@@ -46,13 +47,14 @@ namespace Extremely_Casual_Game_Organizer
         private List<Member> _members;
         private int _memberID = 0;
 
+        PageControl _pgControl = new PageControl();
         // Regular construction
         public pgRespondToMessage()
         {
             _messageManager = new MessageManager();
             _memberManager = new MemberManager();
             InitializeComponent();
-            _memberID = Int32.Parse(txtMemberId.Text);
+            _memberID = _pgControl.GetSignedInMember().MemberID;
             GetMyAccountInfo();
             reduceRemainingCharacter();
             txtMessage.Focus();
@@ -67,7 +69,7 @@ namespace Extremely_Casual_Game_Organizer
             _memberManager = new MemberManager();
             InitializeComponent();
             _otherUser = member;
-            _memberID = Int32.Parse(txtMemberId.Text);
+            _memberID = _pgControl.GetSignedInMember().MemberID;
             GetMyAccountInfo();
             chatWith();
             reduceRemainingCharacter();
@@ -81,7 +83,7 @@ namespace Extremely_Casual_Game_Organizer
             this._messageManager = messageManager;
             _memberManager = new MemberManager();
             InitializeComponent();
-            _memberID = Int32.Parse(txtMemberId.Text);
+            _memberID = _pgControl.GetSignedInMember().MemberID;
             GetMyAccountInfo();
             reduceRemainingCharacter();
             txtMessage.Focus();

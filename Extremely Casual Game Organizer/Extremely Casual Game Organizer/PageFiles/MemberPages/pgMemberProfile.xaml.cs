@@ -63,6 +63,7 @@ namespace Extremely_Casual_Game_Organizer
             {
                 _member = _pgControl.GetSignedInMember();
 
+
                 // If there's a member
                 if (_member != null)
                 {
