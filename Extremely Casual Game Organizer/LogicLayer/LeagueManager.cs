@@ -516,5 +516,44 @@ namespace LogicLayer
 
             return requestList;
         }
+
+        /// <summary>
+        /// Elijah
+        /// method to add league items into leagueVM
+        /// </summary>
+        public LeagueVM ConvertToLeagueVM (League league)
+        {
+            SportManager sportManager = new SportManager();
+
+            LeagueVM leagueVM = new LeagueVM();
+
+            leagueVM.LeagueID = league.LeagueID;
+            leagueVM.SportID = league.SportID;
+            leagueVM.LeagueDues = league.LeagueDues;
+            leagueVM.Active = league.Active;
+            leagueVM.MemberID = league.MemberID;
+            leagueVM.Gender = league.Gender;
+            leagueVM.Description = league.Description;
+            leagueVM.Name = league.Name;
+            leagueVM.MaxNumOfTeams = league.MaxNumOfTeams;
+
+            leagueVM.SportName = sportManager.RetrieveSportBySportID(leagueVM.SportID);
+
+            if (league.Gender == true)
+            {
+                leagueVM.genderAsText = "Male";
+            }
+            if (league.Gender == false)
+            {
+                leagueVM.genderAsText = "Female";
+            }
+            if (league.Gender == null)
+            {
+                leagueVM.genderAsText = "Undefined";
+            }
+
+
+            return leagueVM;
+        }
     }
 }
