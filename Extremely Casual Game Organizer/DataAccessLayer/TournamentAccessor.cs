@@ -481,12 +481,15 @@ namespace DataAccessLayer
                         {
                             TournamentID = reader.GetInt32(0),
                             SportID = reader.GetInt32(1),
-                            Gender = reader.GetBoolean(2),
+                            //Gender = reader.GetBoolean(2),
                             MemberID = reader.GetInt32(3),
                             Name = reader.GetString(4),
                             Description = reader.GetString(5),
                             Active = reader.GetBoolean(6)
                         };
+
+                        if (reader.IsDBNull(2) == false) tournament.Gender = reader.GetBoolean(2);
+                        else tournament.Gender = null;
 
                         tournaments.Add(tournament);
                     }

@@ -815,9 +815,13 @@ namespace DataAccessLayer
                             FirstName = reader.GetString(2),
                             FamilyName = reader.GetString(3),
                             Birthday = reader.GetDateTime(4),
-                            PhoneNumber = reader.GetString(5),
+                            //PhoneNumber = reader.GetString(5),
                             Active = reader.GetBoolean(7)
                         };
+
+
+                        if (reader.IsDBNull(5) == false) member.PhoneNumber = reader.GetString(5);
+                        else member.PhoneNumber = null;
 
                         if (reader.IsDBNull(6) == false) member.Gender = reader.GetBoolean(6);
                         else member.Gender = null;
@@ -883,9 +887,13 @@ namespace DataAccessLayer
                             FirstName = reader.GetString(2),
                             FamilyName = reader.GetString(3),
                             Birthday = reader.GetDateTime(4),
-                            PhoneNumber = reader.GetString(5),
+                            //PhoneNumber = reader.GetString(5),
                             Active = reader.GetBoolean(7)
                         };
+
+
+                        if (reader.IsDBNull(5) == false) member.PhoneNumber = reader.GetString(5);
+                        else member.PhoneNumber = null;
 
                         if (reader.IsDBNull(6) == false) member.Gender = reader.GetBoolean(6);
                         else member.Gender = null;
