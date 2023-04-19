@@ -77,10 +77,11 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         private void LoadUserDetails()
         {
             int ownerID = _masterManager.TeamManager.SelectTeamOwner(_teamID);
-            Console.WriteLine(ownerID);
-            Console.WriteLine(_pageControl.GetSignedInMember()?.MemberID);
-            if (_pageControl.GetSignedInMember()?.MemberID.Equals(100042) == true)
+            // Console.WriteLine(ownerID); print to console the ID of the owner
+            // Console.WriteLine(_pageControl.GetSignedInMember()?.MemberID); // print signed in user's ID to console
+            if (_pageControl.GetSignedInMember()?.MemberID.Equals(ownerID) == true)
             {
+                //buttons are Hidden by default, if ownerID matches the signed in user's ID, they will be visible
                 btnCreatePractice.Visibility = Visibility.Visible;
                 btnRemovePractice.Visibility = Visibility.Visible;
             }

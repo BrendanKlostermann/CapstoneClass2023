@@ -40,7 +40,6 @@ namespace DataAccessLayer
 
                 // execute the command
                 rowsAffected = cmd.ExecuteNonQuery();
-                // process the results
             }
             catch (Exception ex)
             {
