@@ -85,6 +85,9 @@ namespace DataAccessLayer
                     {
                         member.Bio = reader.GetString(8);
                     }
+
+                    if (reader.IsDBNull(9) == false) member.ProfilePhoto = (byte[])reader[9];
+                    else member.ProfilePhoto = null;
                 }
             }
             catch (Exception ex)
@@ -181,6 +184,9 @@ namespace DataAccessLayer
                     {
                         member.Bio = reader.GetString(8);
                     }
+
+                    if (reader.IsDBNull(9) == false) member.ProfilePhoto = (byte[])reader[9];
+                    else member.ProfilePhoto = null;
                 }
             }
             catch (Exception ex)
@@ -340,6 +346,9 @@ namespace DataAccessLayer
                     {
                         _member.Bio = reader.GetString(8);
                     }
+
+                    if (reader.IsDBNull(9) == false) _member.ProfilePhoto = (byte[])reader[9];
+                    else _member.ProfilePhoto = null;
                     _members.Add(_member);
                 }
             }
@@ -742,12 +751,12 @@ namespace DataAccessLayer
                 // .ExecuteReadet() returns row/column data (normal select statements)
                 // .ExecuteNonQuery() returns Int32 rows affected (action statements (update/delete/insert))
                 // .ExecuteScalar() returns a System.Object (aggregate queries)
-                addedMemberID = Convert.ToInt32(cmd.ExecuteScalar());
+                addedMemberID = Convert.ToInt32(cmd.ExecuteNonQuery());
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Cannot create the user");
+                throw new ApplicationException("Cannot create the user. " + ex.Message);
             }
             finally
             {
@@ -1076,9 +1085,9 @@ namespace DataAccessLayer
                 // .ExecuteScalar() returns a System.Object (aggregate queries)
                 rowsAffected = cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Update Failed");
+                throw new ApplicationException("Update Failed. "+ ex.Message);
             }
             finally
             {

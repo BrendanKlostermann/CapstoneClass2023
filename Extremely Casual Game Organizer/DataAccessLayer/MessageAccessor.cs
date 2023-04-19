@@ -148,9 +148,10 @@ namespace DataAccessLayer
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                members = null;
+                //throw ex;
             }
             return members;
         }

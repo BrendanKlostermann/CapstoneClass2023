@@ -562,9 +562,10 @@ namespace LogicLayer
             {
                 requestedUser = _memberAccessor.UpdateProfilePicture(member);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 requestedUser = 0;
+                throw new ApplicationException(ex.Message);
             }
             return requestedUser;
         }

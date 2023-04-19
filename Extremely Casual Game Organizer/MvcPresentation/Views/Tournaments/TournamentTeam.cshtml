@@ -3,90 +3,100 @@
 @{
     ViewBag.Title = "TournamentTeam";
 }
-    <div class="row" style="background-color:#F4F4F4">
+@try{
+<div class="row" style="background-color:#F4F4F4">
 
-        <div class="col-md-12" style="padding:30px 30px;">
-            <h3>Tournament Team for:</h3>
-            <span style="font-weight:bold; font-size:3.2em">@ViewBag.Name</span>
-        </div>
+    <div class="col-md-12" style="padding:30px 30px;">
+        <h3>Tournament Team for:</h3>
+        <span style="font-weight:bold; font-size:3.2em">@ViewBag.Name</span>
+    </div>
 
-        <div style="margin-top:10px">
-            @if (@ViewBag.Message != null)
+    <div style="margin-top:10px">
+        @if (@ViewBag.Message != null)
+        {
+            if (ViewBag.Error == false)
             {
-                if (ViewBag.Error == false)
-                {
-                    <div class="alert alert-success">
-                        <h5>@ViewBag.Message</h5>
-                    </div>
-                }
-                else
-                {
-                    <div class="alert alert-danger">
-                        <h5>@ViewBag.Message</h5>
-                    </div>
-                }
+                <div class="alert alert-success">
+                    <h5>@ViewBag.Message</h5>
+                </div>
             }
-        </div>
+            else
+            {
+                <div class="alert alert-danger">
+                    <h5>@ViewBag.Message</h5>
+                </div>
+            }
+        }
+    </div>
 
-        <div class="col-md-12" style="padding:30px 30px;">
+    <div class="col-md-12" style="padding:30px 30px;">
 
-            <div class="row" style="background-color:white">
-                <div class="col-md-4">
-                    <h3>TEAMS</h3>
-                    <div style="margin-top:20px">
-                        @foreach (var item in Model)
-                        {
-                            <div>
-                                <a href="~/Tournaments/AddTeamToTournament?id=@ViewBag.TournamentID&&sport_id=@ViewBag.SportID&&team_id=@item.TeamID"
-                                   class="noDecoration bg-info" style="display: flex; flex-direction: row; justify-content:start; align-items:center;
+        <div class="row" style="background-color:white; padding: 20px 0px">
+            <div class="col-md-4">
+                <h3>TEAMS</h3>
+                <div style="margin-top:20px">
+                    @foreach (var item in Model)
+                    {
+                        <div>
+                            <a href="~/Tournaments/AddTeamToTournament?id=@ViewBag.TournamentID&&sport_id=@ViewBag.SportID&&team_id=@item.TeamID"
+                               class="noDecoration bg-info" style="display: flex; flex-direction: row; justify-content:start; align-items:center;
                                 padding:10px 20px; margin-top:10px;border-radius:25px">
 
-                                    <img src="~/Images/@item.Description@ViewBag.png"
-                                         alt="Profile Picture" class="img-circle img-fluid img-responsive text-center"
-                                         width="70" style="height:70px" />
+                                <img src="~/Images/@item.Description@ViewBag.png"
+                                     alt="Profile Picture" class="img-circle img-fluid img-responsive text-center"
+                                     width="70" style="height:70px" />
 
-                                    <div style="padding: 0px 20px; color:black">
-                                        <p style="font-size: 1.5em;">
-                                            @Html.DisplayFor(modelItem => item.Name)
-                                        </p>
-                                        <span>@Html.DisplayFor(modelItem => item.Description)</span>
-                                        <br />
-                                        @*<span class="btn btn-primary">Add</span>*@
-                                    </div>
-
-                                </a>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-                <div class="col-md-8">
-                    <h3 style="text-align:center;">TEAM ADDED</h3>
-                    <div style="margin-top:20px" class="row">
-                        @foreach (var item in @ViewBag.TournamentTeams)
-                        {
-                            <div class="col-md-4" style="padding:15px;">
-                                <div style="padding-bottom:20px;border-radius:15px;text-align:center;
-                                background-color:#F0F0F0">
-
-                                    <div style="display:flex;justify-content:center; flex-direction:column;
-                                    padding: 10px 20px; color:black; min-height:130px">
-                                        <p style="font-size: 2em;">
-                                            @item.TeamName
-                                        </p>
-                                        <span>@item.Description</span>
-                                    </div>
-                                    <a href="~/Tournaments/DeleteTeamFromTournament?id=@ViewBag.TournamentID&&sport_id=@ViewBag.SportID&&team_id=@item.TeamID"
-                                       class="btn btn-primary">Remove</a>
+                                <div style="padding: 0px 20px; color:black">
+                                    <p style="font-size: 1.5em;">
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </p>
+                                    <span>@Html.DisplayFor(modelItem => item.Description)</span>
+                                    <br />
+                                    @*<span class="btn btn-primary">Add</span>*@
                                 </div>
 
-                            </div>
-                        }
-
-                    </div>
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
 
+            <div class="col-md-8">
+                <h3 style="text-align:center;">TEAM ADDED : @ViewBag.NbreTeam</h3>
+                <div style="margin-top:20px" class="row">
+                    @foreach (var item in @ViewBag.TournamentTeams)
+                    {
+                        <div class="col-md-4" style="padding:15px;">
+                            <div style="padding-bottom:20px;border-radius:15px;text-align:center;
+                                background-color:#F0F0F0">
+
+                                <div style="display:flex;justify-content:center; flex-direction:column;
+                                    padding: 10px 20px; color:black; min-height:130px">
+                                    <p style="font-size: 2em;">
+                                        @item.TeamName
+                                    </p>
+                                    <span>@item.Description</span>
+                                </div>
+                                <a href="~/Tournaments/DeleteTeamFromTournament?id=@ViewBag.TournamentID&&sport_id=@ViewBag.SportID&&team_id=@item.TeamID"
+                                   class="btn btn-primary">Remove</a>
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
         </div>
 
     </div>
+
+</div>
+}catch(Exception ex)
+{
+    <div class="alert alert-danger">
+        An Error has occurred! 
+        <p>
+            @ex
+        </p>
+    </div>
+}
