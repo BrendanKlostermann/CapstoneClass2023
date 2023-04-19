@@ -151,7 +151,62 @@ namespace DataAccessLayer
             return team;
         }
 
-        
+
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/18
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// Takes in the team and returns the ID of which member owns it
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed
+        public int SelectOwnerIDByTeamID(int team_id)
+        {
+            int ownerID = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_owner_by_team_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+
+            cmd.Parameters["@team_id"].Value = team_id;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    ownerID = reader.GetInt32(0);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return ownerID;
+        }
+
+
 
         /// <summary>
         /// Alex Korte

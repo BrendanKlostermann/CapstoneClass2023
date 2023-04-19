@@ -82,6 +82,10 @@ sqlcmd -S localhost -E -i sp_select_tournament_by_tournamentid.sql
 sqlcmd -S localhost -E -i sp_deactivate_tournament.sql
 sqlcmd -S localhost -E -i sp_select_members_by_name_and_or_email.sql
 sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
+sqlcmd -S localhost -E -i sp_select_all_practices.sql
+sqlcmd -S localhost -E -i sp_delete_practice.sql
+sqlcmd -S localhost -E -i sp_select_owner_by_team_id.sql
+
 
 
 sqlcmd -S localhost -E -i fake_data.sql
@@ -89,6 +93,7 @@ sqlcmd -S localhost -E -i fake_data.sql
 
 
 sqlcmd -S localhost -E -i sp_select_all_teams.sql
+sqlcmd -S localhost -E -i zipcodes.sql
 
 
 rem server is localhost

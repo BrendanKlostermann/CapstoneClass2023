@@ -264,5 +264,19 @@ namespace LogicLayerTests
             // Test
             Assert.AreEqual(expectedResult, actualResult);
         }
+        [TestMethod]
+        public void TestSelectTeamOwner()
+        {
+            // Arrange
+            var teamManager = new TeamManager();
+
+            // Act
+            int expectedResult = 100040;
+            int actualResult = teamManager.SelectTeamOwner(1000);
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
+    
 }

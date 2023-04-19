@@ -343,7 +343,7 @@ CREATE TABLE [dbo].[Practice] (
 	[date_time]		[SMALLDATETIME]				NOT NULL,	
 	[description]	[nvarchar](1000)			NULL, 
 	[zip_code]		[int]						NOT NULL,
-	[city]			[nvarchar](250)				NOT NULL,
+	[city]			[nvarchar](250)				NULL,
 	[state_name]	[nvarchar](50)				NULL,
 	CONSTRAINT [pk_practice_id] PRIMARY KEY([practice_id]),
 	CONSTRAINT [fk_Practice_team_id] FOREIGN KEY([team_id])

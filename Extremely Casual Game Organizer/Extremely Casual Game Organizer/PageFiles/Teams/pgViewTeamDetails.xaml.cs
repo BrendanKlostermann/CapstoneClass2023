@@ -27,6 +27,7 @@ using LogicLayerInterfaces;
 using LogicLayer;
 using DataObjects;
 using System.Data;
+using Extremely_Casual_Game_Organizer.PageFiles.Practices;
 
 namespace Extremely_Casual_Game_Organizer.PageFiles
 {
@@ -61,13 +62,29 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             // Creating button for viewing team roster
             _viewRoster = _pageControl.SetCustomButton("View Roster", 1);
             _viewRoster.Click += ViewRosterButton_Click;
-
             LoadTeamDetails();
             LoadGameData();
             LoadLeagueList();
-
+            LoadUserDetails();
         }
 
+        /// <summary>
+        ///  Created By: Nick Vroom
+        ///  Date: 2023/04/18
+        ///  
+        /// Method checks to see if the logged-in user is the owner of the team, if so, they can create and remove practices 
+        /// </summary>
+        private void LoadUserDetails()
+        {
+            int ownerID = _masterManager.TeamManager.SelectTeamOwner(_teamID);
+            Console.WriteLine(ownerID);
+            Console.WriteLine(_pageControl.GetSignedInMember()?.MemberID);
+            if (_pageControl.GetSignedInMember()?.MemberID.Equals(100042) == true)
+            {
+                btnCreatePractice.Visibility = Visibility.Visible;
+                btnRemovePractice.Visibility = Visibility.Visible;
+            }
+        }
 
         /// <summary>
         ///  Created By: Jacob Lindauer
@@ -331,6 +348,19 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             datPreviousGamesList.SelectedItem = null;
             datUpcomingGamesList.SelectedItem = null;
             datLeagueList.SelectedItem = null;
+        }
+
+        private void btnCreatePractice_Click(object sender, RoutedEventArgs e)
+        {
+            pgCreatePractice page = new pgCreatePractice(_team.TeamID);
+
+            NavigationService.Navigate(page);
+        }
+
+        private void btnRemovePractice_Click(object sender, RoutedEventArgs e)
+        {
+            pgRemovePractice page = new pgRemovePractice(_team.TeamID);
+            NavigationService.Navigate(page);
         }
     }
 }

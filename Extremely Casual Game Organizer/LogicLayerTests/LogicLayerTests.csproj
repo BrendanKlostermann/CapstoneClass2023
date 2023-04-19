@@ -53,6 +53,7 @@
     <Compile Include="EquipmentTest.cs" />
     <Compile Include="MemberManagerTest.cs" />
     <Compile Include="MessageTest.cs" />
+    <Compile Include="PracticeManagerTests.cs" />
     <Compile Include="TeamMemberManagerTest.cs" />
     <Compile Include="LeagueAccessorTest.cs" />
     <Compile Include="LeagueManagerTests.cs" />

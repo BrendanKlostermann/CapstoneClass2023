@@ -47,6 +47,7 @@
     <Compile Include="IGameRosterManager.cs" />
     <Compile Include="IMemberManager.cs" />
     <Compile Include="IMessageManager.cs" />
+    <Compile Include="IPracticeManager.cs" />
     <Compile Include="ISportManager.cs" />
     <Compile Include="ITeamManager.cs" />
     <Compile Include="ITeamMemberManager.cs" />
