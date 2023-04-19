@@ -23,6 +23,48 @@ namespace DataAccessLayer
 {
     public class GameAccessor : IGameAccessor
     {
+        public int DeleteGame(Game game, int member_id)
+        {
+            /// <summary>
+            /// Jacob Lindauer
+            /// Created: 2023/02/10
+            /// 
+            /// Retrieves game list from stored procedure and stores results into a data table
+            /// </summary>
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_deactivate_game";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@game_id", game.GameID);
+
+            try
+            {
+                conn.Open();
+
+                result = cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
+        }
+
+        public int InsertGame(Game game, int member_id)
+        {
+            throw new NotImplementedException();
+        }
+
         public DataTable SelectAllGames()
         {
             /// <summary>
@@ -226,6 +268,16 @@ namespace DataAccessLayer
             }
 
             return result;
+        }
+
+        public Dictionary<string, string> SelectZipCodeInformation(int zip_code)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateGame(Game game, int member_id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

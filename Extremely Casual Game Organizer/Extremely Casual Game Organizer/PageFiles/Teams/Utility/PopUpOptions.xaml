@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
         mc:Ignorable="d"
-        Title="Options" Height="98" Width="100" WindowStartupLocation="Manual" WindowStyle="None">
+        Title="Options" Height="121.241" Width="100" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="22"/>
@@ -16,9 +18,9 @@
             <RowDefinition Height="22"/>
             <RowDefinition Height="22"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnAdd" Grid.Row="0" Content="Add" Click="btnAdd_Click"/>
-        <Button x:Name="btnBench" Grid.Row="1" Content="Bench" Click="btnBench_Click"/>
-        <Button x:Name="btnRemove" Grid.Row="2" Content="Remove" Click="btnRemove_Click"/>
-        <Button x:Name="btnCancel" Grid.Row="3" Content="Cancel" Click="Button_Click"/>
+        <Button x:Name="btnAdd" Grid.Row="0" Content="Add" Click="btnAdd_Click" Grid.ColumnSpan="3" Margin="0,0,-0.4,0.2"/>
+        <Button x:Name="btnBench" Content="Bench" Click="btnBench_Click" Grid.ColumnSpan="3" Margin="0,23,-0.4,0.4" Grid.RowSpan="2"/>
+        <Button x:Name="btnRemove" Grid.Row="1" Content="Remove" Click="btnRemove_Click" Grid.ColumnSpan="3" Margin="0,22.8,-0.4,22.2" Grid.RowSpan="3"/>
+        <Button x:Name="btnCancel" Grid.Row="3" Content="Cancel" Click="Button_Click" Grid.ColumnSpan="3" Margin="0,0.2,-0.4,0.2"/>
     </Grid>
 </Window>

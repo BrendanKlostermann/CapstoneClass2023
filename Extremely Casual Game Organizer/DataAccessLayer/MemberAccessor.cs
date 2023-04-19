@@ -85,6 +85,9 @@ namespace DataAccessLayer
                     {
                         member.Bio = reader.GetString(8);
                     }
+
+                    if (reader.IsDBNull(9) == false) member.ProfilePhoto = (byte[])reader[9];
+                    else member.ProfilePhoto = null;
                 }
             }
             catch (Exception ex)
@@ -181,6 +184,9 @@ namespace DataAccessLayer
                     {
                         member.Bio = reader.GetString(8);
                     }
+
+                    if (reader.IsDBNull(9) == false) member.ProfilePhoto = (byte[])reader[9];
+                    else member.ProfilePhoto = null;
                 }
             }
             catch (Exception ex)
@@ -340,6 +346,9 @@ namespace DataAccessLayer
                     {
                         _member.Bio = reader.GetString(8);
                     }
+
+                    if (reader.IsDBNull(9) == false) _member.ProfilePhoto = (byte[])reader[9];
+                    else _member.ProfilePhoto = null;
                     _members.Add(_member);
                 }
             }
@@ -406,7 +415,14 @@ namespace DataAccessLayer
                         tempMember.FirstName = reader.GetString(2);
                         tempMember.FamilyName = reader.GetString(3);
                         tempMember.Birthday = reader.GetDateTime(4);
-                        tempMember.PhoneNumber = reader.GetString(5);
+                        if (reader.IsDBNull(5))
+                        {
+                            tempMember.PhoneNumber = "";
+                        }
+                        else
+                        {
+                            tempMember.PhoneNumber = reader.GetString(5);
+                        }
                         tempMember.Gender = reader.GetBoolean(6);
                         tempMember.Active = reader.GetBoolean(7);
                         try
@@ -678,14 +694,14 @@ namespace DataAccessLayer
         public int AddUser(Member member)
         {
             // return object
-            int rowsAffected = 0;
+            int addedMemberID = 0;
 
             // connection
             DBConnection connectionFactory = new DBConnection();
             var conn = connectionFactory.GetDBConnection();
 
             // command text
-            string commandText = @"sp_insert_user_account";
+            string commandText = "sp_insert_user_account";
 
             // command
             var cmd = new SqlCommand(commandText, conn);
@@ -708,7 +724,14 @@ namespace DataAccessLayer
             // parameter values
             cmd.Parameters["@first_name"].Value = member.FirstName;
             cmd.Parameters["@family_name"].Value = member.FamilyName;
-            cmd.Parameters["@gender"].Value = member.Gender;
+            if (member.Gender == null)
+            {
+                cmd.Parameters["@gender"].Value = DBNull.Value;
+            }
+            else
+            {
+                cmd.Parameters["@gender"].Value = member.Gender;
+            }
             cmd.Parameters["@birthday"].Value = member.Birthday;
             cmd.Parameters["@phone_number"].Value = member.PhoneNumber;
             cmd.Parameters["@email"].Value = member.Email;
@@ -728,11 +751,12 @@ namespace DataAccessLayer
                 // .ExecuteReadet() returns row/column data (normal select statements)
                 // .ExecuteNonQuery() returns Int32 rows affected (action statements (update/delete/insert))
                 // .ExecuteScalar() returns a System.Object (aggregate queries)
-                rowsAffected = cmd.ExecuteNonQuery();
+                addedMemberID = Convert.ToInt32(cmd.ExecuteNonQuery());
+
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Cannot create the user");
+                throw new ApplicationException("Cannot create the user. " + ex.Message);
             }
             finally
             {
@@ -740,7 +764,7 @@ namespace DataAccessLayer
             }
 
             // return the result
-            return rowsAffected;
+            return addedMemberID;
         }
 
         /// <summary>
@@ -932,11 +956,13 @@ namespace DataAccessLayer
                             FirstName = reader.GetString(2),
                             FamilyName = reader.GetString(3),
                             Birthday = reader.GetDateTime(4),
-                            PhoneNumber = reader.GetString(5),
                             Active = reader.GetBoolean(7)
                         };
 
-                        if (reader.IsDBNull(6) == false) member.Gender = reader.GetBoolean(6);
+                        if (reader.IsDBNull(5) == false) member.PhoneNumber = reader.GetString(5);
+                        else member.PhoneNumber = "";
+
+                        if (reader.IsDBNull(6) == false || reader.GetInt32(6) == 0) member.Gender = reader.GetBoolean(6);
                         else member.Gender = null;
 
                         if (reader.IsDBNull(8) == false) member.Bio = reader.GetString(8);
@@ -1059,9 +1085,9 @@ namespace DataAccessLayer
                 // .ExecuteScalar() returns a System.Object (aggregate queries)
                 rowsAffected = cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ApplicationException("Update Failed");
+                throw new ApplicationException("Update Failed. "+ ex.Message);
             }
             finally
             {
@@ -1433,6 +1459,85 @@ namespace DataAccessLayer
                 conn.Close(); //for sp_select_members_by_name_and_or_email
             }
             return _members;  //for sp_select_members_by_name_and_or_email
+        }
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/03/25
+        /// 
+        /// get a list of all members by first name, last or email
+        /// </summary>
+        public List<Member> SearchMembersByFirstNameLastNameOrEmail(string firstName, string lastName, string email)
+        {
+            List<Member> members = new List<Member>();//SearchMembersByFirstNameLastNameOrEmail
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();//SearchMembersByFirstNameLastNameOrEmail
+            var conn = connectionFactory.GetDBConnection();//SearchMembersByFirstNameLastNameOrEmail
+
+            // command text
+            var cmdText = "sp_select_members_by_name_and_or_email";//SearchMembersByFirstNameLastNameOrEmail
+
+            // command
+            var cmd = new SqlCommand(cmdText, conn);//SearchMembersByFirstNameLastNameOrEmail
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure; //SearchMembersByFirstNameLastNameOrEmail
+
+            cmd.Parameters.Add("@first_name", SqlDbType.NVarChar, 25);
+            cmd.Parameters["@first_name"].Value = firstName;
+            cmd.Parameters.Add("@family_name", SqlDbType.NVarChar, 25);
+            cmd.Parameters["@family_name"].Value = lastName;
+            cmd.Parameters.Add("@email", SqlDbType.NVarChar, 254);
+            cmd.Parameters["@email"].Value = email;
+
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                var reader = cmd.ExecuteReader();//SearchMembersByFirstNameLastNameOrEmail
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())//SearchMembersByFirstNameLastNameOrEmail
+                    {
+                        Member member = new Member();//SearchMembersByFirstNameLastNameOrEmail
+                        member.MemberID = reader.GetInt32(0);
+                        member.Email = reader.GetString(1);
+                        member.FirstName = reader.GetString(2);
+                        member.FamilyName = reader.GetString(3);
+                        member.Birthday = reader.GetDateTime(4);
+                        if (!reader.IsDBNull(5))
+                        {
+                            member.PhoneNumber = reader.GetString(5);
+                        }
+                        if (!reader.IsDBNull(6))
+                        {
+                            member.Gender = reader.GetBoolean(6);
+                        }
+
+
+                        member.Active = reader.GetBoolean(7);
+
+                        if (!reader.IsDBNull(8))
+                        {
+                            member.Bio = reader.GetString(8);
+                        }
+
+
+                        members.Add(member);//SearchMembersByFirstNameLastNameOrEmail
+
+                    }
+                }
+            }
+            catch (Exception ex)//SearchMembersByFirstNameLastNameOrEmail
+            {
+                throw ex;//SearchMembersByFirstNameLastNameOrEmail
+            }
+            return members;//SearchMembersByFirstNameLastNameOrEmail
         }
     }
 }

@@ -15,9 +15,9 @@
             <ColumnDefinition Width="13*"/>
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="dtaGridMember" HorizontalAlignment="Left" Height="331" Margin="98,35,0,0" VerticalAlignment="Top" Width="459" Grid.Column="1" Grid.ColumnSpan="3"/>
-        <TextBox x:Name="txtFirstname" HorizontalAlignment="Left" Height="26" Margin="38,101,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="216" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtFamilyName" HorizontalAlignment="Left" Height="26" Margin="38,182,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="216" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="26" Margin="38,265,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="216" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtFirstname" HorizontalAlignment="Left" Height="26" Margin="38,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtFamilyName" HorizontalAlignment="Left" Height="26" Margin="38,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="26" Margin="38,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="216" Grid.ColumnSpan="2"/>
         <Label x:Name="lblFirstName" Content="First Name" HorizontalAlignment="Left" Margin="38,70,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblFamilyName" Content="Last Name" HorizontalAlignment="Left" Margin="40,151,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblEmail" Content="Email" HorizontalAlignment="Left" Margin="38,234,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.536,2.06"/>

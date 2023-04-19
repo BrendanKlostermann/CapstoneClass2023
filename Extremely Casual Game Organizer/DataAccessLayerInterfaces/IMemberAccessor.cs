@@ -188,5 +188,7 @@ namespace DataAccessLayerInterfaces
 
         List<Member> SelectAListOfMembersByNameAndOrEmail(string firstName, string lastName, string email);
 
+        List<Member> SearchMembersByFirstNameLastNameOrEmail(String firstName, String lastName, String email);
+
     }
 }

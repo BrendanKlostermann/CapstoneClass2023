@@ -149,6 +149,62 @@ namespace LogicLayer
         }
 
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/21
+        /// 
+        /// </summary>
+        /// this method calls the UpdateTournament method in the accessor class
+        /// it returns true or false depending on if the correct number of lines effected is returned.
+        public bool EditTournament(int memberid, Tournament tm)
+        {
+            try
+            {
+                int count = _tournamentAccessor.UpdateTournament(memberid, tm);
+                if (count == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Tournament could not be updated.", ex);
+            }
+
+
+        } // end EditTournament
+
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/21
+        /// 
+        /// </summary>
+        /// This method is used to deactivate a tournament in the database. returns true or false
+        /// depending if the correct amount lines are changed.
+        public bool DeleteTournament(int memberid, int tournamentID)
+        {
+            try
+            {
+                _tournamentAccessor = new TournamentAccessor();
+                if (1 == _tournamentAccessor.DeactivateTournament(memberid, tournamentID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error deleting tournament", ex);
+            }
+        }
 
         /// <summary>
         /// Heritier Otiom
@@ -171,6 +227,23 @@ namespace LogicLayer
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// </summary>
+        /// this method takes in an id number and will return a Tournament object that has the same id
+        public Tournament RetrieveTournamentByTournamentID(int id)
+        {
+            try
+            {
+                return _tournamentAccessor.SelectTournamentByTournamentID(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error finding tournament", ex);
+            }
+        }
 
 
         /// <summary>
@@ -301,6 +374,32 @@ namespace LogicLayer
                 throw new ApplicationException("Cannot add these games to the tournament");
             }
             return rowsAffected;
+        }
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Activate tournament
+        /// </summary>
+        public bool ActivateTournament(int memberid, int tournamentID)
+        {
+            try
+            {
+                _tournamentAccessor = new TournamentAccessor();
+                if (1 == _tournamentAccessor.ActivateTournament(memberid, tournamentID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error activating tournament", ex);
+            }
         }
 
     }

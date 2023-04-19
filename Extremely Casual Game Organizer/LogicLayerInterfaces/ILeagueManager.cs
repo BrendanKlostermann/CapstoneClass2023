@@ -126,5 +126,16 @@ namespace LogicLayerInterfaces
         /// </summary>
         ///
         League RetrieveLeagueBySportID(int SportID);
+        int AddLeague(League league);
+
+        bool RemoveLeague(int LeagueID);
+
+        List<League> RetrieveLeagueListByMemberID(int MemberID);
+
+        bool ChangeRegistration(int LeagueID, bool OpenOrClose);
+
+        bool UpdateALeague(League league);
+
+        List<LeagueRequest> RetrieveRequestsByLeagueID(int LeagueID);
     }
 }

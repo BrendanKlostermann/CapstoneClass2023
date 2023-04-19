@@ -1,6 +1,7 @@
 ECHO off
 
 sqlcmd -S localhost -E -i ecgo_db.sql
+sqlcmd -S localhost -E -i zipcodes.sql
 sqlcmd -S localhost -E -i sp_deactivate_member.sql
 sqlcmd -S localhost -E -i sp_reset_password.sql
 sqlcmd -S localhost -E -i sp_select_game_roster_by_game_id.sql
@@ -82,15 +83,18 @@ sqlcmd -S localhost -E -i sp_select_tournament_by_tournamentid.sql
 sqlcmd -S localhost -E -i sp_deactivate_tournament.sql
 sqlcmd -S localhost -E -i sp_select_members_by_name_and_or_email.sql
 sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
+<<<<<<< HEAD
 sqlcmd -S localhost -E -i sp_select_all_practices.sql
 sqlcmd -S localhost -E -i sp_delete_practice.sql
 sqlcmd -S localhost -E -i sp_select_owner_by_team_id.sql
 
+=======
+sqlcmd -S localhost -E -i sp_update_tournament.sql
+>>>>>>> origin/main
 
+sqlcmd -S localhost -E -i sp_select_zip_code_details.sql
 
-sqlcmd -S localhost -E -i fake_data.sql
-
-
+sqlcmd -S localhost -E -i sampleData.sql
 
 sqlcmd -S localhost -E -i sp_select_all_teams.sql
 sqlcmd -S localhost -E -i zipcodes.sql

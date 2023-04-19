@@ -84,6 +84,21 @@ namespace DataAccessLayerFakes
 
         }
 
+        public int AddALeague(League league)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ChangeLeagueRegistration(int LeagueID, bool OpenOrClose)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RemoveALeague(int LeagueID)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Alex Korte
         /// Created: 2023/01/24
@@ -166,6 +181,11 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
+        public List<League> SelectLeaguesByMemberID(int MemberID)
+        {
+            throw new NotImplementedException();
+        }
+
         public League SelectLeaguesBySportID(int sportID)
         {
             throw new NotImplementedException();
@@ -182,6 +202,16 @@ namespace DataAccessLayerFakes
         }
 
         public List<League> SelectListOfLeagues()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<LeagueRequest> SelectRequestsByLeagueID(int LeagueID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateALeague(League league)
         {
             throw new NotImplementedException();
         }

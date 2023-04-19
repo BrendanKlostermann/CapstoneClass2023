@@ -142,6 +142,64 @@ namespace LogicLayerTests
             //Test
             Assert.AreEqual(expectedResult, actualResult);
         }
+        [TestMethod]
+        public void CreateTournamentTestByCount()
+        {
+            List<Tournament> tournaments = _tournamentManager.RetrieveAllTournamnets();
+            Tournament tourn = new Tournament()
+            {
+                TournamentID = 100100,
+                Name = "Test 100",
+                Description = "Test tourn",
+                Gender = true,
+                SportID = 100000,
+                MemberID = 100001
+            };
+            tournaments.Add(tourn);
+            Assert.AreEqual(5, tournaments.Count);
+        }
+        [TestMethod]
+        public void DeactivateTournamentTestByCount()
+        {
+            List<Tournament> tournaments = _tournamentManager.GetTournaments();
+            int count = 0;
+            foreach(Tournament tourn in tournaments)
+            {
+                if(tourn.TournamentID == 100)
+                {
+                    _tournamentManager.DeleteTournament(tourn.MemberID, tourn.TournamentID);
+                    count++;
+                }
+            }
+
+            Assert.AreEqual(1, count);
+        }
+        [TestMethod]
+        public void UpdateTouurnamentTestByCount()
+        {
+            List <Tournament> tournaments = _tournamentManager.RetrieveAllTournamnets();
+            int count = 0;
+            Tournament tournament = new Tournament()
+            {
+                TournamentID = 1,
+                Name = "Test 100",
+                Description = "Test 100 description",
+                SportID = 100,
+                MemberID = 100,
+                Gender = true
+            };
+            foreach (Tournament tourn in tournaments)
+            {
+                if(tourn.TournamentID == tournament.TournamentID)
+                {
+                    if(_tournamentManager.EditTournament(tourn.MemberID, tournament))
+                    {
+                        count++;
+                    }
+                }
+            }
+            Assert.AreEqual(1, count);
+        }
 
         [TestMethod]
         public void GetTournamentTeamGameGood()
@@ -186,6 +244,5 @@ namespace LogicLayerTests
             //Test
             Assert.AreEqual(expectedResult, actualResult);
         }
-
     }
 }

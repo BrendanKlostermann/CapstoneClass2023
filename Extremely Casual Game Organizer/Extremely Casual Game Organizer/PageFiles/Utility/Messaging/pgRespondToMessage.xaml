@@ -20,8 +20,8 @@
             </StackPanel>
             <Label x:Name="lblMemberName" Content="" HorizontalAlignment="Left" Margin="334,14,0,0" VerticalAlignment="Top" FontSize="22" Width="445" FontWeight="Bold" Height="39" Foreground="White"/>
             <Button x:Name="btnSend1_Copy" Content="Add user" HorizontalAlignment="Left" Margin="10,483,0,0" VerticalAlignment="Top" Width="80" Height="23" RenderTransformOrigin="-1.066,-1.045" Background="{DynamicResource {x:Static SystemColors.MenuHighlightBrushKey}}" BorderBrush="Black" Foreground="White" Click="btnSend1_Copy_Click"/>
-            <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Height="23" Margin="10,512,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Text="100000"/>
-            <Button Content="Get" HorizontalAlignment="Left" Margin="68,511,0,0" VerticalAlignment="Top" Width="37" Click="Button_Click"/>
+            <TextBox x:Name="txtMemberId" HorizontalAlignment="Left" Height="23" Margin="10,512,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" Text="100000" Visibility="Hidden"/>
+            <Button Content="Get" HorizontalAlignment="Left" Margin="68,511,0,0" VerticalAlignment="Top" Width="37" Click="Button_Click" Visibility="Hidden"/>
 
         </Grid>
 

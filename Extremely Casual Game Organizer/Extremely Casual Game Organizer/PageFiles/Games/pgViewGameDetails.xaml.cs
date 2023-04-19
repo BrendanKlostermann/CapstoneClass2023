@@ -78,11 +78,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             // details [1] 222 roadName st, IA
             // details [2] City Name
             // details [3] ZIP
-            string[] locationString = details[1].ToString().Split(',');
-            string locationFormatted = locationString[0].ToString() + ", " + details[2].ToString()
-                    + ", " + locationString[1] + " " + details[3].ToString();
-            txtLocation.Text = locationFormatted;
-            txtVenueName.Text = details[4].ToString();
+            txtLocation.Text =  details[2].ToString() + " " + details[3].ToString();
+            txtVenueName.Text = details[1].ToString();
             txtDate.Text = Convert.ToDateTime(details[4]).ToShortDateString();
             txtTime.Text = Convert.ToDateTime(details[4]).ToShortTimeString();
             txtSport.Text = details[5].ToString();
@@ -148,9 +145,18 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                         {
                             txtTeam1Score.Text = Convert.ToInt32(team1Score.TeamScore).ToString();
                         }
+                        else
+                        {
+                            txtTeam1Score.Text = team1Score.TeamScore.ToString();
+                        }
+
                         if (team2Score.TeamScore % 1 == 0)
                         {
                             txtTeam2Score.Text = Convert.ToInt32(team2Score.TeamScore).ToString();
+                        }
+                        else
+                        {
+                            txtTeam2Score.Text = team2Score.TeamScore.ToString();
                         }
                     }
                     else

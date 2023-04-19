@@ -8,26 +8,25 @@
     Team team2 = ViewBag.Team2;
     IEnumerable<GameRoster> team1Roster = ViewBag.Team1Roster;
     IEnumerable<GameRoster> team2Roster = ViewBag.Team2Roster;
-    string[] location = Model[1].ToString().Split(',');
-    string locationFormatted = location[0] + ", " + Model[2].ToString() + ", " + location[1] + " " + Model[3].ToString();
-    Score team1Score = ViewBag.Team1Score;
-    Score team2Score = ViewBag.Team2Score;
+    string location = Model[2].ToString() + " " + Model[3].ToString();
+    var team1Score = ViewBag.Team1Score;
+    var team2Score = ViewBag.Team2Score;
 }
 
 <h2>Game Details</h2>
 
 <div>
     <p>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "AllGames")
     </p>
-    <h4>Game</h4>
+    <h4>@team1.TeamName vs @team2.TeamName</h4>
     <div class="row">
         <div class="col-lg-4">
-            <center><h3>@team1.TeamName</h3></center>
-            <center><h6>@if (team1Score != null)
+            @if (team1Score > team2Score)
             {
-               @team1Score.TeamScore
-            }</h6></center>
+                <center><h4 style="margin-bottom: 0px; color: forestgreen">Winner!</h4></center>
+            }
+            <center><h3 style="margin-top: 5px">@team1.TeamName</h3></center>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -51,75 +50,95 @@
         <div class="col-lg-4">
             <center><h4>Game Information</h4></center>
             <br />
-            <br />
-            <dl class="dl-horizontal">
-                <dt>
+            @if (team1Score != null && team2Score != null)
+            {
+                <table class="table" align="center">
+                    <thead>
+                        <tr class="row">
+                            <td style="text-align: center">
+                                Score
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; padding-left: 30px">
+                                @team1Score
+                            </td>
+                            <td style="text-align: center">
+                                To
+                            </td>
+                            <td style="text-align: right; padding-right: 30px">
+                                @team2Score
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+            <dl class="dl-horizontal" style="margin-top: 10px">
+                <dt style="width: 80px; margin-bottom: 5px">
                     <b>Venue: </b>
                 </dt>
-                <dd>
-                    @Model[4].ToString()
+                <dd style="margin-left: 90px;">
+                    @Model[1].ToString()
                 </dd>
 
-                <dt>
+                <dt style="width: 80px; margin-bottom: 5px">
                     <b>Location: </b>
                 </dt>
-                <dd>
-                    @locationFormatted
+                <dd style="margin-left: 90px">
+                    @location
                 </dd>
 
 
-                <dt>
+                <dt style="width: 80px; margin-bottom: 5px">
                     <b>Date: </b>
                 </dt>
-                <dd>
+                <dd style="margin-left: 90px">
                     @Convert.ToDateTime(Model[4]).ToShortDateString()
                 </dd>
 
 
-                <dt>
+                <dt style="width: 80px; margin-bottom: 5px">
                     <b>Time: </b>
                 </dt>
-                <dd>
+                <dd style="margin-left: 90px">
                     @Convert.ToDateTime(Model[4]).ToShortTimeString()
                 </dd>
 
-                <dt>
+                <dt style="width: 80px; margin-bottom: 5px">
                     <b>Sport: </b>
                 </dt>
-                <dd>
+                <dd style="margin-left: 90px">
                     @Model[5]
                 </dd>
             </dl>
         </div>
         <div class="col-lg-4">
-            <center><h3>@team2.TeamName</h3></center>
-            <center>
-                <h6>
-                    @if (team2Score != null)
-                    {
-                        @team2Score.TeamScore
-                    }
-            </h6>
-        </center>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Player </th>
-                    <th>Position</th>
-                </tr>
-            </thead>
-            @foreach (var player in team2Roster)
+            @if (team2Score > team1Score)
             {
-                <tr class="">
-                    <td>
-                        @String.Concat(player.FirstName, " ", player.LastName)
-                    </td>
-                    <td>
-                        @player.Description
-                    </td>
-                </tr>
+                <center><h4 style="margin-bottom: 0px; color: forestgreen">Winner!</h4></center>
             }
-        </table>
+            <center><h3 style="margin-top: 5px">@team2.TeamName</h3></center>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Player </th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                @foreach (var player in team2Roster)
+                {
+                    <tr class="">
+                        <td>
+                            @String.Concat(player.FirstName, " ", player.LastName)
+                        </td>
+                        <td>
+                            @player.Description
+                        </td>
+                    </tr>
+                }
+            </table>
         </div>
     </div>
 </div>

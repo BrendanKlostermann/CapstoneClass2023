@@ -53,6 +53,7 @@
     <Compile Include="ITeamAccessor.cs" />
     <Compile Include="ITeamRoleAccessor.cs" />
     <Compile Include="ITournamentAccessor.cs" />
+    <Compile Include="IVenueAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

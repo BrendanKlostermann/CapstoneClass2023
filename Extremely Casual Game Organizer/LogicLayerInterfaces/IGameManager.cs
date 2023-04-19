@@ -27,6 +27,10 @@ namespace LogicLayerInterfaces
         DataRow ViewGameDetails(int gameid);
         DataTable RetrieveTeamGameList(int team_id);
         List<Score> RetreiveScoresByGameID(int game_id);
+        int AddGame(Game game, int member_id);
+        int EditGame(Game game, int member_id);
+        int RemoveGame(Game game, int member_id);
+        Dictionary<string, string> RetrieveZipCodeInforamtion(int zip_code);
 
     }
 }

@@ -53,6 +53,7 @@
     <Compile Include="ITeamMemberManager.cs" />
     <Compile Include="ITeamRolesManager.cs" />
     <Compile Include="ITournamentManager.cs" />
+    <Compile Include="IVenueManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

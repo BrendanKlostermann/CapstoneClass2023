@@ -53,6 +53,11 @@ namespace LogicLayerInterfaces
         /// </summary>
         List<TournamentTeam> GetTournamentTeamByID(int tournament_id);
 
+        bool EditTournament(int id, Tournament tm);
+
+        Tournament RetrieveTournamentByTournamentID(int id);
+        bool DeleteTournament(int id, int tournamentID);
+
 
         /// <summary>
         /// Heritier Otiom
@@ -95,5 +100,13 @@ namespace LogicLayerInterfaces
         /// delete tournament games that it's genereated so that we can generate new games
         /// </summary>
         int deleteTournamentGameGenerated(int tournament_id);
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/22
+        /// 
+        /// Activate tournament 
+        /// </summary>
+        bool ActivateTournament(int memberid, int tournamentID);
     }
 }

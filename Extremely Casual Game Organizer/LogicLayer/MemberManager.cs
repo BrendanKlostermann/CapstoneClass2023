@@ -562,9 +562,10 @@ namespace LogicLayer
             {
                 requestedUser = _memberAccessor.UpdateProfilePicture(member);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 requestedUser = 0;
+                throw new ApplicationException(ex.Message);
             }
             return requestedUser;
         }
@@ -652,6 +653,21 @@ namespace LogicLayer
             }
 
             return result;
+        }
+
+
+        public List<Member> GetAListOfMembersByFirstNameLastNameOrEmail(string firstName, string lastName, string email)
+        {
+            List<Member> _members = new List<Member>();
+            try
+            {
+                _members = _memberAccessor.SearchMembersByFirstNameLastNameOrEmail(firstName, lastName, email);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Error with data");
+            }
+            return _members;
         }
     }
 }

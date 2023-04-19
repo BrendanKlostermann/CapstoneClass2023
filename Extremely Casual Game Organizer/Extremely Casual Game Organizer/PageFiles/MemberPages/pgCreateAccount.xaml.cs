@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using Extremely_Casual_Game_Organizer.PageFiles;
 using Extremely_Casual_Game_Organizer.PageFiles.Utility;
+using System.Collections.Generic;
 
 namespace Extremely_Casual_Game_Organizer
 {
@@ -186,14 +187,24 @@ namespace Extremely_Casual_Game_Organizer
                     ProfilePhoto = data
                 };
 
-                // Add user to the database
-                if (_memberManager.AddUser(member) > 0)
-                {
-                    MessageBox.Show("Your account has been created!");
-                    resetForm();
-                    _pageControl.SetSignedInMember(member);
-                    _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
+                int result = _memberManager.AddUser(member);
 
+                // Add user to the database
+                if (result> 0)
+                {
+
+                    List<Member> member1 = _memberManager.GetMemberByName(member.Email);
+
+                    if(member1 != null)
+                    {
+                        MessageBox.Show("Your account has been created!");
+                        resetForm();
+
+                        member.MemberID = member1[0].MemberID;
+
+                        _pageControl.SetSignedInMember(member);
+                        _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
+                    }
                 }
                 else
                 {

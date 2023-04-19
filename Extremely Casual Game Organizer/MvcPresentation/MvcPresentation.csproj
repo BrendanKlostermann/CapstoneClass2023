@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -127,12 +133,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -185,7 +185,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeagueController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\TournamentsController.cs" />
@@ -199,6 +201,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\App.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -210,6 +213,7 @@
     <Content Include="Images\all.png" />
     <Content Include="Images\all_2.png" />
     <Content Include="Images\Archery.png" />
+    <Content Include="Images\back.png" />
     <Content Include="Images\Badminton.png" />
     <Content Include="Images\Baseball.png" />
     <Content Include="Images\Basketball.png" />
@@ -217,6 +221,7 @@
     <Content Include="Images\Bobsleigh.png" />
     <Content Include="Images\Bowling.png" />
     <Content Include="Images\Boxing.png" />
+    <Content Include="Images\close.png" />
     <Content Include="Images\Cricket.png" />
     <Content Include="Images\Cycling.png" />
     <Content Include="Images\Diving.png" />
@@ -232,7 +237,9 @@
     <Content Include="Images\Rhythmic gymnastics.png" />
     <Content Include="Images\Rowing.png" />
     <Content Include="Images\Sailing.png" />
+    <Content Include="Images\send.png" />
     <Content Include="Images\Ski jumping.png" />
+    <Content Include="Images\sms.png" />
     <Content Include="Images\Snooker.png" />
     <Content Include="Images\Snowboarding.png" />
     <Content Include="Images\Soccer.png" />
@@ -298,6 +305,13 @@
     <Content Include="Views\Tournaments\Details.cshtml" />
     <Content Include="Views\Tournaments\CreateTournament.cshtml" />
     <Content Include="Views\Tournaments\EditTournaments.cshtml" />
+    <Content Include="Views\Tournaments\TournamentTeam.cshtml" />
+    <Content Include="Views\League\AllLeagues.cshtml" />
+    <Content Include="Views\League\Details.cshtml" />
+    <Content Include="Views\Tournaments\MemberTournaments.cshtml" />
+    <Content Include="Views\Messages\Index.cshtml" />
+    <Content Include="Views\Messages\PeopleITexted.cshtml" />
+    <Content Include="Views\Messages\AllMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

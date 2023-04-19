@@ -26,5 +26,7 @@ AS
 		VALUES
 			(@first_name, @family_name, @gender, @birthday, @phone_number, 
 			@email, @passwordHash, @active, @profile_photo)
+			
+		SELECT SCOPE_IDENTITY()
 	END
 GO

@@ -4,70 +4,102 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+@try
+{
+    <div class="row">
+        <div class="col-12" style="padding:15px 30px 30px; margin:30px 0px">
+            <h2>Create a Team</h2>
+            <a class="btn btn-success btn-lg" href="~/Teams/AllTeams">View All teams</a>
 
-
-<form method="POST" action="~/Teams/CreateTeam">
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Team</h4>
-        @if (@ViewBag.Message != null)
-        {
-            if (ViewBag.Error == false)
-            {
-                <div class="alert alert-success">
-                    <h5>@ViewBag.Message</h5>
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-danger">
-                    <h5>@ViewBag.Message</h5>
-                </div>
-            }
-        }
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeamName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TeamName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.SportID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select name="sportname" class="form-control" for="sport">
-                    <option></option>
-                    @foreach (var item in ViewBag.sports)
+            <div style="margin-top:10px">
+                @if (@ViewBag.Message != null)
+                {
+                    if (ViewBag.Error == false)
                     {
-                        <option value="@Html.DisplayFor(modelItem => item)">
-                            @Html.DisplayFor(modelItem => item)
-                        </option>
+                        <div class="alert alert-success">
+                            <h5>@ViewBag.Message</h5>
+                        </div>
                     }
-                </select>
+                    else
+                    {
+                        <div class="alert alert-danger">
+                            <h5>@ViewBag.Message</h5>
+                        </div>
+                    }
+                }
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-success" />
+        </div>
+        <div class="col-12 bg-primary" style="padding:30px; margin-bottom:30px; background-color:#F0F0F0">
+            <div class="row" style="display:flex; justify-content:center;">
+
+                <div class="col-md-5" style="padding:50px 20px 30px; background-color:white;color:black">
+                    <h2 style="text-align:center">Team</h2>
+
+                    <form class="form" method="post" action="~/Teams/CreateTeam">
+
+                        @Html.AntiForgeryToken()
+                        <div style="padding:5px 0px">
+                            <div style="padding:0px 20px 0px">
+                                <h4 for="description">Team Name:</h4>
+                            </div>
+                            <div style="padding:10px 20px">
+                                <input name="TeamName" type="text" class="form-control" style="width: 100%; max-width: 100%;" />
+                            </div>
+                        </div>
+
+                        <div style="padding:5px 0px">
+                            <div style="padding:0px 20px 0px">
+                                <h4 for="description">Sport:</h4>
+                            </div>
+                            <div style="padding:10px 20px">
+                                <select name="sportname" class="form-control" style="width: 100%; max-width: 100%;">
+                                    <option></option>
+                                    @foreach (var item in ViewBag.sports)
+                                    {
+                                        <option value="@Html.DisplayFor(modelitem => item)">
+                                            @Html.DisplayFor(modelitem => item)
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="padding:5px 0px">
+                            <div style="padding:0px 20px 0px">
+                                <h4 for="description">Gender:</h4>
+                            </div>
+                            <div style="padding:10px 20px">
+                                <select name="gender" class="form-control" style="width: 100%; max-width: 100%;">
+                                    <option></option>
+                                    <option value="true">Male</option>
+                                    <option value="false">Female</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:center">
+                            <div class="col-md-5" style="padding:15px 0px">
+                                <input type="submit" class="btn btn-block btn-success" value="Submit" />
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
             </div>
-        </div>
 
+        </div>
     </div>
-</form>
+
+}
+catch (Exception)
+{
+    <div class="alert alert-danger">
+        An error has occurred!
+    </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

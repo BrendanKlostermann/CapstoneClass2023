@@ -256,7 +256,15 @@ namespace DataAccessLayer
                     {
                         _teamMember = new TeamMember();
                         _teamMember.TeamID = reader.GetInt32(0);
-                        _teamMember.Description = reader.GetString(1);
+                        if (!reader.IsDBNull(1))
+                        {
+                            _teamMember.Description = reader.GetString(1);
+                        }
+                        else
+                        {
+                            _teamMember.Description = null;
+                        }
+
                         _teamMember.Starter = reader.GetBoolean(2);
                         _teamMember.MemberID = reader.GetInt32(3);
                         return _teamMember;
@@ -369,40 +377,40 @@ namespace DataAccessLayer
         /// </remarks>
         public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
         {
+            int rowcount = 0;
             // connection
-            DBConnection connectionFactory = new DBConnection();//AddMemberToTeamByTeamIDAndMemberID
-            var conn = connectionFactory.GetDBConnection();//AddMemberToTeamByTeamIDAndMemberID
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
 
             // command text
-            var cmdText = "sp_add_member_to_team_by_member_id_and_team_id";//AddMemberToTeamByTeamIDAndMemberID
+            string commandText = "sp_add_member_to_team_by_member_id_and_team_id";
 
-            // create command
-            var cmd = new SqlCommand(cmdText, conn);//AddMemberToTeamByTeamIDAndMemberID
+            // command
+            var cmd = new SqlCommand(commandText, conn);
 
             // command type
-            cmd.CommandType = CommandType.StoredProcedure;//AddMemberToTeamByTeamIDAndMemberID
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            // add parameters and values
-            cmd.Parameters.Add("@team_id", SqlDbType.Int);//AddMemberToTeamByTeamIDAndMemberID
-            cmd.Parameters["@team_id"].Value = teamID;//AddMemberToTeamByTeamIDAndMemberID
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+            cmd.Parameters["@team_id"].Value = teamID;
 
-            cmd.Parameters.Add("@member_id", SqlDbType.Int);//AddMemberToTeamByTeamIDAndMemberID
-            cmd.Parameters["@member_id"].Value = memberID;//AddMemberToTeamByTeamIDAndMemberID
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = memberID;
 
             try
             {
-                conn.Open();//AddMemberToTeamByTeamIDAndMemberID
-                var reader = cmd.ExecuteNonQuery();//AddMemberToTeamByTeamIDAndMemberID
-                return reader;//AddMemberToTeamByTeamIDAndMemberID
+                conn.Open();
+                rowcount = cmd.ExecuteNonQuery();
             }
-            catch (Exception up)
+            catch (Exception)
             {
-                throw up;//AddMemberToTeamByTeamIDAndMemberID
+                throw new ApplicationException("error with database");
             }
             finally
             {
-                conn.Close(); //AddMemberToTeamByTeamIDAndMemberID
+                conn.Close();
             }
+            return rowcount;
         }
 
         /// <summary>
@@ -751,10 +759,10 @@ namespace DataAccessLayer
             cmd.CommandType = CommandType.StoredProcedure;
 
             // parameters
-            cmd.Parameters.Add("@teamid", SqlDbType.Int);
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
 
             // parameter values
-            cmd.Parameters["@teamid"].Value = team_id;
+            cmd.Parameters["@team_id"].Value = team_id;
 
             try
             {
@@ -771,8 +779,8 @@ namespace DataAccessLayer
                     {
                         TeamMember addMember = new TeamMember();
                         addMember.Description = reader.GetString(0);
-                        addMember.MemberID = reader.GetInt32(1);
-                        addMember.Starter = reader.GetBoolean(2);
+                        addMember.Starter = reader.GetBoolean(1);
+                        addMember.MemberID = reader.GetInt32(2);
                         addMember.TeamID = team_id;
 
                         teamMembers.Add(addMember);

@@ -402,5 +402,158 @@ namespace LogicLayer
 
             return leagues;
         }
+
+        /// <summary>
+        /// Rith
+        /// method to call add a league method and pass results to the presentation layer
+        /// </summary>
+        public int AddLeague(League league)
+        {
+            int leagueID;
+            try
+            {
+
+                leagueID = _leagueAccessor.AddALeague(league);
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed adding league", ex);
+            }
+            return leagueID;
+        }
+
+        /// <summary>
+        /// Rith
+        /// method to call the remove a league method and pass results to the presentation layer
+        /// </summary>
+        public bool RemoveLeague(int LeagueID)
+        {
+            bool success = false;
+            if (1 == _leagueAccessor.RemoveALeague(LeagueID))
+            {
+                success = true;
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// Rith
+        /// method to call the change registration method and pass results to the presentation layer
+        /// </summary>
+        public bool ChangeRegistration(int LeagueID, bool OpenOrClose)
+        {
+            bool success = false;
+            try
+            {
+
+                if (1 == _leagueAccessor.ChangeLeagueRegistration(LeagueID, OpenOrClose))
+                {
+                    success = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                throw new ApplicationException("Failed changing registration", ex);
+            }
+            return success;
+        }
+
+        /// <summary>
+        /// Rith
+        /// method to call method that retrieves a list of leagues and passes the results to the presentation layer
+        /// </summary>
+        public List<League> RetrieveLeagueListByMemberID(int MemberID)
+        {
+            List<League> leagueList;
+            try
+            {
+                leagueList = _leagueAccessor.SelectLeaguesByMemberID(MemberID);
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed loading League list", ex);
+            }
+
+            return leagueList;
+        }
+
+        /// <summary>
+        /// Rith
+        /// method to call update league method and pass results to the presentation layer
+        /// </summary>
+        public bool UpdateALeague(League league)
+        {
+            bool success = false;
+            try
+            {
+
+                if (1 == _leagueAccessor.UpdateALeague(league))
+                {
+                    success = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed updating league", ex);
+            }
+            return success;
+        }
+        public List<LeagueRequest> RetrieveRequestsByLeagueID(int LeagueID)
+        {
+            List<LeagueRequest> requestList;
+            try
+            {
+                requestList = _leagueAccessor.SelectRequestsByLeagueID(LeagueID);
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed loading League list", ex);
+            }
+
+            return requestList;
+        }
+
+        /// <summary>
+        /// Elijah
+        /// method to add league items into leagueVM
+        /// </summary>
+        public LeagueVM ConvertToLeagueVM (League league)
+        {
+            SportManager sportManager = new SportManager();
+
+            LeagueVM leagueVM = new LeagueVM();
+
+            leagueVM.LeagueID = league.LeagueID;
+            leagueVM.SportID = league.SportID;
+            leagueVM.LeagueDues = league.LeagueDues;
+            leagueVM.Active = league.Active;
+            leagueVM.MemberID = league.MemberID;
+            leagueVM.Gender = league.Gender;
+            leagueVM.Description = league.Description;
+            leagueVM.Name = league.Name;
+            leagueVM.MaxNumOfTeams = league.MaxNumOfTeams;
+
+            leagueVM.SportName = sportManager.RetrieveSportBySportID(leagueVM.SportID);
+
+            if (league.Gender == true)
+            {
+                leagueVM.genderAsText = "Male";
+            }
+            if (league.Gender == false)
+            {
+                leagueVM.genderAsText = "Female";
+            }
+            if (league.Gender == null)
+            {
+                leagueVM.genderAsText = "Undefined";
+            }
+
+
+            return leagueVM;
+        }
     }
 }

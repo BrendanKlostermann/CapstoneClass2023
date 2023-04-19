@@ -24,6 +24,9 @@ namespace DataAccessLayerInterfaces
         List<Tournament> SelectAllTournaments();
         List<TournamentVM> SelectAllTournamentVMs();
         int InsertTournament(Tournament tm);
+        int UpdateTournament(int memberid, Tournament tm);
+        Tournament SelectTournamentByTournamentID(int id);
+        int DeactivateTournament(int memberid, int tournamentID);
 
         /// <summary>
         /// Heritier Otiom
@@ -93,5 +96,13 @@ namespace DataAccessLayerInterfaces
         /// Select details about a specific tournament by tournamentID
         /// </summary>
         Tournament SelectTournamentByID(int tournament_id);
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/22
+        /// 
+        /// Activate tournament 
+        /// </summary>
+        int ActivateTournament(int memberid, int tournamentID);
     }
 }

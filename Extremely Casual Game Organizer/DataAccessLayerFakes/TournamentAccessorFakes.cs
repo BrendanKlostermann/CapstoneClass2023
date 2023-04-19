@@ -261,6 +261,56 @@ namespace DataAccessLayerFakes
             _tournamentTeams.Remove(_tournamentTeams[num]);
             return 1;
         }
+
+        public int UpdateTournament(int memberid, Tournament tm)
+        {
+            int count = 0;
+            foreach(Tournament tourn in _tournaments)
+            {
+                if(tourn.TournamentID == memberid)
+                {
+                    tourn.Description = tm.Description;
+                    tourn.Gender = tm.Gender;
+                    tourn.Name = tm.Name;
+                    tourn.SportID = tm.SportID;
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        public Tournament SelectTournamentByTournamentID(int id)
+        {
+            Tournament tournament = null;
+            foreach(Tournament tourn in _tournaments)
+            {
+                if(tourn.TournamentID == id)
+                {
+                    tournament = tourn;
+                    break;
+                }
+            }
+            if(tournament == null)
+            {
+                return null;
+            }
+            return tournament;
+        }
+
+        public int DeactivateTournament(int memberid, int tournamentID)
+        {
+            int count = 0;
+            foreach(Tournament tourn in _tournaments)
+            {
+                if(tourn.TournamentID == memberid)
+                {
+                    tourn.Active = false;
+                    count++;
+                }
+            }
+            return count;
+		}
+		
         public List<TournamentTeamGame> SelectTournamentTeamAndGame(int tournament_id)
         {
             var tournaments = _tournamentTeamsAndGames.Where(b => b.TournamentID == tournament_id).ToList();
@@ -312,6 +362,20 @@ namespace DataAccessLayerFakes
 
             }
             return returnTournament;
+        }
+
+        public int ActivateTournament(int memberid, int tournamentID)
+        {
+            int count = 0;
+            foreach (Tournament tourn in _tournaments)
+            {
+                if (tourn.TournamentID == memberid)
+                {
+                    tourn.Active = true;
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }

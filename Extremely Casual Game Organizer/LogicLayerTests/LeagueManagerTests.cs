@@ -110,5 +110,52 @@ namespace LogicLayerTests
 
             actualResult = _leagueManager.RetrieveLeagueListByTeamID(source).Count;
         }
+
+        [TestMethod]
+        public void testAddingALeague()
+        {
+            var expected = 100004;
+            League league = new League(100004, 100002, 300m, true, 123049, false, "test league 3", "test3", 2);
+            var actual = _leagueManager.AddLeague(league);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void testUpdatingALeague()
+        {
+            var expected = 300m;
+            League league = new League(100002, 100002, 300m, true, 123049, false, "test league 3", "test3", 2);
+            _leagueManager.UpdateALeague(league);
+            List<League> leagues = _leagueManager.GetListOfLeagues();
+            var actual = leagues[2].LeagueDues;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void testDeleteALeague()
+        {
+            var expected = true;
+            var actual = _leagueManager.RemoveLeague(100000);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void testChangeLeagueRegistration()
+        {
+            var expected = true;
+            var actual = _leagueManager.ChangeRegistration(100000, false);
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void TestRetrievingListOfLeaguesByMemberID()
+        {
+            const int source = 100000;
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _leagueManager.RetrieveLeagueListByMemberID(source).Count;
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }

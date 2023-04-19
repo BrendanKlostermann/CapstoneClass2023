@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using DataObjects;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
@@ -12,6 +13,12 @@ namespace MvcPresentation.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+    }
+
+    public class LeagueViewModel
+    {
+        public List<League> leagues { get; set; }
+        public List<LeagueGridVM> leaguesVM { get; set; }
     }
 
     public class ManageLoginsViewModel

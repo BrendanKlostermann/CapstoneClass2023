@@ -10,5 +10,6 @@ namespace LogicLayerInterfaces
     public interface ISportManager
     {
         List<Sport> RetrieveAllSports();
+        string RetrieveSportBySportID(int SportID);
     }
 }
