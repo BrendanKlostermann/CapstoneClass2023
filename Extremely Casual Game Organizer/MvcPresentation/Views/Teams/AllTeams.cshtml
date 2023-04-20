@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DataObjects.Team>
+
+@{
+    ViewBag.Title = "All Teams";
+}
+
+<!--Garion Opiola
+    Created: 2023/04/08
+    Web page for all team-->
+
+<h2>AllTeams</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td>
+                @if (item.Gender == true)
+                {
+                    <p>
+                        Male
+                    </p>
+                }
+                else if (item.Gender == false)
+                {
+                    <p>
+                        Female
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        Undefined
+                    </p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @if (item.Active == true)
+                {
+                    <p>
+                        True
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        False
+                    </p>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.TeamID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.TeamID }) |
+                @Html.ActionLink("Deactivate", "Deactivate", new { id = item.TeamID })
+            </td>
+        </tr>
+    }
+
+</table>

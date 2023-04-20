@@ -100,5 +100,25 @@ namespace MvcPresentation.Controllers
                 ViewBag.Message = ex.Message;
             }
         }
+
+        // GET: RetriveAllTeams
+        /// <summary>
+        /// /// Garion Opiola
+        /// Created: 2023/04/08
+        /// gets all teams for controller
+        /// </summary>
+        public ActionResult AllTeams()
+        {
+            try
+            {
+                teams = teamManager.RetrieveAllTeams();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex;
+            }
+
+            return View(teams);
+        }
     }
 }

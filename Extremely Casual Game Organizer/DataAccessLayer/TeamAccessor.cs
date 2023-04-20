@@ -293,9 +293,9 @@ namespace DataAccessLayer
         /// A method to select all teams
         /// 
         /// <remarks>
-        /// Updater Name
-        /// Updated: yyyy/mm/dd 
-        /// example: Fixed a problem when user inputs bad data
+        /// Garion Opiola
+        /// Updated: 2023/04/18 
+        /// gets active feild
         /// </remarks>
         public List<Team> SelectAllTeams()
         {
@@ -323,7 +323,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        
+
                         Team team = new Team();
                         team.TeamID = reader.GetInt32(0);
                         team.TeamName = reader.GetString(1);
@@ -345,6 +345,7 @@ namespace DataAccessLayer
                         //{
                         //    team.Description = reader.GetString(5);
                         //} // Script does not return Desc (JDL)
+                        team.Active = reader.GetBoolean(6);
                         teams.Add(team);
                     }
                 }
