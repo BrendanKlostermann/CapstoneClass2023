@@ -108,6 +108,7 @@ namespace DataAccessLayerFakes
                     Bio = "Yet Another Member bio"
                 }
             };
+            
             // Create data table and setup columns, then add values to table.
             // This talbe is used to map password hashes to members since the members do not and should not have a password hash property
             _passwords = new DataTable();
@@ -162,6 +163,13 @@ namespace DataAccessLayerFakes
             _availability.Rows.Add("Availability", 1001, new DateTime(2023, 12, 1, 0, 0, 0), new DateTime(2023, 12, 1, 11, 0, 0), "");
             _availability.Rows.Add("Availability", 1002, new DateTime(2023, 12, 3, 0, 0, 0), new DateTime(2023, 12, 5, 12, 0, 0), "On Vacation");
             _availability.Rows.Add("Availability", 1003, new DateTime(2023, 01, 1, 0, 0, 0), new DateTime(2023, 01, 5, 12, 30, 0), "");
+
+            // Add Roles
+            _members[1].Roles.Add("Captain");
+            _members[1].Roles.Add("Manager");
+            _members[1].Roles.Add("Player");
+            _members[0].Roles.Add("Vendor");
+            _members[0].Roles.Add("Manager");
 
         }
 
@@ -272,9 +280,9 @@ namespace DataAccessLayerFakes
 
                 foreach (Member member in _members)
                 {
-                    var getPassword = from row in _passwords.AsEnumerable() where row["MemberID"].Equals(member.MemberID) select row;
+                    var getPassword = from row in _passwords.AsEnumerable() where (int)row[0] == memberID select row;
                     var selectedPassword = getPassword.First(); // Should only return 1 result.
-                    if (member.MemberID == memberID && currentPassword == selectedPassword["PasswordHash"].ToString())
+                    if (member.MemberID == memberID && currentPassword == selectedPassword[1].ToString().ToUpper())
                     {
                         _passwords.Rows.RemoveAt(_passwords.Rows.IndexOf(selectedPassword)); // I do not know how to update Data Table entries so remove and re-add will work fine for this test.
                         _passwords.Rows.Add(memberID, newPassword);
@@ -373,10 +381,6 @@ namespace DataAccessLayerFakes
                 }
             }
 
-            if (member == null)
-            {
-                throw new ApplicationException("User not found.");
-            }
             return member;
         }
 
@@ -760,6 +764,15 @@ namespace DataAccessLayerFakes
             }
 
             return result;
+        }
+
+        public List<string> SelectMemberRoles(int member_id)
+        {
+            // Should only be 1 member in table
+            var memberSearch = (from member in _members where member.MemberID == member_id select member).First();
+
+            // return roles
+            return memberSearch.Roles;
         }
     }
 }

@@ -27,6 +27,7 @@ using System.Windows.Shapes;
 using LogicLayer;
 using DataObjects;
 using System.Data;
+using Extremely_Casual_Game_Organizer.PageFiles.Games;
 
 namespace Extremely_Casual_Game_Organizer.PageFiles
 {
@@ -38,6 +39,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         DateTime _gameDate;
         PageControl _pageControl = null;
         List<Score> _gameScores = null;
+        Button _editButton = null;
+        DataRow _details = null;
         public pgViewGameDetails(int game_id, MasterManager masterManager)
         {
             _game_id = game_id;
@@ -48,42 +51,72 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
 
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// Loaded event. Need to set the back button and click event for the button. 
+        /// </summary>
         private void pageViewGameDetails_Loaded(object sender, RoutedEventArgs e)
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// Loaded event. Need to set the back button and click event for the button. 
-            /// </summary>
+
             _backButton = _pageControl.ShowGoBack();
             _backButton.Click += BackButton_Click;
 
             LoadGameDetails();
             LoadRosterData();
+
+            if (_pageControl.GetSignedInMember() != null && (int)_details[6] == _pageControl.GetSignedInMember().MemberID)
+            {
+                _editButton = _pageControl.SetCustomButton("Edit Game", 1);
+                _editButton.Click += _editButton_Click;
+
+            }
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/18/2023
+        /// 
+        /// Click event for edit button
+        /// </summary>
+        private void _editButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                _pageControl.LoadPage(new pgAddEditGame(_masterManager, _game_id), new pgViewGameDetails(_game_id, _masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error loading game edit page", ex.InnerException.Message);
+                return;
+            }
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// Method for loading game details from based on values provided in constructor when class file was called. 
+        /// </summary>
         private void LoadGameDetails()
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// Method for loading game details from based on values provided in constructor when class file was called. 
-            /// </summary>
 
-            DataRow details = _masterManager.GameManager.ViewGameDetails(_game_id);
+            _details = _masterManager.GameManager.ViewGameDetails(_game_id);
 
             // Method to parse location to correct format.
             // details [1] 222 roadName st, IA
             // details [2] City Name
             // details [3] ZIP
-            txtLocation.Text =  details[2].ToString() + " " + details[3].ToString();
-            txtVenueName.Text = details[1].ToString();
-            txtDate.Text = Convert.ToDateTime(details[4]).ToShortDateString();
-            txtTime.Text = Convert.ToDateTime(details[4]).ToShortTimeString();
-            txtSport.Text = details[5].ToString();
-            _gameDate = Convert.ToDateTime(details[4]);
+            txtLocation.Text =  _details[2].ToString() + " " + _details[3].ToString();
+            txtVenueName.Text = _details[1].ToString();
+            txtDate.Text = Convert.ToDateTime(_details[4]).ToShortDateString();
+            txtTime.Text = Convert.ToDateTime(_details[4]).ToShortTimeString();
+            txtSport.Text = _details[5].ToString();
+            _gameDate = Convert.ToDateTime(_details[4]);
         }
 
         /// <summary>
@@ -295,6 +328,16 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             // Need to get Previous page.
             Page previousPage = _pageControl.GetPreviousPage();
             _pageControl.LoadPage(previousPage);
+        }
+
+        private void pageViewGameDetails_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _backButton.Click -= BackButton_Click;
+            if (_pageControl.GetSignedInMember() != null && (int)_details[6] == _pageControl.GetSignedInMember().MemberID)
+            {
+                _editButton.Click -= _editButton_Click;
+
+            }
         }
     }
 }

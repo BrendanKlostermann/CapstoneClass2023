@@ -23,7 +23,7 @@ namespace DataAccessLayer
 {
     public class GameAccessor : IGameAccessor
     {
-        public int DeleteGame(Game game, int member_id)
+        public int DeleteGame(int game_id, int member_id)
         {
             /// <summary>
             /// Jacob Lindauer
@@ -42,7 +42,8 @@ namespace DataAccessLayer
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@game_id", game.GameID);
+            cmd.Parameters.AddWithValue("@game_id", game_id);
+            cmd.Parameters.AddWithValue("@member_id", member_id);
 
             try
             {
@@ -56,13 +57,92 @@ namespace DataAccessLayer
 
                 throw ex;
             }
+            finally
+            {
+                conn.Close();
+            }
 
             return result;
         }
 
         public int InsertGame(Game game, int member_id)
         {
-            throw new NotImplementedException();
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_insert_game";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@member_id", member_id);
+            cmd.Parameters.AddWithValue("@venue_id", game.VenueID);
+            cmd.Parameters.AddWithValue("@date_and_time", game.DateAndTime);
+            cmd.Parameters.AddWithValue("@sport_id", game.SportID);
+
+
+            try
+            {
+                conn.Open();
+
+                result = Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
+        public int InsertScore(Score score)
+        {
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_insert_score_by_game_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@game_id", score.GameID);
+            cmd.Parameters.AddWithValue("@team_id", score.TeamID);
+            if (score.TeamScore == null)
+            {
+                cmd.Parameters.AddWithValue("@score", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@score", score.TeamScore);
+            }
+
+
+            try
+            {
+                conn.Open();
+
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
         }
 
         public DataTable SelectAllGames()
@@ -270,14 +350,143 @@ namespace DataAccessLayer
             return result;
         }
 
-        public Dictionary<string, string> SelectZipCodeInformation(int zip_code)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/12/2023
+        /// 
+        /// Method updates row in game table
+        /// </summary>
+        /// 
         public int UpdateGame(Game game, int member_id)
         {
-            throw new NotImplementedException();
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_update_game";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@game_id", game.GameID);
+            cmd.Parameters.AddWithValue("@venue_id", game.VenueID);
+            cmd.Parameters.AddWithValue("@date_and_time", game.DateAndTime);
+            cmd.Parameters.AddWithValue("@sport_id", game.SportID);
+            cmd.Parameters.AddWithValue("@member_id", member_id);
+
+            try
+            {
+                conn.Open();
+
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
+        public int ReplaceTeamScore(Score score, int oldTeamID)
+        {
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_update_game_score_by_team_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@game_id", score.GameID);
+            cmd.Parameters.AddWithValue("@team_id", score.TeamID);
+            if (score.TeamScore == null)
+            {
+                cmd.Parameters.AddWithValue("@score", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@score", score.TeamScore);
+            }
+            cmd.Parameters.AddWithValue("@old_team_id", oldTeamID);
+
+
+            try
+            {
+                conn.Open();
+
+                result = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
+        public int UpdateScores(List<Score> scores)
+        {
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_update_game_score_by_game_id";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@game_id", SqlDbType.Int);
+            cmd.Parameters.Add("@team_id", SqlDbType.Int);
+            cmd.Parameters.Add("@score", SqlDbType.Decimal);
+
+            foreach (var score in scores)
+            {
+                cmd.Parameters["@game_id"].Value = score.GameID;
+                cmd.Parameters["@team_id"].Value = score.TeamID;
+                if (score.TeamScore == null)
+                {
+                    cmd.Parameters["@score"].Value = DBNull.Value;
+                }
+                else
+                {
+                    cmd.Parameters["@score"].Value = score.TeamScore;
+                }
+
+                try
+                {
+                    conn.Open();
+
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+            return result;
+
         }
     }
 }

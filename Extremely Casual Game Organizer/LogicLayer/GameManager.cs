@@ -37,13 +37,20 @@ namespace LogicLayer
             _gameAccessor = ga;
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/12/2023
+        /// 
+        /// Method adds game top game table
+        /// </summary>
+        /// <returns></returns>
         public int AddGame(Game game, int member_id)
         {
             int result = 0;
 
             try
             {
-                
+
                 result = _gameAccessor.InsertGame(game, member_id);
 
                 if (result == 0)
@@ -61,6 +68,13 @@ namespace LogicLayer
             return result;
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/12/2023
+        /// 
+        /// Method edits game in game table
+        /// </summary>
+        /// <returns></returns>
         public int EditGame(Game game, int member_id)
         {
             int result = 0;
@@ -84,13 +98,50 @@ namespace LogicLayer
             return result;
         }
 
-        public int RemoveGame(Game game, int member_id)
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/12/2023
+        /// 
+        /// Method add score to score table
+        /// </summary>
+        /// <returns></returns>
+        public int AddScore(Score score)
         {
             int result = 0;
 
             try
             {
-                result = _gameAccessor.DeleteGame(game, member_id);
+                result = _gameAccessor.InsertScore(score);
+
+                if (result == 0)
+                {
+                    throw new ApplicationException("Score not added");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error adding score", ex);
+            }
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/12/2023
+        /// 
+        /// Method Removed game from game table
+        /// </summary>
+        /// <returns></returns>
+        public int RemoveGame(int game_id, int member_id)
+        {
+            int result = 0;
+
+            try
+            {
+                result = _gameAccessor.DeleteGame(game_id, member_id);
 
 
                 if (result == 0)
@@ -166,9 +217,32 @@ namespace LogicLayer
             return gameList;
         }
 
-        public Dictionary<string, string> RetrieveZipCodeInforamtion(int zip_code)
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/12/2023
+        /// 
+        /// Method edits game scores for game
+        /// </summary>
+        /// <returns></returns>
+        public int EditGameScores(List<Score> scores)
         {
-            throw new NotImplementedException();
+            int result = 0;
+
+            try
+            {
+                result = _gameAccessor.UpdateScores(scores);
+                if (result == 0)
+                {
+                    throw new ApplicationException("Scores not updated");
+                }
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Error updating scores", ex);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -234,6 +308,33 @@ namespace LogicLayer
             return returnRow;
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/12/2023
+        /// 
+        /// Method replaces game scores if team needs to be updated
+        /// </summary>
+        /// <returns></returns>
+        public int ReplaceGameScore(Score score, int oldTeamID)
+        {
+            int result = 0;
 
+            try
+            {
+                result = _gameAccessor.ReplaceTeamScore(score, oldTeamID);
+
+                if (result == 0)
+                {
+                    throw new ApplicationException("Team not repalced for score");
+                }
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Error Updating Team for Score", ex);
+            }
+
+            return result;
+        }
     }
 }

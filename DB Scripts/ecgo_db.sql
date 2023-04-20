@@ -244,10 +244,10 @@ print '' print '*** creating game roster table Rith'
 GO
 CREATE TABLE [dbo].[GameRoster] (
 	[game_roster_id]			[int] IDENTITY(1000,1)	NOT NULL,
-	[team_id]					[int]					NOT NULL,
-	[member_id]					[int]					NOT NULL,
-	[description]				[nvarchar](250)			NULL,
-	[game_id]					[int]					NOT NULL,
+	[team_id]					[int]				NOT NULL,
+	[member_id]					[int]				NOT NULL,
+	[description]				[nvarchar](250)		NULL,
+	[game_id]					[int]				NOT NULL,
 	CONSTRAINT [pk_game_roster_id] PRIMARY KEY([game_roster_id]),
 	CONSTRAINT [fk_GamePost_game_id] FOREIGN KEY([game_id])
 		REFERENCES [Game]([game_id]),
@@ -581,6 +581,27 @@ CREATE TABLE [dbo].[VolunteerSignUp]
 		FOREIGN KEY ([member_id]) REFERENCES [dbo].[Member]([member_id])
 )
 GO 
+
+
+
+
+print '' print '*** creating LeagueRequest Rith Sivaprakash'
+GO
+CREATE TABLE [dbo].[LeagueRequest]
+(
+    [request_id]        [int] IDENTITY (1000, 1) NOT NULL,
+    [league_id]                    [int] NOT NULL,
+    [team_id]                 [int] NOT NULL, 
+    [status]                    [nvarchar] (250) NOT NULL DEFAULT "Waiting",
+    CONSTRAINT [fk_LeagueRequest_league_id]
+        FOREIGN KEY ([league_id]) REFERENCES [dbo].[League]([league_id]),
+    CONSTRAINT [fk_LeagueRequest_team_id]
+        FOREIGN KEY ([team_id]) REFERENCES [dbo].[Team]([team_id]),
+    CONSTRAINT [pk_request_id] PRIMARY KEY ([request_id])
+)
+GO
+
+
 
 print '' print '*** creating zipcode TABLE'
 GO

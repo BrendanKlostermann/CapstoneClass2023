@@ -16,10 +16,10 @@
             <RowDefinition Height="250"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Button x:Name="btnSignUp" Content="Sign Up" HorizontalAlignment="Left" Height="20" Margin="325,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="150" Click="openSignUp" Grid.Column="1"/>
-        <Button x:Name="btnSignIn" Content="Sign In" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="325,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="150" Click="btnSignIn_Click"/>
-        <PasswordBox x:Name="txtPassword" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="300,182.4,0,48" Grid.Row="2" Width="200"/>
         <TextBox x:Name="txtEmail" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="300,148.4,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <PasswordBox x:Name="txtPassword" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="300,182.4,0,48" Grid.Row="2" Width="200"/>
+        <Button x:Name="btnSignIn" Content="Sign In" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="325,10,0,0" Grid.Row="3" VerticalAlignment="Top" Width="150" Click="btnSignIn_Click"/>
+        <Button x:Name="btnSignUp" Content="Sign Up" HorizontalAlignment="Left" Height="20" Margin="325,40,0,0" Grid.Row="3" VerticalAlignment="Top" Width="150" Click="openSignUp" Grid.Column="1"/>
         <Label x:Name="lblEmail" Content="Email" Grid.Column="1" HorizontalAlignment="Left" Margin="200,148.4,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.766,0.57"/>
         <Label x:Name="lblPassword" Content="Password" Grid.Column="1" HorizontalAlignment="Left" Margin="200,182.4,0,0" Grid.Row="2" VerticalAlignment="Top" RenderTransformOrigin="-0.781,-0.109" IsHitTestVisible="False"/>
         <Grid Grid.Row="2" Grid.Column="2">

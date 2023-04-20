@@ -12,6 +12,81 @@ namespace DataAccessLayer
 {
     public class VenueAccessor : IVenueAccessor
     {
+
+        /// <summary>
+        /// Jacob Lindauer
+        /// Created: 2023/04/04
+        /// 
+        /// Inserts Venue into Venue Table
+        /// </summary>
+        public int InsertVenue(Venue venue)
+        {
+            int result = 0;
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_insert_venue";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (venue.VenueName == null || venue.VenueName == "")
+            {
+                cmd.Parameters.AddWithValue("@venue_name", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@venue_name", venue.VenueName);
+            }
+
+            if (venue.Parking == null || venue.Parking == "")
+            {
+                cmd.Parameters.AddWithValue("@parking", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@parking", venue.Parking);
+            }
+
+            if (venue.Description == null || venue.Description == "")
+            {
+                cmd.Parameters.AddWithValue("@description", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@description", venue.Description);
+            }
+
+            if (venue.Location == null || venue.Location == "")
+            {
+                cmd.Parameters.AddWithValue("@location", DBNull.Value);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@location", venue.Location);
+            }
+
+            cmd.Parameters.AddWithValue("@zip_code", venue.ZipCode);
+
+            try
+            {
+                conn.Open();
+
+                result = Convert.ToInt32(cmd.ExecuteScalar());
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Jacob Lindauer
         /// Created: 2023/04/09
@@ -44,7 +119,7 @@ namespace DataAccessLayer
                     while (reader.Read())
                     {
                         Venue addVenue = new Venue();
-                        addVenue.VenueID = Convert.ToInt32(0);
+                        addVenue.VenueID = reader.GetInt32(0);
                         if (reader.IsDBNull(1))
                         {
                             addVenue.VenueName = "";
@@ -111,6 +186,63 @@ namespace DataAccessLayer
             }
 
             return venueList;
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/*15/04
+        /// 
+        /// Method takes a zipcode input and returns hash table of zipcode information
+        /// 
+        /// TKey:
+        /// zip_code
+        /// City
+        /// State
+        /// 
+        /// </summary>
+        /// <param name="zipcode"></param>
+        /// <returns></returns>
+        public Dictionary<string, object> SelectZipCodeDetails(int zipcode)
+        {
+            Dictionary<string, object> zipcodeInfo = new Dictionary<string, object>();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            var cmdText = "sp_select_zip_code_details";
+
+            var cmd = new SqlCommand(cmdText, conn);
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@zipcode", zipcode);
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        zipcodeInfo = Enumerable.Range(0, reader.FieldCount).ToDictionary(reader.GetName, reader.GetValue);
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return zipcodeInfo;
         }
     }
 }

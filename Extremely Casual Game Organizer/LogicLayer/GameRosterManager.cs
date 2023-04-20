@@ -37,6 +37,53 @@ namespace LogicLayer
             _gameRosterAccessor = grm;
         }
 
+        public bool AddGameRosterMembers(List<GameRoster> members)
+        {
+            bool result = false;
+            try
+            {
+                int count = _gameRosterAccessor.InsertGameRosterMembers(members);
+
+                if (count == 0)
+                {
+                    throw new ApplicationException("Not all members added to game");
+                }
+                else
+                {
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error adding members", ex);
+            }
+
+            return result;
+        }
+
+        public int RemoveFromGameRoster(int team_id, int game_id)
+        {
+            int result = 0;
+
+            try
+            {
+                result = _gameRosterAccessor.DeleteFromGameRoster(game_id, team_id);
+
+                if (result == 0)
+                {
+                    throw new ApplicationException("Roster Members Not Removed");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Error removing game roster members", ex);
+            }
+
+            return result;
+        }
+
         public List<GameRoster> RetrieveGameRoster(int game_id)
         {
             List<GameRoster> rosterList = null;

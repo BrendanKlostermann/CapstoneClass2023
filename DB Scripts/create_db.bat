@@ -24,7 +24,6 @@ sqlcmd -S localhost -E -i sp_selecting_all_players_on_a_team_by_team_id.sql
 sqlcmd -S localhost -E -i sp_select_all_sports.sql
 sqlcmd -S localhost -E -i sp_add_league.sql
 sqlcmd -S localhost -E -i sp_delete_league.sql
-sqlcmd -S localhost -E -i sp_add_team_to_league.sql
 sqlcmd -S localhost -E -i sp_select_members_by_name.sql
 sqlcmd -S localhost -E -i sp_select_people_I_texted_by_user_id.sql
 sqlcmd -S localhost -E -i sp_user_create_team.sql
@@ -83,13 +82,30 @@ sqlcmd -S localhost -E -i sp_select_tournament_by_tournamentid.sql
 sqlcmd -S localhost -E -i sp_deactivate_tournament.sql
 sqlcmd -S localhost -E -i sp_select_members_by_name_and_or_email.sql
 sqlcmd -S localhost -E -i sp_update_teamMember_to_bench_or_starter.sql
-sqlcmd -S localhost -E -i sp_update_tournament.sql
-
 sqlcmd -S localhost -E -i sp_select_zip_code_details.sql
+sqlcmd -S localhost -E -i sp_delete_game_roster_rows.sql
+sqlcmd -S localhost -E -i sp_select_all_teams.sql
+sqlcmd -S localhost -E -i sp_select_all_roles.sql
+sqlcmd -S localhost -E -i sp_insert_venue.sql
+sqlcmd -S localhost -E -i sp_add_team_to_league.sql
+sqlcmd -S localhost -E -i sp_insert_league_request.sql
+sqlcmd -S localhost -E -i sp_select_leagues_by_member_id.sql
+sqlcmd -S localhost -E -i sp_select_request_by_league_id.sql
+sqlcmd -S localhost -E -i sp_select_teams_by_league_id.sql
+sqlcmd -S localhost -E -i sp_update_league_request_status_by_request_id.sql
+sqlcmd -S localhost -E -i sp_update_registration_by_league_id.sql
+sqlcmd -S localhost -E -i sp_update_tournament.sql
+sqlcmd -S localhost -E -i sp_delete_practice.sql
+sqlcmd -S localhost -E -i sp_select_all_practices.sql
+sqlcmd -S localhost -E -i sp_select_owner_by_team_id.sql
+sqlcmd -S localhost -E -i sp_select_tournament_games.sql
+sqlcmd -S localhost -E -i sp_delete_generate_tournament_team.sql
+sqlcmd -S localhost -E -i sp_generate_tournament_team.sql
+sqlcmd -S localhost -E -i sp_activate_tournament.sql
+sqlcmd -S localhost -E -i sp_select_roles_by_member_id.sql
 
 sqlcmd -S localhost -E -i sampleData.sql
 
-sqlcmd -S localhost -E -i sp_select_all_teams.sql
 
 
 rem server is localhost

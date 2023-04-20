@@ -198,8 +198,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("League creation failed.");
-                    throw ex;
+                    MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
                 }
             }
         }

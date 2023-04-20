@@ -341,6 +341,9 @@ namespace LogicLayer
 
                     member = _memberAccessor.SelectMemberByEmail(email);
 
+                    // Apply roles to member
+                    member.Roles = _memberAccessor.SelectMemberRoles(member.MemberID);
+
                 }
                 else
                 {

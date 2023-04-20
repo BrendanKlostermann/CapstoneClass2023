@@ -16,9 +16,9 @@ CREATE PROCEDURE [dbo].[sp_deactivate_tournament]
 AS    
     BEGIN
         update	[Tournament]
-		set		[active] = 0
-		WHERE	[tournament_ID] = 	@tournamentid
-			AND 	[Member_ID]		= 	@memberid
-		RETURN 	@@ROWCOUNT
+		set		[Active] = 0
+		where 	@memberid = [member_id] and @tournamentid = [Tournament_ID]
+        
+        RETURN @@ROWCOUNT
     END
 GO

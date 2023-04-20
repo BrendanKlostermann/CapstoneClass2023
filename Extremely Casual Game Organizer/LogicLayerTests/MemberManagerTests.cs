@@ -69,14 +69,15 @@ namespace LogicLayerTests
             actualResult = _memberManager.EditMemberPassword(source, currentPassword, newPassword);
 
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/10/2023
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void TestPasswordResetWithBadEmailInput()
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/10/2023
-            /// </summary>
             Member testMember = new Member();
             const string source = "bademail@email.com";
             const string expectedResult = "John";

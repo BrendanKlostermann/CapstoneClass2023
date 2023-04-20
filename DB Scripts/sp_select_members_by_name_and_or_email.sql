@@ -17,7 +17,7 @@ BEGIN
 	IF (@first_name IS NOT NULL OR @family_name IS NOT NULL OR @email IS NOT NULL)
 	BEGIN
 		SELECT [member_id],[email],[first_name],[family_name],[birthday],
-			[phone_number],[gender],[active],[bio],[profile_photo] 
+			[phone_number],[gender],[active],[bio] 
 		FROM [dbo].[Member]
 		WHERE (@first_name IS NULL OR [first_name] LIKE '%'+@first_name+'%')
 			AND (@family_name IS NULL OR [family_name] LIKE '%'+@family_name+'%')
@@ -26,7 +26,7 @@ BEGIN
 	ELSE 
 	BEGIN
 		SELECT [member_id],[email],[first_name],[family_name],[birthday],
-			[phone_number],[gender],[active],[bio],[profile_photo] 
+			[phone_number],[gender],[active],[bio]
 		FROM [dbo].[Member]
 	END
 END

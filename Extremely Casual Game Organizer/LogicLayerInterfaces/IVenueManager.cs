@@ -10,5 +10,7 @@ namespace LogicLayerInterfaces
     public interface IVenueManager
     {
         List<Venue> RetrieveAllVenues();
+        int AddVenue(Venue venue);
+        Dictionary<string, object> RetrieveZipCodeDetails(int zipcode);
     }
 }

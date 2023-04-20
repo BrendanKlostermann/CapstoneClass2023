@@ -183,6 +183,14 @@ namespace DataAccessLayerInterfaces
         /// </summary>
         int UpdateProfilePicture(Member member);
 
+        /// <summary>
+        /// Jacob Lindauer
+        /// Created: 2023/04/20
+        /// 
+        /// Retreive employee roles from database
+        /// </summary>
+        List<string> SelectMemberRoles(int member_id);
+
         //List<Member> SearchMemberByFirstAndLastName(string firstName, string lastName);
 
 

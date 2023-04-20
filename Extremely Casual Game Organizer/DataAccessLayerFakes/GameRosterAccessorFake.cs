@@ -48,6 +48,8 @@ namespace DataAccessLayerFakes
                 { GameID = 1000, TeamID = 1002, MemberID = 100005, Description = "Away Team", GameRosterID = 15, TeamName = "TheSecondTeam", FirstName = "Frank", LastName = "Smith" },
             };
         }
+
+
         public List<GameRoster> SelectGameRoster(int game_id)
         {
             /// <summary>
@@ -73,6 +75,45 @@ namespace DataAccessLayerFakes
             }
 
             return gameRoster;
+        }
+
+
+        public int DeleteFromGameRoster(int game_id, int team_id)
+        {
+            int result = 0;
+            int count = 0;
+            foreach (var player in _gameRoster)
+            {
+                if (player.GameID == game_id && player.TeamID == team_id)
+                {
+                    _gameRoster.Remove(player);
+                    count++;
+                }
+            }
+
+            if (count > 0)
+            {
+                result = 1;
+            }
+            return result;
+        }
+
+        public int InsertGameRosterMembers(List<GameRoster> members)
+        {
+            int result = 0;
+            int count = 0;
+            foreach (var player in members)
+            {
+                _gameRoster.Add(player);
+                count++;
+            }
+
+            if (count > 0 )
+            {
+                result = 1;
+            }
+
+            return result;
         }
     }
 }

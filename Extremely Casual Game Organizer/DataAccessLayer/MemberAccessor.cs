@@ -1451,5 +1451,61 @@ namespace DataAccessLayer
             }
             return _members;  //for sp_select_members_by_name_and_or_email
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/04/20
+        /// 
+        /// Method returns member roles from the database and returns it as a list of strings
+        /// </summary>
+        /// <param name="member_id"></param>
+        /// <returns></returns>
+        public List<string> SelectMemberRoles(int member_id)
+        {
+            List<string> roles = new List<string>();
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            //command text
+            var cmdText = "sp_select_roles_by_member_id";
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Add paramaters //values
+
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+            cmd.Parameters["@member_id"].Value = member_id;
+
+            try
+            {
+                conn.Open();
+
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        roles.Add(reader.GetString(0));
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return roles;
+        }
     }
 }

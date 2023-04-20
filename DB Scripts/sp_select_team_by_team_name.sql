@@ -22,6 +22,7 @@ AS
 			ON [Sport].[sport_id] = [Team].[sport_id]
 			WHERE [team_name] 
 			LIKE '%'+@team_name+'%'
+			ORDER BY [team_name] 
 
 		-- Search for a team by sport_ID
 		ELSE IF (@team_name != '' AND @sport_id!=0)
@@ -32,6 +33,7 @@ AS
 			WHERE [team_name] 
 			LIKE '%'+@team_name+'%'
 			AND [Team].[sport_id] = @sport_id
+			ORDER BY [team_name] 
 
 		-- Select every team by sport_ID
 		ELSE IF (@team_name = '' AND @sport_id!=0)
@@ -40,6 +42,7 @@ AS
 			INNER JOIN [dbo].[Sport]
 			ON [Sport].[sport_id] = [Team].[sport_id]
 			AND [Team].[sport_id] = @sport_id
+			ORDER BY [team_name] 
 
 		-- If nothing is specify, show all teams 
 		ELSE IF (@team_name = '' AND @sport_id=0)
@@ -47,10 +50,12 @@ AS
 			FROM [dbo].[Team]
 			INNER JOIN [dbo].[Sport]
 			ON [Sport].[sport_id] = [Team].[sport_id]
+			ORDER BY [team_name] 
 
 		ELSE
 			SELECT [team_id], [team_name], [gender], [sport_id]
 			FROM [dbo].[Team]
+			-- ORDER BY [team_name] 
 		ENDIF
         
 	END

@@ -22,5 +22,7 @@ namespace LogicLayerInterfaces
     public interface IGameRosterManager
     {
         List<GameRoster> RetrieveGameRoster(int game_id);
+        bool AddGameRosterMembers(List<GameRoster> members);
+        int RemoveFromGameRoster(int team_id, int game_id);
     }
 }

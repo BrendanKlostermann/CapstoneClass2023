@@ -28,8 +28,10 @@ namespace DataAccessLayerInterfaces
         List<Score> SelectScoreByGameID(int game_id);
         int InsertGame(Game game, int member_id);
         int UpdateGame(Game game, int member_id);
-        int DeleteGame(Game game, int member_id);
-        Dictionary<string, string> SelectZipCodeInformation(int zip_code);
+        int DeleteGame(int game_id, int member_id);
+        int InsertScore(Score score);
+        int UpdateScores(List<Score> scores);
+        int ReplaceTeamScore(Score score, int oldTeamID);
 
     }
 }

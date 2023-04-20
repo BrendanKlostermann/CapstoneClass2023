@@ -36,9 +36,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         MasterManager _masterManager = null;
         PageControl _pageControl = null;
         Button _viewButton = null;
-        Button _updateButton = null;
         Button _createButton = null;
-        Button _deleteButton = null;
         DataRowView _selectedItem = null;
         public pgGameList(MasterManager masterManager)
         {
@@ -49,42 +47,41 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             LoadGameList();
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// Page loaded event. Need to create click event for the view button.
+        /// </summary>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// Page loaded event. Need to create click event for the view button.
-            /// </summary>
 
             // Load buttons
-            var buttons = _pageControl.ShowFullCRUD();
-            _createButton = buttons[0];
-            _viewButton = buttons[1];
-            _updateButton = buttons[2];
-            _deleteButton = buttons[3];
+            _viewButton = _pageControl.SetCustomButton("View Game", 1);
+            if (_pageControl.GetSignedInMember() != null)
+            {
+                _createButton = _pageControl.SetCustomButton("Create Game", 2);
+
+                _createButton.Click += CreateButton_Click;
+            }
 
             // Need to set button the ability to be clicked.
             _viewButton.Click += ViewButton_Click;
-            _createButton.Click += CreateButton_Click;
-            _updateButton.Click += UpdateButton_Click;
-            _deleteButton.Click += DeleteButton_Click;
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// Method for generating the game list.
+        /// 
+        /// Udpated By: Jacob Lindauer
+        /// Date: 2023/04/04
+        /// 
+        /// Updated game list to be a listbox instead of data table for better formatting
+        /// </summary>
         private void LoadGameList()
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// Method for generating the game list.
-            /// 
-            /// Udpated By: Jacob Lindauer
-            /// Date: 2023/04/04
-            /// 
-            /// Updated game list to be a listbox instead of data table for better formatting
-            /// </summary>
             try
             {
                 DataTable gameList = _masterManager.GameManager.ViewAllGames();
@@ -148,14 +145,15 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
             }
         }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// View button click event
+        /// </summary>
         private void lstGameList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// View button click event
-            /// </summary>
             try
             {
 
@@ -184,14 +182,14 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             }
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// View button click event
+        /// </summary>
         private void ViewButton_Click(object sender, RoutedEventArgs e)
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// View button click event
-            /// </summary>
             try
             {
 
@@ -221,30 +219,21 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             }
 
         }
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //if (_pageControl.GetSignedInMember() != null)
-                //{
-                //    _pageControl.LoadPage(new pgAddEditGame(_masterManager));
+                if (_pageControl.GetSignedInMember() != null)
+                {
+                    _pageControl.LoadPage(new pgAddEditGame(_masterManager));
 
-                //}
-                //else
-                //{
-                //    MessageBox.Show("You must be signed in to create a game");
-                //    return;
-                //}
+                }
+                else
+                {
+                    MessageBox.Show("You must be signed in to create a game");
+                    return;
+                }
                 _pageControl.LoadPage(new pgAddEditGame(_masterManager));
             }
             catch (Exception ex)
@@ -254,21 +243,22 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             }
         }
 
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 02/15/2023
+        /// 
+        /// Page unload evnet to remove click events from occurring should we navigate back to this page.
+        /// If this is not done the click event will loop on themselves if you navigate back to this page. 
+        /// </summary>
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            /// <summary>
-            /// Created By: Jacob Lindauer
-            /// Date: 02/15/2023
-            /// 
-            /// Page unload evnet to remove click events from occurring should we navigate back to this page.
-            /// If this is not done the click event will loop on themselves if you navigate back to this page. 
-            /// </summary>
 
             // Remove previous click events to avoid event loops
             _viewButton.Click -= ViewButton_Click;
-            _createButton.Click -= CreateButton_Click;
-            _updateButton.Click -= UpdateButton_Click;
-            _deleteButton.Click -= DeleteButton_Click;
+            if (_createButton != null)
+            {
+                _createButton.Click -= CreateButton_Click;
+            }
         }
     }
 }

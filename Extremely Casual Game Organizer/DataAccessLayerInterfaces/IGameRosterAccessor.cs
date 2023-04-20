@@ -22,5 +22,7 @@ namespace DataAccessLayerInterfaces
     public interface IGameRosterAccessor
     {
         List<GameRoster> SelectGameRoster(int game_id);
+        int InsertGameRosterMembers(List<GameRoster> members);
+        int DeleteFromGameRoster(int game_id, int team_id);
     }
 }

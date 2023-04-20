@@ -119,14 +119,14 @@ namespace DataAccessLayerFakes
         /// </summary>
         /// <param name="game"></param>
         /// <returns></returns>
-        public int DeleteGame(Game game, int member_id)
+        public int DeleteGame(int game_id, int member_id)
         {
             int result = 0;
 
             try
             {
                 // Select game to delete. Result should return only 1 row
-                var deleteGame = _gameList.AsEnumerable().Where(x => Convert.ToInt32(x[0]) == game.GameID);
+                var deleteGame = _gameList.AsEnumerable().Where(x => Convert.ToInt32(x[0]) == game_id);
 
                 // Count list before removal
                 int preRemoval = _gameList.Rows.Count;
@@ -147,7 +147,7 @@ namespace DataAccessLayerFakes
             }
 
             return result;
-         }
+        }
 
         public int InsertGame(Game game, int member_id)
         {
@@ -206,7 +206,7 @@ namespace DataAccessLayerFakes
 
                 throw ex;
             }
-            
+
             return returnRow;
         }
 
@@ -271,11 +271,6 @@ namespace DataAccessLayerFakes
             return returnList;
         }
 
-        public Dictionary<string, string> SelectZipCodeInformation(int zip_code)
-        {
-            throw new NotImplementedException();
-        }
-
         public int UpdateGame(Game game, int member_id)
         {
             int result = 0;
@@ -310,7 +305,89 @@ namespace DataAccessLayerFakes
                 {
                     result = 1;
                 }
-                
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
+        }
+
+        public int UpdateScores(List<Score> scores)
+        {
+            int result = 0;
+            int count = 0;
+            try
+            {
+                // Remove
+                foreach (var score in scores)
+                {
+                    if (_scoreList.Where(x => x.TeamID == score.TeamID).Where(y => y.GameID == score.GameID).Count() > 0)
+                    {
+                        _scoreList.RemoveAt(_scoreList.IndexOf(_scoreList.Where(x => x.TeamID == score.TeamID).Where(y => y.GameID == score.GameID).First()));
+
+                        _scoreList.Add(score);
+                    }
+                }
+
+                foreach (var score in scores)
+                {
+                    if (_scoreList.Where(x => x.TeamID == score.TeamID).Where(y => y.GameID == score.GameID).Count() > 0)
+                    {
+                        count += 1;
+                    }
+                }
+
+                if (count == 2)
+                {
+                    result = 1;
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            return result;
+        }
+        public int InsertScore(Score score)
+        {
+            int result = 0;
+            int preCount = _scoreList.Count;
+            if (_scoreList.Where(x => x.GameID == score.GameID).Count() > 0)
+            {
+                _scoreList.Add(score);
+            }
+            int postCount = _scoreList.Count;
+
+            result = postCount - preCount;
+
+            return result;
+        }
+
+        public int ReplaceTeamScore(Score score, int oldTeamID)
+        {
+            int result = 0;
+
+            try
+            {
+                if (_scoreList.Where(x => x.TeamID == oldTeamID).Count() > 0)
+                {
+                    var updateScore = _scoreList.Remove(_scoreList.Where(x => x.TeamID == oldTeamID).Where(y => y.GameID == score.GameID).First());
+
+                    _scoreList.Add(score);
+
+                    if (_scoreList.Contains(score))
+                    {
+                        result = 1;
+                    }
+                }
+
             }
             catch (Exception ex)
             {

@@ -7,9 +7,7 @@
 
 <h2>All Games</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<input type="button" class="btn btn-secondary btn-sm" value="Create Game" onclick="location.href='@Url.Action("Create", "Games")'" />
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +24,7 @@
             <td>@row[2]</td>
             <td>@Convert.ToDateTime(row[3]).ToString("MM/dd/yyyy hh:mm tt") </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = row.ItemArray[0] })
+                <input type="button" class="btn btn-sm btn-primary" value="Details" onclick="location.href='@Url.Action("Details", "Games", new { id = row.ItemArray[0] } )'" />
             </td>
         </tr>
         }

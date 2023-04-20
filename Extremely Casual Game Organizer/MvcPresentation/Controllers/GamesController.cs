@@ -19,9 +19,18 @@ namespace MvcPresentation.Controllers
         // GET: Games
         public ActionResult AllGames()
         {
-            DataTable gameList = _masterManager.GameManager.ViewAllGames();
+            try
+            {
+                DataTable gameList = _masterManager.GameManager.ViewAllGames();
 
-            return View(gameList);
+                return View(gameList);
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.ErrorMessage = ex.Message;
+                return View("Error");
+            }
         }
 
         // GET: Games/Details/5

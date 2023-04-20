@@ -10,9 +10,9 @@ CREATE PROCEDURE [dbo].[sp_select_zip_code_details](
 AS
 	BEGIN
 		SELECT
-			[zip_code]
-			, [city]
-			, [st]
+			[zip_code] AS 'Zipcode'
+			, [city] AS 'City'
+			, [st] AS 'State'
 		FROM [dbo].[zipcode]
 		WHERE [zip_code] = @zipCode
 	END

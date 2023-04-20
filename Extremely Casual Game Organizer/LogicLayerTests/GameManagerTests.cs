@@ -1,4 +1,4 @@
-﻿/// /// <summary>
+﻿ /// /// <summary>
 /// Jacob Lindauer
 /// Created: 2023/01/31
 /// 
@@ -18,6 +18,7 @@ using LogicLayer;
 using DataObjects;
 using DataAccessLayerFakes;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace LogicLayerTests
 {
@@ -152,6 +153,24 @@ namespace LogicLayerTests
         ///Created By: Jacob Lindauer
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestErrorAddingGame()
+        {
+            Game game = null;
+            int member_id = 100000;
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _gameManager.AddGame(game, member_id);
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
         public void TestEdittingGameByGameID()
         {
             Game game = new Game() { GameID = 1000, VenueID = 1001, DateAndTime = DateTime.Now, SportID = 1000 };
@@ -167,38 +186,6 @@ namespace LogicLayerTests
         ///Created By: Jacob Lindauer
         /// </summary>
         [TestMethod]
-        public void TestRemovingGameByGameID()
-        {
-            Game game = new Game() { GameID = 1000, VenueID = 1001, DateAndTime = DateTime.Now, SportID = 1000 };
-            const int expectedResult = 1;
-            int actualResult = 0;
-
-            actualResult = _gameManager.RemoveGame(game, 100000);
-
-            Assert.AreEqual(expectedResult, actualResult);
-        }
-
-        ///<summary>
-        ///Created By: Jacob Lindauer
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(ApplicationException))]
-        public void TestErrorAddingGame()
-        {
-            Game game = null;
-            int member_id = 100000;
-            const int expectedResult = 1;
-            int actualResult = 0;
-
-            actualResult = _gameManager.AddGame(game, member_id);
-
-            Assert.AreEqual(expectedResult, actualResult);
-        }
-
-        ///<summary>
-        ///Created By: Jacob Lindauer
-        /// </summary>
-        [TestMethod]
         [ExpectedException(typeof(ApplicationException))]
         public void TestErrorEdittingGameWithInvalidGameID()
         {
@@ -206,7 +193,21 @@ namespace LogicLayerTests
             const int expectedResult = 1;
             int actualResult = 0;
 
-            actualResult = _gameManager.RemoveGame(game, 100000);
+            actualResult = _gameManager.EditGame(game, 100000);
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        public void TestRemovingGameByGameID()
+        { 
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _gameManager.RemoveGame(1000, 100000);
 
             Assert.AreEqual(expectedResult, actualResult);
         }
@@ -218,13 +219,117 @@ namespace LogicLayerTests
         [ExpectedException(typeof(ApplicationException))]
         public void TestErrorRemovingGameWithInvalidGameID()
         {
-            Game game = new Game() { GameID = 0, VenueID = 1001, DateAndTime = DateTime.Now, SportID = 1000 };
             const int expectedResult = 1;
             int actualResult = 0;
 
-            actualResult = _gameManager.RemoveGame(game, 100000);
+            actualResult = _gameManager.RemoveGame(0, 100000);
 
             Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        public void TestUpdatingGameScores()
+        {
+            List<Score> scoreList = new List<Score>();
+            Score score1 = new Score() { GameID = 1000, TeamID = 1001, TeamScore = 10 };
+            Score score2 = new Score() { GameID = 1000, TeamID = 1002, TeamScore = 8 };
+            scoreList.Add(score1);
+            scoreList.Add(score2);
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _gameManager.EditGameScores(scoreList);
+
+            Assert.AreEqual(expectedResult, actualResult);          
+
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestErrorWhenUpdatingGameScores()
+        {
+            List<Score> scoreList = new List<Score>();
+            Score score1 = new Score() { GameID = 1000, TeamID = 00, TeamScore = 10 };
+            Score score2 = new Score() { GameID = 1000, TeamID = 00, TeamScore = 8 };
+            scoreList.Add(score1);
+            scoreList.Add(score2);
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _gameManager.EditGameScores(scoreList);
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        public void TestAddingGameScore()
+        {
+            Score score1 = new Score() { GameID = 1000, TeamID = 1008, TeamScore = 10 };
+
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _gameManager.AddScore(score1);
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestErrorAddingGameScoreWithInvalidGameID()
+        {
+            Score score1 = new Score() { GameID = 0, TeamID = 1008, TeamScore = 10 };
+
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _gameManager.AddScore(score1);
+
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        public void TestReplacingGameScore()
+        {
+            Score score1 = new Score() { GameID = 1000, TeamID = 1008, TeamScore = 10 };
+
+            const int expectedResult = 1;
+            int actualResult = 0;
+
+            actualResult = _gameManager.ReplaceGameScore(score1, 1002);
+
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        ///<summary>
+        ///Created By: Jacob Lindauer
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void TestErrorReplacingGameScoreWithInvalidOldTeamID()
+        {
+            Score score1 = new Score() { GameID = 1000, TeamID = 1008, TeamScore = 10 };
+
+            const int expectedResult = 1;
+            const int oldTeamID = 0;
+            int actualResult = 0;
+
+            actualResult = _gameManager.ReplaceGameScore(score1, oldTeamID);
+
         }
     }
 }

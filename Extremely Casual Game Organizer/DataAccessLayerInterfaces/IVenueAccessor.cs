@@ -10,5 +10,7 @@ namespace DataAccessLayerInterfaces
     public interface IVenueAccessor
     {
         List<Venue> SelectAllVenues();
+        int InsertVenue(Venue venue);
+        Dictionary<string, object> SelectZipCodeDetails(int zipcode);
     }
 }
