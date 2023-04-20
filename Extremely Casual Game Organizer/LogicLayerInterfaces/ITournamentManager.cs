@@ -100,5 +100,13 @@ namespace LogicLayerInterfaces
         /// delete tournament games that it's genereated so that we can generate new games
         /// </summary>
         int deleteTournamentGameGenerated(int tournament_id);
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/22
+        /// 
+        /// Activate tournament 
+        /// </summary>
+        bool ActivateTournament(int memberid, int tournamentID);
     }
 }

@@ -48,6 +48,7 @@
     <Compile Include="GameRosterAccessor.cs" />
     <Compile Include="MemberAccessor.cs" />
     <Compile Include="MessageAccessor.cs" />
+    <Compile Include="PracticeAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SportAccessor.cs" />
     <Compile Include="TeamAccessor.cs" />

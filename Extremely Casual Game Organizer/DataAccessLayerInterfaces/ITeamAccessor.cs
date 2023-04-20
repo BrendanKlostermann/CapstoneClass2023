@@ -129,5 +129,13 @@ namespace DataAccessLayerInterfaces
         /// Get all teams a user is into
         /// </summary>
         int DeactivateOwnTeam(int teamID, int memberID);
+
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/18
+        /// 
+        /// Gets the owner ID of the team owner (creator)
+        /// </summary>
+        int SelectOwnerIDByTeamID(int team_id);
     }
 }

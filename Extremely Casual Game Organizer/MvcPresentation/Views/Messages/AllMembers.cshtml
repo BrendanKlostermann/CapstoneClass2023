@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DataObjects.Member>
+
+@{
+    ViewBag.Title = "PeopleITexted";
+}
+
+
+<div style="padding:10px 0px 0px">
+
+    <div class="" style="margin:20px 0px 10px">
+        <a class="btn btns-default" href="~/Messages/PeopleITexted">
+            <img src="~/Images/back.png"
+                 alt="sms" class="img-fluid img-responsive text-center" width="25" />
+        </a>
+    </div>
+
+    <h2>Add a User</h2>
+
+    <form method="post" class="form-inline" action="~/Messages/AllMembers" style="margin: 10px 0px 20px">
+        <div class="form-group" style="display:flex; align-items:center">
+            <input class="form-control" type="text" name="username" placeholder="Search here" 
+                   style="width: 100%; max-width: 100%; margin: 5px 20px 5px 15px" />
+            <input type="submit" value="Search" class="btn btn-success" style="margin: 5px 0px" />
+        </div>
+    </form>
+
+    @try
+    {
+        <div class="row" style="padding:0px 0px 120px; margin:25px 0px;height:75vh; overflow-y:auto;">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-12">
+                    <a href="/Messages?email=@item.Email" class="noDecoration" style="display: flex; flex-direction: row; justify-content: start; align-items: center; background-color: #E9E9E9; padding: 10px; margin-top: 5px">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
+                             alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="70"
+                             style="" />
+
+                        <p style="font-size:2em;padding: 0px 20px">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.FamilyName)
+                        </p>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+    catch (Exception)
+    {
+        <div class="alert alert-danger">
+            <h3>The list is empty!</h3>
+        </div>
+    }
+</div>

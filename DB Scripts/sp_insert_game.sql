@@ -17,6 +17,7 @@ AS
 		VALUES
 			(@venue_id, @date_and_time, @sport_id, @member_id)
 			
+		SELECT SCOPE_IDENTITY()
 	END
 GO
 	

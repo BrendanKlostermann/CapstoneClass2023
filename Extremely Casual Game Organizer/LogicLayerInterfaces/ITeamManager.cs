@@ -69,5 +69,13 @@ namespace LogicLayerInterfaces
         /// removes a team that's not in a league
         int RemoveOwnTeam(int teamID, int memberID);
 
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/18
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// Gets the team owner's member ID
+        int SelectTeamOwner(int teamID);
     }
 }

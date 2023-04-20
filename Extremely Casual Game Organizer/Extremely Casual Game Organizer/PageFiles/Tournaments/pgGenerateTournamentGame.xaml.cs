@@ -3,6 +3,7 @@
 /// Created: 02/18/2023
 /// </summary>
 using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles;
 using LogicLayer;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace Extremely_Casual_Game_Organizer
         TournamentManager _tournamentManager = null;
         private int _memberID = 100000;
 
+
         //I created this variable to store the sport ID
         private int _sport_id;
 
@@ -51,12 +53,15 @@ namespace Extremely_Casual_Game_Organizer
         //This variable List store all teams
         List<TeamSport> _teams = null;
         private MasterManager masterManager;
+        PageControl _pageControl = null;
 
         public pgGenerateTournamentGame()
         {
             _teamManager = new TeamManager();
             _tournamentManager = new TournamentManager();
             List<Tournament> tournaments = new List<Tournament>();
+
+            _pageControl = new PageControl();
 
             _sport_id = 0;
             _teams = new List<TeamSport>();
@@ -71,6 +76,8 @@ namespace Extremely_Casual_Game_Organizer
             _teamManager = new TeamManager();
             _tournamentManager = new TournamentManager();
             List<Tournament> tournaments = new List<Tournament>();
+
+            _pageControl = new PageControl();
 
             _sport_id = 0;
             _teams = new List<TeamSport>();
@@ -137,14 +144,43 @@ namespace Extremely_Casual_Game_Organizer
         {
             _sport_id = 0;
             _tournament_id = 0;
+            int memberID = 0;
+            Member _member = _pageControl.GetSignedInMember();
+
             foreach (Tournament line in tournaments)
             {
                 if (line.Name == ddTournament.SelectedItem.ToString())
                 {
                     _sport_id = line.SportID;
                     _tournament_id = line.TournamentID;
+                    memberID = line.MemberID;
                 }
             }
+            if (_member != null)
+            {
+                if (_member.MemberID == memberID)
+                {
+                    btnDeleteAllGames.Visibility = Visibility.Visible;
+                    btnGenerate.Visibility = Visibility.Visible;
+                    btnSave.Visibility = Visibility.Visible;
+                    btnOpenTournamentPage.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    btnDeleteAllGames.Visibility = Visibility.Hidden;
+                    btnGenerate.Visibility = Visibility.Hidden;
+                    btnSave.Visibility = Visibility.Hidden;
+                    btnOpenTournamentPage.Visibility = Visibility.Hidden;
+                }
+            }
+            else
+            {
+                btnDeleteAllGames.Visibility = Visibility.Hidden;
+                btnGenerate.Visibility = Visibility.Hidden;
+                btnSave.Visibility = Visibility.Hidden;
+                btnOpenTournamentPage.Visibility = Visibility.Hidden;
+            }
+
             getTournamentTeam();
             getTournamentGames();
         }
@@ -346,7 +382,6 @@ namespace Extremely_Casual_Game_Organizer
 
         private void btnGenerate_Copy_Click(object sender, RoutedEventArgs e)
         {
-
             if (lbTournament.Items.Count < 1)
             {
                 MessageBox.Show("You have to generate game first");

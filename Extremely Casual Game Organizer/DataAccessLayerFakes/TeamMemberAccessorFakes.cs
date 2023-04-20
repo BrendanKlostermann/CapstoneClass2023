@@ -193,6 +193,11 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
+        public int SelectOwnerIDByTeamID(int team_id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Team SelectTeamByTeamID(int team_id)
         {
             throw new NotImplementedException();

@@ -29,5 +29,7 @@ namespace MvcPresentation.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<DataObjects.League> Leagues { get; set; }
     }
 }

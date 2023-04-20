@@ -656,5 +656,10 @@ namespace LogicLayer
 
             return result;
         }
+
+        public List<Member> GetAListOfMembersByFirstNameLastNameOrEmail(string firstName, string lastName, string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

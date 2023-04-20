@@ -1,0 +1,17 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.PageFiles.Practices.pgRemovePractice"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer.PageFiles.Practices"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgRemovePractice">
+
+    <Grid>
+        <DataGrid x:Name="dtaGridPractices" HorizontalAlignment="Left" Height="388" VerticalAlignment="Top" Width="800" Loaded="dtaGridPractices_Loaded"/>
+        <Button x:Name="btnRemovePractice" Content="Remove" HorizontalAlignment="Left" Margin="351,393,0,0" VerticalAlignment="Top" Width="100" Height="26" Click="btnRemovePractice_Click"/>
+        <Button x:Name="btnBackToTeam" Content="Back to Team" HorizontalAlignment="Left" Margin="690,407,0,0" VerticalAlignment="Top" Width="100" Height="32" Click="btnBackToTeam_Click"/>
+
+    </Grid>
+</Page>

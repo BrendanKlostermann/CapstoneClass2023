@@ -376,5 +376,31 @@ namespace LogicLayer
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/20
+        /// 
+        /// Activate tournament
+        /// </summary>
+        public bool ActivateTournament(int memberid, int tournamentID)
+        {
+            try
+            {
+                _tournamentAccessor = new TournamentAccessor();
+                if (1 == _tournamentAccessor.ActivateTournament(memberid, tournamentID))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error activating tournament", ex);
+            }
+        }
+
     }
 }

@@ -1,0 +1,75 @@
+﻿<!-- 
+Elijah Morgan
+Created: 2023/04/11
+
+Views all leagues in the database
+-->
+
+@model IEnumerable<DataObjects.LeagueGridVM>
+
+@{
+    ViewBag.Title = "AllLeagues";
+}
+
+<h2>All Leagues</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <p>
+                League:
+            </p>
+        </th>
+        <th>
+            <p>
+                League Desctiption:
+            </p>
+        </th>
+        <th>
+            <p>
+                Sport:
+            </p>
+        </th>
+        <th>
+            <p>
+                League Creator:
+            </p>
+        </th>
+        <th>
+            <p>
+                Gender:
+            </p>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeagueName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SportName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeagueCreator)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.LeagueID }) |
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>

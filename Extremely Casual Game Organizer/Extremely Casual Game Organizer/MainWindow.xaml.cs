@@ -176,6 +176,7 @@ namespace Extremely_Casual_Game_Organizer
             try
             {
                 _pageControl.LoadPage(new pgViewTournamentList());
+                //_pageControl.LoadPage(new pgAddTeamToTournament());
             }
             catch (Exception ex)
             {

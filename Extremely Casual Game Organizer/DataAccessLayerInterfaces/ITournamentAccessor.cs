@@ -96,5 +96,13 @@ namespace DataAccessLayerInterfaces
         /// Select details about a specific tournament by tournamentID
         /// </summary>
         Tournament SelectTournamentByID(int tournament_id);
+
+        /// <summary>
+        /// Heritier Otiom
+        /// Created: 2023/03/22
+        /// 
+        /// Activate tournament 
+        /// </summary>
+        int ActivateTournament(int memberid, int tournamentID);
     }
 }

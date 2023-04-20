@@ -48,6 +48,7 @@
     <Compile Include="IDBConnection.cs" />
     <Compile Include="IGameAccessor.cs" />
     <Compile Include="IMessageAccessor.cs" />
+    <Compile Include="IPracticeAccessor.cs" />
     <Compile Include="ISportAccessor.cs" />
     <Compile Include="ITeamAccessor.cs" />
     <Compile Include="ITeamRoleAccessor.cs" />

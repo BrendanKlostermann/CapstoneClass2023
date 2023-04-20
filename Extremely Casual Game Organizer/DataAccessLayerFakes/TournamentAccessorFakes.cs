@@ -363,5 +363,19 @@ namespace DataAccessLayerFakes
             }
             return returnTournament;
         }
+
+        public int ActivateTournament(int memberid, int tournamentID)
+        {
+            int count = 0;
+            foreach (Tournament tourn in _tournaments)
+            {
+                if (tourn.TournamentID == memberid)
+                {
+                    tourn.Active = true;
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }

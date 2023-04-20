@@ -209,5 +209,20 @@ namespace LogicLayer
             }
             return requestTeam;
         }
+
+        public int SelectTeamOwner(int teamID)
+        {
+            int ownerID = 0;
+
+            try
+            {
+                ownerID = _teamAccessor.SelectOwnerIDByTeamID(teamID);
+            }
+            catch (Exception)
+            {
+                throw new ApplicationException("Cannot retrieve owner of team");
+            }
+            return ownerID;
+        }
     }
 }

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DataObjects.Tournament>
+
+@{
+    ViewBag.Title = "AllTournaments";
+}
+
+
+<div class="row">
+
+    <div class="col-12 bg-primary" style="padding:30px 30px 50px; margin-bottom:30px">
+        <h2>My Tournaments</h2>
+        <a class="btn btn-success btn-lg" href="~/Tournaments/CreateTournament">Create a tournament</a>
+    </div>
+
+    <div class="col-12" style="padding:15px 30px 30px; margin-bottom:30px">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                if (item.MemberID == @ViewBag.Me)
+                {
+                    <div class="col-md-3" style="padding:15px 15px 5px">
+                        <a href="~/Tournaments/Details/@Html.DisplayFor(modelItem => item.TournamentID)">
+                            <div style="box-shadow:0px 0px 0px 1px #D0D0D0;">
+                                <div style="background-color:white; color:black;
+                        padding:30px 0px; font-size:1.3em; min-height:120px; font-weight:bold;
+                        display:flex; align-items:center; justify-content:center;">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </div>
+
+                                @if (item.Active)
+                                {
+                                    <div style="text-align:center; color:green;padding-bottom:10px">
+                                        <h4>Active</h4>
+                                    </div>
+                                    <div style="background-color:#F4F4F4;
+                                    padding:20px 0px; font-size:1.3em; min-height:40px;
+                                    display:flex; align-items:center; justify-content:center">
+                                        <span class="btn btn-success">Open</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div style="text-align:center; color:red;padding-bottom:10px">
+                                        <h4>Inactive</h4>
+                                    </div>
+                                    <div style="background-color:#F4F4F4;
+                                    padding:20px 0px; font-size:1.3em; min-height:40px;
+                                    display:flex; align-items:center; justify-content:center">
+                                        <span class="btn btn-danger">Open</span>
+                                    </div>
+                                }
+
+                            </div>
+                        </a>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+
+</div>

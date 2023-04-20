@@ -52,7 +52,8 @@ namespace DataAccessLayerFakes
                     TeamName = "TheTestTeam1",
                     Gender = true,
                     SportID = 1001,
-                    Description = "TheTestTeam1 Description"
+                    Description = "TheTestTeam1 Description",
+                    MemberID = 100001
                 },
                 new Team()
                 {
@@ -487,6 +488,11 @@ namespace DataAccessLayerFakes
                 }
             }
             return 0;
+        }
+
+        public int SelectOwnerIDByTeamID(int team_id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -773,6 +773,11 @@ namespace DataAccessLayerFakes
 
             // return roles
             return memberSearch.Roles;
+		}
+		
+        public List<Member> SearchMembersByFirstNameLastNameOrEmail(string firstName, string lastName, string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }

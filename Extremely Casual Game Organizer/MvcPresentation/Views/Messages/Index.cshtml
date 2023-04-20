@@ -1,0 +1,101 @@
+﻿@model IEnumerable<DataObjects.Message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div style="padding:0px 0px; min-height:100vh">
+
+    @try
+    {
+        <div style="height:100%">
+            <div id="divMessage" class="navbar navbar-fixed-top" style="padding:60px 10px 0px;height:85%; overflow-y:auto;">
+
+                <div class="" style="margin:20px 0px 10px">
+                    <a class="btn btns-default" href="~/Messages/PeopleITexted">
+                        <img src="~/Images/back.png"
+                             alt="sms" class="img-fluid img-responsive text-center" width="25" />
+                    </a>
+                </div>
+
+                <div style="display: flex; flex-direction: column; align-items: center">
+                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
+                         alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="100" />
+                    <h2 style="margin-top:20px;">@ViewBag.MemberName</h2>
+                </div>
+
+                <hr />
+
+                @foreach (var item in Model)
+                {
+                    if (item.UserIdSender != @ViewBag.Me)
+                    {
+                        @*Incomming Message*@
+                        <div style="display: flex; flex-direction: row; justify-content:start; align-items:center">
+                            <div style="display: flex; flex-direction: row; align-items:center;padding:10px 0px">
+                                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
+                                     alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="50"
+                                     style="" />
+
+                                <div style="padding: 0px 10px">
+                                    <p class="bg-primary" style="padding:10px; border-radius:15px; font-size:1.5em">
+                                        @Html.DisplayFor(modelItem => item.MessageText)
+                                    </p>
+                                    <span>@Html.DisplayFor(modelItem => item.Date)</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        @*Outcomming Message*@
+                        <div style="display: flex; flex-direction: row; justify-content:end; align-items:center">
+                            <div style="display: flex; flex-direction: row; justify-content:end; align-items:center;padding:10px 0px">
+
+                                <div style="padding: 0px 10px">
+                                    <p class="bg-warning messageText" style="padding:10px; border-radius:15px; font-size:1.5em">
+                                        @Html.DisplayFor(modelItem => item.MessageText)
+                                    </p>
+                                    <span>@Html.DisplayFor(modelItem => item.Date)</span>
+                                </div>
+
+                                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
+                                     alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="50"
+                                     style="" />
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+            @*<div class="bg-warning" style="padding:50px 0px">
+
+                </div>*@
+            <div class="navbar navbar-fixed-bottom" style="position:absolute; bottom:0; padding:0px 15px;
+        margin:50px 0px 0px; background-color:#E4E4E4;height:13%">
+                <form method="post" action="~/Messages/Create">
+
+                    <input type="text" name="user_id" value="@ViewBag.Me" hidden />
+                    <input type="text" name="other_user_id" value="@ViewBag.Him" hidden />
+                    <input type="text" name="email" value="@ViewBag.Email" hidden />
+
+                    <div class="form-group" style="position:sticky; bottom:0; padding:15px 0px;
+                display: flex; flex-direction:row; justify-content:end; align-items:center">
+                        <textarea type="text" rows="3" name="message" class="form-control sms" placeholder="Your message here"
+                                  style="margin: 0px 10px; font-size:1.2em;width: 100%; max-width: 100%;"></textarea>
+                        <button class="btn btn-success" style="margin:10px ">
+                            <img src="~/Images/send.png"
+                                 alt="sms" class="img-fluid img-responsive text-center" width="30" />
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+    catch (Exception)
+    {
+        <div class="alert alert-danger">
+            <h3>No messages!</h3>
+        </div>
+    }
+</div>
