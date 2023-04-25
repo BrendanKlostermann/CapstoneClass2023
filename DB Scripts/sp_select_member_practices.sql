@@ -14,7 +14,6 @@ AS
 			, [Practice].[practice_id]
 			, [Practice].[location]
 			, [Practice].[date_time]
-			, [Practice].[description]
 		FROM [dbo].[TeamRole]
 		JOIN [dbo].[Team] ON [Team].[team_id] = [TeamRole].[team_id]
 		JOIN [dbo].[Practice] ON [Practice].[team_id] = [Team].[team_id]

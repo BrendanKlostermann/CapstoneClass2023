@@ -5,7 +5,7 @@ GO
 
 USE [ecgo_db]
 GO
-CREATE PROCEDURE [dbo].[sp_select_venues]
+CREATE PROCEDURE [dbo].[sp_select_venue]
 AS 
 	BEGIN
 		SELECT  [venue_id],[venue_name],[parking],[description],[location],[zipcode].[zip_code],[zipcode].[city], [zipcode].[st]			

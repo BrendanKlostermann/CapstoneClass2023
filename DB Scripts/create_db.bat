@@ -63,7 +63,7 @@ sqlcmd -S localhost -E -i sp_select_tournament_by_id.sql
 sqlcmd -S localhost -E -i sp_create_practice.sql
 sqlcmd -S localhost -E -i sp_update_game_score_by_game_id.sql
 sqlcmd -S localhost -E -i sp_select_game.sql
-sqlcmd -S localhost -E -i sp_select_venues.sql
+sqlcmd -S localhost -E -i sp_select_venue.sql
 sqlcmd -S localhost -E -i sp_delete_member_availability.sql
 sqlcmd -S localhost -E -i sp_insert_member_availability.sql
 sqlcmd -S localhost -E -i sp_select_member_availability.sql
@@ -103,12 +103,8 @@ sqlcmd -S localhost -E -i sp_delete_generate_tournament_team.sql
 sqlcmd -S localhost -E -i sp_generate_tournament_team.sql
 sqlcmd -S localhost -E -i sp_activate_tournament.sql
 sqlcmd -S localhost -E -i sp_select_roles_by_member_id.sql
-sqlcmd -S localhost -E -i sp_insert_game_roster_member.sql
-sqlcmd -S localhost -E -i sp_update_game_score_by_team_id.sql
-sqlcmd -S localhost -E -i sp_update_game_score_by_game_id.sql
-sqlcmd -S localhost -E -i sp_delete_game_roster_rows.sql
-
 sqlcmd -S localhost -E -i sampleData.sql
+
 
 
 rem server is localhost
