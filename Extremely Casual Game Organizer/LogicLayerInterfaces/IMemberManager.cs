@@ -145,6 +145,29 @@ namespace LogicLayerInterfaces
 
 
         List<Member> GetAListOfMembersByFirstNameLastNameOrEmail(String firstName, String lastName, String email);
+        
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/16
+        /// 
+        /// Selects all roles from the role table
+        /// </summary>
+        List<string> RetrieveAllRoles();
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/17
+        /// 
+        /// Boolean used to find user
+        /// </summary>
+        bool FindUser(string email);
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/17
+        /// 
+        /// Authenticates User
+        /// Created to be used for Identity Framework
+        /// </summary>
+        Member AuthenticateUser(string email, string password);
 
     }
 }

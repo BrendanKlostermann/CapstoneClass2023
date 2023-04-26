@@ -661,5 +661,71 @@ namespace LogicLayer
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/16
+        /// 
+        /// Selects all roles from the role table
+        /// </summary>
+        public List<string> RetrieveAllRoles()
+        {
+            List<string> roles = null;
+
+            try
+            {
+                roles = _memberAccessor.SelectAllRoles();
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Roles not found", ex);
+            }
+
+            return roles;
+        }
+
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/17
+        /// 
+        /// Boolean used to find user
+        /// </summary>
+        public bool FindUser(string email)
+        {
+            try
+            {
+                return _memberAccessor.SelectMemberByEmail(email) != null;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Database Error", ex);
+            }
+        }
+        
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/17
+        /// 
+        /// Authenticates User
+        /// Created to be used for Identity Framework
+        /// </summary>
+        public Member AuthenticateUser(string email, string password)
+        {
+            Member result = null;
+
+            // we need to hash the password
+            var passwordHash = HashSha256(password);
+
+            try
+            {
+                result = _memberAccessor.AuthenticateUser(email, passwordHash);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Login failed!", ex);
+            }
+
+            return result;
+        }
     }
 }

@@ -1,0 +1,4 @@
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\b\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.dll
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\DataAccessLayerFakes\Debug\DataAccessLayerFakes.csproj.CoreCompileInputs.cache
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\DataAccessLayerFakes\Debug\DataAccessLayerFakes.csproj.CopyComplete
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\DataAccessLayerFakes\Debug\DataAccessLayerFakes.dll

@@ -1,20 +1,75 @@
-﻿@model MvcPresentation.Models.RegisterViewModel
+﻿@*<summary>
+        /// Michael Haring
+        /// Created: 2023/04/25
+        ///
+        /// Member registration page
+        ///
+    </summary>*@
+
+@model MvcPresentation.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
+        @Html.LabelFor(m => m.ProfilePicture, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <div class="image-upload">
+                <div class="preview">
+                    <img id="image-preview" class="img-responsive" style="max-height:300px; max-width:250px; margin:10px 0px;" alt="Image Preview" />
+                </div>
+                <input type="file" id="image-upload" name="ProfilePicture" accept="image/*" onchange="previewImage(event)" />
+            </div>
+            @Html.ValidationMessageFor(m => m.ProfilePicture, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FamilyName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FamilyName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Male", Value = "Male" },
+                new SelectListItem { Text = "Female", Value = "Female" },
+                new SelectListItem { Text = "Non-binary", Value = "" }
+            }, "", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Birthday, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Birthday, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
     <div class="form-group">

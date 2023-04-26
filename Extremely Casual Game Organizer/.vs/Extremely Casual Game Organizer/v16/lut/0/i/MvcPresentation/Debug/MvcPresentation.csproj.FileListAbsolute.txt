@@ -1,0 +1,3 @@
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\MvcPresentation\Debug\MvcPresentation.Migrations.test.resources
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\MvcPresentation\Debug\MvcPresentation.csproj.GenerateResource.cache
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\MvcPresentation\Debug\MvcPresentation.csproj.CoreCompileInputs.cache

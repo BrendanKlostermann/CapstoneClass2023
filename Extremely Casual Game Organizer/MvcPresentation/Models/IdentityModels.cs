@@ -1,14 +1,28 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MvcPresentation.Models
 {
+    /// <summary>
+    /// Michael Haring
+    /// Created: 2023/04/25
+    /// 
+    /// Member profile data
+    /// 
+    /// </summary>
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public int MemberID { get; set; }
+        public string FirstName { get; set; }
+        public string FamilyName { get; set; }
+        public DateTime Birthday { get; set; }
+        public byte[] ProfilePicture { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -21,7 +35,7 @@ namespace MvcPresentation.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("IdentityConnection", throwIfV1Schema: false)
         {
         }
 
@@ -30,6 +44,6 @@ namespace MvcPresentation.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<DataObjects.League> Leagues { get; set; }
+        //public System.Data.Entity.DbSet<MvcPresentation.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

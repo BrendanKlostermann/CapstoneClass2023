@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MvcPresentation.Models;
+using System.IO;
+using System.Text;
 
 namespace MvcPresentation.Controllers
 {
@@ -142,33 +144,131 @@ namespace MvcPresentation.Controllers
             return View();
         }
 
-        //
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/25
+        /// 
+        /// Checks to see if user is already registered in the DB
+        /// If they are not creates new user
+        /// </summary>
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            // Removes any error messages from the ModelState dictionary
+            ModelState.Remove("ProfilePicture");
 
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+            byte[] fileData = null;
+            //var image = (System.Web.HttpPostedFileWrapper) model.ProfilePicture;
+
+            using (var binaryReader = new BinaryReader(Request.Files[0].InputStream))
+            {
+                fileData = binaryReader.ReadBytes(Request.Files[0].ContentLength);
             }
 
-            // If we got this far, something failed, redisplay form
+            if (ModelState.IsValid)
+            {
+                // check to see if this user is in the existing database
+                LogicLayer.MemberManager usrMgr = new LogicLayer.MemberManager();
+                //DataObjects.Member _member = new DataObjects.Member();
+                try
+                {
+                    if (usrMgr.FindUser(model.Email))
+                    {
+                        // this requires the user to use the same password as the one in the internal database
+                        var oldUser = usrMgr.AuthenticateUser(model.Email, model.Password);
+                        var user = new ApplicationUser
+                        {
+                            // populate these fields with existing data from oldUser
+                            FirstName = model.FirstName,
+                            FamilyName = model.FamilyName,
+                            Email = model.Email,
+                            PhoneNumber = model.PhoneNumber,
+                            Birthday = (DateTime)model.Birthday,
+                            UserName = model.Email,
+                            MemberID = oldUser.MemberID
+                        };
+                        // create the user with the Identity system UserManager normally
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            if (oldUser.Roles != null)
+                            {
+                                // user the oldUser.Roles list to add the internally assigned roles to the user
+                                foreach (var role in oldUser.Roles)
+                                {
+                                    UserManager.AddToRole(user.Id, role);
+                                }
+                            }
+
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                    }
+                    else // not an existing user, create a user without roles
+                    {
+                        bool? gender = null;
+                        if (model.Gender == "Male") gender = true;
+                        else if (model.Gender == "Female") gender = false;
+                        else gender = null;
+
+                        var member = new DataObjects.Member()
+                        {
+                            Birthday = model.Birthday,
+                            Email = model.Email,
+                            FirstName = model.FirstName,
+                            Gender = gender,
+                            FamilyName = model.FamilyName,
+                            PhoneNumber = model.PhoneNumber,
+                            Active = true,
+                            PasswordHash = usrMgr.HashSha256(model.Password)
+                        };
+
+                        member.ProfilePhoto = fileData;
+
+                        int newMemberID = usrMgr.AddUser(member);
+                        var user = new ApplicationUser
+                        {
+                            FirstName = model.FirstName,
+                            FamilyName = model.FamilyName,
+                            Email = model.Email,
+                            PhoneNumber = model.PhoneNumber,
+                            Birthday = model.Birthday,
+                            UserName = model.Email,
+                            MemberID = newMemberID,
+
+                        };
+
+                        // Check if user is over 18 years old
+                        var today = DateTime.Today;
+                        var age = today.Year - model.Birthday.Year;
+                        if (age < 18)
+                        {
+                            ModelState.AddModelError(string.Empty, "You must be at least 18 years old to register.");
+                            return View(model);
+                        }
+
+                        // Sign User in and return them back to homepage
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // creating old user failed, probably because AuthenticateUser failed
+                    ViewBag.ErrorMessage = ex.Message;
+                    return View("Error");
+                }
+            }
+            // modelstate was not valid
             return View(model);
         }
 

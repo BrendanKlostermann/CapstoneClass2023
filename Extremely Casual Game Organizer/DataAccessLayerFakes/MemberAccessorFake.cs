@@ -779,5 +779,15 @@ namespace DataAccessLayerFakes
         {
             throw new NotImplementedException();
         }
+
+        public List<string> SelectAllRoles()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Member AuthenticateUser(string username, string passwordHash)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

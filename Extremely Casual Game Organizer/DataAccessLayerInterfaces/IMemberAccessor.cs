@@ -198,5 +198,21 @@ namespace DataAccessLayerInterfaces
 
         List<Member> SearchMembersByFirstNameLastNameOrEmail(String firstName, String lastName, String email);
 
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/16
+        /// 
+        /// Selects all roles from the role table
+        /// </summary>
+        List<string> SelectAllRoles();
+
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/16
+        /// 
+        /// Authenticates user returning a Member object
+        /// </summary>
+        Member AuthenticateUser(string username, string passwordHash);
+
     }
 }

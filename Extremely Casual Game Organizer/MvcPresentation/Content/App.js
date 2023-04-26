@@ -70,3 +70,34 @@ function scrollBottom() {
     var divMessage = document.getElementById("divMessage");
     divMessage.scroll({ top: divMessage.scrollHeight, behavior: 'smooth' });
 }
+
+function previewImage(event) {
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
+
+    var imgtag = document.getElementById("image-preview");
+    imgtag.title = selectedFile.name;
+
+    reader.onload = function (event) {
+        imgtag.src = event.target.result;
+    };
+
+    reader.readAsDataURL(selectedFile);
+}
+
+
+function previewImagesss(e) {
+    console.log(e);
+    console.log("element");
+    var element = e.target.files[0];
+
+    var image = document.getElementById("image-preview");
+    console.log("image");
+    console.log(image);
+
+    image.setAttribute("src", element)
+
+    //setCookie("image", element);
+    console.log(element);
+
+}
