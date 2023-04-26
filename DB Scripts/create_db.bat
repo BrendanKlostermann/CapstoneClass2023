@@ -103,6 +103,24 @@ sqlcmd -S localhost -E -i sp_delete_generate_tournament_team.sql
 sqlcmd -S localhost -E -i sp_generate_tournament_team.sql
 sqlcmd -S localhost -E -i sp_activate_tournament.sql
 sqlcmd -S localhost -E -i sp_select_roles_by_member_id.sql
+sqlcmd -S localhost -E -i sp_select_venues.sql
+sqlcmd -S localhost -E -i sp_insert_game_roster_member.sql
+sqlcmd -S localhost -E -i sp_update_game_score_by_team_id.sql
+sqlcmd -S localhost -E -i sp_insert_team_request.sql
+sqlcmd -S localhost -E -i sp_insert_tournament_request.sql
+sqlcmd -S localhost -E -i sp_update_team_request_status_by_request_id.sql
+sqlcmd -S localhost -E -i sp_update_tournament_request_status_by_request_id.sql
+sqlcmd -S localhost -E -i sp_create_league.sql
+sqlcmd -S localhost -E -i sp_select_teams_by_member_id.sql
+sqlcmd -S localhost -E -i sp_select_request_by_team_id.sql
+sqlcmd -S localhost -E -i sp_select_request_by_tournament_id.sql
+
+
+
+
+
+
+
 sqlcmd -S localhost -E -i sampleData.sql
 
 

@@ -39,7 +39,7 @@ namespace DataAccessLayerInterfaces
         int DeleteAMemberFromATeamByMemberIdAndTeamID(int memberId, int teamId); //returns number of rows affected
 
         TeamMember SelectAMembersInATeamWithTeamDetails(int memberID, int teamID);//getting a list of team details
-		
+
         Team SelectTeamByTeamID(int team_id);
 
         List<Team> SelectAllTeams();
@@ -137,5 +137,11 @@ namespace DataAccessLayerInterfaces
         /// Gets the owner ID of the team owner (creator)
         /// </summary>
         int SelectOwnerIDByTeamID(int team_id);
+
+        List<TeamRequest> SelectRequestsByTeamID(int TeamID);
+
+        int UpdateTeamRequestStatus(int RequestID, string Status);
+
+        int AddATeamRequest(TeamRequest request);
     }
 }

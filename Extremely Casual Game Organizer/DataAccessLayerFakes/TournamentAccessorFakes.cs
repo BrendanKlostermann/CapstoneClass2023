@@ -377,5 +377,20 @@ namespace DataAccessLayerFakes
             }
             return count;
         }
+
+        public List<TournamentRequest> SelectRequestsByTournamentID(int TournamentID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateTournamentRequest(int RequestID, string Status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddATournamentRequest(TournamentRequest request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace LogicLayerInterfaces
         Team RetrieveTeamByTeamID(int team_id);
 
         List<Team> RetrieveAllTeams();
-         /// <summary>
+        /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
         /// 
@@ -77,5 +77,11 @@ namespace LogicLayerInterfaces
         /// </summary>
         /// Gets the team owner's member ID
         int SelectTeamOwner(int teamID);
+
+        List<TeamRequest> RetrieveRequestByTeamID(int TeamID);
+
+        bool UpdateTeamRequestStatus(int RequestID, string Status);
+
+        bool CreateATeamRequest(int TeamID, int MemberID);
     }
 }

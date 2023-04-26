@@ -494,5 +494,20 @@ namespace DataAccessLayerFakes
         {
             throw new NotImplementedException();
         }
+
+        public List<TeamRequest> SelectRequestsByTeamID(int TeamID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateTeamRequestStatus(int RequestID, string Status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddATeamRequest(TeamRequest request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
