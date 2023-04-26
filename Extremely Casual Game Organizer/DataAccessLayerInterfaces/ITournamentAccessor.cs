@@ -104,5 +104,12 @@ namespace DataAccessLayerInterfaces
         /// Activate tournament 
         /// </summary>
         int ActivateTournament(int memberid, int tournamentID);
+
+
+        List<TournamentRequest> SelectRequestsByTournamentID(int TournamentID);
+
+        int UpdateTournamentRequest(int RequestID, string Status);
+
+        int AddATournamentRequest(TournamentRequest request);
     }
 }

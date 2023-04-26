@@ -23,5 +23,5 @@ AS
 		([sport_id], [league_dues], [active], [member_id], [gender], [description], [name], [max_num_of_teams])
 		VALUES
 		(@SportID, @Dues, @Active, @MemberID, @Gender, @Description, @Name, @Max_Num_Teams)
-		RETURN SCOPE_IDENTITY()
+		SELECT SCOPE_IDENTITY()
 	END

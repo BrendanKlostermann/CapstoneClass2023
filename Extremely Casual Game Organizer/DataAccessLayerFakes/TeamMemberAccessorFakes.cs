@@ -80,6 +80,11 @@ namespace DataAccessLayerFakes
             _teamMember.Add(temp2);
         }
 
+        public int AddATeamRequest(TeamRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public int AddMemberToTeamByTeamIDAndMemberID(int teamID, int memberID)
         {
             throw new NotImplementedException();
@@ -198,12 +203,22 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
+        public List<TeamRequest> SelectRequestsByTeamID(int TeamID)
+        {
+            throw new NotImplementedException();
+        }
+
         public Team SelectTeamByTeamID(int team_id)
         {
             throw new NotImplementedException();
         }
 
         public List<TeamMember> SelectTeamMembersByTeamID(int team_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateTeamRequestStatus(int RequestID, string Status)
         {
             throw new NotImplementedException();
         }

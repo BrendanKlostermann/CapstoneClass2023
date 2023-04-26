@@ -21,10 +21,12 @@ AS
 	BEGIN
 		SELECT
 			DISTINCT [Game].[game_id]
+			, [Venue].[venue_name]
 			, [Venue].[location]
 			, CONCAT([zipcode].[city], ', ', [zipcode].[st], ' ', [zipcode].[zip_code])
 			, [Game].[date_and_time]
 			, [Sport].[description]
+			, [Game].[member_id]
 			FROM [Game]
 			JOIN [Venue] ON [Venue].[venue_id] = [Game].[venue_id]
 			JOIN [Sport] ON [Game].[sport_id] = [Sport].[sport_id]

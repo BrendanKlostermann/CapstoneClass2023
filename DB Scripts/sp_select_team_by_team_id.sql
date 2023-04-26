@@ -27,6 +27,7 @@ AS
 			, [team_name]
 			, [gender]
 			, [sport_id]
+			, [member_id]
 		FROM [dbo].[Team]
 		WHERE @team_id = [team_id]
 	END

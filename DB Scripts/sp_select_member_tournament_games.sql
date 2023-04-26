@@ -10,7 +10,7 @@ CREATE PROCEDURE [dbo].[sp_select_member_tournament_games](
 AS
 	BEGIN
 		SELECT
-			'Tourament Game'
+			'Tournament Game'
 			, [Game].[game_id]
 			, [Venue].[venue_name]
 			, [Game].[date_and_time]
@@ -19,5 +19,6 @@ AS
 		JOIN [TournamentGame] ON [TournamentGame].[game_id] = [Game].[game_id]
 		JOIN [Venue] ON [Venue].[venue_id] = [Game].[venue_id]
 		WHERE [dbo].[GameRoster].[member_id] = @member_id
+		AND [dbo].[Game].[Active] = 1
 	END
 GO

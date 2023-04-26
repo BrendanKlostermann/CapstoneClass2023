@@ -22,7 +22,6 @@ AS
 BEGIN
     
     BEGIN TRY
-        BEGIN TRANSACTION
         
         UPDATE 	[Tournament]
 			SET		[Sport_ID]		=	@sportID,
@@ -34,8 +33,8 @@ BEGIN
 			WHERE	[tournament_ID] = 	@tournamentID
 			AND 	[Member_ID]		= 	@editorID
 		RETURN 	@@ROWCOUNT
-        COMMIT TRANSACTION;
     END TRY
+	
     BEGIN CATCH
         ROLLBACK TRANSACTION; --Rollback any changed made if failed
     END CATCH

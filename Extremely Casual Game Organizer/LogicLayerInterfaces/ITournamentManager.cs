@@ -27,7 +27,7 @@ namespace LogicLayerInterfaces
         List<TournamentVM> RetrieveAllTournamentVMs();
 
         bool CreateTournament(Tournament tm);
-        
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
@@ -108,5 +108,11 @@ namespace LogicLayerInterfaces
         /// Activate tournament 
         /// </summary>
         bool ActivateTournament(int memberid, int tournamentID);
+
+        List<TournamentRequest> RetrieveRequestByTournamentID(int TournamentID);
+
+        bool UpdateTournamentRequestStatus(int RequestID, string Status);
+
+        bool CreateATournamentRequest(int TournamentID, int TeamID);
     }
 }

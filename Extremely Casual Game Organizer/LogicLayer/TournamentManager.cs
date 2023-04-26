@@ -61,7 +61,7 @@ namespace LogicLayer
                     return false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new ApplicationException("Error adding new tournament.", ex);
             }
@@ -103,7 +103,7 @@ namespace LogicLayer
         public List<TournamentVM> RetrieveAllTournamentVMs()
         {
             List<TournamentVM> tournaments = new List<TournamentVM>();
-            
+
 
             try
             {
@@ -121,11 +121,11 @@ namespace LogicLayer
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new ApplicationException("Error retireving tournament list", ex);
             }
-            
+
             return tournaments;
         }
         /// <summary>
@@ -141,11 +141,11 @@ namespace LogicLayer
             {
                 return _tournamentAccessor.SelectAllTournaments();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new ApplicationException("Error retireving tournament list", ex);
             }
-            
+
         }
 
 
@@ -312,7 +312,7 @@ namespace LogicLayer
             }
             return rowsAffected;
         }
-        
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/03/20
@@ -402,5 +402,78 @@ namespace LogicLayer
             }
         }
 
+        public List<TournamentRequest> RetrieveRequestByTournamentID(int TournamentID)
+        {
+            List<TournamentRequest> _requests;
+            try
+            {
+                _requests = _tournamentAccessor.SelectRequestsByTournamentID(TournamentID);
+                if (_requests == null || _requests.Count == 0)
+                {
+                    _requests = new List<TournamentRequest>();
+                    return _requests;
+                }
+                else
+                {
+                    return _requests;
+                }
+            }
+            catch (Exception up)
+            {
+                throw new ApplicationException("Error getting requests", up);
+            }
+        }
+
+        public bool UpdateTournamentRequestStatus(int RequestID, string Status)
+        {
+            try
+            {
+                var results = _tournamentAccessor.UpdateTournamentRequest(RequestID, Status);
+                if (results == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception up)
+            {
+                throw new ApplicationException("There was an error updating that request", up);
+            }
+        }
+
+        public bool CreateATournamentRequest(int TournamentID, int TeamID)
+        {
+            try
+            {
+                var teams = _tournamentAccessor.GetTournamentTeamByID(TeamID);
+                if (teams == null)
+                {
+                    TournamentRequest request = new TournamentRequest();
+                    request.TournamentID = TournamentID;
+                    request.TeamID = TeamID;
+                    var results = _tournamentAccessor.AddATournamentRequest(request);
+                    if (results == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception up)
+            {
+                throw new ApplicationException("Error requesting to join", up);
+            }
+        }
     }
 }
