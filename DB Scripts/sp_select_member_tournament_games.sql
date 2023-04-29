@@ -19,5 +19,6 @@ AS
 		JOIN [TournamentGame] ON [TournamentGame].[game_id] = [Game].[game_id]
 		JOIN [Venue] ON [Venue].[venue_id] = [Game].[venue_id]
 		WHERE [dbo].[GameRoster].[member_id] = @member_id
+		AND [dbo].[Game].[Active] = 1
 	END
 GO

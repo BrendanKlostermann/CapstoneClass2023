@@ -282,9 +282,9 @@ namespace LogicLayer
                 }
                 return _tempMemberList;
             }
-            catch (ApplicationException up)
+            catch (Exception up)
             {
-                throw new ApplicationException("Unable to find any members");
+                throw new ApplicationException("Unable to find any members", up);
             }
         }
 
@@ -409,7 +409,7 @@ namespace LogicLayer
                     calEvent.Date = Convert.ToDateTime(availability[2]).ToString("MM/dd/yyyy h:mm tt") + "," + Convert.ToDateTime(availability[3]).ToString("MM/dd/yyyy h:mm tt");
                     if (availability[4] == null)
                     {
-                        calEvent.Description = "";
+                        calEvent.Description = null;
                     }
                     else
                     {
@@ -425,18 +425,17 @@ namespace LogicLayer
                     practiceEvent.EventID = Convert.ToInt32(practice[1]);
                     practiceEvent.Location = practice[2].ToString();
                     practiceEvent.Date = Convert.ToDateTime(practice[3]).ToString("MM/dd/yyyy h:mm tt");
-                    practiceEvent.Description = Convert.ToString(practice[4]);
-                    events.Add(practiceEvent);
-                }
+                    if (practice[4].ToString() == "" || practice[4] == null)
+                       
+                    {
+                        practiceEvent.Description = null;
+                    }
+                    else
+                    {
+                        practiceEvent.Description = Convert.ToString(practice[4]);
 
-                foreach (var game in games.AsEnumerable())
-                {
-                    CalendarEvent gameEvent = new CalendarEvent();
-                    gameEvent.Type = game[0].ToString();
-                    gameEvent.EventID = Convert.ToInt32(game[1]);
-                    gameEvent.Location = game[2].ToString();
-                    gameEvent.Date = Convert.ToDateTime(game[3]).ToString("MM/dd/yyyy h:mm tt"); ;
-                    events.Add(gameEvent);
+                    }
+                    events.Add(practiceEvent);
                 }
 
                 foreach (var tournamentGame in tournamentGames.AsEnumerable())
@@ -446,8 +445,24 @@ namespace LogicLayer
                     game.EventID = Convert.ToInt32(tournamentGame[1]);
                     game.Location = tournamentGame[2].ToString();
                     game.Date = Convert.ToDateTime(tournamentGame[3]).ToString("MM/dd/yyyy h:mm tt");
+                    game.Description = null;
 
                     events.Add(game);
+                }
+
+                foreach (var game in games.AsEnumerable())
+                {
+                    // Games can be added via tournamet games, validate game has not already been added
+                    if (events.Where(x => x.EventID == (int)game[1]).Where(y => y.Type == "Tournament Game").Count() == 0)
+                    {
+                        CalendarEvent gameEvent = new CalendarEvent();
+                        gameEvent.Type = game[0].ToString();
+                        gameEvent.EventID = Convert.ToInt32(game[1]);
+                        gameEvent.Location = game[2].ToString();
+                        gameEvent.Date = Convert.ToDateTime(game[3]).ToString("MM/dd/yyyy h:mm tt");
+                        gameEvent.Description = null;
+                        events.Add(gameEvent);
+                    }
                 }
 
 

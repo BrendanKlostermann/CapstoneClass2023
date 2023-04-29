@@ -8,7 +8,7 @@
       d:DesignHeight="500" d:DesignWidth="800"
       Title="TeamMembers" Unloaded="Page_Unloaded" Loaded="Page_Loaded">
 
-    <Grid Background="White" Margin="10,10,10,0">
+    <Grid x:Name="grdSpots" Background="White" Margin="10,10,10,0">
         <!--<Canvas Width="800" Height="500"></Canvas>-->
         <Grid.RowDefinitions>
             <RowDefinition />

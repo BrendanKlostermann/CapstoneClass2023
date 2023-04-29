@@ -17,6 +17,13 @@ namespace MvcPresentation.Controllers
             _masterManager = new MasterManager();
         }
         // GET: Games
+        /// <summary>
+        /// Created By: Jacob Lindauer 
+        /// Date: 04/20/2023
+        /// 
+        /// View All Games
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AllGames()
         {
             try
@@ -34,6 +41,13 @@ namespace MvcPresentation.Controllers
         }
 
         // GET: Games/Details/5
+        /// <summary>
+        /// Created By: Jacob Lindauer 
+        /// Date: 04/20/2023
+        /// 
+        /// View game details
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Details(int id)
         {
             try

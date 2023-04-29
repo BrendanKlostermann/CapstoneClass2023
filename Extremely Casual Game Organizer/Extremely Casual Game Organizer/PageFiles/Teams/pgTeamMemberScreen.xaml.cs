@@ -36,6 +36,7 @@ namespace Extremely_Casual_Game_Organizer
         bool toggleBench = true; //true = starter false = benched
         private int _teamID = 0;
         int _optionStatus = 0; //used to figure out which options to display when clicking on a team member
+        Team _team;
 
 
         public pgTeamMemberScreen(MasterManager masterManager)
@@ -66,7 +67,24 @@ namespace Extremely_Casual_Game_Organizer
             _members = _masterManager.MemberManager.GetAListOfMembersByTeamID(_teamID);
             _starterOrBenchers = _masterManager.TeamMemberManager.SortIntoStarters(_members, _teamID, toggleBench);
             _pageControl = new PageControl();
-			InitializeComponent();
+            _team = _masterManager.TeamManager.RetrieveTeamByTeamID(teamID);
+            InitializeComponent();
+            // Hide roster member options if the current member is not signed in or is not the captain
+            if (_pageControl.GetSignedInMember() == null || _pageControl.GetSignedInMember().MemberID != _team.MemberID)
+            {
+                foreach (var spot in grdSpots.Children)
+                {
+                    if (spot.GetType() == typeof(Label))
+                    {
+                        Label spotCast = (Label)spot;
+                        if (spotCast.Name.Contains("spot"))
+                        {
+                            spotCast.IsEnabled = false;
+                        }
+                        
+                    }
+                }
+            }
             DisplayTeamMembers();
         }
 

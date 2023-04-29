@@ -105,9 +105,9 @@ GO
 print ''print 'sample leagueRoleAssignment table'
 INSERT INTO [dbo].[LeagueRoleAssignment] ([member_id], [league_role_id], [league_id])
 VALUES
-(100001, 'League Admin', 1001),
-(100002, 'League Manager', 1002),
-(100003, 'Spectator 	', 1003),
+(100001, 'League Admin', 1000),
+(100002, 'Player', 1002),
+(100003, 'Spectator', 1003),
 (100004, 'Player', 1001),
 (100005, 'League Manager', 1002);
 GO
@@ -159,10 +159,7 @@ VALUES
 (1003, 'Backup', 0, 100008),
 (1004, 'Starting lineup', 1, 100004),
 (1004, 'Backup', 0, 100009),
-(1005, 'Starting lineup', 1, 100005),
-(1006, 'Starting lineup', 1, 100009),
-(1007, 'Starting lineup', 1, 100007),
-(1008, 'Starting lineup', 1, 100009);
+(1005, 'Starting lineup', 1, 100005);
 GO
 
 print ''print 'sample tournament table'

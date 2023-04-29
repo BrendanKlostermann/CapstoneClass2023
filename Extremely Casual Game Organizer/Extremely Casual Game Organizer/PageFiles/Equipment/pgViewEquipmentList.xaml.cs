@@ -30,7 +30,7 @@ namespace Extremely_Casual_Game_Organizer
         private EquipmentManager _equipmentManager= null;
         private List<Equipment> _equipmentLists = null;
         private int _team_id;
-        private MasterManager masterManager = new MasterManager();
+        private MasterManager masterManager = null;
 
         public pgViewEquipmentList(TeamMemberAndSport teamMemberAndSport)
         {

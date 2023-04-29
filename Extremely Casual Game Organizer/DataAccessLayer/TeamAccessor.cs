@@ -137,6 +137,7 @@ namespace DataAccessLayer
                         team.Gender = reader.GetBoolean(2);
                     }
                     team.SportID = reader.GetInt32(3);
+                    team.MemberID = reader.GetInt32(4);
                 }
             }
             catch (Exception ex)

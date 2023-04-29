@@ -751,7 +751,7 @@ namespace DataAccessLayer
                 // .ExecuteReadet() returns row/column data (normal select statements)
                 // .ExecuteNonQuery() returns Int32 rows affected (action statements (update/delete/insert))
                 // .ExecuteScalar() returns a System.Object (aggregate queries)
-                addedMemberID = Convert.ToInt32(cmd.ExecuteNonQuery());
+                addedMemberID = Convert.ToInt32(cmd.ExecuteScalar());
 
             }
             catch (Exception ex)

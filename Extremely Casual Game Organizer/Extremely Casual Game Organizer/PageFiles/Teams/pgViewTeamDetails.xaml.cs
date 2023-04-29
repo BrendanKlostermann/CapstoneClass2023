@@ -41,6 +41,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         MasterManager _masterManager = null;
         PageControl _pageControl = new PageControl();
         Button _viewRoster = null;
+        Button _requestToJoin = null;
+        int _teamCaptain = 0;
         public pgViewTeamDetails(int teamID, MasterManager masterManager)
         {
             _teamID = teamID;
@@ -62,10 +64,21 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             // Creating button for viewing team roster
             _viewRoster = _pageControl.SetCustomButton("View Roster", 1);
             _viewRoster.Click += ViewRosterButton_Click;
+
+            if (_pageControl.GetSignedInMember() != null)
+            {
+                _requestToJoin = _pageControl.SetCustomButton("Join Team", 3);
+                _requestToJoin.Click += JoinTeamButton_Click;
+            }
             LoadTeamDetails();
             LoadGameData();
             LoadLeagueList();
             LoadUserDetails();
+        }
+
+        private void JoinTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -102,6 +115,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 lblTeamName.Text = _team.TeamName;
                 txtTeamSport.Text = (from sport in _masterManager.SportManager.RetrieveAllSports() where sport.SportId.Equals(_team.SportID) select sport.Description).First(); // should only return 1 result
                 txtDescription.Text = _team.Description;
+                _teamCaptain = _team.MemberID;
 
                 if (_team.Gender == null)
                 {
@@ -344,6 +358,10 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             // Need to remove click event, should user return to this page
 
             _viewRoster.Click -= ViewRosterButton_Click;
+            if (_pageControl.GetSignedInMember() != null)
+            {
+                _requestToJoin.Click -= JoinTeamButton_Click;
+            }
 
             // nulling selected items
             datPreviousGamesList.SelectedItem = null;

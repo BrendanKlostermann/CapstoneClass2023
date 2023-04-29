@@ -1,0 +1,120 @@
+﻿@model List<DataObjects.CalendarEvent>
+
+@{
+    ViewBag.Title = "Schedule";
+}
+
+@{ 
+    var masterManager = new LogicLayer.MasterManager();
+} 
+
+<h2>Schedule</h2>
+
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () { // Initialize Calendar
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                eventTimeFormat: { // Apply Time formatting for events
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true,
+                    meridiem: 'narrow'
+                },
+
+                //Popup window click event
+                eventClick: function (info) {
+                    // obtain details
+                    var title = info.event.title;
+                    var description = info.event.extendedProps.description;
+                    var start = info.event.start;
+                    var end = info.event.end;
+                    var location = info.event.extendedProps.location;
+
+                    // display event details
+                    document.getElementById("eventTitle").innerHTML = title;
+                    if (description != null) {
+                        document.getElementById("eventDescription").innerHTML = "Description: " + description;
+
+                    }
+                    else {
+                        document.getElementById("eventDescription").innerHTML = "";
+
+                    }
+                    document.getElementById("eventDetails").style.display = "block";
+                    document.getElementById("eventStart").innerHTML = "Start: " + start;
+                    if (end != null) {
+                        document.getElementById("eventEnd").innerHTML = "End: " + end;
+                    }
+                    else {
+                        document.getElementById("eventEnd").innerHTML = "";
+                    }
+                    if (location != null) {
+                        document.getElementById("eventLocation").innerHTML = "Location: " + location;
+
+                    }
+                    else {
+                        document.getElementById("eventLocation").innerHTML = "";
+
+                    }
+                }
+            });
+
+            @foreach (var calendarEvent in Model) // Loop through model events and add them to the calendar
+            {
+                if (calendarEvent.Type != "Availability")
+                {
+
+                if (calendarEvent.Description != null && calendarEvent.Description != "") // Add description if not null
+                    {
+            <text>
+            var event = {title: '@calendarEvent.Type', description: '@calendarEvent.Description', location: '@calendarEvent.Location', start: '@Convert.ToDateTime(calendarEvent.Date).ToString("yyyy-MM-ddTHH:mm:ss")' };
+            calendar.addEvent(event);
+            </text>
+                    }
+                    else
+                    {
+            <text>
+            var event = {title: '@calendarEvent.Type', location: '@calendarEvent.Location', start: '@Convert.ToDateTime(calendarEvent.Date).ToString("yyyy-MM-ddTHH:mm:ss")' };
+            calendar.addEvent(event);
+            </text>
+                    }
+
+                }
+                if (calendarEvent.Type == "Availability")
+                {
+                    string[] dates = calendarEvent.Date.Split(',');
+            <text>
+            var event = { title: 'Unavailable', description: '@calendarEvent.Description', start: '@Convert.ToDateTime(dates[0]).ToString("yyyy-MM-ddTHH:mm:ss")', end: '@Convert.ToDateTime(dates[1]).ToString("yyyy-MM-ddTHH:mm:ss")'};
+            calendar.addEvent(event);
+            </text>
+                }
+            }
+
+                calendar.render();
+            });
+
+
+    </script>
+</head>
+<body>
+    <div id='calendar'></div>
+
+    <div id="eventDetails" style="display: none;">
+        <h2 id="eventTitle"></h2>
+        <h4 id="eventLocation"></h4>
+        <br />
+        <p id="eventDescription"></p>
+        <br />
+        <p id="eventStart"></p>
+        <p id="eventEnd"></p>
+    </div>
+</body>
+</html>
+
