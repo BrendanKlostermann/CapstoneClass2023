@@ -28,6 +28,7 @@ using LogicLayer;
 using DataObjects;
 using System.Data;
 using Extremely_Casual_Game_Organizer.PageFiles.Practices;
+using Extremely_Casual_Game_Organizer.PageFiles.Teams.Utility;
 
 namespace Extremely_Casual_Game_Organizer.PageFiles
 {
@@ -42,61 +43,176 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         PageControl _pageControl = new PageControl();
         Button _viewRoster = null;
         Button _requestToJoin = null;
+        Button _createPracitce = null;
+        Button _removePractice = null;
+        Button _viewInvites = null;
         int _teamCaptain = 0;
         public pgViewTeamDetails(int teamID, MasterManager masterManager)
         {
-            _teamID = teamID;
+            try
+            {
+                _teamID = teamID;
 
-            _masterManager = masterManager;
+                _masterManager = masterManager;
 
-            InitializeComponent();
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
         /// <summary>
         /// Created By: Jacob Lindauer
         /// Date: 2023/25/02
         /// 
         /// Page loaded event. Should add click events to buttons and load data for page. 
-        /// </summary>
+        /// 
+        ///  Updated By: Nick Vroom
+        ///  Date: 2023/04/18
+        ///  
+        /// Added buttons for creating and removing practices
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // Creating button for viewing team roster
-            _viewRoster = _pageControl.SetCustomButton("View Roster", 1);
-            _viewRoster.Click += ViewRosterButton_Click;
-
-            if (_pageControl.GetSignedInMember() != null)
+            try
             {
-                _requestToJoin = _pageControl.SetCustomButton("Join Team", 3);
-                _requestToJoin.Click += JoinTeamButton_Click;
-            }
-            LoadTeamDetails();
-            LoadGameData();
-            LoadLeagueList();
-            LoadUserDetails();
-        }
+                // Creating button for viewing team roster
+                _viewRoster = _pageControl.SetCustomButton("View Roster", 1);
+                _viewRoster.Click += ViewRosterButton_Click;
 
-        private void JoinTeamButton_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+                if (_pageControl.GetSignedInMember() != null && _pageControl.GetSignedInMember().MemberID != _masterManager.TeamManager.RetrieveTeamByTeamID(_teamID).MemberID)
+                {
+                    _requestToJoin = _pageControl.SetCustomButton("Join Team", 4);
+                    _requestToJoin.Click += JoinTeamButton_Click;
+                }
+                if (_pageControl.GetSignedInMember() != null && _pageControl.GetSignedInMember().MemberID == _masterManager.TeamManager.RetrieveTeamByTeamID(_teamID).MemberID)
+                {
+                    // Create practice buttons
+                    _createPracitce = _pageControl.SetCustomButton("Create Practice", 2);
+                    _createPracitce.Click += CreatePractice_Click;
+
+                    _removePractice = _pageControl.SetCustomButton("Remove Practice", 3);
+                    _removePractice.Click += RemovePracitce_Click;
+
+                    _viewInvites = _pageControl.SetCustomButton("View Invites", 5);
+                    _viewInvites.Click += ViewInvites_Click;
+
+                }
+
+                LoadTeamDetails();
+                LoadGameData();
+                LoadLeagueList();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
         }
 
         /// <summary>
-        ///  Created By: Nick Vroom
-        ///  Date: 2023/04/18
-        ///  
-        /// Method checks to see if the logged-in user is the owner of the team, if so, they can create and remove practices 
-        /// </summary>
-        private void LoadUserDetails()
+        /// Created By: Jacob Lindauer
+        /// Date: 2023/25/02
+        /// 
+        /// View Invites Click Event
+        /// 
+        private void ViewInvites_Click(object sender, RoutedEventArgs e)
         {
-            int ownerID = _masterManager.TeamManager.SelectTeamOwner(_teamID);
-            // Console.WriteLine(ownerID); print to console the ID of the owner
-            // Console.WriteLine(_pageControl.GetSignedInMember()?.MemberID); // print signed in user's ID to console
-            if (_pageControl.GetSignedInMember()?.MemberID.Equals(ownerID) == true)
+            try
             {
-                //buttons are Hidden by default, if ownerID matches the signed in user's ID, they will be visible
-                btnCreatePractice.Visibility = Visibility.Visible;
-                btnRemovePractice.Visibility = Visibility.Visible;
+                winTeamInvites invites = new winTeamInvites(_teamID, _masterManager);
+                invites.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+        }
+
+        /// <summary>
+        /// Created By: Nick Vroom
+        /// Date: 04/25/2023
+        /// 
+        /// Remove Practice Click Event
+        /// 
+        private void RemovePracitce_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                pgRemovePractice page = new pgRemovePractice(_team.TeamID);
+
+                _pageControl.LoadPage(page, new pgViewTeamDetails(_teamID, _masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Created By: Nick Vroom
+        /// Date: 04/25/2023
+        /// 
+        /// Create Practice Click Event
+        /// 
+        private void CreatePractice_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                pgCreatePractice page = new pgCreatePractice(_team.TeamID);
+
+                _pageControl.LoadPage(page, new pgViewTeamDetails(_teamID, _masterManager));
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+        }
+
+        /// <summary>
+        /// Created By: Jacob Lindauer
+        /// Date: 04/29/2023
+        /// 
+        /// Join team Click Event
+        /// 
+        private void JoinTeamButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Check if user has request already
+                var request = from member in _masterManager.TeamManager.RetrieveRequestByTeamID(_teamID) where member.MemberID == _pageControl.GetSignedInMember().MemberID where member.Status != "Pending" where member.Status != "Approved" select member;
+                var teamMember = from teammate in _masterManager.TeamMemberManager.RetrieveTeamRosterByTeamID(_teamID) where teammate.MemberID == _pageControl.GetSignedInMember().MemberID select teammate;
+
+                if (teamMember.Count() > 0)
+                {
+                    MessageBox.Show("You are already a member of this team!");
+                }
+                else if (request.Count() > 0)
+                {
+                    MessageBox.Show("Invite already pending for approval");
+                }
+                else
+                {
+                    bool result = _masterManager.TeamManager.CreateATeamRequest(_teamID, _pageControl.GetSignedInMember().MemberID);
+
+                    if (result == true)
+                    {
+                        MessageBox.Show("Invite Request Sent");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
         }
 
@@ -185,12 +301,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 DataGridTextColumn prevColumn2 = new DataGridTextColumn();
                 prevColumn2.Binding = new Binding("Teams");
                 prevColumn2.Header = "Teams";
-                prevColumn2.Width = new DataGridLength(230);
+                prevColumn2.Width = new DataGridLength(170);
                 datPreviousGamesList.Columns.Add(prevColumn2);
 
                 DataGridTextColumn prevColumn4 = new DataGridTextColumn();
                 prevColumn4.Binding = new Binding("Date and Time");
-                prevColumn4.Width = new DataGridLength(130);
+                prevColumn4.Width = new DataGridLength(135);
                 prevColumn4.Header = "Date and Time";
                 datPreviousGamesList.Columns.Add(prevColumn4);
 
@@ -207,12 +323,12 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 DataGridTextColumn column2 = new DataGridTextColumn();
                 column2.Binding = new Binding("Teams");
                 column2.Header = "Teams";
-                column2.Width = new DataGridLength(220);
+                column2.Width = new DataGridLength(170);
                 datUpcomingGamesList.Columns.Add(column2);
 
                 DataGridTextColumn column4 = new DataGridTextColumn();
                 column4.Binding = new Binding("Date and Time");
-                column4.Width = new DataGridLength(125);
+                column4.Width = new DataGridLength(135);
                 column4.Header = "Date and Time";
                 datUpcomingGamesList.Columns.Add(column4);
 
@@ -230,9 +346,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             }
             catch (Exception ex)
             {
-               MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
-            
+
         }
         /// <summary>
         /// Created By: Jacob Lindauer
@@ -259,7 +375,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             DataGridTextColumn column8 = new DataGridTextColumn();
             column8.Binding = new Binding("Name");
             column8.Header = "Name";
-            column8.Width = new DataGridLength(380);
+            column8.Width = new DataGridLength(305);
             datLeagueList.Columns.Add(column8);
 
 
@@ -292,7 +408,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             catch (Exception ex)
             {
 
-               MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
 
             }
         }
@@ -348,38 +464,39 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             catch (Exception ex)
             {
 
-               MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException);
 
             }
         }
 
+
+        /// <summary>
+        /// Created By: Jacob LIndauer
+        /// Date: 04/25/2023
+        /// 
+        /// Unlaoded event. Removed Click Evenets
+        /// 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             // Need to remove click event, should user return to this page
 
             _viewRoster.Click -= ViewRosterButton_Click;
-            if (_pageControl.GetSignedInMember() != null)
+            if (_pageControl.GetSignedInMember() != null && _pageControl.GetSignedInMember().MemberID != _masterManager.TeamManager.RetrieveTeamByTeamID(_teamID).MemberID)
             {
                 _requestToJoin.Click -= JoinTeamButton_Click;
+            }
+            if (_pageControl.GetSignedInMember() != null && _pageControl.GetSignedInMember().MemberID == _masterManager.TeamManager.RetrieveTeamByTeamID(_teamID).MemberID)
+            {
+                _createPracitce.Click -= CreatePractice_Click;
+
+                _removePractice.Click -= RemovePracitce_Click;
+
             }
 
             // nulling selected items
             datPreviousGamesList.SelectedItem = null;
             datUpcomingGamesList.SelectedItem = null;
             datLeagueList.SelectedItem = null;
-        }
-
-        private void btnCreatePractice_Click(object sender, RoutedEventArgs e)
-        {
-            pgCreatePractice page = new pgCreatePractice(_team.TeamID);
-
-            NavigationService.Navigate(page);
-        }
-
-        private void btnRemovePractice_Click(object sender, RoutedEventArgs e)
-        {
-            pgRemovePractice page = new pgRemovePractice(_team.TeamID);
-            NavigationService.Navigate(page);
         }
     }
 }

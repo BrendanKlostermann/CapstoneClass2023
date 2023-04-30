@@ -12,9 +12,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace MvcPresentation.Controllers
 {
+    [Authorize]
     public class ScheduleController : Controller
     {
         MasterManager _masterManager = null;
@@ -33,7 +36,16 @@ namespace MvcPresentation.Controllers
         /// <returns></returns>
         public ActionResult ViewSchedule()
         {
-            var events = _masterManager.MemberManager.RetreiveMemberSchedule(100001); // Value is hard set until identity system is implemented
+            ApplicationUserManager UserManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            // Get current signed in member
+            var userID = User.Identity.GetUserId();
+            var userEmail = UserManager.FindById(userID).Email;
+
+            // Get Member ID
+            var member = _masterManager.MemberManager.RetrieveMemberByEmail(userEmail);
+
+            var events = _masterManager.MemberManager.RetreiveMemberSchedule(member.MemberID); // Value is hard set until identity system is implemented
 
             return View(events);
         }

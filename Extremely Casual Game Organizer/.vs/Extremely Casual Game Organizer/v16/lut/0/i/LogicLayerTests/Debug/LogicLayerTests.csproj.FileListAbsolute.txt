@@ -1,0 +1,8 @@
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\b\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\b\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\b\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\b\LogicLayerTests\bin\Debug\LogicLayerTests.dll
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\LogicLayerTests\Debug\LogicLayerTests.csproj.AssemblyReference.cache
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\LogicLayerTests\Debug\LogicLayerTests.csproj.CoreCompileInputs.cache
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\LogicLayerTests\Debug\LogicLayerTests.csproj.CopyComplete
+C:\Users\HARIN\source\repos\Capstone-2023-EVE\Extremely Casual Game Organizer\.vs\Extremely Casual Game Organizer\v16\lut\0\i\LogicLayerTests\Debug\LogicLayerTests.dll

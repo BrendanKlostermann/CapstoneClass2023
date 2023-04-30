@@ -75,7 +75,8 @@ namespace DataAccessLayer
                 conn.Open();
                 var reader = cmd.ExecuteNonQuery();
                 return reader;
-            }catch(Exception up)
+            }
+            catch (Exception up)
             {
                 throw up;
             }
@@ -338,14 +339,14 @@ namespace DataAccessLayer
                         }
                         team.SportID = reader.GetInt32(3);
                         team.MemberID = reader.GetInt32(4);
-                        //if (reader.IsDBNull(5))
-                        //{
-                        //    team.Description = null;
-                        //}
-                        //else
-                        //{
-                        //    team.Description = reader.GetString(5);
-                        //} // Script does not return Desc (JDL)
+                        if (reader.IsDBNull(5))
+                        {
+                            team.Description = null;
+                        }
+                        else
+                        {
+                            team.Description = reader.GetString(5);
+                        }
                         team.Active = reader.GetBoolean(6);
                         teams.Add(team);
                     }
@@ -467,7 +468,7 @@ namespace DataAccessLayer
             }
         }
 
-         /// <summary>
+        /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
         /// 
@@ -517,7 +518,7 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
-                throw new ApplicationException("Cannot create the team "+ ex.Message);
+                throw new ApplicationException("Cannot create the team " + ex.Message);
             }
             finally
             {
@@ -527,8 +528,8 @@ namespace DataAccessLayer
             // return the result
             return rowsAffected;
         }
-        
-        
+
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
@@ -652,8 +653,8 @@ namespace DataAccessLayer
             }
             return teams;
         }
-        
-        
+
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
@@ -695,7 +696,7 @@ namespace DataAccessLayer
 
                 if (reader.HasRows)
                 {
-                        //var a = reader.FieldCount;
+                    //var a = reader.FieldCount;
                     while (reader.Read())
                     {
                         TeamSport _aTeam = new TeamSport()
@@ -708,7 +709,7 @@ namespace DataAccessLayer
 
                         if (reader.IsDBNull(2) == false)
                         {
-                                _aTeam.Gender = reader.GetBoolean(2);
+                            _aTeam.Gender = reader.GetBoolean(2);
                         }
                         else
                         {
@@ -716,15 +717,15 @@ namespace DataAccessLayer
                         }
                         if (reader.IsDBNull(2) == false)
                         {
-                                _aTeam.Description = reader.GetString(4);
+                            _aTeam.Description = reader.GetString(4);
                         }
                         else
                         {
                             _aTeam.Description = null;
                         }
-                            //if (teamName=="") _aTeam.Description = reader.GetString(4);
-                            //else _aTeam.Description = reader.GetString(4);
-                            teams.Add(_aTeam);
+                        //if (teamName=="") _aTeam.Description = reader.GetString(4);
+                        //else _aTeam.Description = reader.GetString(4);
+                        teams.Add(_aTeam);
                     }
                 }
             }
@@ -780,7 +781,14 @@ namespace DataAccessLayer
                     while (reader.Read())
                     {
                         TeamMember addMember = new TeamMember();
-                        addMember.Description = reader.GetString(0);
+                        if (reader.IsDBNull(0))
+                        {
+                            addMember.Description = "";
+                        }
+                        else
+                        {
+                            addMember.Description = reader.GetString(0);
+                        }
                         addMember.Starter = reader.GetBoolean(1);
                         addMember.MemberID = reader.GetInt32(2);
                         addMember.TeamID = team_id;
@@ -839,6 +847,169 @@ namespace DataAccessLayer
                 conn.Close();
             }
             return rows;
+        }
+
+
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/04/25
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method for getting requests to join a team
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+
+        public List<TeamRequest> SelectRequestsByTeamID(int TeamID) //sp_select_request_by_team_id
+        {
+            List<TeamRequest> requests = new List<TeamRequest>();//sp_select_request_by_team_id
+            DBConnection connectionFactory = new DBConnection();//sp_select_request_by_team_id
+            var conn = connectionFactory.GetDBConnection();//sp_select_request_by_team_id
+
+            //command text
+            var cmdText = "sp_select_request_by_team_id";//sp_select_request_by_team_id
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);//sp_select_request_by_team_id
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;//sp_select_request_by_team_id
+
+            //Add parameters //values
+            cmd.Parameters.Add("@TeamID", SqlDbType.Int);//sp_select_request_by_team_id
+            cmd.Parameters["@TeamID"].Value = TeamID;//sp_select_request_by_team_id
+
+            try
+            {
+                conn.Open();//sp_select_request_by_team_id
+                var reader = cmd.ExecuteReader();//sp_select_request_by_team_id
+                if (reader.HasRows)//sp_select_request_by_team_id
+                {
+                    while (reader.Read())
+                    {
+                        TeamRequest temp = new TeamRequest();//sp_select_request_by_team_id
+                        temp.TeamRequestID = reader.GetInt32(0);//sp_select_request_by_team_id
+                        temp.MemberID = reader.GetInt32(1);//sp_select_request_by_team_id
+                        temp.TeamID = reader.GetInt32(2);//sp_select_request_by_team_id
+                        temp.Status = reader.GetString(3);//sp_select_request_by_team_id
+                        requests.Add(temp);//sp_select_request_by_team_id
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;//sp_select_request_by_team_id
+            }
+            finally
+            {
+                conn.Close();//sp_select_request_by_team_id
+            }
+            return requests;//sp_select_request_by_team_id
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/04/25
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method for getting requests to join a team
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+
+        public int UpdateTeamRequestStatus(int RequestID, string Status)//sp_update_team_request_status_by_request_id
+        {
+            DBConnection connectionFactory = new DBConnection();//sp_update_team_request_status_by_request_id
+            var conn = connectionFactory.GetDBConnection();//sp_update_team_request_status_by_request_id
+            //command text
+            var cmdText = "sp_update_team_request_status_by_request_id";//sp_update_team_request_status_by_request_id
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);//sp_update_team_request_status_by_request_id
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;//sp_update_team_request_status_by_request_id
+
+            //Add parameters //values
+            cmd.Parameters.Add("@RequestID", SqlDbType.Int);//sp_update_team_request_status_by_request_id
+            cmd.Parameters["@RequestID"].Value = RequestID;//sp_update_team_request_status_by_request_id
+            cmd.Parameters.Add("@Status", SqlDbType.VarChar);//sp_update_team_request_status_by_request_id
+            cmd.Parameters["@Status"].Value = Status;//sp_update_team_request_status_by_request_id
+
+            try
+            {
+                conn.Open();//sp_update_team_request_status_by_request_id
+                var reader = cmd.ExecuteNonQuery();//sp_update_team_request_status_by_request_id
+                return reader;//sp_update_team_request_status_by_request_id
+            }
+            catch (Exception up)
+            {
+                throw up;//sp_update_team_request_status_by_request_id
+            }
+            finally
+            {
+                conn.Close();//sp_update_team_request_status_by_request_id
+            }
+        }
+
+        /// <summary>
+        /// Alex Korte
+        /// Created: 2023/04/25
+        /// 
+        /// Actual summary of the class if needed.
+        /// </summary>
+        /// A method for getting requests to join a team
+        /// 
+        /// <remarks>
+        /// Updater Name
+        /// Updated: yyyy/mm/dd 
+        /// example: Fixed a problem when user inputs bad data
+        /// </remarks>
+
+        public int AddATeamRequest(TeamRequest request)//sp_insert_team_request
+        {
+            DBConnection connectionFactory = new DBConnection();//sp_insert_team_request
+            var conn = connectionFactory.GetDBConnection();//sp_insert_team_request
+
+            //command text
+            var cmdText = "sp_insert_team_request";//sp_insert_team_request
+
+            //create command
+            var cmd = new SqlCommand(cmdText, conn);//sp_insert_team_request
+
+            //command type
+            cmd.CommandType = CommandType.StoredProcedure;//sp_insert_team_request
+
+            //Add parameters //values
+            cmd.Parameters.Add("@TeamID", SqlDbType.Int);//sp_insert_team_request
+            cmd.Parameters["@TeamID"].Value = request.TeamID;//sp_insert_team_request
+
+            cmd.Parameters.Add("@MemberID", SqlDbType.Int);//sp_insert_team_request
+            cmd.Parameters["@MemberID"].Value = request.MemberID;//sp_insert_team_request
+
+            try
+            {
+                conn.Open();//sp_insert_team_request
+                var reader = cmd.ExecuteNonQuery();//sp_insert_team_request
+                return reader;//sp_insert_team_request
+            }
+            catch (Exception up)
+            {
+                throw up;//sp_insert_team_request
+            }
+            finally
+            {
+                conn.Close();//sp_insert_team_request
+            }
         }
     }
 }

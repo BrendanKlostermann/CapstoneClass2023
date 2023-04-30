@@ -24,10 +24,25 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Practices
     {
         int _teamID;
         MasterManager masterManager = new MasterManager();
+        Button _backButton;
+        PageControl _pageControl;
         public pgRemovePractice(int teamID)
         {
-            InitializeComponent();
-            _teamID = teamID;
+            try
+            {
+                _teamID = teamID;
+
+                _pageControl = new PageControl();
+                _backButton = _pageControl.ShowGoBack();
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+
         }
 
         private void dtaGridPractices_Loaded(object sender, RoutedEventArgs e)
@@ -55,6 +70,15 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Practices
 
         private void btnBackToTeam_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             pgViewTeamDetails page = new pgViewTeamDetails(_teamID, masterManager);
             NavigationService.Navigate(page);
         }

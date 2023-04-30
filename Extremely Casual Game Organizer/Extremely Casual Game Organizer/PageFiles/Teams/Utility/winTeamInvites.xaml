@@ -1,0 +1,24 @@
+﻿<Window x:Name="winViewInvites" x:Class="Extremely_Casual_Game_Organizer.PageFiles.Teams.Utility.winTeamInvites"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer.PageFiles.Teams.Utility"
+        mc:Ignorable="d"
+        Title="View Team Invites" Height="450" Width="300" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <Label x:Name="lblTeamInvites" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Team Invites</Label>
+        <ListBox x:Name="lstInvites" Grid.Row="1" Margin="5" Background="Transparent" BorderBrush="Transparent"/>
+
+        <TextBlock x:Name="txtEmptyInvites" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" FontSize="15">(No Current Invites)</TextBlock>
+
+        <Button x:Name="btnClose" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10 5 10 5" Click="btnClose_Click">Close</Button>
+    </Grid>
+</Window>

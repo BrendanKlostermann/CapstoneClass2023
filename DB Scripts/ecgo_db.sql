@@ -602,6 +602,38 @@ CREATE TABLE [dbo].[LeagueRequest]
 GO
 
 
+print '' print '*** creating TeamRequest Alex Korte'
+GO
+CREATE TABLE [dbo].[TeamRequest]
+(
+    [team_request_id]        [int] IDENTITY (1000, 1) NOT NULL,
+    [member_id]                    [int] NOT NULL,
+    [team_id]                 [int] NOT NULL, 
+    [status]                    [nvarchar] (250) NOT NULL DEFAULT "Waiting",
+    CONSTRAINT [fk_teamRequest_member_id]
+        FOREIGN KEY ([member_id]) REFERENCES [dbo].[Member]([member_id]),
+    CONSTRAINT [fk_TeamRequest_team_id]
+        FOREIGN KEY ([team_id]) REFERENCES [dbo].[Team]([team_id]),
+    CONSTRAINT [pk_team_request_id] PRIMARY KEY ([team_request_id])
+)
+GO
+
+
+print '' print '*** creating TournamentRequest Alex Korte'
+GO
+CREATE TABLE [dbo].[TournamentRequest]
+(
+    [tournament_request_id]        [int] IDENTITY (1000, 1) NOT NULL,
+    [tournament_id]                    [int] NOT NULL,
+    [team_id]                 [int] NOT NULL, 
+    [status]                    [nvarchar] (250) NOT NULL DEFAULT "Waiting",
+    CONSTRAINT [fk_tournamentRequest_id]
+        FOREIGN KEY ([tournament_id]) REFERENCES [dbo].[Tournament]([tournament_id]),
+    CONSTRAINT [fk_TournamentRequest_team_id]
+        FOREIGN KEY ([team_id]) REFERENCES [dbo].[Team]([team_id]),
+    CONSTRAINT [pk_tournament_request_id] PRIMARY KEY ([tournament_request_id])
+)
+GO
 
 print '' print '*** creating zipcode TABLE'
 GO

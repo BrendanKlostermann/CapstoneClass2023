@@ -1602,5 +1602,100 @@ namespace DataAccessLayer
             }
             return members;//SearchMembersByFirstNameLastNameOrEmail
         }
+
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/16
+        /// 
+        /// Selects all roles from the role table
+        /// </summary>
+        public List<string> SelectAllRoles()
+        {
+            List<string> roles = new List<string>();
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // command objects
+            var cmd = new SqlCommand("sp_select_all_roles");
+            cmd.Connection = conn;
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                // open connection
+                conn.Open();
+
+                // execute the first command
+
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    string role = reader.GetString(0);
+                    roles.Add(role);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return roles;
+        }
+
+        /// <summary>
+        /// Michael Haring
+        /// Created: 2023/04/16
+        /// 
+        /// Authenticates user returning a Member object
+        /// </summary>
+        public Member AuthenticateUser(string username, string passwordHash)
+        {
+            Member result = null; // change this to 1 if the user is authenticated
+
+            // first, get a connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // next, we need a command object
+            var cmd = new SqlCommand("sp_authenticate_user");
+            cmd.Connection = conn;
+
+            // set the command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // add parameters for the procedure
+            cmd.Parameters.Add("@Email", SqlDbType.NVarChar, 250);
+            cmd.Parameters.Add("@PasswordHash", SqlDbType.NVarChar, 100);
+
+            // set the values for the parameters
+            cmd.Parameters["@Email"].Value = username;
+            cmd.Parameters["@PasswordHash"].Value = passwordHash;
+
+            // now that the command is set up, we can execute it
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                if (1 == Convert.ToInt32(cmd.ExecuteScalar()))
+                {
+                    // if the command worked correctly, get a user
+                    // object
+                    result = SelectMemberByEmail(username);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return result;
+        }
     }
 }

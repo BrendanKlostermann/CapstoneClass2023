@@ -27,5 +27,6 @@ AS
 		FROM [dbo].[TournamentGame]
         INNER JOIN [dbo].[TeamGame]
         ON [TournamentGame].[game_id] = [TeamGame].[game_id]
+		WHERE [tournament_id] = @tournament_id
 	END
 GO

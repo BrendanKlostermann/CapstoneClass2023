@@ -166,14 +166,14 @@ print ''print 'sample tournament table'
 INSERT INTO [dbo].[Tournament] ([sport_id], [gender], [member_id], [name], [description], [active])
 VALUES
 (1000, 1, 100000, 'Co-ed Football Tournament', 'This is a tournament for all skill levels.', 1),
-(1003, 0, 100002, 'Women''s Tennis Tournament', 'This is a tournament for advanced players.', 1),
+(1003, 0, 100002, 'Women''s Baseball Tournament', 'This is a tournament for advanced players.', 1),
 (1002, 1, 100003, 'Men''s Basketball Tournament', 'This is a tournament for intermediate players.', 0),
-(1004, NULL, 100004, 'Mixed Baseball Tournament', 'This is a tournament for all ages.', 1),
-(1006, 0, 100005, 'Recreational Soccer Tournament', 'This is a tournament for all ages and skill levels.', 1),
-(1005, NULL, 100006, 'Community Volleyball Tournament', 'This is a tournament for all ages and skill levels.', 1),
-(1007, 1, 100007, 'Competitive Men''s Ice Hockey Tournament', 'This is a tournament for experienced players.', 1),
-(1008, 0, 100008, 'Casual Golf Tournament', 'This is a tournament for all ages and skill levels.', 1),
-(1009, 1, 100001, 'Masters Swimming Tournament', 'This is a tournament for swimmers aged 30 and over.', 1);
+(1004, NULL, 100004, 'Mixed Volleyball Tournament', 'This is a tournament for all ages.', 1),
+(1006, 0, 100005, 'Women''s Hockey Tournament', 'This is a tournament for all ages and skill levels.', 1),
+(1005, NULL, 100006, 'Community Soccer Tournament', 'This is a tournament for all ages and skill levels.', 1),
+(1007, 1, 100007, 'Competitive Men''s Golf Tournament', 'This is a tournament for experienced players.', 1),
+(1008, 0, 100008, 'Women''s Swimming Tournament', 'This is a tournament for all ages and skill levels.', 1),
+(1009, 1, 100001, 'Track and Field Tournament', 'This is a tournament for track and field.', 1);
 GO
 
 print ''print 'sample venue table'
@@ -223,26 +223,26 @@ VALUES
 GO
 
 
-print ''print 'sample gameRoster table'
+ print ''print 'sample gameRoster table'
 INSERT INTO [dbo].[GameRoster] ([team_id], [member_id], [description], [game_id])
 VALUES
-(1000, 100001, 'Starting goalkeeper', 1000),
-(1000, 100002, 'Starting defender', 1000),
-(1000, 100003, 'Starting midfielder', 1000),
-(1000, 100004, 'Starting forward', 1000),
-(1001, 100005, 'Starting goalkeeper', 1000),
-(1001, 100006, 'Starting defender', 1000),
-(1001, 100007, 'Starting midfielder', 1000),
-(1001, 100008, 'Starting forward', 1000),
-(1002, 100001, 'Starting goalkeeper', 1001),
-(1002, 100002, 'Starting defender', 1001),
-(1002, 100003, 'Starting midfielder', 1001),
-(1002, 100004, 'Starting forward', 1001),
-(1003, 100005, 'Starting goalkeeper', 1001),
-(1003, 100006, 'Starting defender', 1001),
-(1003, 100007, 'Starting midfielder', 1001),
-(1003, 100008, 'Starting forward', 1001);
-GO
+(1000, 100001, 'Starting Quarterback/Safety', 1000),
+(1000, 100002, 'Starting Wide Reciever/Cornerback', 1000),
+(1000, 100003, 'Starting Runningback/Linebacker', 1000),
+(1000, 100004, 'Starting Wide Reciever 2 / Cornerback 2', 1000),
+(1001, 100005, 'Starting Quarterback/Safety', 1000),
+(1001, 100006, 'Starting Wide Reciever/Cornerback', 1000),
+(1001, 100007, 'Starting Runningback/Linebacker', 1000),
+(1001, 100008, 'Starting Wide Reciever 2 / Cornerback 2', 1000),
+(1002, 100001, 'Starting Quarterback/Safety', 1001),
+(1002, 100002, 'Starting Wide Reciever/Cornerback', 1001),
+(1002, 100003, 'Starting Runningback/Linebacker', 1001),
+(1002, 100004, 'Starting Wide Reciever 2 / Cornerback 2', 1001),
+(1003, 100005, 'Starting Quarterback/Safety', 1001),
+(1003, 100006, 'Starting Wide Reciever/Cornerback', 1001),
+(1003, 100007, 'Starting Runningback/Linebacker', 1001),
+(1003, 100008, 'Starting Wide Reciever 2 / Cornerback 2', 1001);
+GO 
 
 
 print ''print 'sample teamGame table'
@@ -432,7 +432,22 @@ VALUES
 (100000, 1001),
 (100001, 1002),
 (100001, 1003),
-(100001, 1004);
+(100001, 1004),
+(100001, 1007),
+(100002, 1005),
+(100002, 1007),
+(100003, 1002),
+(100003, 1003),
+(100004, 1006),
+(100004, 1000),
+(100005, 1006),
+(100005, 1000),
+(100006, 1004),
+(100006, 1000),
+(100007, 1008),
+(100007, 1001),
+(100008, 1008),
+(100008, 1005)
 GO
 
 
@@ -523,3 +538,22 @@ VALUES
 (1003, 100006),
 (1002, 100007);
 GO
+
+print '' print 'Sample TeamRequests table'
+INSERT INTO [dbo].[TeamRequest]
+([member_id], [team_id], [status])
+VALUES
+(100000, 1000, "Waiting"),
+(100002, 1000, "Accepted"),
+(100003, 1000, "Waiting"),
+(100004, 1000, "Waiting"),
+(100005, 1000, "Waiting"),
+(100006, 1000, "Waiting"),
+(100007, 1000, "Waiting"),
+(100008, 1000, "Waiting"),
+(100009, 1000, "Waiting"),
+(100010, 1000, "Waiting")
+GO
+
+
+

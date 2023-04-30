@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace MvcPresentation.Models
 {
@@ -62,12 +64,47 @@ namespace MvcPresentation.Models
         public bool RememberMe { get; set; }
     }
 
+    /// <summary>
+    /// Michael Haring
+    /// Created: 2023/04/25
+    /// 
+    /// Sets parameters for register view data objects
+    /// 
+    /// </summary>
     public class RegisterViewModel
     {
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Family Name")]
+        public string FamilyName { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        [Display(Name = "Gender")]
+        public string Gender { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Birthday")]
+        public DateTime Birthday { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Display(Name = "Profile Picture")]
+        public string ProfilePicture { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

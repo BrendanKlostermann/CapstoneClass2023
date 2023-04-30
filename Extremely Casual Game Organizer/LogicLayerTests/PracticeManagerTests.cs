@@ -9,7 +9,7 @@ using DataObjects;
 using LogicLayer;
 using LogicLayerInterfaces;
 
-namespace LogicLayer.Tests
+namespace LogicLayerTests
 {
 
     // ALL TESTS created by Nick Vroom

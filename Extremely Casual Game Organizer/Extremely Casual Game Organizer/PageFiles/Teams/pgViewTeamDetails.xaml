@@ -78,7 +78,7 @@
         <!-- End Team League Details Grid-->
 
         <!-- Upcoming Games Grid -->
-        <Grid x:Name="grnUpcomingGames" Grid.Row="0" Grid.Column="2">
+        <Grid x:Name="grnUpcomingGames" Grid.Row="0" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition />
@@ -102,13 +102,11 @@
                 </DataGrid.CellStyle>
             </DataGrid>
             <Label x:Name="lblUpcomingEmptyGrid" Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18">(No Upcoming Games)</Label>
-            <Button x:Name="btnCreatePractice" Content="Create Practice" HorizontalAlignment="Left" Margin="294,15,0,0" VerticalAlignment="Top" Width="96" Click="btnCreatePractice_Click" Visibility="Hidden"/>
-            <Button x:Name="btnRemovePractice" Content="Remove Practice" HorizontalAlignment="Left" Margin="294,40,0,0" VerticalAlignment="Top" Width="96" Click="btnRemovePractice_Click" Grid.RowSpan="2" Visibility="Hidden"/>
         </Grid>
         <!-- End Upcoming Games Grid -->
 
         <!-- Previous Games Grid -->
-        <Grid x:Name="grdPreviousGames" Grid.Row="2" Grid.Column="2">
+        <Grid x:Name="grdPreviousGames" Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition />
@@ -135,5 +133,6 @@
 
         </Grid>
         <!-- End Previous Games Grid -->
+      
     </Grid>
 </Page>

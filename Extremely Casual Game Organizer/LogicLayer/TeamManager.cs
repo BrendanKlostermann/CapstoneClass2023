@@ -27,7 +27,7 @@ namespace LogicLayer
     public class TeamManager : ITeamManager
     {
         ITeamAccessor _teamAccessor = null;
-        
+
         public TeamManager()
         {
             _teamAccessor = new TeamAccessor();
@@ -55,7 +55,8 @@ namespace LogicLayer
                 _teamAccessor = new TeamAccessor();
                 _teams = _teamAccessor.SelectAllTeams();
                 return _teams;
-            }catch(ApplicationException up)
+            }
+            catch (ApplicationException up)
             {
                 throw new ApplicationException("No teams in the System", up);
             }
@@ -104,7 +105,7 @@ namespace LogicLayer
         /// 
         /// Create a team
         /// </summary>
-        public int AddTeam(Team team) 
+        public int AddTeam(Team team)
         {
             int requestTeam = 0;
 
@@ -223,6 +224,80 @@ namespace LogicLayer
                 throw new ApplicationException("Cannot retrieve owner of team");
             }
             return ownerID;
+        }
+
+        public List<TeamRequest> RetrieveRequestByTeamID(int TeamID)
+        {
+            List<TeamRequest> _requests;
+            try
+            {
+                _requests = _teamAccessor.SelectRequestsByTeamID(TeamID);
+                if (_requests == null || _requests.Count == 0)
+                {
+                    _requests = new List<TeamRequest>();
+                    return _requests;
+                }
+                else
+                {
+                    return _requests;
+                }
+            }
+            catch (Exception up)
+            {
+                throw new ApplicationException("Error getting requests", up);
+            }
+        }
+
+        public bool UpdateTeamRequestStatus(int RequestID, string Status)
+        {
+            try
+            {
+                var results = _teamAccessor.UpdateTeamRequestStatus(RequestID, Status);
+                if (results == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception up)
+            {
+                throw new ApplicationException("There was an error updating that request", up);
+            }
+        }
+
+        public bool CreateATeamRequest(int TeamID, int MemberID)
+        {
+            try
+            {
+                var members = _teamAccessor.getTeamByMemberID(MemberID);
+                if (members == null || members.Count == 0)
+                {
+                    TeamRequest request = new TeamRequest();
+                    request.TeamID = TeamID;
+                    request.MemberID = MemberID;
+                    var results = _teamAccessor.AddATeamRequest(request);
+                    if (results == 1)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            catch (Exception up)
+            {
+                throw new ApplicationException("Error requesting to join", up);
+            }
         }
     }
 }

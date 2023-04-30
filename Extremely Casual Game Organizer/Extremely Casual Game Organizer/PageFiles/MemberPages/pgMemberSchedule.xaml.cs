@@ -629,7 +629,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.MemberPages
             try
             {
                 DateTime tempDate = Convert.ToDateTime(_selectedDate);
-                int day = tempDate.Day;
+                int day = 1;
                 int month = tempDate.Month;
                 int year = tempDate.Year;
                 if (tempDate.Month == 12)
@@ -664,7 +664,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.MemberPages
             try
             {
                 DateTime tempDate = Convert.ToDateTime(_selectedDate);
-                int day = tempDate.Day;
+                int day = 1;
                 int month = tempDate.Month;
                 int year = tempDate.Year;
                 if (tempDate.Month == 1)

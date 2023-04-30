@@ -80,7 +80,7 @@
     </Compile>
     <Compile Include="PageFiles\Games\pgAddEditGame.xaml.cs">
       <DependentUpon>pgAddEditGame.xaml</DependentUpon>
-	 </Compile>
+    </Compile>
     <Compile Include="CustomControls\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
@@ -104,16 +104,19 @@
     </Compile>
     <Compile Include="PageFiles\Leagues\pgViewLeague.xaml.cs">
       <DependentUpon>pgViewLeague.xaml</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="PageFiles\Seasons\AddEditSeason.xaml.cs">
       <DependentUpon>AddEditSeason.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Teams\Utility\winTeamInvites.xaml.cs">
+      <DependentUpon>winTeamInvites.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Teams\Utility\winTeamSearch.xaml.cs">
       <DependentUpon>winTeamSearch.xaml</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="PageFiles\Tournaments\pgGenerateTournamentGame.xaml.cs">
       <DependentUpon>pgGenerateTournamentGame.xaml</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="PageFiles\Utility\pgHelp.xaml.cs">
       <DependentUpon>pgHelp.xaml</DependentUpon>
     </Compile>
@@ -145,7 +148,7 @@
     <Page Include="PageFiles\Games\pgAddEditGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-	</Page>
+    </Page>
     <Page Include="CustomControls\Game.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -177,17 +180,21 @@
     <Page Include="PageFiles\Leagues\pgViewLeague.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-	</Page>
+    </Page>
     <Page Include="PageFiles\Seasons\AddEditSeason.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFiles\Teams\Utility\winTeamInvites.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFiles\Teams\Utility\winTeamSearch.xaml">
-	      <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Tournaments\pgGenerateTournamentGame.xaml">
-	      <SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Utility\pgHelp.xaml">

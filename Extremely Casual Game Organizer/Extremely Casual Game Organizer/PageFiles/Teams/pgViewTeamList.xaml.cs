@@ -173,6 +173,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             dtaGridTeamList.Columns[4].Width = 214;//TeamName
             dtaGridTeamList.Columns[5].Width = 75;//sportID
             dtaGridTeamList.Columns.RemoveAt(6);//hiding description
+            dtaGridTeamList.Columns.RemoveAt(5);
+            dtaGridTeamList.Columns.RemoveAt(3);
         }
         /// <summary>
         /// Updated BY: Jacob Lindauer
