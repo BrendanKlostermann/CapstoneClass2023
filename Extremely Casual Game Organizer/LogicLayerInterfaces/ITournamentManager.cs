@@ -114,5 +114,13 @@ namespace LogicLayerInterfaces
         bool UpdateTournamentRequestStatus(int RequestID, string Status);
 
         bool CreateATournamentRequest(int TournamentID, int TeamID);
+
+        /// <summary>
+        /// Toney Hale
+        /// Created: 2023/04/11
+        /// 
+        /// changing tournament registation for open or closed
+        /// </summary>
+        int openOrCloseTournamentRegistration(int tournament_id, bool active);
     }
 }

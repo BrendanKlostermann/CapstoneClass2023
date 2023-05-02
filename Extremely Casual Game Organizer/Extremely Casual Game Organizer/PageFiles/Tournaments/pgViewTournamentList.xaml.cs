@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DataObjects;
+using Extremely_Casual_Game_Organizer.PageFiles.Practices;
+using Extremely_Casual_Game_Organizer.PageFiles.Tournaments;
 using LogicLayer;
 using LogicLayerInterfaces;
 
@@ -73,6 +75,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 _addButton.Click += AddButton_Click;
                 _updateButton.Click += UpdateButton_Click;
                 _deleteButton.Click += DeleteButton_Click;
+                _viewButton.Click += ViewButton_Click;
 
 
             }
@@ -82,8 +85,36 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             }
 
         }
+        /// <summary>
+        /// Nick Vroom
+        /// Created: 2023/04/24
+        /// 
+        /// </summary>
+        /// this method views a tournament's details when clicking the view button
+        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (datTournamentGrid.SelectedItem == null)
+                {
+                    MessageBox.Show("You must select a tournament");
+                    return;
+                }
+                else
+                {
+                    int tournamentID = ((TournamentVM)datTournamentGrid.SelectedItem).TournamentID;
+                    pgViewTournament page = new pgViewTournament(tournamentID);
 
+                    _pageControl.LoadPage(page);
+                }
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+        }
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/03/05
@@ -127,7 +158,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                         {
                             MessageBox.Show("Could not delete the tournament");
                         }
-                    }  
+                    }
                 }
                 else
                 {
@@ -182,7 +213,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             {
                 MessageBox.Show("You are not the owner of this tournament and can not edit it.");
             }
-            
+
         }
 
 
@@ -223,12 +254,15 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
         {
             datTournamentGrid.ItemsSource = null;
             _tournaments = null;
+            datTournamentGrid.SelectedItem = null;
+
 
 
             //Remove method attachment from buttons
             _addButton.Click -= AddButton_Click;
             _updateButton.Click -= UpdateButton_Click;
             _deleteButton.Click -= DeleteButton_Click;
+            _viewButton.Click -= ViewButton_Click;
         }
 
     }

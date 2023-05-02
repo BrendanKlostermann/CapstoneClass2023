@@ -34,9 +34,8 @@
                         <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Leagues</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>@Html.ActionLink("View All Leagues", "AllLeagues", "League")</li>
-                            <li>@Html.ActionLink("My Leagues", "MemberLeagues", "League")</li>
                             <li>@Html.ActionLink("Create a League", "CreateLeague", "League")</li>
-                            <li>@Html.ActionLink("Manage My Leagues", "EditLeagues", "League")</li>
+                            <li>@Html.ActionLink("Manage My Leagues", "AllLeagues", "League")</li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -63,6 +62,17 @@
                             <li>@Html.ActionLink("Search", "Search", "Search")</li>
                         </ul>
                     </li>
+                    @*
+                    Michael Haring
+                    05/01/2023
+                    Only shows admin tab if member is signed in as admin
+                    *@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Admin", "Index", "Admin", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -65,7 +65,7 @@ Views all leagues in the database
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.LeagueID }) |
+                @Html.ActionLink("Details", "LeagueDetails", new { id = item.LeagueID }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.LeagueID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.LeagueID})
             </td>

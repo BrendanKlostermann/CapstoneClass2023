@@ -1,0 +1,27 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.PageFiles.Tournaments.pgViewTournament"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer.PageFiles.Tournaments"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgViewTournament">
+
+    <Grid Margin="224,0,0,-0.4">
+
+        <TabControl Margin="10,76,0,0" Background="Transparent">
+
+            <TabItem Header="Teams">
+                <ListBox x:Name="tournamentTeamListBox" Margin="0,0,1.8,-0.4"/>
+            </TabItem>
+            <TabItem Header="Games">
+                <ListBox x:Name="gameTeamListBox" Margin="0,0,1.8,-0.4"/>
+            </TabItem>
+
+        </TabControl>
+        <TextBox x:Name="txtTournamentName" HorizontalAlignment="Left" Height="54" Margin="-221,3,0,0" TextWrapping="Wrap" Text="Tournament Name" VerticalAlignment="Top" Width="797" FontSize="32" BorderBrush="#00ABADB3" IsReadOnly="True" SelectionBrush="#000078D7" BorderThickness="0" Background="Transparent"/>
+        <TextBox x:Name="txtTournamentSportGender" HorizontalAlignment="Left" Height="50" Margin="-221,57,0,0" TextWrapping="Wrap" Text="Tournament Sport and Gender" VerticalAlignment="Top" Width="221" FontSize="16" BorderBrush="#00ABADB3" FontStyle="Italic" IsReadOnly="True" SelectionBrush="#000078D7" BorderThickness="0" Background="Transparent"/>
+        <TextBox x:Name="txtTournamentDescription" HorizontalAlignment="Left" Height="343" Margin="-221,107,0,0" TextWrapping="Wrap" Text="Tournament Description" VerticalAlignment="Top" Width="221" FontSize="16" BorderBrush="#007F8FC0" IsReadOnly="True" SelectionBrush="#000078D7" BorderThickness="0" Background="Transparent"/>
+    </Grid>
+</Page>

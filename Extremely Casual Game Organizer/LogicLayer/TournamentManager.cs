@@ -476,5 +476,28 @@ namespace LogicLayer
                 throw new ApplicationException("Error requesting to join", up);
             }
         }
+
+        // <summary>
+        /// Toney Hale
+        /// Created: 2023/04/11
+        /// 
+        /// changing tournament registation for open or closed
+        /// </summary>
+        public int openOrCloseTournamentRegistration(int tournament_id, bool active)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                rowsAffected = _tournamentAccessor.openOrCloseTournamentRegistration(tournament_id, active);
+            }
+            catch (Exception ex)
+            {
+
+                throw new ApplicationException("Cannot find tournament");
+            }
+
+            return rowsAffected;
+        }
     }
 }
