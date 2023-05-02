@@ -16,3 +16,12 @@ C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfac
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CopyComplete
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.dll
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.pdb
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\LogicLayerInterfaces.dll
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\LogicLayerInterfaces.pdb
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\DataObjects.dll
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\DataObjects.pdb
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.AssemblyReference.cache
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CoreCompileInputs.cache
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CopyComplete
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.dll
+C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.pdb

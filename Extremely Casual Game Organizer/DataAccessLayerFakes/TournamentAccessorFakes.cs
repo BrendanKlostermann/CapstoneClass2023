@@ -392,5 +392,16 @@ namespace DataAccessLayerFakes
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Toney Hale
+        /// Created: 2023/04/11
+        /// 
+        /// fakes registation for open or closed
+        /// </summary>
+        public int openOrCloseTournamentRegistration(int tournament_id, bool active)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
