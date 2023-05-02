@@ -9,7 +9,7 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-﻿/// <summary>
+/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/02/20
 /// 
@@ -25,8 +25,10 @@
 /// </summary>
 ///
 /// <remarks>
-/// Updater Name
-/// Updated: yyyy/mm/dd
+/// Elijah Morgan
+/// Updated: 2023/04/24
+/// 
+/// Added AssignedGender to LeagueVM
 /// </remarks>
 /// 
 
@@ -83,7 +85,8 @@ namespace DataObjects
 
 	public class LeagueVM : League
 	{
-		public string SportName { get; set; }
+        public string AssignedGender { get; set; }
+        public string SportName { get; set; }
 		public string genderAsText { get; set; }
 	}
  

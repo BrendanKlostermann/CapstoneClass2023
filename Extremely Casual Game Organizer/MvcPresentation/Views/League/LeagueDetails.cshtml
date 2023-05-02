@@ -1,0 +1,73 @@
+﻿<!--
+Elijah Morgan
+Created: 2023/04/18
+
+Views the details of a selected league
+-->
+
+@model DataObjects.LeagueVM
+
+@{
+    ViewBag.Title = "LeagueDetails";
+}
+
+<h2>League Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            <p>League Name:</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            <p>League Description:</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            <p>Gender:</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genderAsText)
+        </dd>
+
+        <dt>
+            <p>Max Number of Teams:</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxNumOfTeams)
+        </dd>
+
+        <dt>
+            <p>League Dues:</p>
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.LeagueDues)
+        </dd>
+
+        <dt>
+            <p>Sport Name:</p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SportName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LeagueID }) |
+    @Html.ActionLink("Back to List", "AllLeagues")
+</p>
