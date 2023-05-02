@@ -1,7 +1,10 @@
 ﻿using DataObjects;
 using LogicLayer;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -76,6 +79,25 @@ namespace MvcPresentation.Controllers
                 ViewBag.NbreGame = tournamentGames.Count/2;
                 ViewBag.Type = type;
 
+                ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = userManager.FindById(User.Identity.GetUserId());
+                if(user != null){
+                    if (user.MemberID != tournament.MemberID)
+                    {
+                        ViewBag.NotOwner = "hidden";
+                    }
+                    else
+                    {
+                        ViewBag.IsOwner = "hidden";
+                    }
+                }
+                else
+                {
+                    ViewBag.NotOwner = "hidden";
+                    ViewBag.IsOwner = "hidden";
+
+
+                }
 
 
                 if (tournament != null)
@@ -445,6 +467,120 @@ namespace MvcPresentation.Controllers
                 sport_id = sport_id
             });
         }
+
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// </summary>
+        /// This method will get the signed in member's id, then get all the teams they are part of and removes any
+        /// that are not the same as the tournament sport.
+
+        [Authorize]
+        public ActionResult JoinTournament(int tournamentID)
+        {
+            try
+            {
+
+                ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var user = userManager.FindById(User.Identity.GetUserId());
+
+
+                TeamManager teamManager = new TeamManager();
+                Tournament tournament = tournamentManager.RetrieveTournamentByTournamentID(tournamentID);
+
+                List<Team> teams = new List<Team>();
+                    teams = new TeamManager().RetrieveTeamsByMemberID(user.MemberID);
+                foreach(var team in teams)
+                {
+                    if(team.SportID != tournament.SportID)
+                    {
+                        teams.Remove(team);
+                    }
+                }
+
+                if(teams.Count < 1)
+                {
+                    ViewBag.TeamError = "You don't have any valid teams to join this tournament";
+                    Tournament tourn = tournamentManager.RetrieveTournamentByTournamentID(tournamentID);
+                    return View("Details", tourn);
+                    
+                }
+
+                ViewBag.Tournament = tournament;
+                ViewBag.Teams = teams;
+
+                return View();
+            }
+            catch
+            {
+                return View("Error");
+            }
+            
+        }
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/03/05
+        /// 
+        /// </summary>
+        /// HttpPost method for JoinTournament creates a tournamentrequest
+
+        [HttpPost]
+        public ActionResult JoinTournament(TournamentRequest request)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if (tournamentManager.CreateATournamentRequest(request.TournamentID, request.TeamID))
+                    {
+                        return RedirectToAction("AllTournaments", "Tournaments");
+                    }
+                }
+                catch
+                {
+                    ViewBag.Error = "Could not process request";
+                    return View();
+                }
+            }
+
+            return View("Error");
+            
+        }
+
+        /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/04/02
+        /// 
+        /// </summary>
+        /// This method will open the view for the tournament admin to see all of the join requests for the tournament
+        public ActionResult JoinRequests(int tournamentID, int? requestID, string acceptance)
+        {
+            List<TournamentRequest> requests = new List<TournamentRequest>();
+
+            if(requestID.HasValue)
+            {
+                if (acceptance != "")
+                {
+                    tournamentManager.UpdateTournamentRequestStatus((int)requestID, acceptance);
+                }
+            }
+
+            requests = tournamentManager.RetrieveRequestByTournamentID(tournamentID);
+
+            return View(requests);
+        }
+
+        
+
+
+
+
+
+
+        // Helper Methods
 
         private void getSports()
         {

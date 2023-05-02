@@ -509,5 +509,10 @@ namespace DataAccessLayerFakes
         {
             throw new NotImplementedException();
         }
+
+        public List<Team> SelectTeamsByMemberID(int memberID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

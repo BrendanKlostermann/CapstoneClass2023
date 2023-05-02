@@ -20,3 +20,14 @@ C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFak
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.dll
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.pdb
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.dll
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataObjects.dll
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.pdb
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataObjects.pdb
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.AssemblyReference.cache
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CoreCompileInputs.cache
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
+C:\Capstone\entity_clone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb

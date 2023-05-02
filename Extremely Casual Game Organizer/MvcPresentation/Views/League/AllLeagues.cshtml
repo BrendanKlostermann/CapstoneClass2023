@@ -66,8 +66,8 @@ Views all leagues in the database
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.LeagueID }) |
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id = item.LeagueID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.LeagueID})
             </td>
         </tr>
     }

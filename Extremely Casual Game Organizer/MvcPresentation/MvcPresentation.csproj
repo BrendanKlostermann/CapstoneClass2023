@@ -434,6 +434,10 @@
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\League\Edit.cshtml" />
+    <Content Include="Views\League\Delete.cshtml" />
+    <Content Include="Views\Tournaments\JoinTournament.cshtml" />
+    <Content Include="Views\Tournaments\JoinRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

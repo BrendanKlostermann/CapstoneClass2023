@@ -42,6 +42,8 @@ namespace DataAccessLayerInterfaces
 
         Team SelectTeamByTeamID(int team_id);
 
+        List<Team> SelectTeamsByMemberID(int memberID);
+
         List<Team> SelectAllTeams();
 
 

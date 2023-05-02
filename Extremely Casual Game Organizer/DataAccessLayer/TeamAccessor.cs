@@ -656,6 +656,82 @@ namespace DataAccessLayer
 
 
         /// <summary>
+        /// Brendan Klostermann
+        /// Created: 2023/04/30
+        ///  
+        /// Get all teams by memberID
+        /// </summary>
+
+        public List<Team> SelectTeamsByMemberID(int memberID)
+        {
+            List<Team> teams = new List<Team>();
+
+
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // command text
+            var cmdText = "sp_select_teams_by_member_id";
+
+            // command
+            var cmd = new SqlCommand(cmdText, conn);
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // parameters
+            cmd.Parameters.Add("@member_id", SqlDbType.Int);
+
+            // parameter values
+            cmd.Parameters["@member_id"].Value = memberID;
+
+            try
+            {
+                // open the connection
+                conn.Open();
+
+                // execute the command
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    //var a = reader.FieldCount;
+                    while (reader.Read())
+                    {
+                        Team team = new Team();
+
+                        team.TeamID = reader.GetInt32(0);
+                        team.TeamName = reader.GetString(1);
+                        if (reader.IsDBNull(2))
+                        {
+                            team.Gender = null;
+                        }
+                        else
+                        {
+                            team.Gender = reader.GetBoolean(3);
+                        }
+                        team.SportID = reader.GetInt32(4);
+                        team.MemberID = reader.GetInt32(5);
+                        team.Description = reader.GetString(6);
+                        team. Active = reader.GetBoolean(7);
+
+                        teams.Add(team);
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return teams;
+
+        }
+
+
+
+
+        /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
         /// 
@@ -1011,5 +1087,7 @@ namespace DataAccessLayer
                 conn.Close();//sp_insert_team_request
             }
         }
+
+        
     }
 }
