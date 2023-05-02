@@ -16,3 +16,12 @@ C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organi
 C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.csproj.CopyComplete
 C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.dll
 C:\Users\ahale\Documents\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataAccessLayerInterfaces.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataObjects.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataObjects.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.csproj.AssemblyReference.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.csproj.CopyComplete
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.pdb
