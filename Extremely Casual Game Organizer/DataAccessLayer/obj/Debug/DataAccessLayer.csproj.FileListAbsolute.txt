@@ -31,3 +31,13 @@ C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Or
 C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
 C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\bin\Debug\DataAccessLayerInterfaces.dll
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\bin\Debug\DataObjects.dll
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\bin\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\bin\Debug\DataObjects.pdb
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CopyComplete
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
