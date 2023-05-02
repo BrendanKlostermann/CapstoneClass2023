@@ -62,6 +62,17 @@
                             <li>@Html.ActionLink("Search", "Search", "Search")</li>
                         </ul>
                     </li>
+                    @*
+                    Michael Haring
+                    05/01/2023
+                    Only shows admin tab if member is signed in as admin
+                    *@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Admin", "Index", "Admin", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

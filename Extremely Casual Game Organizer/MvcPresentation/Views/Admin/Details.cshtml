@@ -55,16 +55,16 @@
             <ul>
                 @foreach (string r in ViewBag.Roles)
                 {
-                    <li>
-                        <strong>
-                            @r @Html.ActionLink("Remove Role", "RemoveRole",
-              new { Id = Model.Id, Role = r })
-                        </strong>
-                        @*@if (r == "Administrator")
-                            {
-                                <span style="color: red; font-weight: bold;">@ViewBag.Role</span>
-                            }*@
-                    </li>
+                <li>
+                    <strong>
+                        @r @Html.ActionLink("Remove Role", "RemoveRole",
+                            new { Id = Model.Id, Role = r })
+                    </strong>
+                    @if (r == "Admin")
+                    {
+                        <span style="color: red; font-weight: bold;">@ViewBag.Error</span>
+                    }
+                </li>
                 }
             </ul>
         </dd>
@@ -75,12 +75,12 @@
             <ul>
                 @foreach (string r in ViewBag.NoRoles)
                 {
-                    <li>
-                        <strong>
-                            @r @Html.ActionLink("Add Role", "AddRole",
-              new { Id = Model.Id, Role = r })
-                        </strong>
-                    </li>
+                <li>
+                    <strong>
+                        @r @Html.ActionLink("Add Role", "AddRole",
+                         new { Id = Model.Id, Role = r })
+                    </strong>
+                </li>
                 }
             </ul>
         </dd>

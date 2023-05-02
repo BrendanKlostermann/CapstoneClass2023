@@ -51,7 +51,8 @@ namespace MvcPresentation.Migrations
                 var user = new ApplicationUser()
                 {
                     UserName = admin,
-                    Email = admin
+                    Email = admin,
+                    Birthday = DateTime.Today
                 };
 
                 IdentityResult result = userManager.Create(user, adminPassword);
