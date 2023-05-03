@@ -46,7 +46,6 @@
     <Compile Include="LeagueAccessorFake.cs" />
     <Compile Include="GameAccessorFake.cs" />
     <Compile Include="GameRosterAccessorFake.cs" />
-    <Compile Include="LeagueAccessorFakes.cs" />
     <Compile Include="MemberAccessorFake.cs" />
     <Compile Include="PracticeAccessorFakes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

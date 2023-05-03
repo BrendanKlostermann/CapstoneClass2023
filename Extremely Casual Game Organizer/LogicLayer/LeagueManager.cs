@@ -91,7 +91,8 @@ namespace LogicLayer
             try
             {
                 return _leagueAccessor.SelectAllLeagues();
-            } catch (ApplicationException up)
+            }
+            catch (ApplicationException up)
             {
                 throw new ApplicationException("List failed to populate", up);
             }
@@ -357,12 +358,13 @@ namespace LogicLayer
             try
             {
                 leagueList = _leagueAccessor.SelectLeaguesForGrid();
-                foreach(var league in leagueList)
+                foreach (var league in leagueList)
                 {
-                    if(league.GenderBool == true)
+                    if (league.GenderBool == true)
                     {
                         league.Gender = "Male";
-                    }else if(league.GenderBool == false)
+                    }
+                    else if (league.GenderBool == false)
                     {
                         league.Gender = "Female";
                     }
@@ -521,7 +523,7 @@ namespace LogicLayer
         /// Elijah
         /// method to add league items into leagueVM
         /// </summary>
-        public LeagueVM ConvertToLeagueVM (League league)
+        public LeagueVM ConvertToLeagueVM(League league)
         {
             SportManager sportManager = new SportManager();
 
@@ -554,6 +556,108 @@ namespace LogicLayer
 
 
             return leagueVM;
+        }
+
+        public bool UpdateRequestStatus(int RequestID, string Status)
+        {
+            bool success = false;
+            try
+            {
+
+                if (1 == _leagueAccessor.UpdateRequestStatus(RequestID, Status))
+                {
+                    success = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed updating status", ex);
+            }
+            return success;
+        }
+
+        public bool AddRequest(LeagueRequest request)
+        {
+
+            bool success = false;
+            try
+            {
+
+                if (1 == _leagueAccessor.AddARequest(request))
+                {
+                    success = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed adding request", ex);
+            }
+            return success;
+        }
+
+        public bool AddTeamToLeague(int TeamID, int LeagueID)
+        {
+            bool success = false;
+            try
+            {
+
+                if (1 == _leagueAccessor.AddTeamToLeague(TeamID, LeagueID))
+                {
+                    success = true;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+
+                throw new ApplicationException("Failed adding team to league", ex);
+            }
+            return success;
+        }
+
+        public List<Team> RetrieveNotRequestedTeams(int MemberID, int LeagueID)
+        {
+            List<Team> alreadyAccepted = GetAListOfTeamsByLeagueID(LeagueID);
+            List<LeagueRequest> leagueRequests = RetrieveRequestsByLeagueID(LeagueID);
+            TeamManager teamManager = new TeamManager();
+            List<Team> _teams = teamManager.RetrieveTeamsByMemberID(MemberID);
+            List<Team> teams = new List<Team>();
+            bool requested = false;
+            foreach (Team team in _teams)
+            {
+                foreach (LeagueRequest leagueRequest in leagueRequests)
+
+                    if (team.TeamID == leagueRequest.TeamID)
+                    {
+                        requested = true;
+                    }
+                foreach (Team existingTeam in alreadyAccepted)
+                {
+                    if (team.TeamID == existingTeam.TeamID)
+                    {
+                        requested = true;
+                    }
+                }
+
+                if (!requested)
+                {
+                    teams.Add(team);
+                }
+                requested = false;
+            }
+            return teams;
+        }
+
+        public List<LeagueRequestVM> RetrieveLeagueRequestVMs(List<LeagueRequest> LeagueRequests)
+        {
+            List<LeagueRequestVM> leagueRequestVMs = new List<LeagueRequestVM>();
+            TeamManager teamManager = new TeamManager();
+            foreach (LeagueRequest leagueRequest in LeagueRequests)
+            {
+                leagueRequestVMs.Add(new LeagueRequestVM { RequestID = leagueRequest.RequestID, Status = leagueRequest.Status, TeamName = teamManager.RetrieveTeamByTeamID(leagueRequest.LeagueID).TeamName });
+            }
+            return leagueRequestVMs;
         }
     }
 }

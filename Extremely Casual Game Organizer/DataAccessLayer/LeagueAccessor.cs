@@ -1018,8 +1018,164 @@ public int UpdateALeague(League league)
     }
 }
 
+
     public List<LeagueRequest> SelectRequestsByLeagueID(int LeagueID)
     {
-        throw new NotImplementedException();
+        List<LeagueRequest> requests = new List<LeagueRequest>();
+        DBConnection connectionFactory = new DBConnection();
+        var conn = connectionFactory.GetDBConnection();
+
+        //command text
+        var cmdText = "sp_select_request_by_league_id";
+
+        //create command
+        var cmd = new SqlCommand(cmdText, conn);
+
+        //command type
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        //Add parameters //values
+        cmd.Parameters.Add("@LeagueID", SqlDbType.Int);
+        cmd.Parameters["@LeagueID"].Value = LeagueID;
+
+        try
+        {
+            conn.Open();
+            var reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    LeagueRequest temp = new LeagueRequest();
+                    temp.RequestID = reader.GetInt32(0);
+                    temp.TeamID = reader.GetInt32(1);
+                    temp.Status = reader.GetString(2);
+                    temp.LeagueID = LeagueID;
+                    requests.Add(temp);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return requests;
+
+    }
+
+    public int UpdateRequestStatus(int RequestID, string Status)
+    {
+        DBConnection connectionFactory = new DBConnection();
+        var conn = connectionFactory.GetDBConnection();
+
+        //command text
+        var cmdText = "sp_update_league_request_status_by_request_id";
+
+        //create command
+        var cmd = new SqlCommand(cmdText, conn);
+
+        //command type
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        //Add parameters //values
+        cmd.Parameters.Add("@RequestID", SqlDbType.Int);
+        cmd.Parameters["@RequestID"].Value = RequestID;
+        cmd.Parameters.Add("@Status", SqlDbType.VarChar);
+        cmd.Parameters["@Status"].Value = Status;
+
+        try
+        {
+            conn.Open();
+            var reader = cmd.ExecuteNonQuery();
+            return reader;
+        }
+        catch (Exception up)
+        {
+            throw up;
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+
+    public int AddARequest(LeagueRequest request)
+    {
+        DBConnection connectionFactory = new DBConnection();
+        var conn = connectionFactory.GetDBConnection();
+
+        //command text
+        var cmdText = "sp_insert_league_request";
+
+        //create command
+        var cmd = new SqlCommand(cmdText, conn);
+
+        //command type
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        //Add parameters //values
+        cmd.Parameters.Add("@LeagueID", SqlDbType.Int);
+        cmd.Parameters["@LeagueID"].Value = request.LeagueID;
+
+        cmd.Parameters.Add("@TeamID", SqlDbType.Int);
+        cmd.Parameters["@TeamID"].Value = request.TeamID;
+
+        cmd.Parameters.Add("@Status", SqlDbType.VarChar);
+        cmd.Parameters["@Status"].Value = request.Status;
+
+        try
+        {
+            conn.Open();
+            var reader = cmd.ExecuteNonQuery();
+            return reader;
+        }
+        catch (Exception up)
+        {
+            throw up;
+        }
+        finally
+        {
+            conn.Close();
+        }
+    }
+    public int AddTeamToLeague(int TeamID, int LeagueID)
+    {
+        int rows = 0;
+
+        // connection
+        DBConnection connectionFactory = new DBConnection();
+        var conn = connectionFactory.GetDBConnection();
+
+        // cmdText
+        var cmdText = "sp_add_team_to_league";
+
+        // command
+        var cmd = new SqlCommand(cmdText, conn);
+
+        // type
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        // parameters
+        cmd.Parameters.AddWithValue("@TeamID", TeamID);
+        cmd.Parameters.AddWithValue("@LeagueID", LeagueID);
+        try
+        {
+            conn.Open();
+
+            rows = cmd.ExecuteNonQuery();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+        finally
+        {
+            conn.Close();
+        }
+        return rows;
     }
 }

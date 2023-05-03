@@ -87,6 +87,12 @@
     <Compile Include="CustomControls\Team.xaml.cs">
       <DependentUpon>Team.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Leagues\pgAddLeagueGame.xaml.cs">
+      <DependentUpon>pgAddLeagueGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Leagues\pgGenerateLeagueGames.xaml.cs">
+      <DependentUpon>pgGenerateLeagueGames.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Practices\pgCreatePractice.xaml.cs">
       <DependentUpon>pgCreatePractice.xaml</DependentUpon>
     </Compile>
@@ -162,6 +168,14 @@
     <Page Include="CustomControls\Team.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgAddLeagueGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Leagues\pgGenerateLeagueGames.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Practices\pgCreatePractice.xaml">
       <SubType>Designer</SubType>

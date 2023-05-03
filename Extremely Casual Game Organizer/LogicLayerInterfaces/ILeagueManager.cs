@@ -9,7 +9,7 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-﻿/// <summary>
+/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/02/20
 /// 
@@ -137,5 +137,12 @@ namespace LogicLayerInterfaces
         bool UpdateALeague(League league);
 
         List<LeagueRequest> RetrieveRequestsByLeagueID(int LeagueID);
+        bool UpdateRequestStatus(int RequestID, string Status);
+        bool AddRequest(LeagueRequest request);
+        bool AddTeamToLeague(int TeamID, int LeagueID);
+
+        List<Team> RetrieveNotRequestedTeams(int MemberID, int LeagueID);
+
+        List<LeagueRequestVM> RetrieveLeagueRequestVMs(List<LeagueRequest> LeagueRequests);
     }
 }

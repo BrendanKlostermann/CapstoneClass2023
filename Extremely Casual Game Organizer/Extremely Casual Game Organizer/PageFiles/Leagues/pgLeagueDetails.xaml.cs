@@ -27,11 +27,14 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
         League _league = null;
         Member _member = null;
         LeagueManager _leagueManager = new LeagueManager();
+        MemberManager _memberManager = new MemberManager();
         PageControl _pageControl = new PageControl();
         List<Sport> _sports = new List<Sport>();
         List<League> _leagues;
         SportManager _sportManager = new SportManager();
         String _gender;
+        LeagueRequestVM _leagueRequestVM;
+        LeagueRequest _leagueRequest;
         public pgLeagueDetails()
         {
             _league = new League()
@@ -53,29 +56,85 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
             InitializeComponent();
             populateContents();
             btnSave.Visibility = Visibility.Collapsed;
+            btnAccept.Visibility = Visibility.Collapsed;
+            btnDecline.Visibility = Visibility.Collapsed;
+        }
+
+        public List<Team.TeamVM> getTeamVM()
+        {
+
+            List<Team> teams;
+            List<Team.TeamVM> teamVMs;
+            try
+            {
+                teams = _leagueManager.GetAListOfTeamsByLeagueID(_league.LeagueID);
+                teamVMs = new List<Team.TeamVM>();
+            }
+            catch
+            {
+                return null;
+            }
+            foreach (var team in teams)
+            {
+                Team.TeamVM teamVM = new Team.TeamVM();
+                teamVM.TeamID = team.TeamID;
+                teamVM.TeamName = team.TeamName;
+                teamVM.Gender = team.Gender;
+                teamVM.SportID = team.SportID;
+                teamVM.Description = team.Description;
+                teamVM.MemberID = team.MemberID;
+                if (_memberManager.GetMembers() != null)
+                {
+                    foreach (var member in _memberManager.GetMembers())
+                    {
+                        if (member.MemberID == team.MemberID)
+                        {
+                            teamVM.FirstName = member.FirstName;
+                            teamVM.LastName = member.FamilyName;
+                            if (member.Gender == true)
+                            {
+                                teamVM.GenderAsText = "M";
+                            }
+                            else if (member.Gender == false)
+                            {
+                                teamVM.GenderAsText = "F";
+                            }
+                            else
+                            {
+                                teamVM.GenderAsText = "NB";
+                            }
+                        }
+                    }
+                }
+                teamVMs.Add(teamVM);
+            }
+            return teamVMs;
         }
         private void populateContents()
         {
+            _league = _leagueManager.RetrieveLeagueByLeagueID(_league.LeagueID);
+            List<Team.TeamVM> VMs = getTeamVM();
+            datCurrent.ItemsSource = VMs;
             try
             {
-                datCurrent.ItemsSource = _leagueManager.GetAListOfTeamsByLeagueID(_league.LeagueID);
-
-            }
-            catch (Exception)
-            {
-            }
-            try
-            {
-                datRequest.ItemsSource = _leagueManager.RetrieveRequestsByLeagueID(_league.LeagueID);
+                List<LeagueRequest> requests = _leagueManager.RetrieveRequestsByLeagueID(_league.LeagueID);
+                datRequest.ItemsSource = _leagueManager.RetrieveLeagueRequestVMs(requests);
+                datRequest.Columns[0].Visibility = Visibility.Collapsed;
 
             }
             catch (Exception)
             {
 
             }
+            cboGender.Visibility = Visibility.Collapsed;
+            txtGender.Visibility = Visibility.Visible;
+            cboStatus.Visibility = Visibility.Collapsed;
+            txtStatus.Visibility = Visibility.Visible;
             txtName.Text = _league.Name;
+            txtName.IsReadOnly = true;
             txtDues.Text = _league.LeagueDues.ToString();
-            sldDues.Value = (double)_league.LeagueDues;
+            txtDues.IsReadOnly = true;
+            sldDues.Visibility = Visibility.Hidden;
             txtGame.Text = _sportManager.RetrieveSportBySportID(_league.SportID);
             string registration = "Registration Closed";
             if (_league.Active)
@@ -83,6 +142,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
                 registration = "Registration Open";
             }
             txtStatus.Text = registration;
+            txtStatus.IsReadOnly = true;
             _gender = "No Assignment";
             if (_league.Gender == true)
             {
@@ -94,7 +154,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
             }
             txtGender.Text = _gender;
             txtMax.Text = _league.MaxNumOfTeams.ToString();
+            txtMax.IsReadOnly = true;
             txtDetails.Text = _league.Description;
+            txtDetails.IsReadOnly = true;
 
             if (_league.Active)
             {
@@ -115,13 +177,13 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
             {
                 try
                 {
-                    _leagueManager.RemoveLeague(_league.LeagueID);
-                    MessageBox.Show("League deletion successful");
+                    _leagueManager.ChangeRegistration(_league.LeagueID, false);
+                    MessageBox.Show("League inactivation successful");
                     _pageControl.LoadPage(new pgMyLeagues(_member, _leagueManager));
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("League deletion failed.");
+                    MessageBox.Show("League inactivation failed.");
                     _pageControl.LoadPage(new pgMyLeagues(_member, _leagueManager));
                 }
             }
@@ -131,7 +193,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
         {
 
             btnSave.Visibility = Visibility.Visible;
-            btnOpenCloseRegistration.Visibility= Visibility.Hidden;
+            btnOpenCloseRegistration.Visibility = Visibility.Hidden;
             string status = (string)btnOpenCloseRegistration.Content;
             _sports = _sportManager.RetrieveAllSports();
             List<String> sportNames = new List<string>();
@@ -159,6 +221,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
             cboStatus.ItemsSource = statuses;
             cboStatus.SelectedItem = status;
             cboGender.Visibility = Visibility.Visible;
+            cboGender.SelectedItem = txtGender.Text.ToString();
             cboGender.ItemsSource = genders;
             cboGender.SelectedItem = _gender;
 
@@ -166,6 +229,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
             txtDues.Text = _league.LeagueDues.ToString();
             sldDues.Visibility = Visibility.Visible;
             sldDues.Value = (double)_league.LeagueDues;
+
             txtDues.IsReadOnly = false;
             txtDetails.IsReadOnly = false;
             txtMax.IsReadOnly = false;
@@ -259,15 +323,22 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
             {
                 leagueStatus = _league.Active;
             }
-            if (cboStatus.SelectedItem != null)
+            if (cboGender.SelectedItem != null)
             {
-                if (cboStatus.SelectedItem.ToString().Equals("Male"))
+                if (cboGender.SelectedItem.ToString().Equals("Male"))
                 {
                     leagueGender = true;
                 }
                 else
                 {
-                    leagueGender = false;
+                    if (cboGender.SelectedItem.ToString().Equals("Female"))
+                    {
+                        leagueGender = false;
+                    }
+                    else
+                    {
+                        leagueGender = null;
+                    }
                 }
             }
             leagueDescription = txtDetails.Text;
@@ -281,7 +352,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
                 Description = leagueDescription,
                 Name = leagueName,
                 MaxNumOfTeams = leagueMax,
-                Active = leagueStatus
+                Active = leagueStatus,
+                SportID = _league.SportID
             };
             MessageBoxResult result = MessageBox.Show("Are you sure?", "Update a League", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
@@ -292,12 +364,13 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
                     MessageBox.Show("League update successful!");
                     btnSave.Visibility = Visibility.Hidden;
                     btnOpenCloseRegistration.Visibility = Visibility.Visible;
+                    populateContents();
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("League update failed.");
-                    throw ex;
+                    populateContents();
                 }
             }
         }
@@ -331,6 +404,63 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
                 }
                 populateContents();
             }
+        }
+
+        private void datRequest_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            _leagueRequestVM = (LeagueRequestVM)datRequest.SelectedItem;
+            foreach (LeagueRequest leagueRequest in _leagueManager.RetrieveRequestsByLeagueID(_league.LeagueID))
+            {
+                if (leagueRequest.RequestID == _leagueRequestVM.RequestID)
+                {
+                    _leagueRequest = leagueRequest;
+                }
+            }
+            btnAccept.Visibility = Visibility.Visible;
+            btnDecline.Visibility = Visibility.Visible;
+
+        }
+
+        private void btnAccept_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure?", "Add a Team", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _leagueManager.AddTeamToLeague(_leagueRequest.TeamID, _league.LeagueID);
+                    _leagueManager.UpdateRequestStatus(_leagueRequest.RequestID, "Joined");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Team addition failed.");
+                    throw ex;
+                }
+            }
+            btnAccept.Visibility = Visibility.Collapsed;
+            btnDecline.Visibility = Visibility.Collapsed;
+            populateContents();
+        }
+
+        private void btnDecline_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _leagueManager.UpdateRequestStatus(_leagueRequest.RequestID, "Declined");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed.");
+                throw ex;
+            }
+            btnAccept.Visibility = Visibility.Collapsed;
+            btnDecline.Visibility = Visibility.Collapsed;
+            populateContents();
+        }
+
+        private void btnGames_Click(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgGenerateLeagueGames(_league));
         }
     }
 }

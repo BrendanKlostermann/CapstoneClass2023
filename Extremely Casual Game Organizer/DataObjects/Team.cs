@@ -58,7 +58,8 @@ namespace DataObjects
         }
 
 
-        public Team(int teamID, string teamName, bool? gender, int sportID, int memberID, string description){
+        public Team(int teamID, string teamName, bool? gender, int sportID, int memberID, string description)
+        {
             this.TeamID = teamID;
             this.TeamName = teamName;
             this.Gender = gender;
@@ -90,7 +91,7 @@ namespace DataObjects
             public string FirstName { get; set; }//first name to display
             public string LastName { get; set; }//last name to display
             public string GenderAsText { get; set; } //allows me to change how i display gender
-
+            public string SportName { get; set; }
             //generic constructor-alex
             public TeamVM()
             {

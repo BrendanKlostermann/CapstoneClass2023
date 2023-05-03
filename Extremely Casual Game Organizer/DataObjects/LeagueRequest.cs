@@ -14,4 +14,10 @@ namespace DataObjects
         public int TeamID { get; set; }
         public string Status { get; set; }
     }
+    public class LeagueRequestVM
+    {
+        public int RequestID { get; set; }
+        public string TeamName { get; set; }
+        public string Status { get; set; }
+    }
 }

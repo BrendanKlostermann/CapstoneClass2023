@@ -45,6 +45,7 @@
     <Compile Include="LeagueManager.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameRosterManager.cs" />
+    <Compile Include="ListToDataTableConverter.cs" />
     <Compile Include="MasterManager.cs" />
     <Compile Include="MessageManager.cs" />
     <Compile Include="PracticeManager.cs" />
