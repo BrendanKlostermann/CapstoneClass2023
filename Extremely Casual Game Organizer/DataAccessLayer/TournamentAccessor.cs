@@ -1017,5 +1017,56 @@ namespace DataAccessLayer
                 conn.Close();////sp_insert_tournament_request
             }
         }
+
+        /// <summary>
+        /// Toney Hale
+        /// Created: 2023/04/11
+        /// 
+        /// Tournament Registration database connection
+        /// </summary>
+        public int openOrCloseTournamentRegistration(int tournament_id, bool active)
+        {
+            // return object
+            int rowsAffected = 0;
+
+            // connection
+            DBConnection connectionFactory = new DBConnection();
+            var conn = connectionFactory.GetDBConnection();
+
+            // command text
+            string commandText = @"sp_open_or_close_tournament_registration_by_tournament_id";
+
+            // command
+            var cmd = new SqlCommand(commandText, conn);
+
+            // command type
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            // parameters
+            cmd.Parameters.Add("@active", SqlDbType.Int);
+
+            // parameter values
+            cmd.Parameters["@active"].Value = active;
+
+            try
+            {
+                // 8. open the connection
+                conn.Open();
+
+                rowsAffected = cmd.ExecuteNonQuery();
+                rowsAffected = 1;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException("Tournament Registration Changes Failed. " + ex.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            // return the result
+            return rowsAffected;
+        }
     }
 }

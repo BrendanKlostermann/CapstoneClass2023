@@ -218,6 +218,11 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
+        public List<Team> SelectTeamsByMemberID(int memberID)
+        {
+            throw new NotImplementedException();
+        }
+
         public int UpdateTeamRequestStatus(int RequestID, string Status)
         {
             throw new NotImplementedException();

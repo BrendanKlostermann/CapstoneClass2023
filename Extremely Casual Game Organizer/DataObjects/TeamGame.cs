@@ -18,4 +18,12 @@ namespace DataObjects
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+    public class TeamsInGame
+    {
+        public string Team1Name { get; set; }
+        public string Team2Name { get; set; }
+
+        public int Team1ID { get; set; }
+        public int Team2ID { get; set; }
+    }
 }

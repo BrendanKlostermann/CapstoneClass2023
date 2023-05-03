@@ -24,6 +24,8 @@ namespace LogicLayerInterfaces
     {
         Team RetrieveTeamByTeamID(int team_id);
 
+        List<Team> RetrieveTeamsByMemberID(int memberID);
+
         List<Team> RetrieveAllTeams();
         /// <summary>
         /// Heritier Otiom

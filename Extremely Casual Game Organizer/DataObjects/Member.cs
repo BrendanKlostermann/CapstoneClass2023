@@ -64,6 +64,7 @@ namespace DataObjects
         /// Property for Member
         /// </summary>
         public string PasswordHash { get; set; }
+        public string Photo { get; set; }
         public byte[] ProfilePhoto { get; set; }
 
 

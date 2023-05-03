@@ -46,7 +46,7 @@
         <Label Grid.Column="0" Grid.Row="5" 
                HorizontalContentAlignment="Right"
                FontSize="15" Padding="0 5 10 0" Margin="0,6,5.4,24.4" Grid.RowSpan="2">Dues</Label>
-       <TextBox x:Name="txtDues" Grid.Column="1" Grid.Row="5" 
+        <TextBox x:Name="txtDues" Grid.Column="1" Grid.Row="5" 
                HorizontalContentAlignment="Left"
                FontSize="15" Margin="6.6,2,0,2" HorizontalAlignment="Left" Width="78" IsReadOnly="true"/>
         <Label Grid.Row="6" 
@@ -59,22 +59,32 @@
         <Label Grid.Column="0" Grid.Row="7" 
                HorizontalContentAlignment="Right"
                FontSize="15" Padding="0 5 10 0" Margin="2,4.6,5.4,48.4" Grid.RowSpan="3">Details:</Label>
-        <TextBox x:Name="txtDetails" Grid.Column="1" Grid.Row="7" 
+        <TextBox x:Name="txtDetails" TextWrapping="Wrap" Grid.Column="1" Grid.Row="8" 
                HorizontalContentAlignment="Left"
-               FontSize="15" Margin="7.6,11.6,100,0" BorderThickness="0,0,0,0" Grid.RowSpan="4" Height="223" VerticalAlignment="Top" IsReadOnly="true"/>
+               FontSize="15" Margin="8,0,100,0" BorderThickness="0,0,0,0" Grid.RowSpan="3" Height="94" VerticalAlignment="Top" IsReadOnly="true"/>
         <Label Grid.Column="1" Grid.Row="6" 
             HorizontalContentAlignment="Right"
-            FontSize="15" Padding="0 5 10 0" Margin="309.6,0,0,0" Grid.RowSpan="2" Content="Max:" HorizontalAlignment="Left" Width="165" Height="31" VerticalAlignment="Top"/>
+            FontSize="15" Padding="0 5 10 0" Margin="309.6,0,0,0" Grid.RowSpan="2" Content="Teams:" HorizontalAlignment="Left" Width="165" Height="31" VerticalAlignment="Top"/>
         <TextBox x:Name="txtMax" Grid.Column="1" Grid.Row="6" 
             HorizontalContentAlignment="Left"
             FontSize="15" Margin="479.6,0,0,2.4" HorizontalAlignment="Left" Width="86" IsReadOnly="true"/>
-        <Button x:Name="btnExit" Content="Exit" Grid.Column="1" Grid.Row="10" Padding="20 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" BorderBrush="#FF419CC3" Grid.RowSpan="3" RenderTransformOrigin="0.485,-0.691" Margin="488.6,179.6,96,21.2" Width="81">
+        <Button x:Name="btnExit" Content="Exit" Grid.Column="1" Grid.Row="10" Padding="20 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" BorderBrush="#FF419CC3" Grid.RowSpan="3" RenderTransformOrigin="0.485,-0.691" Margin="488.6,179.6,96,21.2" Width="81" Click="btnExit_Click">
 
 
         </Button>
-        <Button x:Name="btnRequest" Grid.Column="1" Content="Request to Join" Grid.Row="10" Padding="20 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" BorderBrush="#FF419CC3" Grid.RowSpan="3" RenderTransformOrigin="0.485,-0.691" Margin="7,179,502,21" Width="157" Click="btnRequest_Click">
+        <Button x:Name="btnRequest" Grid.Column="1" Content="Request to Join" Grid.Row="10" Padding="20 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" BorderBrush="#FF419CC3" Grid.RowSpan="3" RenderTransformOrigin="0.485,-0.691" Margin="7,179,502,21" Width="157" Click="btnRequest_Click" Visibility="Collapsed">
 
         </Button>
+        <TextBox x:Name="txtRequestStatus" Grid.Column="1" Grid.Row="10" Background="#eeee"
+            HorizontalContentAlignment="Left"
+            FontSize="15" Margin="178.6,144.6,183,0" BorderThickness="0,0,0,0" Height="86" VerticalAlignment="Top" IsReadOnly="true" Grid.RowSpan="3"/>
+        <ListView x:Name="lstCurrent" Focusable="False" Margin="8,38,99,41" Grid.Column="1" Grid.Row="10"/>
+        <ComboBox x:Name="cboRequests" Grid.Column="1" Grid.Row="10" 
+               HorizontalContentAlignment="Left"
+               FontSize="15" Margin="10,144,0,10" BorderThickness="0,0,0,0" HorizontalAlignment="Left" Width="121" Visibility="Collapsed"/>
+        <Label x:Name="Your" Grid.Column="0" Grid.Row="10" 
+            HorizontalContentAlignment="Right"
+            FontSize="15" Padding="0 5 10 0" Margin="2,152.6,5.4,0.4" Content="Your teams:" Visibility="Collapsed"/>
     </Grid>
 </Page>
 

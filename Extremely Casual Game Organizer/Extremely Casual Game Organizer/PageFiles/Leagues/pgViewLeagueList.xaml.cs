@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,11 +46,14 @@ namespace Extremely_Casual_Game_Organizer
         PageControl _pageControl = new PageControl();
         Button _myLeaguesButton;
         Button _addButton;
+        TeamManager _teamManager = new TeamManager();
+        ListToDataTableConverter converter = new ListToDataTableConverter();
 
         public pgViewLeagueList(MasterManager masterManager)
         {
             InitializeComponent();
             _masterManager = masterManager;
+            _leagueManager = new LeagueManager();
         }
 
         /// <summary>
@@ -61,7 +65,110 @@ namespace Extremely_Casual_Game_Organizer
         /// 
         /// </summary>
         /// 
-        private void datLeagues_Loaded(object sender, RoutedEventArgs e)
+
+        private void LoadLeagueList()
+        {
+            DataTable leagueList = converter.ToDataTable(_leagueManager.RetrieveListOfLeaguesForGrid());
+
+            foreach (var league in leagueList.AsEnumerable())
+            {
+                ListBoxItem addLeague = new ListBoxItem();
+                addLeague.BorderBrush = Brushes.Black;
+                addLeague.Margin = new Thickness(5);
+                addLeague.Width = 765;
+                addLeague.Height = 50;
+                addLeague.DataContext = league[0];
+
+
+                TextBlock nameText = new TextBlock()
+                {
+                    Text = league[1].ToString(),
+                    Width = 230,
+                    FontWeight = FontWeights.Bold
+                };
+
+                TextBlock sportText = new TextBlock()
+                {
+                    Text = league[3].ToString(),
+                    Width = 340
+                };
+
+                TextBlock creatorText = new TextBlock()
+                {
+                    Text = league[4].ToString(),
+                    Width = 340
+                };
+                DockPanel leagueListItem = new DockPanel();
+
+                leagueListItem.Children.Add(nameText);
+                leagueListItem.Children.Add(sportText);
+                leagueListItem.Children.Add(creatorText);
+
+                addLeague.Content = leagueListItem;
+
+                lstLeagueList.Items.Add(addLeague);
+            }
+        }
+
+
+
+        private void MyLeaguesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            _pageControl.LoadPage(new pgMyLeagues(_pageControl.GetSignedInMember(), new LeagueManager()));
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgAddLeague(_pageControl.GetSignedInMember(), new LeagueManager(), new SportManager()));
+        }
+
+        private void lstLeagueList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (lstLeagueList.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select an item");
+                }
+                else
+                {
+
+                    ListBoxItem selectedItem = (ListBoxItem)lstLeagueList.SelectedItem;
+                    int leagueID = int.Parse(selectedItem.DataContext.ToString());
+                    League league = _leagueManager.RetrieveLeagueByLeagueID(leagueID);
+
+                    try
+                    {
+                        _member = _pageControl.GetSignedInMember();
+                    }
+                    catch
+                    {
+                    }
+                    List<Team> teams = null;
+                    if (_member != null)
+                    {
+                        try
+                        {
+                            teams = _masterManager.TeamManager.RetrieveTeamsByMemberID(_member.MemberID);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                    pgViewLeague selectedLeague = new pgViewLeague(league, _member, teams);
+                    _pageControl.LoadPage(selectedLeague);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Sorry, league details are unable to load");
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -76,24 +183,7 @@ namespace Extremely_Casual_Game_Organizer
 
                 if (_leaguesForGrid == null)
                 {
-
-                    _leaguesForGrid = new List<LeagueGridVM>();
-                    _leaguesForGrid = _masterManager.LeagueManager.RetrieveListOfLeaguesForGrid();
-
-                    datLeagues.ItemsSource = _leaguesForGrid;
-
-
-                    ////Remove data users do not need, maybe switch to using a ViewModel?
-                    //// Might need to edit data objects to allow league to hold Sport Description as well
-                    //// that way user know what sport it is.
-
-                    datLeagues.Columns.RemoveAt(0);
-                    datLeagues.Columns.RemoveAt(5);
-
-                    datLeagues.Columns[2].Header = "Sport";
-                    datLeagues.Columns[3].Header = "Owner";
-
-                    datLeagues.Columns[1].DisplayIndex = 4;
+                    LoadLeagueList();
                 }
             }
             catch (Exception ex)
@@ -102,75 +192,29 @@ namespace Extremely_Casual_Game_Organizer
             }
         }
 
-
-        /// <summary>
-        /// Brendan Klostermann
-        /// Created: 2023/02/20
-        /// 
-        /// When the page is unloaded it will clear out the league list and clear the item
-        /// source of the datagrid to ensure they are empty and ready for next time it is loaded.
-        /// </summary>
-        /// 
-        private void datLeagues_Unloaded(object sender, RoutedEventArgs e)
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            
-            _leaguesGridVM = null;
-            datLeagues.ItemsSource = null;
-            if (_member!=null)
-            {
-                _addButton.Click -= AddButton_Click;
-                _myLeaguesButton.Click -= MyLeaguesButton_Click;
-            }
-        }
-
-        /// <summary>
-        /// Elijah
-        /// Created: 2023/02/28
-        /// 
-        /// When a item on the datLeagues data grid is selected, the 
-        /// selected item becomes the current League object. This is
-        /// used later when the data from this league is populated 
-        /// in the pgAddEditLeague page.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        // Made by Elijah Morgan
-        private void datLeagues_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var leagueGridVM = (LeagueGridVM)datLeagues.SelectedItem;
-
-            if(_leagueManager == null)
-            {
-                _leagueManager = new LeagueManager();
-            }
-
-            League league = null;
             try
             {
-                league = _leagueManager.RetrieveLeagueByLeagueID(leagueGridVM.LeagueID);
+                _member = _pageControl.GetSignedInMember();
+                if (_member != null)
+                {
+                    _addButton = _pageControl.SetCustomButton("Add new", 1);
+                    _myLeaguesButton = _pageControl.SetCustomButton("My Leagues", 2);
+                    _addButton.Click += AddButton_Click;
+                    _myLeaguesButton.Click += MyLeaguesButton_Click;
+                }
+
+                if (_leaguesForGrid == null)
+                {
+                    LoadLeagueList();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("League not found." + "\n\n" + ex.Message);
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
             }
-
-            pgAddEditLeague selectedLeague = new pgAddEditLeague(league);
-
-            PageControl pageController = new PageControl();
-            pageController.LoadPage(selectedLeague);
-            var editWindow = new pgAddEditLeague(league); // use a constructor that takes a league argument
         }
-        private void MyLeaguesButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            _pageControl.LoadPage(new pgMyLeagues(_pageControl.GetSignedInMember(), new LeagueManager()));
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            _pageControl.LoadPage(new pgAddLeague(_pageControl.GetSignedInMember(), new LeagueManager(), new SportManager()));
-        }
-
     }
 }
 

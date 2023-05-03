@@ -299,5 +299,21 @@ namespace LogicLayer
                 throw new ApplicationException("Error requesting to join", up);
             }
         }
+
+        public List<Team> RetrieveTeamsByMemberID(int memberID)
+        {
+            try
+            {
+                _teamAccessor = new TeamAccessor();
+
+                List<Team> teams = _teamAccessor.SelectTeamsByMemberID(memberID);
+
+                return teams;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Could not find teams", ex);
+            }
+        }
     }
 }

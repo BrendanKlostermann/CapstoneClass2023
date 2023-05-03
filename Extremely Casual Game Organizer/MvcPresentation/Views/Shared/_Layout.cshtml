@@ -17,13 +17,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("ECGO", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("View Schedule", "ViewSchedule", "Schedule")</li>
+                    @if (ViewBag.Title == "Home Page")
+                    {
+                        <li class="current" style="height:100%">@Html.ActionLink("ECGO", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("ECGO", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+                    @if (ViewBag.Title == "Schedule")
+                    {
+                        <li class="current">@Html.ActionLink("View Schedule", "ViewSchedule", "Schedule")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("View Schedule", "ViewSchedule", "Schedule") </li>
+                    }
+
                     <li class="nav-item dropdown">
-                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+                        @if (ViewBag.Title == "All Games")
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle current" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Games</a>
+                        }
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>@Html.ActionLink("View All Games", "AllGames", "Games")</li>
                             <li>@Html.ActionLink("Create a Game", "CreateGame", "Games")</li>
@@ -31,16 +53,29 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Leagues</a>
+                        @if (ViewBag.Title == "AllLeagues")
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle current" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Leagues</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Leagues</a>
+                        }
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>@Html.ActionLink("View All Leagues", "AllLeagues", "League")</li>
-                            <li>@Html.ActionLink("My Leagues", "MemberLeagues", "League")</li>
                             <li>@Html.ActionLink("Create a League", "CreateLeague", "League")</li>
-                            <li>@Html.ActionLink("Manage My Leagues", "EditLeagues", "League")</li>
+                            <li>@Html.ActionLink("Manage My Leagues", "AllLeagues", "League")</li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tournaments</a>
+                        @if (ViewBag.Title == "AllTournaments" || ViewBag.Title == "CreateTournament")
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle current" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tournaments</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tournaments</a>
+                        }
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>@Html.ActionLink("View All Tournaments", "AllTournaments", "Tournaments")</li>
                             <li>@Html.ActionLink("My Tournaments", "MemberTournaments", "Tournaments")</li>
@@ -49,7 +84,14 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teams</a>
+                        @if (ViewBag.Title == "All Teams" || ViewBag.Title == "Create")
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle current" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teams</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Teams</a>
+                        }
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>@Html.ActionLink("View All Teams", "AllTeams", "Teams")</li>
                             <li>@Html.ActionLink("My Teams", "MemberTeams", "Teams")</li>
@@ -58,11 +100,29 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
+                        @if (ViewBag.Title == "Search")
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle current" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
+                        }
+                        else
+                        {
+                            <a href="#" class="navbar-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search</a>
+                        }
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li>@Html.ActionLink("Search", "Search", "Search")</li>
                         </ul>
                     </li>
+                    @*
+                        Michael Haring
+                        05/01/2023
+                        Only shows admin tab if member is signed in as admin
+                    *@
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            @Html.ActionLink("Admin", "Index", "Admin", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -70,7 +130,9 @@
     </div>
 
     <div class="container body-content">
-        @RenderBody()
+        <div class="main-div">
+            @RenderBody()
+        </div>
 
         <hr />
 
@@ -80,40 +142,40 @@
     </div>
 
     @*This is a popup window for Message*@
-<div id="Message" style="display:flex;justify-content:end; width:700px; padding:20px">
-    <div class="chat-popup" id="myForm" data-aos="slide-up">
-        <div style="display:flex;justify-content:end; padding:0px 20px">
-            <a href="" style="text-align:right" class="closeBtn" onclick="closeForm()">
-                <img src="~/Images/close.png"
-                     alt="sms" class="img-fluid img-responsive text-center" width="40" />
+    <div id="Message" style="display:flex;justify-content:end; width:700px; padding:20px">
+        <div class="chat-popup" id="myForm" data-aos="slide-up">
+            <div style="display:flex;justify-content:end; padding:0px 20px">
+                <a href="" style="text-align:right" class="closeBtn" onclick="closeForm()">
+                    <img src="~/Images/close.png"
+                         alt="sms" class="img-fluid img-responsive text-center" width="40" />
 
+                </a>
+            </div>
+            <div id="frame" style="border: 3px solid gray; overflow: hidden; margin:0px 15px 15px auto; max-width: 700px;">
+                <iframe scrolling="no" src="@Url.Action("PeopleITexted","Messages")"
+                        style="border: 0px none; height: 900px; max-height: 90vh; margin-top: -60px; width: 500px">
+                </iframe>
+            </div>
+        </div>
+        <div id="messageForDestop" style="padding:0px 10px; text-align:center">
+            <button type="button" id="btnOpen" class="btn btn-info btn-lg" onclick="openForm()">
+                <span style="display:flex;align-items:center; flex-direction:column;">
+                    <img src="~/Images/sms.png"
+                         alt="sms" class="img-fluid img-responsive text-center" width="50" />
+                    @*Messages*@
+                </span>
+            </button>
+        </div>
+        <div id="messageForMobile" style="padding:0px 10px; text-align:center">
+            <a href="~/Messages/PeopleITexted" type="button" id="btnOpenMobile" class="btn btn-info btn-lg">
+                <span style="display:flex;align-items:center; flex-direction:column;">
+                    <img src="~/Images/sms.png"
+                         alt="sms" class="img-fluid img-responsive text-center" width="50" />
+                    @*Messages*@
+                </span>
             </a>
         </div>
-        <div id="frame" style="border: 3px solid gray; overflow: hidden; margin:0px 15px 15px auto; max-width: 700px;">
-            <iframe scrolling="no" src="@Url.Action("PeopleITexted","Messages")"
-                    style="border: 0px none; height: 900px; max-height: 90vh; margin-top: -60px; width: 500px">
-            </iframe>
-        </div>
     </div>
-    <div id="messageForDestop" style="padding:0px 10px; text-align:center">
-        <button type="button" id="btnOpen" class="btn btn-info btn-lg" onclick="openForm()">
-            <span style="display:flex;align-items:center; flex-direction:column;">
-                <img src="~/Images/sms.png"
-                     alt="sms" class="img-fluid img-responsive text-center" width="50" />
-                @*Messages*@
-            </span>
-        </button>
-    </div>
-    <div id="messageForMobile" style="padding:0px 10px; text-align:center">
-        <a href="~/Messages/PeopleITexted" type="button" id="btnOpenMobile" class="btn btn-info btn-lg">
-            <span style="display:flex;align-items:center; flex-direction:column;">
-                <img src="~/Images/sms.png"
-                     alt="sms" class="img-fluid img-responsive text-center" width="50" />
-                @*Messages*@
-            </span>
-        </a>
-    </div>
-</div>
     @*Message popup window end*@
 
 

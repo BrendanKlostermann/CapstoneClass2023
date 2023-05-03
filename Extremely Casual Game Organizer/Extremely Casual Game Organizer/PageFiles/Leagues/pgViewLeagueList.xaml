@@ -6,9 +6,11 @@
       xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="800"
-      Title="pgViewLeagueList">
+      Title="pgViewLeagueList" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid Background="White">
-        <DataGrid x:Name="datLeagues" Loaded="datLeagues_Loaded" Unloaded="datLeagues_Unloaded" IsReadOnly="True" Focusable="False"></DataGrid>
+        <ListBox x:Name="lstLeagueList" Background="Transparent" Margin="0,51,0,52" MouseDoubleClick="lstLeagueList_MouseDoubleClick" />
+        <Label Grid.Row="0" HorizontalContentAlignment="Center" FontWeight="Bold" 
+            FontSize="22" Height="45" VerticalAlignment="Bottom" Content="List of Leagues" Margin="0,0,0,454.4"/>
     </Grid>
 </Page>

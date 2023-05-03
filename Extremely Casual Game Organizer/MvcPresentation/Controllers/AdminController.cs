@@ -153,6 +153,34 @@ namespace MvcPresentation.Controllers
         //        }
         //        base.Dispose(disposing);
         //    }
+
+        /// <summary>
+        /// Michael Haring
+        /// Created: 05/01/2023
+        /// 
+        /// Adds roles to members
+        /// </summary>
+        public ActionResult AddRole(string id, string role)
+        {
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = userManager.Users.First(u => u.Id == id);
+
+            userManager.AddToRole(id, role);
+
+            // get a list of roles the user has and put them into a viewbag as roles
+            // along with a list of roles the user doesn't have as noRoles
+            var usrMgr = new LogicLayer.MemberManager();
+            var allRoles = usrMgr.RetrieveAllRoles();
+
+            var roles = userManager.GetRoles(id);
+            var noRoles = allRoles.Except(roles);
+
+            ViewBag.Roles = roles;
+            ViewBag.NoRoles = noRoles;
+
+            return View("Details", user);
+        }
+
         public ActionResult RemoveRole(string id, string role)
         {
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();

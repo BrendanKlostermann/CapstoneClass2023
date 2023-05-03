@@ -188,22 +188,22 @@ namespace Extremely_Casual_Game_Organizer
         private void getTournamentGames()
         {
 
-            //try
-            //{
-            tournamentTeamGame = _tournamentManager.SelectTournamentTeamAndGame(_tournament_id);
-            foreach (TournamentTeamGame line in tournamentTeamGame)
+            try
             {
-                //MessageBox.Show("gameID = " + line.GameID+ " --- teamID = " + line.TeamID);
-                saveTeam(line.TeamID);
-                //teamsOfTheTournament.Add(line.TeamID);
+                tournamentTeamGame = _tournamentManager.SelectTournamentTeamAndGame(_tournament_id);
+                foreach (TournamentTeamGame line in tournamentTeamGame)
+                {
+                    //MessageBox.Show("gameID = " + line.GameID+ " --- teamID = " + line.TeamID);
+                    saveTeam(line.TeamID);
+                    //teamsOfTheTournament.Add(line.TeamID);
+                }
+                generateGames();
+                //getTeamGame();
             }
-            generateGames();
-            //getTeamGame();
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("This tournament has no game!");
-            //}
+            catch (Exception)
+            {
+                MessageBox.Show("This tournament has no game!");
+            }
         }
 
         // Get all teams by tournament_id
@@ -255,8 +255,9 @@ namespace Extremely_Casual_Game_Organizer
         {
 
             lbTeam.Items.Clear();
-            if (teamsOfTheTournament.Count > 0) initializeGenerateGames();
-            else MessageBox.Show("Oups! You cannot generate games without teams");
+            if (teamsOfTheTournament.Count > 1) initializeGenerateGames();
+            else if (teamsOfTheTournament.Count == 1) MessageBox.Show("Oups! You cannot generate game with only one team!");
+            else MessageBox.Show("Oups! You cannot generate games without teams!");
         }
 
         private void initializeGenerateGames()

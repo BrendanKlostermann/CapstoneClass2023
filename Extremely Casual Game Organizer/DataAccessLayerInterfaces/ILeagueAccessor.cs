@@ -104,6 +104,9 @@ namespace DataAccessLayerInterfaces
         int UpdateALeague(League league);
 
         List<LeagueRequest> SelectRequestsByLeagueID(int LeagueID);
+        int UpdateRequestStatus(int RequestID, string Status);
+        int AddARequest(LeagueRequest request);
+        int AddTeamToLeague(int TeamID, int LeagueID);
 
     }
 }

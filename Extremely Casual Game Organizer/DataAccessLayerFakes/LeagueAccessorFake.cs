@@ -48,7 +48,7 @@ namespace DataAccessLayerFakes
         private List<League> fakeLeagues = new List<League>();
         public LeagueAccessorFake()
         {
-			fakeLeagues.Add(new League()
+            fakeLeagues.Add(new League()
             {
                 LeagueID = 9999,
                 SportID = 9999,
@@ -83,8 +83,8 @@ namespace DataAccessLayerFakes
                 Description = "A football league",
                 Name = "Football League",
                 MaxNumOfTeams = 64
-            });			
-			
+            });
+
             _leagues = new List<League>();
             League league1 = new League(100000, 100000, 12.34m, true, 100000, true, "test league 1", "test1", 8);
             _leagues.Add(league1);
@@ -116,7 +116,16 @@ namespace DataAccessLayerFakes
 
         public int RemoveATeamFromALeague(int teamId, int leagueId)
         {
-            throw new NotImplementedException();
+            int countControl = 0;
+            for (int i = 0; i < _leagueTeams.Count; i++)
+            {
+                if (_leagueTeams[i].TeamID == teamId && _leagueTeams[i].LeagueID == leagueId)
+                {
+                    _leagueTeams.Remove(_leagueTeams[i]);
+                    countControl++;
+                }
+            }
+            return countControl;
         }
 
         public List<League> SelectAllLeagues()
@@ -126,7 +135,16 @@ namespace DataAccessLayerFakes
 
         public List<Team> SelectATeamByLeagueID(int leagueId)
         {
-            throw new NotImplementedException();
+            List<Team> teamsInLeague = new List<Team>();
+
+            foreach (var team in _leagueTeams)
+            {
+                if (team.LeagueID == leagueId)
+                {
+                    teamsInLeague.Add(new Team() { TeamID = team.TeamID });
+                }
+            }
+            return teamsInLeague;
         }
 
         public List<LeagueGridVM> SelectLeaguesForGrid()
@@ -203,25 +221,6 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
-        //// Elijah M. is currently working on this
-        //public int UpdateLeagueActiveStatus(bool active)
-        //{
-        //    // DO SOMETHING WITH THIS
-        //    throw new NotImplementedException();
-        //}
-
-        //// Elijah M. is currently working on this
-        //public int UpdateLeagueRegistrationByLeagueIDByActive(League oldLeague, League newLeague)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        /// <summary>
-        /// Elijah
-        /// Created: 2023/02/28
-        /// 
-        /// Selects all leagues.
-        /// 
 
         public List<League> SelectListOfLeagues()
         {
@@ -250,30 +249,103 @@ namespace DataAccessLayerFakes
 
         public int AddALeague(League league)
         {
-            throw new NotImplementedException();
+            int count = _leagues.Count();
+            League _league = new League()
+            {
+                LeagueID = league.LeagueID,
+                SportID = league.SportID,
+                LeagueDues = league.LeagueDues,
+                Active = league.Active,
+                MemberID = league.MemberID,
+                Gender = league.Gender,
+                Description = league.Description,
+                Name = league.Name,
+                MaxNumOfTeams = league.MaxNumOfTeams
+            };
+            _leagues.Add(league);
+            if ((_leagues.Count() - 1) == count)
+            {
+                return league.LeagueID;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public int RemoveALeague(int LeagueID)
         {
-            throw new NotImplementedException();
+            foreach (League league in _leagues)
+            {
+                if (league.LeagueID == LeagueID)
+                {
+                    fakeLeagues.Remove(league);
+                    return 1;
+                }
+            }
+            return 0;
         }
 
         public List<League> SelectLeaguesByMemberID(int MemberID)
         {
-            throw new NotImplementedException();
+            List<League> leagues = new List<League>();
+            foreach (League league in _leagues)
+            {
+                if (league.MemberID == MemberID)
+                {
+                    leagues.Add(league);
+                }
+            }
+            return leagues;
         }
 
         public int ChangeLeagueRegistration(int LeagueID, bool OpenOrClose)
         {
-            throw new NotImplementedException();
+            foreach (League league in _leagues)
+            {
+                if (league.LeagueID == LeagueID)
+                {
+                    league.Active = OpenOrClose;
+                    return 1;
+                }
+            }
+            return 0;
         }
 
         public int UpdateALeague(League league)
         {
-            throw new NotImplementedException();
+            foreach (League _league in _leagues)
+            {
+                if (league.LeagueID == _league.LeagueID)
+                {
+                    _league.LeagueDues = league.LeagueDues;
+                    _league.Active = league.Active;
+                    _league.Gender = league.Gender;
+                    _league.Description = league.Description;
+                    _league.Name = league.Name;
+                    _league.MaxNumOfTeams = league.MaxNumOfTeams;
+                    return 1;
+                }
+            }
+            return 0;
         }
 
         public List<LeagueRequest> SelectRequestsByLeagueID(int LeagueID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateRequestStatus(int RequestID, string Status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddARequest(LeagueRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddTeamToLeague(int TeamID, int LeagueID)
         {
             throw new NotImplementedException();
         }

@@ -1,0 +1,36 @@
+﻿@model DataObjects.TournamentRequest
+
+@{
+    ViewBag.Title = "JoinTournament";
+}
+
+<h2>JoinTournament</h2>
+
+
+<div class="container">
+    <div class="row">
+        <h3 class="danger">@ViewBag.Error</h3>
+        <h2>Which team would you like to join this tournament with?</h2>
+    </div>
+    
+    <div class="row">
+        <form method="post" action="@Url.Action("JoinTournament","Tournaments")">
+
+            @Html.HiddenFor(model => model.TournamentID)
+
+            <select class="col-md-6">
+                @foreach (var item in ViewBag.Teams)
+                {
+                    <option value=@item.TeamID>@item.TeamName</option>
+                }
+            </select>
+            <br />
+            <input type="submit" value="Submit" class="btn btn-success">
+
+        </form>
+    </div>
+
+    <div class="row">
+
+    </div>
+</div>

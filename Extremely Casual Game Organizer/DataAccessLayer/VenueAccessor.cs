@@ -69,6 +69,7 @@ namespace DataAccessLayer
             }
 
             cmd.Parameters.AddWithValue("@zip_code", venue.ZipCode);
+            cmd.Parameters.AddWithValue("@city", venue.City);
 
             try
             {

@@ -8,20 +8,24 @@
       Title="pgGenerateTournamentGame" Width="800" Height="500">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="331*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="559*"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="lbTeam" HorizontalAlignment="Left" Height="360" Margin="27,122,0,0" VerticalAlignment="Top" Width="284" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}"/>
-        <Label Content="Generate Tournament Games" HorizontalAlignment="Left" Margin="27,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="22" FontWeight="Bold"/>
-        <ListBox x:Name="lbTournament" HorizontalAlignment="Left" Height="360" Margin="316,122,0,0" VerticalAlignment="Top" Width="474" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"/>
-        <Label Content="Tournament:" HorizontalAlignment="Left" Margin="29,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="20"/>
-        <ComboBox x:Name="ddTournament" HorizontalAlignment="Left" Margin="168,76,0,0" VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.209,1.182" Padding="8,3,5,8" FontSize="16" SelectionChanged="ddTournament_SelectionChanged"/>
-        <Button x:Name="btnGenerate" Content="Generate Games" HorizontalAlignment="Left" Margin="349,77,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="-0.091,0.696" Height="31" Click="btnGenerate_Click" Visibility="Hidden"/>
-        <Button x:Name="btnSave" Content="Save all games" HorizontalAlignment="Left" Margin="459,77,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="-0.091,0.696" Height="31" Click="btnGenerate_Copy_Click" Visibility="Hidden"/>
-        <Button x:Name="btnOpenTournamentPage" Content="Add team" HorizontalAlignment="Left" Margin="678,77,0,0" VerticalAlignment="Top" Width="83" RenderTransformOrigin="-0.091,0.696" Height="31" Background="#FFF08C8C" Foreground="White" Click="btnOpenTournamentPage_Click" Visibility="Hidden"/>
-        <Label x:Name="lblNbreOfTeam"  Content="Number of teams: 0" HorizontalAlignment="Left" Margin="556,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="20" Width="201" Background="{x:Null}" FontWeight="Bold" Foreground="#FFF08C8C"/>
-        <Button x:Name="btnDeleteAllGames" Content="Delete all games" HorizontalAlignment="Left" Margin="569,77,0,0" VerticalAlignment="Top" Width="98" Height="31" Click="btnDeleteAllGames_Click" Visibility="Hidden"/>
+        <ListBox x:Name="lbTeam" HorizontalAlignment="Left" Height="360" Margin="27,122,0,0" VerticalAlignment="Top" Width="284" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}" Grid.ColumnSpan="2"/>
+        <Label Content="Generate Tournament Games" HorizontalAlignment="Left" Margin="27,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="22" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <ListBox x:Name="lbTournament" HorizontalAlignment="Left" Height="360" Margin="178,122,0,0" VerticalAlignment="Top" Width="474" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Grid.Column="1"/>
+        <Label Content="Tournament:" HorizontalAlignment="Left" Margin="29,71,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="20" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="ddTournament" HorizontalAlignment="Left" Margin="30,76,0,0" VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.209,1.182" Padding="8,3,5,8" FontSize="16" SelectionChanged="ddTournament_SelectionChanged" Grid.Column="1"/>
+        <Button x:Name="btnGenerate" Content="Generate Games" HorizontalAlignment="Left" Margin="211,77,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="-0.091,0.696" Height="31" Click="btnGenerate_Click" Visibility="Hidden" Grid.Column="1"/>
+        <Button x:Name="btnSave" Content="Save all games" HorizontalAlignment="Left" Margin="321,77,0,0" VerticalAlignment="Top" Width="97" RenderTransformOrigin="-0.091,0.696" Height="31" Click="btnGenerate_Copy_Click" Visibility="Hidden" Grid.Column="1"/>
+        <Button x:Name="btnOpenTournamentPage" Content="Add team" HorizontalAlignment="Left" Margin="540,77,0,0" VerticalAlignment="Top" Width="83" RenderTransformOrigin="-0.091,0.696" Height="31" Background="#FFF08C8C" Foreground="White" Click="btnOpenTournamentPage_Click" Visibility="Hidden" Grid.Column="1"/>
+        <Label x:Name="lblNbreOfTeam"  Content="Number of teams: 0" HorizontalAlignment="Left" Margin="418,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0,0" FontSize="20" Width="201" Background="{x:Null}" FontWeight="Bold" Foreground="#FFF08C8C" Grid.Column="1"/>
+        <Button x:Name="btnDeleteAllGames" Content="Delete all games" HorizontalAlignment="Left" Margin="431,77,0,0" VerticalAlignment="Top" Width="98" Height="31" Click="btnDeleteAllGames_Click" Visibility="Hidden" Grid.Column="1"/>
 
     </Grid>
 </Page>

@@ -53,6 +53,7 @@ namespace Extremely_Casual_Game_Organizer
         PageControl _pageControl = null;
         Member _member = null;
         private TeamManager masterManager;
+        private Button _previousButton;
 
         public Page PreviousPage { get; set; }
         public Page CurrentPage { get; set; }
@@ -95,6 +96,7 @@ namespace Extremely_Casual_Game_Organizer
             try
             {
                 _pageControl.LoadPage(new pgGameList(_masterManager));
+                ChangeButtonColor(sender as Button);
             }
             catch (Exception ex)
             {
@@ -109,6 +111,7 @@ namespace Extremely_Casual_Game_Organizer
             try
             {
                 _pageControl.LoadPage(new pgViewLeagueList(_masterManager));
+                ChangeButtonColor(sender as Button);
             }
             catch (Exception ex)
             {
@@ -123,6 +126,7 @@ namespace Extremely_Casual_Game_Organizer
             {
                 TeamManager teamManager = new TeamManager();
                 _pageControl.LoadPage(new pgSearchforTeam(_masterManager));
+                ChangeButtonColor(sender as Button);
             }
             catch (Exception ex)
             {
@@ -137,6 +141,7 @@ namespace Extremely_Casual_Game_Organizer
             {
                 TeamManager teamManager = new TeamManager();
                 _pageControl.LoadPage(new pgViewTeamList(_masterManager));
+                ChangeButtonColor(sender as Button);
             }
             catch (Exception up)
             {
@@ -162,6 +167,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _pageControl.LoadPage(new pgMemberSchedule(CurrentMember, _masterManager));
+                    ChangeButtonColor(sender as Button);
                 }
             }
             catch (Exception ex)
@@ -177,6 +183,7 @@ namespace Extremely_Casual_Game_Organizer
             {
                 _pageControl.LoadPage(new pgViewTournamentList());
                 //_pageControl.LoadPage(new pgAddTeamToTournament());
+                ChangeButtonColor(sender as Button);
             }
             catch (Exception ex)
             {
@@ -227,6 +234,7 @@ namespace Extremely_Casual_Game_Organizer
                 {
                     pgRespondToMessage _pgRespondToMessage = new pgRespondToMessage();
                     _pgRespondToMessage.Show();
+                    ChangeButtonColor(sender as Button);
                 }
             }
             catch (Exception ex)
@@ -253,6 +261,7 @@ namespace Extremely_Casual_Game_Organizer
                 else
                 {
                     _pageControl.LoadPage(new pgMemberProfile(_masterManager));
+                    ChangeButtonColor(sender as Button);
                 }
             }
             catch (Exception ex)
@@ -273,6 +282,7 @@ namespace Extremely_Casual_Game_Organizer
             try
             {
                 _pageControl.LoadPage(new pgHomepage(_pageControl, _masterManager));
+                ChangeButtonColor(sender as Button);
             }
             catch (Exception ex)
             {
@@ -294,6 +304,26 @@ namespace Extremely_Casual_Game_Organizer
         private void btnHelp_Click(object sender, RoutedEventArgs e)
         {
             _pageControl.LoadPage(new pgHelp(), _pageControl.GetCurrentPage());
+            ChangeButtonColor(sender as Button);
+        }
+
+        /// <summary>
+        /// Toney Hale
+        /// Created: 2023/04/11
+        /// 
+        /// Created to keep color on tabs
+        /// </summary>
+        private void ChangeButtonColor(Object sender)
+        {
+            if (_previousButton != null)
+            {
+                _previousButton.Background = Brushes.Transparent;
+            }
+
+            // Set background color of current button
+            Button currentButton = (Button)sender;
+            currentButton.Background = Brushes.SkyBlue;
+            _previousButton = currentButton;
         }
     }
 }

@@ -32,6 +32,9 @@ namespace DataObjects
         public DateTime Date { get; set; }
         public bool Important { get; set; }
         public string MessageText { get; set; }
+        public byte[] ProfilePhoto { get; set; }
+        public string Photo { get; set; }
+
 
     }
 }

@@ -43,7 +43,7 @@
         <TextBox x:Name="txtGame" Grid.Column="1" Grid.Row="4" 
                HorizontalContentAlignment="Left" IsReadOnly="true"
                FontSize="15" Margin="7.6,2.4,100,2" BorderThickness="0,0,0,0" />
-        
+
         <Label Grid.Column="0" Grid.Row="5" 
                HorizontalContentAlignment="Right"
                FontSize="15" Padding="0 5 10 0" Margin="0,6,5.4,24.4" Grid.RowSpan="2">Dues</Label>
@@ -65,21 +65,21 @@
         <Label Grid.Column="1" Grid.Row="6" 
                HorizontalContentAlignment="Right"
                FontSize="15" Padding="0 5 10 0" Margin="201.6,1,0,0.4" HorizontalAlignment="Left" Width="76">Gender:</Label>
+        <ComboBox x:Name="cboGender" Grid.Column="1" Grid.Row="6" 
+               HorizontalContentAlignment="Left"
+               FontSize="15" Margin="279.6,2,0,2.4" BorderThickness="0,0,0,0" HorizontalAlignment="Left" Width="121" Visibility="Hidden"/>
         <TextBox x:Name="txtGender" Grid.Column="1" Grid.Row="6" 
                HorizontalContentAlignment="Left"
                FontSize="15" Margin="279.6,2,0,2.4" BorderThickness="0,0,0,0" HorizontalAlignment="Left" Width="121" IsReadOnly="true"/>
-        <ComboBox x:Name="cboGender" Grid.Column="1" Grid.Row="6" 
-               HorizontalContentAlignment="Left"
-               FontSize="15" Margin="279.6,2,0,2.4" BorderThickness="0,0,0,0" HorizontalAlignment="Left" Width="121" Visibility="Collapsed"/>
         <Label Grid.Column="0" Grid.Row="7" 
                HorizontalContentAlignment="Right"
                FontSize="15" Padding="0 5 10 0" Margin="2,4.6,5.4,48.4" Grid.RowSpan="3">Details:</Label>
-        <TextBox x:Name="txtDetails" Grid.Column="1" Grid.Row="7" 
+        <TextBox x:Name="txtDetails" TextWrapping="Wrap" Grid.Column="1" Grid.Row="7" 
                HorizontalContentAlignment="Left"
                FontSize="15" Margin="7.6,11.6,100,0" BorderThickness="0,0,0,0" Grid.RowSpan="3" Height="68" VerticalAlignment="Top" IsReadOnly="true"/>
-        <Label Grid.Column="1" Grid.Row="6" 
+        <Label Grid.Column="1" Grid.Row="5" 
             HorizontalContentAlignment="Right"
-            FontSize="15" Padding="0 5 10 0" Margin="309.6,0,0,0" Grid.RowSpan="2" Content="Max:" HorizontalAlignment="Left" Width="165" Height="31" VerticalAlignment="Top"/>
+            FontSize="15" Padding="0 5 10 0" Margin="431.6,30,0,0" Grid.RowSpan="3" Content="Max:" HorizontalAlignment="Left" Width="43" Height="31" VerticalAlignment="Top"/>
         <TextBox x:Name="txtMax" Grid.Column="1" Grid.Row="6" 
             HorizontalContentAlignment="Left"
             FontSize="15" Margin="479.6,0,0,2.4" HorizontalAlignment="Left" Width="86" IsReadOnly="true"/>
@@ -99,9 +99,12 @@
                 <DataGrid x:Name="datCurrent" IsReadOnly="True" Focusable="False" Margin="-2,-1,-0.4,1" />
             </TabItem>
             <TabItem Header="Requests">
-                <DataGrid x:Name="datRequest" IsReadOnly="True" Focusable="False" Margin="-2,-1,-0.4,1"/>
+                <DataGrid x:Name="datRequest" IsReadOnly="True" Focusable="False" Margin="-2,-1,-0.4,1" MouseDoubleClick="datRequest_MouseDoubleClick"/>
             </TabItem>
         </TabControl>
+        <Button x:Name="btnAccept" Content="Accept" Grid.Row="10" Padding="20 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" BorderBrush="#FF419CC3" RenderTransformOrigin="0.485,-0.691" Margin="45,45.2,8.4,95.6" Width="81" Click="btnAccept_Click"/>
+        <Button x:Name="btnDecline" Content="Decline" Grid.Row="10" Padding="20 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" BorderBrush="#FF419CC3" RenderTransformOrigin="0.485,-0.691" Margin="43,96.2,10.4,44.6" Width="81" Click="btnDecline_Click"/>
+        <Button x:Name="btnGames" Content="Games" Grid.Row="10" Padding="20 0 20 0" VerticalAlignment="Center" HorizontalAlignment="Center" Height="40" BorderBrush="#FF419CC3" RenderTransformOrigin="0.485,-0.691" Margin="280.6,180.2,304,20.6" Width="81" Grid.RowSpan="3" Grid.Column="1" Click="btnGames_Click"/>
 
     </Grid>
 </Page>

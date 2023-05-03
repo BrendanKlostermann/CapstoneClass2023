@@ -216,6 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\App.js" />
+    <Content Include="Content\bootstrap-ECGO.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -224,6 +225,7 @@
     <Content Include="Content\fullcalendar.min.css" />
     <Content Include="Content\fullcalendar.print.css" />
     <Content Include="Content\fullcalendar.print.min.css" />
+    <Content Include="Content\ECGO.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -422,7 +424,7 @@
     <Content Include="Views\Tournaments\EditTournaments.cshtml" />
     <Content Include="Views\Tournaments\TournamentTeam.cshtml" />
     <Content Include="Views\League\AllLeagues.cshtml" />
-    <Content Include="Views\League\Details.cshtml" />
+    <Content Include="Views\League\LeagueDetails.cshtml" />
     <Content Include="Views\Tournaments\MemberTournaments.cshtml" />
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Messages\PeopleITexted.cshtml" />
@@ -434,6 +436,11 @@
     <Content Include="Views\Admin\Details.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\League\Edit.cshtml" />
+    <Content Include="Views\League\Delete.cshtml" />
+    <Content Include="Views\Tournaments\JoinTournament.cshtml" />
+    <Content Include="Views\Tournaments\JoinRequests.cshtml" />
+    <Content Include="Views\League\CreateLeague.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

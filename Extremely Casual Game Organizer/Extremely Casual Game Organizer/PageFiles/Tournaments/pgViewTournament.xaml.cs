@@ -40,10 +40,9 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
         public pgViewTournament(int tournamentID)
         {
             InitializeComponent();
-            tournament = tm.RetrieveTournamentByTournamentID(tournamentID);
+			tournament = tm.RetrieveTournamentByTournamentID(tournamentID);
             txtTournamentName.Text = tournament.Name;
             txtTournamentDescription.Text = tournament.Description;
-
             _tournamentID = tournamentID;
 
             //logic for if gender = 0, 1, or null
@@ -70,6 +69,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
             List<int> gameTeamIDList = new List<int>();
             List<TournamentTeam> _teamList = tm.GetTournamentTeamByID(tournamentID);
             List<TournamentTeamGame> tournamentTeamGameList = tm.SelectTournamentTeamAndGame(tournamentID);
+
             foreach (TournamentTeam team in _teamList)
             {
                 int teamID = team.TeamID;
@@ -78,7 +78,6 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
             foreach (TournamentTeamGame game in tournamentTeamGameList)
             {
                 gameIDList.Add(game.GameID);
-                Console.WriteLine(game.GameID);
             }
 
             // Get a list of the tournament team games
@@ -89,6 +88,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
             //var 
 
             HashSet < Tuple<int, int> > addedPairs = new HashSet<Tuple<int, int>>();
+			
             foreach (TournamentTeamGame game in tournamentTeamGameList)
             {
                 gameTeamIDList.Clear();
@@ -105,7 +105,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
                         gameTeamIDList.Add(gameRosters.TeamID);
                     }
                 }
-
+				
                 for (int i = 0; i < gameTeamIDList.Count - 1; i++)
                 {
                     for (int j = i + 1; j < gameTeamIDList.Count; j++)
@@ -115,6 +115,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
                         if (team1ID < team2ID)
                         {
                             Tuple<int, int> teamPair = new Tuple<int, int>(team1ID, game.GameID);
+
                             if (!addedPairs.Contains(teamPair))
                             {
                                 addedPairs.Add(teamPair);
