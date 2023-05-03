@@ -33,13 +33,10 @@ namespace MvcPresentation.Controllers
     {
         LeagueManager leagueManager = new LeagueManager();
         private List<LeagueGridVM> leagues = null;
-<<<<<<< HEAD
         int memberID;
-=======
         private ILeagueManager _leagueManager;
         private ISportManager _sportManager;
         /*const int memberID = 100000;*/
->>>>>>> origin
 
         // GET: League
         public ActionResult AllLeagues()

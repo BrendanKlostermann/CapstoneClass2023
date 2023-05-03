@@ -58,11 +58,8 @@
     <Compile Include="GameRosterManagerTests.cs" />
     <Compile Include="TeamManagerTests.cs" />
     <Compile Include="GameManagerTests.cs" />
-<<<<<<< HEAD
     <Compile Include="TeamRolesManagerTests.cs" />
     <Compile Include="TournamantManagerTests.cs" />
-=======
->>>>>>> origin/main
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

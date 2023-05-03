@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿/// <summary>
 /// Brendan Klostermann
 /// Created: 2023/01/31
@@ -11,37 +10,24 @@
 /// Updated: yyyy/mm/dd
 /// </remarks>
 
-using System;
-=======
 ﻿using System;
 >>>>>>> origin/main
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using DataObjects;
 using DataAccessLayerFakes;
 using DataAccessLayer;
 using LogicLayerInterfaces;
 using DataAccessLayerInterfaces;
-=======
-using LogicLayerInterfaces;
-using DataAccessLayerFakes;
-using DataAccessLayerInterfaces;
-using System.Security.Cryptography;
-using DataObjects;
-using DataAccessLayer;
->>>>>>> origin/main
+
 
 namespace LogicLayer
 {
     public class MemberManager : IMemberManager
     {
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/main
         private IMemberAccessor _memberAccessor = null;
         private MemberAccessorFake _fakeMemberAccessor = null;
 
@@ -53,7 +39,6 @@ namespace LogicLayer
         {
             _memberAccessor = ma;
         }
-<<<<<<< HEAD
 
         public int EditUserToInactive(int member_id)
         {
@@ -65,7 +50,7 @@ namespace LogicLayer
             {
                 throw new ApplicationException("Member not found.",ex);
             }
-=======
+		}
         public bool EditMemberPassword(int member_id, string oldPassword, string newPassword)
         {
             /// <summary>
@@ -199,7 +184,6 @@ namespace LogicLayer
             }
 
             return results;
->>>>>>> origin/main
         }
     }
 }

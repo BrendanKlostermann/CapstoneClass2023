@@ -8,10 +8,10 @@
     Created: 2023/04/08
     Web page for all team-->
 
-<h2>All Teams</h2>
+<h2>AllTeams</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CreateTeam")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -76,7 +76,7 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.TeamID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.TeamID }) |
-                @Html.ActionLink("Deactivate", "Deactivate", new { id = item.TeamID })
+                @Html.ActionLink("Deactivate", "Deactivate", "Teams", new { team_id = item.TeamID }, null)
             </td>
         </tr>
     }

@@ -210,8 +210,6 @@ namespace DataAccessLayer
             return team;
         }
 
-<<<<<<< HEAD
-
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/03/05

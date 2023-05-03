@@ -1,4 +1,4 @@
-﻿<!-- 
+﻿<!--
 Elijah Morgan
 Created: 2023/04/11
 
@@ -14,7 +14,7 @@ Views all leagues in the database
 <h2>All Leagues</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateLeague")
 </p>
 <table class="table">
     <tr>
@@ -67,7 +67,7 @@ Views all leagues in the database
             <td>
                 @Html.ActionLink("Details", "LeagueDetails", new { id = item.LeagueID }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.LeagueID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.LeagueID})
+                @Html.ActionLink("Delete", "Delete", new { id = item.LeagueID })
             </td>
         </tr>
     }

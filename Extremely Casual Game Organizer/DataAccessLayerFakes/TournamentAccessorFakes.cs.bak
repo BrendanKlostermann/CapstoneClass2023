@@ -261,7 +261,6 @@ namespace DataAccessLayerFakes
             _tournamentTeams.Remove(_tournamentTeams[num]);
             return 1;
         }
-<<<<<<< HEAD
 
         public int UpdateTournament(int memberid, Tournament tm)
         {
@@ -310,7 +309,7 @@ namespace DataAccessLayerFakes
                 }
             }
             return count;
-=======
+		}
         public List<TournamentTeamGame> SelectTournamentTeamAndGame(int tournament_id)
         {
             var tournaments = _tournamentTeamsAndGames.Where(b => b.TournamentID == tournament_id).ToList();
@@ -362,7 +361,6 @@ namespace DataAccessLayerFakes
 
             }
             return returnTournament;
->>>>>>> origin/main
         }
     }
 }
