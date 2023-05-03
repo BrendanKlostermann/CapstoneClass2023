@@ -536,6 +536,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Games
                     }
                     else
                     {
+                        string[] cityState = txtState.Text.Split(',');
+
                         // Create new Venue since venue does not exist
                         _newVenue = new Venue();
                         _newVenue.VenueName = txtVenueName.Text;
@@ -543,6 +545,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Games
                         _newVenue.Location = txtStreet.Text;
                         _newVenue.ZipCode = Convert.ToInt32(txtZip.Text);
                         _newVenue.Description = "";
+                        _newVenue.City = cityState[0];
 
                         _newVenue.VenueID = _masterManager.VenueManager.AddVenue(_newVenue);
                     }
@@ -1048,7 +1051,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Games
                         if (zipcodeDetails != null || zipcodeDetails.Count > 0)
                         {
                             // Select city from hash table resutls
-                            txtState.Text = zipcodeDetails["City"].ToString() + ", " + zipcodeDetails["State"].ToString();
+                            txtState.Text = zipcodeDetails["city"].ToString() + ", " + zipcodeDetails["st"].ToString();
                         }
                     }
                     else

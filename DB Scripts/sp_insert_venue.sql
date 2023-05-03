@@ -10,13 +10,14 @@ CREATE PROCEDURE [dbo].[sp_insert_venue](
 	, @description	[nvarchar](2500)
 	, @location		[nvarchar](250)
 	, @zip_code		[int]
+	, @city			[nvarchar](250)
 )
 AS
 	BEGIN
 		INSERT INTO [venue]
-			([venue_name], [parking], [description], [location], [zip_code])
+			([venue_name], [parking], [description], [location], [zip_code], [city])
 		VALUES
-			(@venue_name, @parking, @description, @location, @zip_code)
+			(@venue_name, @parking, @description, @location, @zip_code, @city)
 			
 		SELECT SCOPE_IDENTITY()
 	END
