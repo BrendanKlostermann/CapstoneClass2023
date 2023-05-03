@@ -261,6 +261,10 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
                             MessageBox.Show("Request failed.");
                         }
                         populateContents();
+                        if (_teams.Count<2)
+                        {
+                            btnRequest.Visibility = Visibility.Hidden;
+                        }
                     }
                 }
             }
@@ -281,6 +285,10 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Leagues
                         _leagueManager.AddRequest(request);
                         MessageBox.Show("Join request successful!");
                         populateContents();
+                        if (_teams.Count < 2)
+                        {
+                            btnRequest.Visibility = Visibility.Hidden;
+                        }
                     }
                     catch
                     {
