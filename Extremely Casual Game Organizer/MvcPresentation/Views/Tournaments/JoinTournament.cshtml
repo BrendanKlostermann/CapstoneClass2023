@@ -18,7 +18,7 @@
 
             @Html.HiddenFor(model => model.TournamentID)
 
-            <select class="col-md-6">
+            <select class="col-md-6" name="TeamID">
                 @foreach (var item in ViewBag.Teams)
                 {
                     <option value=@item.TeamID>@item.TeamName</option>

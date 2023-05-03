@@ -6,9 +6,6 @@
 
 <h2>JoinRequests</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -29,8 +26,8 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Accept", "JoinRequests", new { tournamentID=item.TournamentID, requestID = item.TournamentRequestID, acceptance = "Accept" }) |
-            @Html.ActionLink("Deny", "JoinRequests", new { tournamentID=item.TournamentID, requestID = item.TournamentRequestID, acceptance = "Deny" })
+            @Html.ActionLink("Accept", "JoinRequests", new { tournamentID=item.TournamentID, teamID = item.TeamID, requestID = item.TournamentRequestID, acceptance = "Accept" }) |
+            @Html.ActionLink("Deny", "JoinRequests", new { tournamentID=item.TournamentID, teamID = item.TeamID, requestID = item.TournamentRequestID, acceptance = "Deny" })
         </td>
     </tr>
 }

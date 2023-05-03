@@ -221,21 +221,21 @@
 
                                     </table>
 
-                                    @if (Model.MemberID == ViewBag.Me)
-                                    {
-                                <div style="text-align:right; margin-top:50px">
                                     <a href="@Url.Action("JoinRequests", "Tournaments", new { tournamentID = ViewBag.TournamentID })" class="btn btn-primary @ViewBag.NotOwner">Join Requests</a>
                                     <a href="@Url.Action("JoinTournament", "Tournaments", new { tournamentID = ViewBag.TournamentID })" class="btn btn-primary @ViewBag.IsOwner">Join Tournament</a>
-                                    <a href="~/Tournaments/EditTournaments/@ViewBag.TournamentID" class="btn btn-primary" style="padding:10px 30px; margin:0px 5px">Edit</a>
-                                    @if (Model.Active == true)
+                                    @if (Model.MemberID == ViewBag.Me)
                                     {
-                                        <a href="~/Tournaments/Delete/@ViewBag.TournamentID" class="btn btn-danger" style="padding:10px 30px; margin:0px 5px">Deactivate</a>
-                                    }
-                                    else
-                                    {
-                                        <a href="~/Tournaments/Activate/@ViewBag.TournamentID" class="btn btn-success" style="padding:10px 30px; margin:0px 5px">Activate</a>
-                                    }
-                                </div>
+                                        <div style="text-align:right; margin-top:50px">
+                                            <a href="~/Tournaments/EditTournaments/@ViewBag.TournamentID" class="btn btn-primary" style="padding:10px 30px; margin:0px 5px">Edit</a>
+                                            @if (Model.Active == true)
+                                            {
+                                                <a href="~/Tournaments/Delete/@ViewBag.TournamentID" class="btn btn-danger" style="padding:10px 30px; margin:0px 5px">Deactivate</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="~/Tournaments/Activate/@ViewBag.TournamentID" class="btn btn-success" style="padding:10px 30px; margin:0px 5px">Activate</a>
+                                            }
+                                        </div>
                                     }
 
                                 </div>

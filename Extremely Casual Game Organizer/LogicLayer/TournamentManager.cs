@@ -450,7 +450,7 @@ namespace LogicLayer
             try
             {
                 var teams = _tournamentAccessor.GetTournamentTeamByID(TeamID);
-                if (teams == null)
+                if (teams.Count() == 0)
                 {
                     TournamentRequest request = new TournamentRequest();
                     request.TournamentID = TournamentID;

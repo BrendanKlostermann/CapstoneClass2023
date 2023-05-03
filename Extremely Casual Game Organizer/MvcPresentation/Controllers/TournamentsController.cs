@@ -79,6 +79,10 @@ namespace MvcPresentation.Controllers
                 ViewBag.NbreGame = tournamentGames.Count/2;
                 ViewBag.Type = type;
 
+                ViewBag.TeamError = (string)TempData["TeamError"];
+                
+                ViewBag.TeamError = TempData["TeamError"];
+
                 ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var user = userManager.FindById(User.Identity.GetUserId());
                 if(user != null){
@@ -95,8 +99,6 @@ namespace MvcPresentation.Controllers
                 {
                     ViewBag.NotOwner = "hidden";
                     ViewBag.IsOwner = "hidden";
-
-
                 }
 
 
@@ -490,21 +492,22 @@ namespace MvcPresentation.Controllers
                 TeamManager teamManager = new TeamManager();
                 Tournament tournament = tournamentManager.RetrieveTournamentByTournamentID(tournamentID);
 
+                List<Team> tempTeams = new List<Team>();
                 List<Team> teams = new List<Team>();
-                    teams = new TeamManager().RetrieveTeamsByMemberID(user.MemberID);
-                foreach(var team in teams)
+                tempTeams = new TeamManager().RetrieveTeamsByMemberID(user.MemberID);
+                foreach (var item in tempTeams)
                 {
-                    if(team.SportID != tournament.SportID)
+                    if (item.SportID == tournament.SportID)
                     {
-                        teams.Remove(team);
+                        teams.Add(item);
                     }
                 }
 
-                if(teams.Count < 1)
+                if (teams.Count < 1)
                 {
-                    ViewBag.TeamError = "You don't have any valid teams to join this tournament";
+                    TempData["TeamError"] = "You don't have any valid teams to join this tournament";
                     Tournament tourn = tournamentManager.RetrieveTournamentByTournamentID(tournamentID);
-                    return View("Details", tourn);
+                    return RedirectToAction("Details", new { id = tournamentID });
                     
                 }
 
@@ -538,6 +541,12 @@ namespace MvcPresentation.Controllers
                     {
                         return RedirectToAction("AllTournaments", "Tournaments");
                     }
+                    else
+                    {
+                        
+                        TempData["TeamError"] = "Could not add this team to the tournament.";
+                        return RedirectToAction("Details", new { id = request.TournamentID });
+                    }
                 }
                 catch
                 {
@@ -556,7 +565,7 @@ namespace MvcPresentation.Controllers
         /// 
         /// </summary>
         /// This method will open the view for the tournament admin to see all of the join requests for the tournament
-        public ActionResult JoinRequests(int tournamentID, int? requestID, string acceptance)
+        public ActionResult JoinRequests(int tournamentID, int? requestID, int?teamID, string acceptance)
         {
             List<TournamentRequest> requests = new List<TournamentRequest>();
 
@@ -564,7 +573,19 @@ namespace MvcPresentation.Controllers
             {
                 if (acceptance != "")
                 {
-                    tournamentManager.UpdateTournamentRequestStatus((int)requestID, acceptance);
+                    if(acceptance == "Accept")
+                    {
+                        
+                        TournamentTeam tournTeam = new TournamentTeam();
+                        tournTeam.TeamID = (int)teamID;
+                        tournTeam.TournamentID = tournamentID;
+                        tournamentManager.AddTeamToTournament(tournTeam);
+                        tournamentManager.UpdateTournamentRequestStatus((int)requestID, acceptance);
+                    }
+                    else
+                    {
+                        tournamentManager.UpdateTournamentRequestStatus((int)requestID, acceptance);
+                   }
                 }
             }
 
@@ -572,6 +593,8 @@ namespace MvcPresentation.Controllers
 
             return View(requests);
         }
+
+        
 
         
 
