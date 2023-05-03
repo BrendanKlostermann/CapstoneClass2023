@@ -1,0 +1,207 @@
+﻿body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: burlywood;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+a.noDecoration {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+div.boxShadow {
+    box-shadow: 10px 10px black;
+}
+
+textarea.sms {
+    resize: none;
+}
+
+/* Message Pop up window */
+.frame {
+    box-sizing: border-box;
+}
+
+a.closeBtn {
+    position: absolute;
+    margin: -15px -15px;
+}
+
+/* Button used to open the chat form - fixed at the bottom of the page */
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+/* The popup chat - hidden by default */
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+/* Add styles to the form container */
+
+#Message {
+    position: sticky;
+    float: right;
+    right: 0;
+    bottom: 0;
+}
+
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+    /* Full-width textarea */
+    .form-container textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+        resize: none;
+        min-height: 200px;
+    }
+
+        /* When the textarea gets focus, do something */
+        .form-container textarea:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+        background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+    }
+
+
+
+
+
+.purple-container {
+    background-color: rgb(100,100,0);
+}
+
+.navbar {
+    background-color: rgb(34, 139, 34);
+}
+
+
+.jumbotron {
+    text-align: center;
+}
+
+.image-size-1 {
+    width: 120px;
+}
+
+
+
+.navbar.navbar-inverse {
+    background-color: rgb(34, 139, 34);
+}
+
+
+
+.navbar {
+    height: 50px;
+}
+
+.navbar-link.dropdown-toggle.current:hover {
+    background-color: rgb(0,0,70);
+}
+
+.main-div {
+    width: 85%;
+    height: 50%;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    margin-top: 7%;
+    margin-left: 8%;
+}
+
+.main-div-search {
+    width: 85%;
+    height: 50%;
+    margin: auto;
+    text-align: center;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    margin-top: 7%;
+    margin-left: 8%;
+}
+
+@media (max-width: 611px) {
+    #messageForDestop {
+        display: none;
+    }
+
+    #messageForMobile {
+        display: block;
+    }
+}
+
+@media (min-width: 611px) {
+    #messageForDestop {
+        display: block;
+    }
+
+    #messageForMobile {
+        display: none;
+    }
+}
+/*End*/

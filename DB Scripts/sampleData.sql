@@ -6,17 +6,17 @@ GO
 print ''print 'sample member table'
 INSERT INTO [dbo].[Member] ([email], [first_name], [family_name], [birthday], [phone_number], [passwordHash], [gender], [active], [bio], [profile_photo], [PhotoMimeType])
 VALUES
-('john@example.com', 'John', 'Doe', '1990-01-01', '555-1234', '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 1, 1, 'I love hiking and camping.', NULL, NULL),
-('jane@example.com', 'Jane', 'Doe', '1992-05-12', NULL, '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 0, 1, NULL, NULL, NULL),
-('bill@example.com', 'Bill', 'Smith', '1985-12-01', '555-5678', '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 1, 1, 'I am a professional chef.', NULL, NULL),
-('jim@example.com', 'Jim', 'Johnson', '1998-09-24', NULL, '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 1, 1, NULL, NULL, NULL),
-('susan@example.com', 'Susan', 'Lee', '1982-07-18', '555-2468', '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 0, 1, 'I am a software engineer.', NULL, NULL),
-('fred@example.com', 'Fred', 'Davis', '1975-03-08', '555-7890', '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 1, 1, 'I am an artist.', NULL, NULL),
-('mary@example.com', 'Mary', 'Wilson', '1995-11-03', NULL, '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 0, 1, NULL, NULL, NULL),
-('tom@example.com', 'Tom', 'Brown', '1988-02-16', '555-1010', '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 1, 1, 'I am a teacher.', NULL, NULL),
-('lisa@example.com', 'Lisa', 'Anderson', '1993-06-22', NULL, '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 0, 1, 'I am a student.', NULL, NULL),
-('steve@example.com', 'Steve', 'Wilson', '1980-12-10', '555-4444', '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 1, 1, 'I am a lawyer.', NULL, NULL),
-('amy@example.com', 'Amy', 'Johnson', '1987-03-18', NULL, '9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E', 0, 1, NULL, NULL, NULL);
+('john@example.com', 'John', 'Doe', '1990-01-01', '555-1234', 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, 'I love hiking and camping.', NULL, NULL),
+('jane@example.com', 'Jane', 'Doe', '1992-05-12', NULL, 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, NULL, NULL, NULL),
+('bill@example.com', 'Bill', 'Smith', '1985-12-01', '555-5678', 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, 'I am a professional chef.', NULL, NULL),
+('jim@example.com', 'Jim', 'Johnson', '1998-09-24', NULL, 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, NULL, NULL, NULL),
+('susan@example.com', 'Susan', 'Lee', '1982-07-18', '555-2468', 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, 'I am a software engineer.', NULL, NULL),
+('fred@example.com', 'Fred', 'Davis', '1975-03-08', '555-7890', 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, 'I am an artist.', NULL, NULL),
+('mary@example.com', 'Mary', 'Wilson', '1995-11-03', NULL, 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, NULL, NULL, NULL),
+('tom@example.com', 'Tom', 'Brown', '1988-02-16', '555-1010', 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, 'I am a teacher.', NULL, NULL),
+('lisa@example.com', 'Lisa', 'Anderson', '1993-06-22', NULL, 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, 'I am a student.', NULL, NULL),
+('steve@example.com', 'Steve', 'Wilson', '1980-12-10', '555-4444', 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 1, 1, 'I am a lawyer.', NULL, NULL),
+('amy@example.com', 'Amy', 'Johnson', '1987-03-18', NULL, 'b03ddf3ca2e714a6548e7495e2a03f5e824eaac9837cd7f159c67b90fb4b7342', 0, 1, NULL, NULL, NULL);
 GO
 
 print ''print 'sample adminrole table'
@@ -539,21 +539,16 @@ VALUES
 (1002, 100007);
 GO
 
+
 print '' print 'Sample TeamRequests table'
 INSERT INTO [dbo].[TeamRequest]
 ([member_id], [team_id], [status])
 VALUES
 (100000, 1000, "Waiting"),
-(100002, 1000, "Accepted"),
-(100003, 1000, "Waiting"),
 (100004, 1000, "Waiting"),
 (100005, 1000, "Waiting"),
-(100006, 1000, "Waiting"),
 (100007, 1000, "Waiting"),
 (100008, 1000, "Waiting"),
 (100009, 1000, "Waiting"),
 (100010, 1000, "Waiting")
 GO
-
-
-

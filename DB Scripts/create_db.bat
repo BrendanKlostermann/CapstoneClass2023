@@ -22,7 +22,6 @@ sqlcmd -S localhost -E -i sp_select_game_list.sql
 sqlcmd -S localhost -E -i sp_select_team_members_by_member_id_and_team_id.sql
 sqlcmd -S localhost -E -i sp_selecting_all_players_on_a_team_by_team_id.sql
 sqlcmd -S localhost -E -i sp_select_all_sports.sql
-sqlcmd -S localhost -E -i sp_add_league.sql
 sqlcmd -S localhost -E -i sp_delete_league.sql
 sqlcmd -S localhost -E -i sp_select_members_by_name.sql
 sqlcmd -S localhost -E -i sp_select_people_I_texted_by_user_id.sql
@@ -114,6 +113,10 @@ sqlcmd -S localhost -E -i sp_create_league.sql
 sqlcmd -S localhost -E -i sp_select_teams_by_member_id.sql
 sqlcmd -S localhost -E -i sp_select_request_by_team_id.sql
 sqlcmd -S localhost -E -i sp_select_request_by_tournament_id.sql
+
+
+
+
 
 
 

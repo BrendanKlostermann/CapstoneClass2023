@@ -2,30 +2,42 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
+
+
+<h1 class="center-text" style="font-family: Arial">Welcome to</h1>
+<h1 class="center-text" style="font-family: Arial">Extremely Casual Game Organizer</h1>
+<p class="lead center-text">This screen is fun, but once you login it's going to be even better!</p>
+@{
+    var folderPath = Server.MapPath("~/Images/");
+    var ignoreList = new List<string>() { "back.png", "close.png", "send.png", "sms.png", "unknow.jpg" };
+    var imageList = Directory.GetFiles(folderPath, "*.png")
+                             .Select(Path.GetFileName)
+                             .Where(fileName => !ignoreList.Contains(fileName))
+                             .ToList();
+    bool okayPNG = false;
+    var selectedImage = "";
+
+    var random = new Random();
+    var randomIndex = random.Next(imageList.Count);
+
+    selectedImage = imageList[randomIndex];
+
+}
+<img src="@Url.Content("~/Images/"+selectedImage)" alt="A pile of sport balls" class="image-size-1">
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2 class="center-text">Find Games</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            got no plans for an upcoming day off and not sure what to do? look up the upcoming games and find one in your area to go and play!
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2 class="center-text">Make Games</h2>
+        <p>If you can't find anyone playing your sport of choice at the moment, try making your own game to spark some intrest!</p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2 class="center-text">Make Teams</h2>
+        <p>You can even make Teams so you have a group of people who want to play the same sports as you auto invited with you to the games that you find!</p>
     </div>
 </div>
