@@ -86,8 +86,8 @@ namespace DataAccessLayer
             // return the result
             return rowsAffected;
         }
-        
-        
+
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
@@ -129,7 +129,7 @@ namespace DataAccessLayer
                 {
                     while (reader.Read())
                     {
-                        if (reader.GetInt32(0)!= memberId)
+                        if (reader.GetInt32(0) != memberId)
                         {
                             Member member = new Member()
                             {
@@ -155,8 +155,8 @@ namespace DataAccessLayer
             }
             return members;
         }
-        
-        
+
+
         /// <summary>
         /// Heritier Otiom
         /// Created: 2023/01/31
@@ -165,7 +165,7 @@ namespace DataAccessLayer
         /// </summary>
         public List<Message> GetMessagesByMemberIDSentToOtherMemberID(int memberId, int otherMemberId)
         {
-            List<Message> messages= new List<Message>();
+            List<Message> messages = new List<Message>();
 
             // connection
             DBConnection connectionFactory = new DBConnection();
@@ -209,6 +209,9 @@ namespace DataAccessLayer
                             Important = reader.GetBoolean(4),
                             MessageText = reader.GetString(5)
                         };
+
+                        if (reader.IsDBNull(6) == false) message.ProfilePhoto = (byte[])reader[6];
+                        else message.ProfilePhoto = null;
 
                         messages.Add(message);
 

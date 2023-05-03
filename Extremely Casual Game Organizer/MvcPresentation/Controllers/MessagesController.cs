@@ -18,6 +18,8 @@ namespace MVCPresentation.Controllers
         private Member _member;
 
         // GET: Message
+
+        [Authorize]
         public ActionResult Index(string email)
         {
             try
@@ -38,12 +40,26 @@ namespace MVCPresentation.Controllers
             {
                 throw new ApplicationException("An Error occured! " + ex.Message);
             }
+
+            if (messages != null)
+            {
+                foreach (Message line in messages)
+                {
+                    if (line.ProfilePhoto != null)
+                    {
+                        string imreBase64Data = Convert.ToBase64String(line.ProfilePhoto);
+                        string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                        //Passing image data in viewbag to view
+                        line.Photo = imgDataURL;
+                    }
+                }
+            }
             return View(messages);
         }
 
 
         // GET: People I texted
-        //[Authorize]
+        [Authorize]
         public ActionResult PeopleITexted()
         {
             try
@@ -61,11 +77,26 @@ namespace MVCPresentation.Controllers
                 ViewBag.Error = ("An Error occured! " + ex.Message);
                 return View("Error");
             }
+
+            if (members != null)
+            {
+                foreach (Member line in members)
+                {
+                    if (line.ProfilePhoto != null)
+                    {
+                        string imreBase64Data = Convert.ToBase64String(line.ProfilePhoto);
+                        string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                        //Passing image data in viewbag to view
+                        line.Photo = imgDataURL;
+                    }
+                }
+            }
+
             return View(members);
         }
 
         // GET: Send Message
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public ActionResult Create(string message, int user_id, int other_user_id, string email)
         {
@@ -94,13 +125,30 @@ namespace MVCPresentation.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult AllMembers()
         {
             members = _memberManager.GetMembers();
+
+            if (members != null)
+            {
+                foreach (Member line in members)
+                {
+                    if (line.ProfilePhoto != null)
+                    {
+                        string imreBase64Data = Convert.ToBase64String(line.ProfilePhoto);
+                        string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                        //Passing image data in viewbag to view
+                        line.Photo = imgDataURL;
+                    }
+                }
+            }
+
             return View(members);
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult AllMembers(string username)
         {
             if (username != null && username != "")

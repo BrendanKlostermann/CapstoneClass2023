@@ -19,8 +19,20 @@
                 </div>
 
                 <div style="display: flex; flex-direction: column; align-items: center">
-                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
-                         alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="100" />
+
+
+                    @*@if (@Model.Photo != null)
+                        {
+                            <img id="image-preview" name="image" src="@Model.Photo"
+                                 alt="Profile Picture" class="img-circle img-fluid img-responsive text-center"
+                                 style="height:70px; max-width:70px;" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/unknow.jpeg"
+                                 alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="70"
+                                 style="height:70px; max-width:70px;" />
+                        }*@
                     <h2 style="margin-top:20px;">@ViewBag.MemberName</h2>
                 </div>
 
@@ -33,9 +45,19 @@
                         @*Incomming Message*@
                         <div style="display: flex; flex-direction: row; justify-content:start; align-items:center">
                             <div style="display: flex; flex-direction: row; align-items:center;padding:10px 0px">
-                                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
-                                     alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="50"
-                                     style="" />
+
+                                @if (@item.Photo != null)
+                                {
+                                    <img id="image-preview" name="image" src="@item.Photo"
+                                         alt="Profile Picture" class="img-circle img-fluid img-responsive text-center"
+                                         style="height:70px; max-width:70px;" />
+                                }
+                                else
+                                {
+                                    <img src="~/Images/unknow.jpeg"
+                                         alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="70"
+                                         style="height:70px; max-width:70px;" />
+                                }
 
                                 <div style="padding: 0px 10px">
                                     <p class="bg-primary" style="padding:10px; border-radius:15px; font-size:1.5em">
@@ -59,9 +81,20 @@
                                     <span>@Html.DisplayFor(modelItem => item.Date)</span>
                                 </div>
 
-                                <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80"
-                                     alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="50"
-                                     style="" />
+
+
+                                @if (@item.Photo != null)
+                                {
+                                    <img id="image-preview" name="image" src="@item.Photo"
+                                         alt="Profile Picture" class="img-circle img-fluid img-responsive text-center"
+                                         style="height:70px; max-width:70px;" />
+                                }
+                                else
+                                {
+                                    <img src="~/Images/unknow.jpeg"
+                                         alt="Profile Picture" class="img-circle img-fluid img-responsive text-center" width="70"
+                                         style="height:70px; max-width:70px;" />
+                                }
                             </div>
                         </div>
                     }
