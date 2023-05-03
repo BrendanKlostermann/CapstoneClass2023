@@ -194,7 +194,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
                 {
                     var userInTeam = from teammate in teamMembers where teammate.MemberID == _pageControl.GetSignedInMember().MemberID select teammate;
 
-                    if (teamMembers.Count() > 0)
+                    if (teamMembers.Where(x => x.MemberID == _pageControl.GetSignedInMember().MemberID).Count() > 0)
                     {
                         MessageBox.Show("You are already a member of this team!");
                     }

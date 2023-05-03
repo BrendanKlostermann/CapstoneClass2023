@@ -79,13 +79,12 @@ namespace DataAccessLayerFakes
             throw new NotImplementedException();
         }
 
-<<<<<<< HEAD
         public List<LeagueGridVM> SelectLeaguesForGrid()
         {
             throw new NotImplementedException();
         }
 
-=======
+
         /// <summary>
         /// Created by: Jacob Lindauer
         /// Date: 2023/26/02
@@ -110,7 +109,6 @@ namespace DataAccessLayerFakes
             }
             return leagueList;
         }
->>>>>>> origin/main
 
 
         /// <summary>

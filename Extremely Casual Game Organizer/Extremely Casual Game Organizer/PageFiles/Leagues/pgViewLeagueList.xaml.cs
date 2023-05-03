@@ -201,8 +201,8 @@ namespace Extremely_Casual_Game_Organizer
                 {
                     _addButton = _pageControl.SetCustomButton("Add new", 1);
                     _myLeaguesButton = _pageControl.SetCustomButton("My Leagues", 2);
-                    _addButton.Click += AddButton_Click;
-                    _myLeaguesButton.Click += MyLeaguesButton_Click;
+                    _addButton.Click -= AddButton_Click;
+                    _myLeaguesButton.Click -= MyLeaguesButton_Click;
                 }
 
                 if (_leaguesForGrid == null)

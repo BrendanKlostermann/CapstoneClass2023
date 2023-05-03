@@ -27,19 +27,23 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
     /// </summary>
     public partial class pgViewTournament : Page
     {
+        PageControl _pageControl = new PageControl();
+        Button _addGameToTournament = null;
+        TournamentManager tm = new TournamentManager();
+        TeamManager teammanager = new TeamManager();
+        SportManager sm = new SportManager();
+        Tournament tournament = new Tournament();
+        GameManager gm = new GameManager();
+        GameRosterManager grm = new GameRosterManager();
+        int _tournamentID;
+
         public pgViewTournament(int tournamentID)
         {
             InitializeComponent();
-            TournamentManager tm = new TournamentManager();
-            TeamManager teammanager = new TeamManager();
-            SportManager sm = new SportManager();
-            Tournament tournament = new Tournament();
-            GameManager gm = new GameManager();
-            GameRosterManager grm = new GameRosterManager();
-            tournament = tm.RetrieveTournamentByTournamentID(tournamentID);
+			tournament = tm.RetrieveTournamentByTournamentID(tournamentID);
             txtTournamentName.Text = tournament.Name;
             txtTournamentDescription.Text = tournament.Description;
-
+            _tournamentID = tournamentID;
 
             //logic for if gender = 0, 1, or null
             // 0 is mens, 1 is womens, null means unisex
@@ -65,7 +69,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
             List<int> gameTeamIDList = new List<int>();
             List<TournamentTeam> _teamList = tm.GetTournamentTeamByID(tournamentID);
             List<TournamentTeamGame> tournamentTeamGameList = tm.SelectTournamentTeamAndGame(tournamentID);
-            Console.WriteLine(tournamentTeamGameList);
+
             foreach (TournamentTeam team in _teamList)
             {
                 int teamID = team.TeamID;
@@ -75,7 +79,16 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
             {
                 gameIDList.Add(game.GameID);
             }
-            HashSet<Tuple<int, int>> addedPairs = new HashSet<Tuple<int, int>>();
+
+            // Get a list of the tournament team games
+            //var gameList = tournamentTeamGameList;
+            //int team1 = 0;
+            //int team2 = 0;
+
+            //var 
+
+            HashSet < Tuple<int, int> > addedPairs = new HashSet<Tuple<int, int>>();
+			
             foreach (TournamentTeamGame game in tournamentTeamGameList)
             {
                 gameTeamIDList.Clear();
@@ -92,6 +105,7 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
                         gameTeamIDList.Add(gameRosters.TeamID);
                     }
                 }
+				
                 for (int i = 0; i < gameTeamIDList.Count - 1; i++)
                 {
                     for (int j = i + 1; j < gameTeamIDList.Count; j++)
@@ -100,7 +114,8 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
                         int team2ID = gameTeamIDList[j];
                         if (team1ID < team2ID)
                         {
-                            Tuple<int, int> teamPair = new Tuple<int, int>(team1ID, team2ID);
+                            Tuple<int, int> teamPair = new Tuple<int, int>(team1ID, game.GameID);
+
                             if (!addedPairs.Contains(teamPair))
                             {
                                 addedPairs.Add(teamPair);
@@ -129,6 +144,54 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
 
             gameTeamListBox.ItemsSource = upcomingGames;
             tournamentTeamListBox.ItemsSource = myList;
+        }
+        private void AddGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Prepare page to be loaded
+                pgAddGame viewGame = new pgAddGame(_tournamentID);
+
+                // Get current page to pass through for previous page
+                var currentPage = new pgViewTournament(_tournamentID);
+
+                _pageControl.LoadPage(viewGame, currentPage);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message + "\n\n" + ex.InnerException.Message);
+            }
+
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            /*if (_pageControl.GetSignedInMember() != null && _pageControl.GetSignedInMember().MemberID == tournament.MemberID)
+        {
+            // Create add game button
+            _addGameToTournament = _pageControl.SetCustomButton("Add Game", 1);
+        _addGameToTournament.Click += AddGameButton_Click;
+        }*/
+
+            // Create add game button
+
+            var signedInMember = _pageControl.GetSignedInMember();
+            if (signedInMember != null && signedInMember.MemberID == tournament.MemberID)
+            {
+                _addGameToTournament = _pageControl.SetCustomButton("Add Game", 1);
+                _addGameToTournament.Click += AddGameButton_Click;
+            }
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var signedInMember = _pageControl.GetSignedInMember();
+            if (signedInMember != null && signedInMember.MemberID == tournament.MemberID)
+            {
+                _addGameToTournament.Click -= AddGameButton_Click;
+            }
+
         }
     }
 }

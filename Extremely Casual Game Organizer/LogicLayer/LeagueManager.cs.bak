@@ -147,8 +147,7 @@ namespace LogicLayer
             return results;
         }
 
-<<<<<<< HEAD
-=======
+
         /// <summary>
         /// Created By: Jacob Lindauer
         /// Date: 2023/26/02
@@ -178,7 +177,6 @@ namespace LogicLayer
             return leagueList;
         }
 
->>>>>>> origin/main
         /// <summary>
         /// Brendan Klostermann
         /// Created: 2023/02/20

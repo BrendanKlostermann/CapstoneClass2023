@@ -142,7 +142,7 @@ namespace LogicLayerTests
             //Test
             Assert.AreEqual(expectedResult, actualResult);
         }
-<<<<<<< HEAD
+
         [TestMethod]
         public void CreateTournamentTestByCount()
         {
@@ -201,7 +201,7 @@ namespace LogicLayerTests
             }
             Assert.AreEqual(1, count);
         }
-=======
+
 
         [TestMethod]
         public void GetTournamentTeamGameGood()
@@ -247,6 +247,5 @@ namespace LogicLayerTests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
->>>>>>> origin/main
     }
 }

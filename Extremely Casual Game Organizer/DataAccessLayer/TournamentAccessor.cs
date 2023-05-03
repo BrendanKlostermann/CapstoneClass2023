@@ -725,6 +725,7 @@ namespace DataAccessLayer
             cmd.Parameters["@content"].Value = tournamentGenerateGames.Content;
 
             cmd.Parameters["@group"].Value = tournamentGenerateGames.IsAGroup;
+            cmd.Parameters.AddWithValue("@date_and_time", tournamentGenerateGames.DateAndTime);
 
             try
             {

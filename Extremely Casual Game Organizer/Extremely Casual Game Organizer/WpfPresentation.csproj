@@ -120,6 +120,9 @@
     <Compile Include="PageFiles\Teams\Utility\winTeamSearch.xaml.cs">
       <DependentUpon>winTeamSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Tournaments\pgAddGame.xaml.cs">
+      <DependentUpon>pgAddGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Tournaments\pgGenerateTournamentGame.xaml.cs">
       <DependentUpon>pgGenerateTournamentGame.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PageFiles\Teams\Utility\winTeamSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgAddGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

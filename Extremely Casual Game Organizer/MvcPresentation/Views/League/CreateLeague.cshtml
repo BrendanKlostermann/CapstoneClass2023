@@ -6,11 +6,17 @@ Views the details of a selected league
 -->
 
 @using Microsoft.AspNet.Identity
-@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.AspNet.Identity.Owin
+@{
+    int memberID = 0;
+}
+
 @if (Request.IsAuthenticated)
 {
     ApplicationUserManager userManager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
     var user = userManager.FindById(User.Identity.GetUserId());
+
+    memberID = user.MemberID;
 }
 
 @model DataObjects.LeagueVM
@@ -25,7 +31,7 @@ Views the details of a selected league
 {
     @Html.AntiForgeryToken()
 
-    <input type="hidden" name="memberID" value="@User.Identity" />
+    <input type="hidden" name="MemberID" value="@memberID" />
 
     <div class="form-horizontal">
         <div class="form-group">

@@ -116,6 +116,8 @@ namespace MvcPresentation.Controllers
                     league.SportID = l.SportID;
                     league.MaxNumOfTeams = l.MaxNumOfTeams;
                     league.LeagueDues = l.LeagueDues;
+                    league.MemberID = l.MemberID;
+                    league.Active = true;
                 }
 
                 int createdLeagues = leagueManager.AddLeague(league);

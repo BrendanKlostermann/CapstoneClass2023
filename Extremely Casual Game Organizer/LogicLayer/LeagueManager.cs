@@ -618,10 +618,21 @@ namespace LogicLayer
 
         public List<Team> RetrieveNotRequestedTeams(int MemberID, int LeagueID)
         {
-            List<Team> alreadyAccepted = GetAListOfTeamsByLeagueID(LeagueID);
+            List<Team> alreadyAccepted = null;
+            try
+            {
+                alreadyAccepted = GetAListOfTeamsByLeagueID(LeagueID);
+            }
+            catch
+            {
+            }
             List<LeagueRequest> leagueRequests = RetrieveRequestsByLeagueID(LeagueID);
             TeamManager teamManager = new TeamManager();
             List<Team> _teams = teamManager.RetrieveTeamsByMemberID(MemberID);
+            if (alreadyAccepted == null)
+            {
+                return _teams;
+            }
             List<Team> teams = new List<Team>();
             bool requested = false;
             foreach (Team team in _teams)

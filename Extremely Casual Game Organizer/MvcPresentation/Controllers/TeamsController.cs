@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace MvcPresentation.Controllers
 {
@@ -14,7 +16,7 @@ namespace MvcPresentation.Controllers
         List<Team> teams = new List<Team>();
         List<string> sports = new List<string>();
         List<int> sportIds = new List<int>();
-        int memberID = 100000;
+
 
         // GET: Team
         public ActionResult Index()
@@ -40,6 +42,10 @@ namespace MvcPresentation.Controllers
         [HttpPost]
         public ActionResult CreateTeam(string TeamName, bool? Gender, string sportname)
         {
+
+            ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = userManager.FindById(User.Identity.GetUserId());
+            int memberID = user.MemberID;
             try
             {
                 getSports();
@@ -119,6 +125,45 @@ namespace MvcPresentation.Controllers
             }
 
             return View(teams);
+        }
+
+        // GET: Team Deactivate
+        /// <summary>
+        /// /// Garion Opiola
+        /// Created: 2023/04/16
+        /// deactivate team for WEB app
+        /// </summary>
+        public ActionResult Deactivate(int team_id)
+        {
+            int result = 0;
+            ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = userManager.FindById(User.Identity.GetUserId());
+            int memberID = user.MemberID;
+
+            try
+            {
+                result = teamManager.RemoveOwnTeam(team_id, memberID);
+                if (result > 0)
+                {
+                    ViewBag.Error = false;
+                    ViewBag.Message = "Team deavtivated successfully!";
+                }
+                else
+                {
+                    ViewBag.Error = true;
+                    ViewBag.Message = "An error has occurred!";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+            }
+
+            return RedirectToAction("AllTeams", new
+            {
+                memberID = memberID,
+            });
+            return View();
         }
     }
 }

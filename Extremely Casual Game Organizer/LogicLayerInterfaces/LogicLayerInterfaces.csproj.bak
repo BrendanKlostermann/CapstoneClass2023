@@ -48,11 +48,8 @@
     <Compile Include="ISportManager.cs" />
     <Compile Include="ITeamManager.cs" />
     <Compile Include="ITeamMemberManager.cs" />
-<<<<<<< HEAD
     <Compile Include="ITeamRolesManager.cs" />
     <Compile Include="ITournamentManager.cs" />
-=======
->>>>>>> origin/main
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
