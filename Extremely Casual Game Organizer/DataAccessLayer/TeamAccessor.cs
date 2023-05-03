@@ -708,12 +708,11 @@ namespace DataAccessLayer
                         }
                         else
                         {
-                            team.Gender = reader.GetBoolean(3);
+                            team.Gender = reader.GetBoolean(2);
                         }
-                        team.SportID = reader.GetInt32(4);
-                        team.MemberID = reader.GetInt32(5);
-                        team.Description = reader.GetString(6);
-                        team. Active = reader.GetBoolean(7);
+                        team.SportID = reader.GetInt32(3);
+                        team.MemberID = reader.GetInt32(4);
+                        team.Description = reader.GetString(5);
 
                         teams.Add(team);
                         
