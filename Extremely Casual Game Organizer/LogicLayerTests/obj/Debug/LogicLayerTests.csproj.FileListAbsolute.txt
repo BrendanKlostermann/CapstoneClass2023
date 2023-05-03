@@ -50,3 +50,29 @@ C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerTests\ob
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.csproj.CopyComplete
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.dll
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\LogicLayerTests.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\LogicLayerTests.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataAccessLayer.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataAccessLayerFakes.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataAccessLayerInterfaces.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataObjects.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\LogicLayer.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\LogicLayerInterfaces.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataAccessLayerFakes.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataAccessLayer.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\DataObjects.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\LogicLayerInterfaces.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\LogicLayer.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.csproj.AssemblyReference.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.csproj.CopyComplete
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\LogicLayerTests\obj\Debug\LogicLayerTests.pdb

@@ -20,3 +20,14 @@ C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFak
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataObjects.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataObjects.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.AssemblyReference.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb

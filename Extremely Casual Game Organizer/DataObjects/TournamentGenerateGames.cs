@@ -32,5 +32,7 @@ namespace DataObjects
         /// </summary>
         public bool IsAGroup { get; set; }
 
+        public DateTime DateAndTime { get; set; }
+
     }
 }

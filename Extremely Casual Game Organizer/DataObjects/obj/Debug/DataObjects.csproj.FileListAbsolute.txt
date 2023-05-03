@@ -8,3 +8,9 @@ C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataObjects\bin\De
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataObjects\obj\Debug\DataObjects.csproj.CoreCompileInputs.cache
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataObjects\obj\Debug\DataObjects.dll
 C:\Kirkwood\Capstone-2023-EVE\Extremely Casual Game Organizer\DataObjects\obj\Debug\DataObjects.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataObjects\bin\Debug\DataObjects.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataObjects\bin\Debug\DataObjects.pdb
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataObjects\obj\Debug\DataObjects.csproj.AssemblyReference.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataObjects\obj\Debug\DataObjects.csproj.CoreCompileInputs.cache
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataObjects\obj\Debug\DataObjects.dll
+C:\Users\Nick\Desktop\School\Capstone\Capstone-2023-EVE - with viewtour\Extremely Casual Game Organizer\DataObjects\obj\Debug\DataObjects.pdb

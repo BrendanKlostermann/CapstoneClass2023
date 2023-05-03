@@ -114,8 +114,14 @@
     <Compile Include="PageFiles\Teams\Utility\winTeamSearch.xaml.cs">
       <DependentUpon>winTeamSearch.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageFiles\Tournaments\pgAddGame.xaml.cs">
+      <DependentUpon>pgAddGame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageFiles\Tournaments\pgGenerateTournamentGame.xaml.cs">
       <DependentUpon>pgGenerateTournamentGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageFiles\Tournaments\pgViewTournament.xaml.cs">
+      <DependentUpon>pgViewTournament.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFiles\Utility\pgHelp.xaml.cs">
       <DependentUpon>pgHelp.xaml</DependentUpon>
@@ -193,7 +199,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PageFiles\Tournaments\pgAddGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PageFiles\Tournaments\pgGenerateTournamentGame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageFiles\Tournaments\pgViewTournament.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,21 @@
+﻿<Page x:Class="Extremely_Casual_Game_Organizer.PageFiles.Tournaments.pgAddGame"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:local="clr-namespace:Extremely_Casual_Game_Organizer.PageFiles.Tournaments"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="pgAddGame">
+
+    <Grid>
+        <xctk:DateTimePicker x:Name="DateTimer" Height="40" Margin="495,169,87,240.6"/>
+        <Label Content="Add a game" HorizontalAlignment="Center" Margin="10,49,0,0" VerticalAlignment="Top" Height="64" Width="790" FontSize="24" HorizontalContentAlignment="Center"/>
+        <Button x:Name="btnAddGame" Content="Add Game" HorizontalAlignment="Center" Margin="328,336,339,60.6" VerticalAlignment="Center" Width="133" Height="53" HorizontalContentAlignment="Center" Click="btnAddGame_Click"/>
+        <ComboBox x:Name="cmbTeam1" HorizontalAlignment="Left" Margin="161,169,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cmbTeam2" HorizontalAlignment="Left" Margin="161,234,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblTeam1" Content="First Team:" HorizontalAlignment="Left" Margin="64,169,0,0" VerticalAlignment="Top" Height="30" Width="92" HorizontalContentAlignment="Right"/>
+        <Label x:Name="lblTeam2" Content="Second team:" HorizontalAlignment="Left" Margin="64,234,0,0" VerticalAlignment="Top" Height="30" Width="92" HorizontalContentAlignment="Right"/>
+    </Grid>
+</Page>
