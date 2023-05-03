@@ -190,7 +190,7 @@ namespace LogicLayer
             {
                 teamMembers = _teamAccessor.SelectTeamMembersByTeamID(team_id);
 
-                if (teamMembers.Count == 0)
+                if (teamMembers == null)
                 {
                     throw new ApplicationException("No Members Found");
                 }

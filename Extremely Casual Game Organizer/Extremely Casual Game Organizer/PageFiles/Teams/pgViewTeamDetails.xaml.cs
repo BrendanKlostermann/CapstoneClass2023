@@ -189,15 +189,32 @@ namespace Extremely_Casual_Game_Organizer.PageFiles
             {
                 // Check if user has request already
                 var request = from member in _masterManager.TeamManager.RetrieveRequestByTeamID(_teamID) where member.MemberID == _pageControl.GetSignedInMember().MemberID where member.Status != "Pending" where member.Status != "Approved" select member;
-                var teamMember = from teammate in _masterManager.TeamMemberManager.RetrieveTeamRosterByTeamID(_teamID) where teammate.MemberID == _pageControl.GetSignedInMember().MemberID select teammate;
+                var teamMembers = _masterManager.TeamMemberManager.RetrieveTeamRosterByTeamID(_teamID);
+                if (teamMembers.Count > 0 && teamMembers != null)
+                {
+                    var userInTeam = from teammate in teamMembers where teammate.MemberID == _pageControl.GetSignedInMember().MemberID select teammate;
 
-                if (teamMember.Count() > 0)
-                {
-                    MessageBox.Show("You are already a member of this team!");
-                }
-                else if (request.Count() > 0)
-                {
-                    MessageBox.Show("Invite already pending for approval");
+                    if (teamMembers.Count() > 0)
+                    {
+                        MessageBox.Show("You are already a member of this team!");
+                    }
+                    else if (request.Count() > 0)
+                    {
+                        MessageBox.Show("Invite already pending for approval");
+                    }
+                    else if (_team.MemberID == _pageControl.GetSignedInMember().MemberID)
+                    {
+                        MessageBox.Show("You cannot join your own team!");
+                    }
+                    else
+                    {
+                        bool result = _masterManager.TeamManager.CreateATeamRequest(_teamID, _pageControl.GetSignedInMember().MemberID);
+
+                        if (result == true)
+                        {
+                            MessageBox.Show("Invite Request Sent");
+                        }
+                    }
                 }
                 else
                 {

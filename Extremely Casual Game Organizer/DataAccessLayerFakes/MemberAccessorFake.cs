@@ -81,7 +81,8 @@ namespace DataAccessLayerFakes
                     PhoneNumber = "319-999-9999",
                     Gender = true,
                     Active = true,
-                    Bio = "Member bio"
+                    Bio = "Member bio",
+                    Roles = new List<string>()
                 },
 
                 new Member{
@@ -93,7 +94,8 @@ namespace DataAccessLayerFakes
                     PhoneNumber = "319-888-8888",
                     Gender = true,
                     Active = false,
-                    Bio = "Another Member bio"
+                    Bio = "Another Member bio",
+                    Roles = new List<string>()
                 },
 
                 new Member{
@@ -105,7 +107,8 @@ namespace DataAccessLayerFakes
                     PhoneNumber = "319-777-7777",
                     Gender = true,
                     Active = true,
-                    Bio = "Yet Another Member bio"
+                    Bio = "Yet Another Member bio",
+                    Roles = new List<string>()
                 }
             };
             

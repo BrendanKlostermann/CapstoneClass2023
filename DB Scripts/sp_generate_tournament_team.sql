@@ -13,6 +13,7 @@ CREATE PROCEDURE [dbo].[sp_generate_tournament_team]
 	@team_id_1			[int],
 	@team_id_2			[int],
 	@member_id			[int],
+	@date_and_time		[datetime],
 
 	@content			[nvarchar](1000),
 	@group				[int]
@@ -23,7 +24,6 @@ AS
 		-- Game
 		DECLARE @game_id INT
 		DECLARE @venue_id INT
-		DECLARE @date_and_time DATETIME
 		DECLARE @sport_id INT
 
 		DECLARE @player_1 INT
@@ -37,11 +37,6 @@ AS
 		FROM [dbo].[Venue]
         ORDER BY NEWID()
 
-        -- Select Random date_and_time
-		SELECT @date_and_time = DATEADD(DAY, ABS(CHECKSUM(NEWID()) % 365), '2023-05-01')
-        FROM [dbo].[Member]
-        ORDER BY NEWID()
-
 		-- Select sport_id
         SELECT @sport_id = [sport_id]
         FROM [dbo].[Tournament]
@@ -49,9 +44,9 @@ AS
 
         -- Insert Game
 		INSERT INTO [dbo].[Game]
-			([venue_id], [date_and_time], [sport_id])
+			([venue_id], [date_and_time], [sport_id], [member_id])
 		VALUES
-			(@venue_id, @date_and_time, @sport_id)
+			(@venue_id, @date_and_time, @sport_id, @member_id)
 
         -- Get game_id
         SELECT @game_id = SCOPE_IDENTITY()

@@ -273,7 +273,8 @@ namespace LogicLayer
             try
             {
                 var members = _teamAccessor.getTeamByMemberID(MemberID);
-                if (members == null || members.Count == 0)
+                var membersInTeam = members.Where(x => x.TeamID == TeamID);
+                if (membersInTeam == null || membersInTeam.Count() == 0)
                 {
                     TeamRequest request = new TeamRequest();
                     request.TeamID = TeamID;

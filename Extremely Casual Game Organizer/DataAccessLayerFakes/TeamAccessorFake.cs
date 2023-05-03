@@ -460,9 +460,18 @@ namespace DataAccessLayerFakes
         {
             try
             {
-               var teamList = _teamMembers.Where(x => x.TeamID == team_id);
+               var teamList = _teamMembers.Where(x => x.TeamID == team_id).ToList();
 
-               return teamList.ToList();
+                if (teamList.Count() == 0)
+                {
+                    teamList = null;
+                }
+                else
+                {
+                    teamList = teamList.ToList();
+                }
+
+                return teamList;
             }
             catch (Exception ex)
             {
