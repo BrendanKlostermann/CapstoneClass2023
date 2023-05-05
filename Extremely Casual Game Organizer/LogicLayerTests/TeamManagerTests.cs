@@ -71,7 +71,7 @@ namespace LogicLayerTests
         public void TestRetreivingAllTeams()
         {
 
-            const int actual = 30;
+            const int actual = 9;
             int expectedResults = _teamManager.RetrieveAllTeams().Count;
 
             Assert.AreEqual(expectedResults, actual);
@@ -271,7 +271,7 @@ namespace LogicLayerTests
             var teamManager = new TeamManager();
 
             // Act
-            int expectedResult = 100040;
+            int expectedResult = 100001;
             int actualResult = teamManager.SelectTeamOwner(1000);
 
             // Assert

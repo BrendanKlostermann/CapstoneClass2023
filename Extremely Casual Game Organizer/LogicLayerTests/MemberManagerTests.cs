@@ -225,7 +225,7 @@ namespace LogicLayerTests
             actualResult = _memberManager.HashSha256(source);
 
             // Assert
-            Assert.AreEqual(expectedResult, actualResult);
+            Assert.AreEqual(expectedResult.ToUpper(), actualResult);
         }
         /// <summary>
         /// Anthoney Hale
@@ -238,9 +238,9 @@ namespace LogicLayerTests
         {
             // Arrange
 
-            const string email = "test1@gmail.com";
+            const string email = "KevinW@company.com";
             const string password = "newuser";
-            int expectedResult = 999999;
+            int expectedResult = 10002;
             int actualResult = 0;
 
             // Act

@@ -307,6 +307,7 @@ namespace DataAccessLayerFakes
                 {
                     _teamMembers.Remove(teamMember);
                     countControl = 1;
+                    break;
                 }
             }
             return countControl;

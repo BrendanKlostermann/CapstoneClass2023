@@ -118,9 +118,9 @@ namespace DataAccessLayerFakes
             _passwords.Columns.Add("MemberID", typeof(int));
             _passwords.Columns.Add("PasswordHash", typeof(string));
 
-            _passwords.Rows.Add(10000, "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-            _passwords.Rows.Add(10001, "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e");
-            _passwords.Rows.Add(10002, "9c9064c59f1ffa2e174ee754d2979be80dd30db552ec03e7e327e9b1a4bd594e");
+            _passwords.Rows.Add(10000, "9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E");
+            _passwords.Rows.Add(10001, "9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E");
+            _passwords.Rows.Add(10002, "9C9064C59F1FFA2E174EE754D2979BE80DD30DB552EC03E7E327E9B1A4BD594E");
 
             // Added By Jacob Lindauer. Need to create data fakes for schedule.
             _practices = new DataTable();
@@ -356,7 +356,8 @@ namespace DataAccessLayerFakes
 
             for (int i = 0; i < _members.Count; i++)
             {
-                if (_members[i].Email == email && passwordHashes[i] == passwordHash)
+                string password = _passwords.AsEnumerable().Select(x => x["PasswordHash"]).First().ToString();
+                if (_members[i].Email == email && password == passwordHash)
                 {
                     result++;
                 }

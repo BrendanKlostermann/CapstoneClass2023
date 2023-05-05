@@ -32,7 +32,7 @@ namespace LogicLayerTests
         public void TestEditUserToInactive()
         {
             int expectedResult = 1;
-            int actualResult = _memberManager.EditUserToInactive(100000);
+            int actualResult = _memberManager.EditUserToInactive(10000);
             Assert.AreEqual(expectedResult, actualResult);
         }
         [TestMethod]

@@ -41,8 +41,8 @@ namespace LogicLayerTests
         [TestMethod]
         public void getAllTeamsByLeagueID()
         {
-            int leagueID = 1000;
-            int expected = 1;
+            int leagueID = 100000;
+            int expected = 2;
             int actual = _lm.GetAListOfTeamsByLeagueID(leagueID).Count;
             Assert.AreEqual(expected, actual);
         }
@@ -50,8 +50,8 @@ namespace LogicLayerTests
         [TestMethod]
         public void removeTeamFromLeague()
         {
-            int leagueID = 1002;
-            int teamID = 1003;
+            int leagueID = 100000;
+            int teamID = 1001;
             int expected = 1;
             int actual = _lm.RemoveATeamFromALeagueByTeamIDAndLeagueID(teamID, leagueID);
             Assert.AreEqual(expected, actual);

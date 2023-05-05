@@ -173,6 +173,11 @@ namespace DataAccessLayerFakes
                 // Query should only return one result as leagueIDs are primary keys.
                 leagueList.Add(leagueQuery.First());
             }
+
+            if (leagueList.Count() == 0)
+            {
+                throw new ArgumentException("No leagues found for TeamdID");
+            }
             return leagueList;
         }
 
