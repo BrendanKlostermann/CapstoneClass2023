@@ -193,5 +193,10 @@ namespace Extremely_Casual_Game_Organizer.PageFiles.Tournaments
             }
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _pageControl.LoadPage(new pgGenerateTournamentGame());
+        }
     }
 }

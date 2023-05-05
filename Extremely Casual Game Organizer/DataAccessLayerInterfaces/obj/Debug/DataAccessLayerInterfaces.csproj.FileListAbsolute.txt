@@ -15,3 +15,11 @@ C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\Da
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.csproj.CopyComplete
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.dll
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataAccessLayerInterfaces.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataObjects.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\bin\Debug\DataObjects.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.csprojAssemblyReference.cache
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.csproj.CopyComplete
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerInterfaces\obj\Debug\DataAccessLayerInterfaces.pdb

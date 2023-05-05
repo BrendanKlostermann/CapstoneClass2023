@@ -441,6 +441,7 @@
     <Content Include="Views\Tournaments\JoinTournament.cshtml" />
     <Content Include="Views\Tournaments\JoinRequests.cshtml" />
     <Content Include="Views\League\CreateLeague.cshtml" />
+    <Content Include="Views\Teams\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

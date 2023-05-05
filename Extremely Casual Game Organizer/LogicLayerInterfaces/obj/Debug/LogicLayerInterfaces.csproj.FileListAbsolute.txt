@@ -15,3 +15,11 @@ C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\Lo
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CopyComplete
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.dll
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\LogicLayerInterfaces.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\LogicLayerInterfaces.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\DataObjects.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\bin\Debug\DataObjects.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csprojAssemblyReference.cache
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.csproj.CopyComplete
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\LogicLayerInterfaces\obj\Debug\LogicLayerInterfaces.pdb

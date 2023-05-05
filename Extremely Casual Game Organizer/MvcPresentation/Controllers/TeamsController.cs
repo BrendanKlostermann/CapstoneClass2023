@@ -24,7 +24,21 @@ namespace MvcPresentation.Controllers
             return View();
         }
 
+        // GET: Team
+        /// <summary>
+        // Heritier Otiom
+        /// </summary>
+        public ActionResult Details(int id)
+        {
+            teams = teamManager.RetrieveAllTeams();
+            Team team = teams.Find(x => x.TeamID == id);
+            return View(team);
+        }
+
         // GET: Create Team
+        /// <summary>
+        // Heritier Otiom
+        /// </summary>
         public ActionResult CreateTeam()
         {
             try
@@ -39,6 +53,9 @@ namespace MvcPresentation.Controllers
             return View();
         }
 
+        /// <summary>
+        // Heritier Otiom
+        /// </summary>
         [HttpPost]
         public ActionResult CreateTeam(string TeamName, bool? Gender, string sportname)
         {

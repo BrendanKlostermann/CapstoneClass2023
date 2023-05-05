@@ -20,11 +20,12 @@ namespace MvcPresentation.Controllers
         private List<TournamentTeamGame> tournamentGames = null;
         private List<Team> tournamentTeamname = new List<Team>();
         private List<TeamSport> teams = new List<TeamSport>();
+        private MemberManager _memberManager = new MemberManager();
         private List<TournamentGenerateGames> games = new List<TournamentGenerateGames>();
 
         List<string> sports = new List<string>();
         List<int> sportIds = new List<int>();
-        int memberID = 100000;
+        int memberID = 0;
 
         Tournament tournament = new Tournament();
 
@@ -47,6 +48,7 @@ namespace MvcPresentation.Controllers
         {
             try
             {
+                memberID = GetUserID(User.Identity.Name);
                 tournaments = tournamentManager.GetTournaments();
             }
             catch (Exception ex)
@@ -63,6 +65,8 @@ namespace MvcPresentation.Controllers
         {
             try
             {
+
+                memberID = GetUserID(User.Identity.Name);
                 getSports();
                 ViewBag.sports = sports;
                 tournaments = tournamentManager.GetTournaments();
@@ -163,6 +167,7 @@ namespace MvcPresentation.Controllers
                 getSports();
                 ViewBag.sports = sports;
 
+                memberID = GetUserID(User.Identity.Name);
                 int sport_id = 0;
                 for (int item = 0; item < sports.Count; item++)
                 {
@@ -214,6 +219,7 @@ namespace MvcPresentation.Controllers
                 getSports();
                 ViewBag.sports = sports;
 
+                memberID = GetUserID(User.Identity.Name);
 
                 bool result = tournamentManager.DeleteTournament(memberID, id);
                 if (result == true)
@@ -253,6 +259,7 @@ namespace MvcPresentation.Controllers
                 getSports();
                 ViewBag.sports = sports;
 
+                memberID = GetUserID(User.Identity.Name);
 
                 bool result = tournamentManager.ActivateTournament(memberID, id);
                 if (result == true)
@@ -315,6 +322,7 @@ namespace MvcPresentation.Controllers
         public ActionResult EditTournaments(int id, string name, string sportname, bool? gender, string description)
         {
 
+            memberID = GetUserID(User.Identity.Name);
             Tournament _tournament = new Tournament()
             {
                 TournamentID = id,
@@ -369,7 +377,8 @@ namespace MvcPresentation.Controllers
             {
                 getSports();
                 ViewBag.sports = sports;
-                
+                memberID = GetUserID(User.Identity.Name);
+
                 tournaments = tournamentManager.GetTournaments();
                 //teams = teamManager.();
 
@@ -718,6 +727,22 @@ namespace MvcPresentation.Controllers
             {
                 ViewBag.Message = ex.Message;
             }
+        }
+
+        public int GetUserID(string email)
+        {
+            Member _member = new Member();
+            try
+            {
+                if (email != "") _member = _memberManager.GetMemberByName(email).First();
+                else _member.MemberID = 0;
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException(ex.Message);
+            }
+
+            return _member.MemberID;
         }
 
     }

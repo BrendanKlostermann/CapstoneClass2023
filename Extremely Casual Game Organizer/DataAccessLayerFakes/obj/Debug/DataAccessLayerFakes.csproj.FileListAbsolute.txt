@@ -19,3 +19,13 @@ C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\Da
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
 C:\Users\riche\Documents\Capstone_02_May_2023\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerFakes.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataObjects.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataAccessLayerInterfaces.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\bin\Debug\DataObjects.pdb
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csprojAssemblyReference.cache
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.csproj.CopyComplete
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.dll
+C:\Users\riche\Documents\Capstone_05_May_2023_project\Extremely Casual Game Organizer\DataAccessLayerFakes\obj\Debug\DataAccessLayerFakes.pdb

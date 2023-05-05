@@ -23,5 +23,6 @@
         <TextBox x:Name="txtTournamentName" HorizontalAlignment="Left" Height="54" Margin="-221,3,0,0" TextWrapping="Wrap" Text="Tournament Name" VerticalAlignment="Top" Width="797" FontSize="32" BorderBrush="#00ABADB3" IsReadOnly="True" SelectionBrush="#000078D7" BorderThickness="0" Background="Transparent"/>
         <TextBox x:Name="txtTournamentSportGender" HorizontalAlignment="Left" Height="50" Margin="-221,57,0,0" TextWrapping="Wrap" Text="Tournament Sport and Gender" VerticalAlignment="Top" Width="221" FontSize="16" BorderBrush="#00ABADB3" FontStyle="Italic" IsReadOnly="True" SelectionBrush="#000078D7" BorderThickness="0" Background="Transparent"/>
         <TextBox x:Name="txtTournamentDescription" HorizontalAlignment="Left" Height="343" Margin="-221,107,0,0" TextWrapping="Wrap" Text="Tournament Description" VerticalAlignment="Top" Width="221" FontSize="16" BorderBrush="#007F8FC0" IsReadOnly="True" SelectionBrush="#000078D7" BorderThickness="0" Background="Transparent"/>
+        <Button HorizontalAlignment="Left" Margin="429,21,0,0" VerticalAlignment="Top" Width="113" Height="24" Content="Generate Games" Click="Button_Click" Background="#FFFDB2B2"/>
     </Grid>
 </Page>
